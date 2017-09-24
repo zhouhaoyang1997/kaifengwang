@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  context-path: /cg
+
+spring:
+  #数据源配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/kfcg?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  mvc:
+    view:
+      suffix: .ftl
+      prefix: /templates/
+
+mybatis:
+  #实体类所做包
+  type-aliases-package: com.kf.pojo
+  #mappers.xml所在位置
+  mapper-locations: classpath:mappers/*.xml
+  configLocation: classpath:/mybatis-config.xml
+
+# LOGGING
+logging:
+    level:
+       com.ibatis:DEBUG
