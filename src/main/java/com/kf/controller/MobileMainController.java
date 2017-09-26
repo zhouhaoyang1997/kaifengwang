@@ -19,8 +19,12 @@ public class MobileMainController {
         return modelAndView;
     }
 
-    @GetMapping("/quanzhizhaopin")
+    @GetMapping("/zhaopin")
     public ModelAndView quanzhizhaopin(){
-        return new ModelAndView("phone/quanzhizhaopin");
+        return new ModelAndView("phone/infolist");
+    }
+    @GetMapping("/information")
+    public ModelAndView information(){
+        return new ModelAndView("phone/information");
     }
 }

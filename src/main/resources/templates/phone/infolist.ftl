@@ -109,7 +109,7 @@
     <div class="fullbg" id="fullbg" style="display:none;"><i class="pull2"></i></div>
     <div class="infolst_w">
         <ul class="list-info">
-            <#--结果集合-->
+        <#--结果集合-->
             <div class="clear1"></div>
             <li class="">
                 <a href="index.php?mod=information&id=1229554">

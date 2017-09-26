@@ -1,4 +1,4 @@
-﻿.filter2 .innercontent {
+﻿﻿.filter2 .innercontent {
     position: absolute;
     z-index: 1;
     -webkit-tap-highlight-color: transparent;
@@ -176,7 +176,7 @@
     position: fixed;
     width: 14px;
     height: 15px;
-    background: url(../images/hicon_sort.png) no-repeat 0 -45px;
+    background: url(../img/phone/img/hicon_sort.png) no-repeat 0 -45px;
     background-size: 14px auto;
     top: 409px;
     left: 50%
