@@ -1,6 +1,6 @@
 server:
-  port: 8080
-  context-path: /cg
+  port: 8090
+  context-path:
 
 spring:
   #数据源配置
@@ -14,6 +14,9 @@ spring:
     view:
       suffix: .ftl
       prefix: /templates/
+  freemarker:
+          cache: false
+          request-context-attribute: request
 
 mybatis:
   #实体类所做包
