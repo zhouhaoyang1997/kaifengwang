@@ -26,7 +26,7 @@
     <script src="../js/phone/jq_min.211_1.js"></script>
     <script src="../js/phone/common_1.js"></script>
     <div class="header">
-        <div id="ipageTitle" style="display:none;">开封城市网</div>
+        <div id="ipageTitle">开封城市网</div>
         <div class="search left8" id="search" onclick="searchOnClik()"></div>
     </div>
     <div id="contactbar">
@@ -35,16 +35,7 @@
         <a href="#" class="bottom_history">历史</a>
         <a href="#" class="bottom_post">发布</a>
     </div>
-    <script>
-        window['siteUrl'] = 'http://m.5ol.com';
-        $('.header .back').hide();
-        $('#login_ico').show();
-        if(window['current']) {
-            $('#ipageTitle').html(window['current']).show()
-        } else {
-            $('#ipageTitle').show()
-        }
-    </script>
+
     <div class="select_01" id="wrapper2">
         <ul class="tab-hd" id="scroller2">
             <li class="item current">

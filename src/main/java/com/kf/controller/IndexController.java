@@ -16,10 +16,4 @@ public class IndexController {
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }
-
-    @RequestMapping("/phone/index")
-    public ModelAndView phoneIndex(){
-        ModelAndView modelAndView = new ModelAndView("phone/index");
-        return modelAndView;
-    }
 }
