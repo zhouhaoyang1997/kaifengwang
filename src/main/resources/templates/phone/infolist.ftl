@@ -106,7 +106,6 @@
         <div class="inner_parent" id="parent_container" style="display:none;"><div class="innercontent"></div></div>
         <div class="inner_child" id="inner_container" style="display:none;"><div class="innercontent"></div></div>
     </div>
-    <div class="fullbg" id="fullbg" style="display:none;"><i class="pull2"></i></div>
     <div class="infolst_w">
         <ul class="list-info">
         <#--结果集合-->

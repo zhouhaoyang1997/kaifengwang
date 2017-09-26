@@ -35,9 +35,9 @@
     <div class="tit_area">
         <h1 class="tit">全国专业定做大型鱼缸，水族箱等水族产品 xxxx</h1>
         <div class="status_bar">
-            <span class="date"><i class="ico"></i>2017-05-19 17:17:34</span>
+            <span class="date">发布时间: &nbsp;&nbsp;2017-05-19 17:17:34</span>
             <#--后期决定-->
-            <span class="browse_num"><i class="ico"></i><span id="totalcount">5</span>次</span>
+            <#--<span class="browse_num"><i class="ico"></i><span id="totalcount">5</span>次</span>-->
         </div>
     </div>
     <div class="image_area_w">
@@ -78,7 +78,7 @@
         <span class="attrVal mfico">
         <li>
             <span class="attrName">联系 Q Q：</span>
-            <span class="attrVal"> 1774350961</span>
+            <span class="attrVal"> <a class="fred">1774350961</span>
         </li>
         <li>
             <#--注意-->
@@ -88,8 +88,8 @@
 
         <li>
         <p class="mt10">
-        <a href="tel:15038012692" class="fangico dianhua"><i></i>拨打电话</a>
-        <a href="sms:15038012692" class="fangico duanxin"><i></i>短信咨询</a>
+        <a href="tel:15038012692" class="fangico dianhua">拨打电话</a>
+        <a href="sms:15038012692" class="fangico duanxin">短信咨询</a>
         </p>
         </li>
 </span>

@@ -115,6 +115,7 @@ a {
     visibility: hidden;
     overflow: hidden
 }
+
 .clearfix {
     clear: both;
     height: 0 !important;
