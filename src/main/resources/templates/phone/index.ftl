@@ -36,18 +36,13 @@
         <a href="#" class="bottom_post">发布</a>
     </div>
     <div class="select_01" id="wrapper2">
-        <ul class="tab-hd" id="scroller2">
+    <#--<ul class="tab-hd" id="scroller2"  >-->
+        <ul class="tab-hd">
             <li class="item current">
                 <a style="color:;" target="_self" href="#">首页</a>
             </li>
             <li class="item ">
-                <a style="color:;" target="_self" href="#">信息分类</a>
-            </li>
-            <li class="item ">
-                <a style="color:;" target="_self" href="#">热点资讯</a>
-            </li>
-            <li class="item ">
-                <a style="color:;" target="_self" href="#">商家店铺</a>
+                <a style="color:;" target="_self" href="menulist.ftl">信息分类</a>
             </li>
         </ul>
     </div>
@@ -129,8 +124,6 @@
                 <div class="page">
                     <a href="#" class="item food">
                         <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>二手货</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/cw_icon.png"></div>车辆买卖</a>
                     <a href="#" class="item food">
                         <div class="icon"><img src="../img/phone/pic/cw_icon.png"></div>房屋租售</a>
                     <a href="#" class="item food">

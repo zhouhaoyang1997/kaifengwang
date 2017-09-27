@@ -348,12 +348,19 @@
 	text-align: left
 }
 
+.wrapper .tab-hd {
+    width: 400px;
+    transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+    transition-duration: 0ms;
+    transform: translate(0px, 0px) translateZ(0px);
+}
+
 .wrapper .select_01 li {
 	float: left;
 	text-align: center;
 	padding: 2px 0 0;
 	line-height: 30px;
-	width: 84px;
+    width: 170px;
 	overflow: hidden;
 	vertical-align: middle
 }
