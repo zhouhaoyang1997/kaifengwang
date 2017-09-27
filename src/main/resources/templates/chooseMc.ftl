@@ -3,7 +3,7 @@
 <head lang="zh">
     <title>免费发布信息</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${request.contextPath}/css/menu.css">
@@ -38,7 +38,9 @@
                 <div class="panel-body">
                     <ul class="lanmu_ul2">
                         <#list mc.secondClasses as sc>
-                            <li><a href="${request.contextPath}/push/fill?mcId=${mc.mcId}&scId=${sc.scId}">${sc.scName}</a></li>
+                            <li>
+                                <a href="${request.contextPath}/push/fill?mcId=${mc.mcId}&scId=${sc.scId}">${sc.scName}</a>
+                            </li>
                         </#list>
                     </ul>
                 </div>

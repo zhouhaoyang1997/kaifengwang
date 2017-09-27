@@ -1,9 +1,14 @@
-<<<<<<< HEAD
-.megamenu{margin-bottom:0px;padding:0;width:100%;list-style:none;display:inline-block;position:relative;font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size:15px}
-=======
-.megamenu{margin-bottom:0px;
-    padding:0;width:100%; list-style:none;display:inline-block;position:relative;font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size:15px}
->>>>>>> jl
+
+.megamenu {
+    margin-bottom: 0px;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px
+}
 .megamenu li{margin-bottom:0px;display:inline;}
 .megamenu>li>a{
     color: #ff552e;
@@ -18,54 +23,7 @@
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
-<<<<<<< HEAD
-.men{
-    position:relative;
-}
-.men-pic{
-    position: absolute;
-    bottom: -24em;
-    border: none;
-    right: -28em;
-}
-.women{
-    position:relative;
-}
-.women-pic{
-    position: absolute;
-    bottom: -26em;
-    border: none;
-    right: -3em;
-}
-.kids{
-    position:relative;
-}
-.kids-pic{
-    position: absolute;
-    bottom: -25em;
-    border: none;
-    right: -39em;
-}
-.sports{
-    position:relative;
-}
-.sports-pic{
-    position: absolute;
-    bottom: -28em;
-    border: none;
-    right: -27em;
-}
-.nike{
-    position:relative;
-}
-.nike-pic{
-    position: absolute;
-    bottom: -26em;
-    border: none;
-    right: -16em;
-}
-=======
->>>>>>> jl
+
 .megamenu>li.active>a{color:#fff;background: #ff552e}
 .megamenu>li.right{float:right}
 .megamenu .dropdown,.megamenu .dropdown li .dropdown{
@@ -81,10 +39,7 @@
     border: 1px solid #dbdbdb;
     background: rgba(253, 253, 253, 1);
     width: 100.2%;
-<<<<<<< HEAD
-=======
-    height:400px;
->>>>>>> jl
+    height: 400px;
     top: 55px;
     left: -1px;
     z-index: 99;
@@ -92,23 +47,6 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;}
-<<<<<<< HEAD
-.megamenu .megapanel ul{margin:0;padding:0}
-.megamenu .megapanel img{cursor:pointer;-webkit-transition:border .3s linear;-moz-transition:border .3s linear;-o-transition:border .3s linear;transition:border .3s linear}.megamenu .megapanel img:hover{}.megamenu form.contact input,.megamenu form.contact textarea{font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size:16px;color:#444;outline:0}
-.megapanel .row{width:100%;margin-top:15px}
-.megapanel .row:first-child{margin-top:0}
-.megapanel .row:before,.megapanel .row:after{display:table;content:"";line-height:0}
-.megapanel .row:after{clear:both}
-.megapanel .row .col1,.megapanel .row .col2,.megapanel .row .col3,.megapanel .row .col4,.megapanel .row .col5,.megapanel .row .col6{display:block;width:100%;min-height:20px;float:left;margin-left:2.127659574468085%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
-.megapanel .row [class*="col"]:first-child{margin-left:0}
-.megapanel .row .col1{width:14.893617021276595%}
-.megapanel .row .col2{width:31.914893617021278%}
-.megapanel .row .col3{width:48.93617021276595%}
-.megapanel .row .col4{width:65.95744680851064%}
-.megapanel .row .col5{width:82.97872340425532%}
-.megapanel .row .col6{width:100%}
-=======
->>>>>>> jl
 
 .skyblue{
     border-bottom: 5px #ff552e solid;
@@ -122,44 +60,13 @@
     background:#ff552e;
     color: #ffffff;
 }
-<<<<<<< HEAD
-/* start menu */
-.h_nav h4{
-    border-bottom: 1px solid rgb(236, 236, 236);
-    font-size: 0.9em;
-    color: #08080B;
-    line-height: 1.8em;
-    text-transform: capitalize;
-    margin-bottom: 4%;
-}
-.h_nav h4.top{
-    margin-top: 12%;
-}
-.h_nav ul li{
-    display: block;
-}
-.h_nav ul li a{
-    display: block;
-    font-size: 0.875em;
-    color: #A5A5A5;
-    text-transform: capitalize;
-    line-height: 1.8em;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    font-weight: 100;
-}
-.h_nav ul li a:hover{
-    color:#F06B6B;
-=======
 
-.menu_ul{
+.menu_ul {
     list-style: none;
-    height:260px;
+    height: 260px;
 }
-.menu_ul li{
+
+.menu_ul li {
     width: 160px;
     float: left;
->>>>>>> jl
 }

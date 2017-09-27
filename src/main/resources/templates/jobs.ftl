@@ -3,7 +3,7 @@
 <head lang="zh">
     <title>开封城市网招聘</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/menu.css">
@@ -50,8 +50,8 @@
                     <form action="" method="post">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="输入你感兴趣的职位">
-                            <span class="input-group-btn" >
-                                <button class="btn btn-danger"  type="button">搜索</button>
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger" type="button">搜索</button>
                             </span>
                         </div>
                     </form>
@@ -171,7 +171,7 @@
         <div class="now_position">
             <i class="fa fa-home"></i><a href="/index">开封城市网</a>&nbsp;>&nbsp;<span>招聘</span>
         </div>
-        <div class="panel panel_self now_position" >
+        <div class="panel panel_self now_position">
             <div class="panel-body">
                 <div class="row" style="border-bottom: 1px #e6e6e6 dashed;">
                     <div class="col-xs-1"><span class="lanmutitle">栏目分类:</span></div>
@@ -184,28 +184,28 @@
                         </ul>
                     </div>
                 </div>
-                <#list tags as tg>
-                    <div class="row" style="border-bottom: 1px #e6e6e6 dashed;">
-                        <div class="col-xs-1"><span class="lanmutitle">${tg.tagName}:</span></div>
-                        <div class="col-xs-11">
-                            <ul class="lanmu_ul2">
-                                <li class="active"><a href="#">不限</a></li>
-                                <#list tg.tagContents as tagContent>
-                                    <li><a href="#">${tagContent.tcName}</a></li>
-                                </#list>
-                            </ul>
-                        </div>
+            <#list tags as tg>
+                <div class="row" style="border-bottom: 1px #e6e6e6 dashed;">
+                    <div class="col-xs-1"><span class="lanmutitle">${tg.tagName}:</span></div>
+                    <div class="col-xs-11">
+                        <ul class="lanmu_ul2">
+                            <li class="active"><a href="#">不限</a></li>
+                            <#list tg.tagContents as tagContent>
+                                <li><a href="#">${tagContent.tcName}</a></li>
+                            </#list>
+                        </ul>
                     </div>
-                </#list>
+                </div>
+            </#list>
 
                 <div class="row" style="border-bottom: 1px #e6e6e6 dashed;">
                     <div class="col-xs-1"><span class="lanmutitle">地点:</span></div>
                     <div class="col-xs-11">
                         <ul class="lanmu_ul2">
                             <li class="active"><a href="#">不限</a></li>
-                            <#list districts as ds>
-                                <li><a href="#">${ds.districtName}</a></li>
-                            </#list>
+                        <#list districts as ds>
+                            <li><a href="#">${ds.districtName}</a></li>
+                        </#list>
                         </ul>
                     </div>
                 </div>
@@ -229,25 +229,25 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-11">
-                            <#list jobInfos as job>
-                                <div class="row hover_info">
-                                    <div class="col-xs-3">
-                                        <div class="info_title"><a href="#">${job.piTitle}</a></div>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <span>新思路传媒公司 </span>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <span class="info_yuan">1232</span>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <span>东湖</span>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <span>17-09-10</span>
-                                    </div>
+                        <#list jobInfos as job>
+                            <div class="row hover_info">
+                                <div class="col-xs-3">
+                                    <div class="info_title"><a href="#">${job.piTitle}</a></div>
                                 </div>
-                            </#list>
+                                <div class="col-xs-3">
+                                    <span>新思路传媒公司 </span>
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="info_yuan">1232</span>
+                                </div>
+                                <div class="col-xs-2">
+                                    <span>东湖</span>
+                                </div>
+                                <div class="col-xs-2">
+                                    <span>17-09-10</span>
+                                </div>
+                            </div>
+                        </#list>
 
                         </div>
                         <!-- 广告位-->

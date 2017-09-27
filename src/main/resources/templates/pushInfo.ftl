@@ -3,7 +3,7 @@
 <head lang="zh">
     <title>免费发布信息</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${request.contextPath}/css/menu.css">
@@ -48,7 +48,7 @@
                     </select>
                 </div>
 
-                <#list tags as tag>
+            <#list tags as tag>
                 <div class="form-group">
                     <label>${tag.tagName}:</label>
 
@@ -61,9 +61,7 @@
 
 
                 </div>
-                </#list>
-
-
+            </#list>
 
 
                 <div class="form-group">

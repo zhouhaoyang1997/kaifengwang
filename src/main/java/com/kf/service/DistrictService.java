@@ -1,6 +1,7 @@
 package com.kf.service;
 
 import com.kf.mapper.DistrictMapper;
+
 import java.util.List;
 
 import com.kf.pojo.District;
@@ -16,7 +17,7 @@ public class DistrictService {
     @Autowired
     private DistrictMapper districtMapper;
 
-    public List<District> getAllDistrict(){
+    public List<District> getAllDistrict() {
         return districtMapper.selectAllDistrict();
     }
 }

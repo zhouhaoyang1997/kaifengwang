@@ -14,9 +14,10 @@ public class MainClassService {
 
     /**
      * 该方法用来获取首页所有的大类
+     *
      * @return
      */
-    public List<MainClass> getMainClass(){
+    public List<MainClass> getMainClass() {
         return mainClassMapper.selectAllClass();
     }
 }

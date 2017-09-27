@@ -2,7 +2,9 @@ package com.kf.service;
 
 import com.kf.mapper.SecondClassMapper;
 import com.kf.pojo.SecondClass;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +19,11 @@ public class SecondClassService {
 
     /**
      * 获取大类下的所有小类
+     *
      * @param mcId
      * @return
      */
-    public List<SecondClass> getAllSecondClass(int mcId){
-        return secondClassMapper.selectAllSecondClass( mcId);
+    public List<SecondClass> getAllSecondClass(int mcId) {
+        return secondClassMapper.selectAllSecondClass(mcId);
     }
 }

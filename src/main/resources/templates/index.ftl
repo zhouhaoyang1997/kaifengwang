@@ -82,9 +82,9 @@
                 <li class="grid" style="margin-left: 3px;"><a class="color1" href="#">招聘<span class="caret"></span></a>
                     <div class="megapanel">
                         <ul class="menu_ul">
-                            <#list zhaopin as zp>
-                                <li><a href="#">${zp.scName}</a></li>
-                            </#list>
+                        <#list zhaopin as zp>
+                            <li><a href="#">${zp.scName}</a></li>
+                        </#list>
                         </ul>
                         <div class="img_box">
                             <img src="img/zp_logo.png" alt="">
@@ -96,7 +96,7 @@
                         <ul class="menu_ul">
                         <#list ershou as es>
                             <li><a href="#">${es.scName}</a></li>
-                            </#list>
+                        </#list>
                         </ul>
                     </div>
                 </li>
@@ -105,7 +105,7 @@
                         <ul class="menu_ul">
                         <#list fangchan as fc>
                             <li><a href="#">${fc.scName}</a></li>
-                            </#list>
+                        </#list>
                         </ul>
                     </div>
                 </li>
@@ -114,7 +114,7 @@
                         <ul class="menu_ul">
                         <#list shenghuo as sh>
                             <li><a href="#">${sh.scName}</a></li>
-                            </#list>
+                        </#list>
                         </ul>
                     </div>
                 </li>
@@ -147,28 +147,32 @@
                                 </div>
 
                                 <p><a href="#" target="_blank">招聘</a></p>
-                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a>
+                                </p>
                             </div>
                             <div class="col-xs-2">
                                 <div style="width:55px;margin: 0 auto;">
                                     <img src="img/jjz.png" width="55px" height="55px" alt="">
                                 </div>
                                 <p><a href="#" target="_blank">二手市场</a></p>
-                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a>
+                                </p>
                             </div>
                             <div class="col-xs-2">
                                 <div style="width:55px;margin: 0 auto;">
                                     <img src="img/jz.png" width="55px" height="55px" alt="">
                                 </div>
                                 <p><a href="#" target="_blank">房产</a></p>
-                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a>
+                                </p>
                             </div>
                             <div class="col-xs-2">
                                 <div style="width:55px;margin: 0 auto;">
                                     <img src="img/zp_icon.png" width="55px" height="55px" alt="">
                                 </div>
                                 <p><a href="#" target="_blank">二手车</a></p>
-                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a>
+                                </p>
                             </div>
                             <div class="col-xs-2">
                                 <div style="width:55px;margin: 0 auto;">
@@ -176,14 +180,16 @@
                                 </div>
 
                                 <p><a href="#" target="_blank">宠物</a></p>
-                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a>
+                                </p>
                             </div>
                             <div class="col-xs-2">
                                 <div style="width:55px;margin: 0 auto;">
                                     <img src="img/jz.png" width="55px" height="55px" alt="">
                                 </div>
                                 <p><a href="#" target="_blank">装饰建材</a></p>
-                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a>
+                                </p>
                             </div>
                         </div>
                     </div>

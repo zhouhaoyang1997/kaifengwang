@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.kf.mapper.MainClassMapper" >
+<mapper namespace="com.kf.mapper.MainClassMapper">
     <resultMap id="BaseMainClass" type="com.kf.pojo.MainClass">
         <id column="mc_id" property="mcId"/>
         <result column="mc_img" property="mcImg"/>
@@ -14,9 +14,10 @@
     </resultMap>
 
 
-
     <select id="selectAllClass" resultMap="BaseMainClass">
-        SELECT * FROM mainclass,secondclass where mainclass.mc_id=secondclass.sc_mc_id
+        SELECT *
+        FROM mainclass, secondclass
+        WHERE mainclass.mc_id = secondclass.sc_mc_id
     </select>
 
 </mapper>

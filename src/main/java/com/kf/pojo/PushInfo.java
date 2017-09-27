@@ -1,7 +1,9 @@
 package com.kf.pojo;
 
 import com.kf.vo.TagValue;
+
 import java.util.List;
+
 /**
  * Created by 18236 on 2017/9/26.
  */

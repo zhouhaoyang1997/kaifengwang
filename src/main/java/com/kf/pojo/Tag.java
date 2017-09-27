@@ -1,6 +1,7 @@
 package com.kf.pojo;
 
 import java.util.List;
+
 /**
  * Created by 18236 on 2017/9/26.
  */
@@ -9,6 +10,7 @@ public class Tag {
 
     private String tagName;
     private int tagId;
+
     public String getTagName() {
         return tagName;
     }
