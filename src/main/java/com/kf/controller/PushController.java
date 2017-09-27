@@ -2,11 +2,13 @@ package com.kf.controller;
 
 import com.kf.pojo.District;
 import com.kf.pojo.MainClass;
+import com.kf.pojo.PushInfoClass;
 import com.kf.pojo.Tag;
 import com.kf.service.DistrictService;
 import com.kf.service.MainClassService;
 import java.util.List;
 
+import com.kf.service.PushInfoClassService;
 import com.kf.service.TagService;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class PushController {
     @Autowired
     public MainClassService mainClassService;
 
+
+    @Autowired
+    private PushInfoClassService pics;
 
     @Autowired
     private DistrictService districtService;
@@ -52,8 +57,10 @@ public class PushController {
         ModelAndView modelAndView = new ModelAndView("pushInfo");
         List<District> districts = districtService.getAllDistrict();
         List<Tag> tags = tagService.getAllTag(mcId);
+        List<PushInfoClass> pushInfoClasses = pics.getAllPush(mcId);
         modelAndView.addObject("districts",districts);
         modelAndView.addObject("tags",tags);
+        modelAndView.addObject("pushInfoClasses",pushInfoClasses);
         return modelAndView;
 
     }
