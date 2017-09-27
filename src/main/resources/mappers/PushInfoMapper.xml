@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kf.mapper.PushInfoMapper" >
+
+    <select id="selectAllJob" resultType="com.kf.pojo.PushInfo">
+        select DISTINCT push_info.pi_id,pi_title,mc_name,user_name,pi_address,pi_img,pi_scan,pi_push_date,pi_chujia,pi_zhiding
+ from push_info,user,mainclass,secondclass where push_info.pi_mc=mainclass.mc_id and push_info.pi_user=user.user_id;
+    </select>
+
+</mapper>

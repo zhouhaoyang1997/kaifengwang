@@ -11,7 +11,7 @@
 <body>
 <#--头部开始 -->
 <div class="header-area">
-    <div class="container" style="width: 1200px;">
+    <div class="container_self">
         <div class="row">
             <div class="col-xs-8">
                 <div class="user-menu">
@@ -37,7 +37,7 @@
 </div> <!-- End header area -->
 
 <div class="site-branding-area">
-    <div class="container" style="width: 1200px;">
+    <div class="container_self" style="width: 1200px;">
         <div class="row">
             <div class="col-sm-3">
                 <div class="logo">
@@ -166,7 +166,7 @@
 </div>
 
 <!-- 下方显示职位类别及搜索-->
-<div class="container">
+<div class="container_self">
     <div class="row">
         <div class="now_position">
             <i class="fa fa-home"></i><a href="/index">开封城市网</a>&nbsp;>&nbsp;<span>招聘</span>
@@ -229,23 +229,26 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-11">
-                            <div class="row hover_info">
-                                <div class="col-xs-3">
-                                    <span class="info_title"><a href="#">南昌夜场小费最高招</a></span>
+                            <#list jobInfos as job>
+                                <div class="row hover_info">
+                                    <div class="col-xs-3">
+                                        <div class="info_title"><a href="#">${job.piTitle}</a></div>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <span>新思路传媒公司 </span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="info_yuan">1232</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span>东湖</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span>17-09-10</span>
+                                    </div>
                                 </div>
-                                <div class="col-xs-3">
-                                    <span>新思路传媒公司 </span>
-                                </div>
-                                <div class="col-xs-2">
-                                    <span class="info_yuan">8000以上元</span>
-                                </div>
-                                <div class="col-xs-2">
-                                    <span>东湖</span>
-                                </div>
-                                <div class="col-xs-2">
-                                    <span>17-09-10</span>
-                                </div>
-                            </div>
+                            </#list>
+
                         </div>
                         <!-- 广告位-->
                         <div class="col-xs-1"></div>
@@ -257,7 +260,7 @@
 </div>
 <#-- 页脚-->
 <div class="footerPage" style="margin-top: 30px;background: none repeat scroll 0 0 #f4f4f4;">
-    <div class="container">
+    <div class="container_self">
         <div class="row">
             <div class="col-xs-3">
                 <div class="logo">

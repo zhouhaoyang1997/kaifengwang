@@ -1,9 +1,11 @@
 package com.kf.controller;
 
 import com.kf.pojo.District;
+import com.kf.pojo.PushInfo;
 import com.kf.pojo.SecondClass;
 import com.kf.pojo.Tag;
 import com.kf.service.DistrictService;
+import com.kf.service.PushInfoService;
 import com.kf.service.SecondClassService;
 import java.util.List;
 
@@ -28,18 +30,24 @@ public class JobController {
     @Autowired
     private TagService tagService;
 
+    @Autowired
+    private PushInfoService jobService;
+
     @RequestMapping("/jobs")
     public ModelAndView jobPage(){
         ModelAndView modelAndView = new ModelAndView("jobs");
         List<SecondClass> zhaopin = secondClassService.getAllSecondClass(1);
         List<District> districts = districtService.getAllDistrict();
         List<Tag> tags = tagService.getAllTag(1);
+        List<PushInfo> jobInfos = jobService.getAllJob();
         //查询招聘类别
         modelAndView.addObject("zhaopin",zhaopin);
         //查询所有行政区域
         modelAndView.addObject("districts",districts);
         //查询所有标签
         modelAndView.addObject("tags",tags);
+        modelAndView.addObject("jobInfos",jobInfos);
+
         return modelAndView;
     }
 }

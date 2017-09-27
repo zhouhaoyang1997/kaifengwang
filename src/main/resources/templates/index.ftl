@@ -11,7 +11,7 @@
 <body>
 <#--头部开始 -->
 <div class="header-area">
-    <div class="container" style="width: 1200px;">
+    <div class="container_self" style="width: 1200px;">
         <div class="row">
             <div class="col-xs-8">
                 <div class="user-menu">
@@ -36,7 +36,7 @@
 </div> <!-- End header area -->
 
 <div class="site-branding-area">
-    <div class="container" style="width: 1200px;">
+    <div class="container_self" style="width: 1200px;">
         <div class="row">
             <div class="col-sm-3">
                 <div class="logo">
@@ -74,7 +74,7 @@
 </div> <!-- End site branding area -->
 <#-- 菜单栏-->
 <div class="mainmenu-area">
-    <div class="container" style="width: 1200px;">
+    <div class="container_self" style="width: 1200px;">
         <div class="row">
             <ul class="megamenu skyblue">
                 <li class="active grid"><a class="color1" href="#">首页</a>
@@ -133,7 +133,7 @@
 </div>
 <#-- 主功能模块-->
 <div class="mainPage">
-    <div class="container" style="width:1200px;">
+    <div class="container_self" style="width:1200px;">
         <div class="row">
             <div class="col-xs-8">
                 <div class="panel panel_self">
@@ -289,7 +289,7 @@
 </div>
 <#-- 页脚-->
 <div class="footerPage" style="margin-top: 30px;background: none repeat scroll 0 0 #f4f4f4;">
-    <div class="container">
+    <div class="container_self">
         <div class="row">
             <div class="col-xs-3">
                 <div class="logo">

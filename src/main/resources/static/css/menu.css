@@ -52,6 +52,7 @@
 }
 
 .menu_ul{
+    list-style: none;
     height:260px;
 }
 .menu_ul li{

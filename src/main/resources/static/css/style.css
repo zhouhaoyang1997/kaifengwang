@@ -300,7 +300,6 @@ ol.slide-indicators li.active {
 .readmore:hover {background: #222;text-decoration: none;color: #fff;border: 1px solid #fff}
 
 .slider_width{
-    width:80%;
     margin: 0 auto;
 }
 .lanmu_ul,.lanmu_ul2
@@ -343,6 +342,9 @@ ol.slide-indicators li.active {
     padding-top:28px;
 }
 .info_title{
+    height:22px;
+    text-overflow: ellipsis;
+    overflow: hidden;
     font-size: 16px;color: #000;
 }
 .info_yuan{
@@ -351,4 +353,9 @@ ol.slide-indicators li.active {
 
 .hover_info:hover{
     background: #ddd;
+}
+.container_self{
+    width:1200px;
+    margin:0 auto;
+    padding:0;
 }

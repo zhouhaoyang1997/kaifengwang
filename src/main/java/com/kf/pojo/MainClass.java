@@ -1,5 +1,6 @@
 package com.kf.pojo;
 
+import java.util.List;
 /**
  * Created by 18236 on 2017/9/25.
  */
@@ -8,6 +9,16 @@ public class MainClass {
     private String mcImg;
     private String mcName;
     private int mcClickNums;
+
+    private List<SecondClass> secondClasses;
+
+    public List<SecondClass> getSecondClasses() {
+        return secondClasses;
+    }
+
+    public void setSecondClasses(List<SecondClass> secondClasses) {
+        this.secondClasses = secondClasses;
+    }
 
     public int getMcId() {
         return mcId;

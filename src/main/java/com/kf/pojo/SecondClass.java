@@ -6,7 +6,6 @@ package com.kf.pojo;
 public class SecondClass {
     private int scId;
     private String scName;
-    private String mcName;
     private int scMcId;
 
     public int getScId() {
@@ -25,13 +24,6 @@ public class SecondClass {
         this.scName = scName;
     }
 
-    public String getMcName() {
-        return mcName;
-    }
-
-    public void setMcName(String mcName) {
-        this.mcName = mcName;
-    }
 
     public int getScMcId() {
         return scMcId;
