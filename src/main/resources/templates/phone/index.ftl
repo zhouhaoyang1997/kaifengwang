@@ -35,7 +35,6 @@
         <a href="#" class="bottom_history">历史</a>
         <a href="#" class="bottom_post">发布</a>
     </div>
-
     <div class="select_01" id="wrapper2">
         <ul class="tab-hd" id="scroller2">
             <li class="item current">

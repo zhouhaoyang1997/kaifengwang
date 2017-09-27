@@ -7,6 +7,34 @@ package com.kf.pojo;
 public class User {
     private String userName;
     private String userPassword;
+    private String userAvator;
+    private String userPhone;
+    private String userEmail;
+
+    public String getUserAvator() {
+        return userAvator;
+    }
+
+    public void setUserAvator(String userAvator) {
+        this.userAvator = userAvator;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
     private int userId;
 
     public String getUserName() {

@@ -11,12 +11,13 @@
 <body>
 <#--头部开始 -->
 <div class="header-area">
-    <div class="container" style="width: 1200px;">
+
+    <div class="container_self" style="width: 1200px;">
         <div class="row">
             <div class="col-xs-8">
                 <div class="user-menu">
                     <ul>
-                        <li><p>欢迎来到开封网!</p></li>
+                        <li><p>欢迎来到开封城市网!</p></li>
                         <li><a href="#"><i class="fa fa-heart"></i> 快速发布信息</a></li>
                         <li><a href="#"><i class="fa fa-user"></i> 修改/删除信息</a></li>
                         <li><a href="#"><i class="fa fa-phone"></i> 手机浏览</a></li>
@@ -36,7 +37,7 @@
 </div> <!-- End header area -->
 
 <div class="site-branding-area">
-    <div class="container" style="width: 1200px;">
+    <div class="container_self" style="width: 1200px;">
         <div class="row">
             <div class="col-sm-3">
                 <div class="logo">
@@ -74,152 +75,53 @@
 </div> <!-- End site branding area -->
 <#-- 菜单栏-->
 <div class="mainmenu-area">
-    <div class="container" style="width: 1200px;">
+    <div class="container_self" style="width: 1200px;">
         <div class="row">
-                <ul class="megamenu skyblue">
-                    <li class="active grid"><a class="color1" href="#">首页</a>
-                    <li class="grid"><a class="color1" href="#">招聘<span class="caret"></span></a>
-                        <div class="megapanel">
-                            <div class="row">
-                                <div class="col1">
-                                    <div class="h_nav">
-                                        <h4>全职招聘</h4>
-                                        <ul>
-                                            <li><a href="products.html">营业员/店员</a></li>
-                                            <li><a href="products.html">销售/业务员</a></li>
-                                            <li><a href="products.html">保姆/家政</a></li>
-                                            <li><a href="products.html">保安/保洁</a></li>
-                                            <li><a href="products.html">送货/快递/仓管</a></li>
-                                            <li><a href="products.html">财务/会计</a></li>
-                                            <li><a href="products.html">美工/程序员</a></li>
-                                            <li><a href="products.html">人才招聘会</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col1">
-                                    <div class="h_nav" style="margin-top:30px">
-                                        <ul>
-                                            <li><a href="products.html">服务员/收银员</a></li>
-                                            <li><a href="products.html">文员/客服/助理</a></li>
-                                            <li><a href="products.html">司机/驾驶员</a></li>
-                                            <li><a href="products.html">厨师/切配</a></li>
-                                            <li><a href="products.html">工人/技工</a></li>
-                                            <li><a href="products.html">老师/培训师</a></li>
-                                            <li><a href="products.html">保健师/美容师</a></li>
-                                            <li><a href="products.html">KTV/酒吧</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col1">
-                                    <div class="h_nav">
-                                        <h4>兼职招聘</h4>
-                                        <ul>
-                                            <li><a href="products.html">派发/促销</a></li>
-                                            <li><a href="products.html">餐厅/服务员</a></li>
-                                            <li><a href="products.html">网站/设计</a></li>
-                                            <li><a href="products.html">钟点/小时工</a></li>
-                                            <li><a href="products.html">家教/老师</a></li>
-                                            <li><a href="products.html">模特/礼仪</a></li>
-                                            <li><a href="products.html">会计/财务</a></li>
-                                            <li><a href="products.html">学生兼职</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+            <ul class="megamenu skyblue">
+                <li class="active grid"><a class="color1" href="#">首页</a>
+                <li class="grid" style="margin-left: 3px;"><a class="color1" href="#">招聘<span class="caret"></span></a>
+                    <div class="megapanel">
+                        <ul class="menu_ul">
+                            <#list zhaopin as zp>
+                                <li><a href="#">${zp.scName}</a></li>
+                            </#list>
+                        </ul>
+                        <div class="img_box">
+                            <img src="img/zp_logo.png" alt="">
                         </div>
-                    </li>
-                    <li class="grid"><a class="color1" href="#">跳蚤市场<span class="caret"></span></a>
-                        <div class="megapanel">
-                            <div class="row">
-                                <div class="col1">
-                                    <div class="h_nav">
-                                        <h4>数码·通讯</h4>
-                                        <ul>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col1">
-                                    <div class="h_nav">
-                                        <h4>百货·设备  换季衣服便宜清</h4>
-                                        <ul>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                            <li><a href="products.html">二手手机</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a class="color1" href="#"> 房产信息<span class="caret"></span></a>
-                        <div class="megapanel">
-                            <div class="row">
-                                <div class="col1">
-                                    <div class="h_nav">
-                                        <h4>出租/出售</h4>
-                                        <ul>
-                                            <li><a href="products.html">旺铺/店面/仓库/厂房</a></li>
-                                            <li><a href="products.html">个人二手房出售</a></li>
-                                            <li><a href="products.html">中介二手房出售</a></li>
-                                            <li><a href="products.html">出租房屋</a></li>
-                                            <li><a href="products.html">求购房屋</a></li>
-                                            <li><a href="products.html">求租房屋</a></li>
-                                            <li><a href="products.html">房屋装修/工程/施工</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a class="color1" href="#">生活服务<span class="caret"></span></a>
-                        <div class="megapanel">
-                            <div class="row">
-                                <div class="col1">
-                                    <div class="h_nav">
-                                        <h4>休闲娱乐</h4>
-                                        <ul>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                                <div class="col1">
-                                    <div class="h_nav">
-                                        <h4>餐饮美食</h4>
-                                        <ul>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                            <li><a href="products.html">餐饮/送餐/送水</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a class="color1" href="#">名企招聘</a></li>
-                    <li><a class="color1" href="#">个人简历</a></li>
-                </ul>
-
-            </div>
+                    </div>
+                </li>
+                <li class="grid"><a class="color1" href="#">二手市场<span class="caret"></span></a>
+                    <div class="megapanel">
+                        <ul class="menu_ul">
+                        <#list ershou as es>
+                            <li><a href="#">${es.scName}</a></li>
+                            </#list>
+                        </ul>
+                    </div>
+                </li>
+                <li><a class="color1" href="#">房产信息<span class="caret"></span></a>
+                    <div class="megapanel">
+                        <ul class="menu_ul">
+                        <#list fangchan as fc>
+                            <li><a href="#">${fc.scName}</a></li>
+                            </#list>
+                        </ul>
+                    </div>
+                </li>
+                <li><a class="color1" href="#">生活服务<span class="caret"></span></a>
+                    <div class="megapanel">
+                        <ul class="menu_ul">
+                        <#list shenghuo as sh>
+                            <li><a href="#">${sh.scName}</a></li>
+                            </#list>
+                        </ul>
+                    </div>
+                </li>
+                <li><a class="color1" href="#">名企招聘</a></li>
+                <li><a class="color1" href="#">个人简历</a></li>
+            </ul>
+        </div>
     </div>
 </div> <!-- End mainmenu area -->
 <#-- 广告-->
@@ -232,55 +134,61 @@
 </div>
 <#-- 主功能模块-->
 <div class="mainPage">
-    <div class="container" style="width:1200px;">
+
+    <div class="container_self" style="width:1200px;">
         <div class="row">
             <div class="col-xs-8">
-                <div class="row iconDiv">
-                    <div class="col-xs-2">
-                        <div style="width:55px;margin: 0 auto;">
-                            <img src="img/zp_icon.png" width="55px" height="55px" alt="">
-                        </div>
+                <div class="panel panel_self">
+                    <div class="panel-body">
+                        <div class="row iconDiv">
+                            <div class="col-xs-2">
+                                <div style="width:55px;margin: 0 auto;">
+                                    <img src="img/zp_icon.png" width="55px" height="55px" alt="">
+                                </div>
 
-                        <p><a href="#" target="_blank">招聘</a></p>
-                        <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
-                    </div>
-                    <div class="col-xs-2">
-                        <div style="width:55px;margin: 0 auto;">
-                            <img src="img/jjz.png" width="55px" height="55px" alt="">
-                        </div>
-                        <p><a href="#" target="_blank">二手市场</a></p>
-                        <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
-                    </div>
-                    <div class="col-xs-2">
-                        <div style="width:55px;margin: 0 auto;">
-                            <img src="img/jz.png" width="55px" height="55px" alt="">
-                        </div>
-                        <p><a href="#" target="_blank">房产</a></p>
-                        <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
-                    </div>
-                    <div class="col-xs-2">
-                        <div style="width:55px;margin: 0 auto;">
-                            <img src="img/zp_icon.png" width="55px" height="55px" alt="">
-                        </div>
-                        <p><a href="#" target="_blank">二手车</a></p>
-                        <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
-                    </div>
-                    <div class="col-xs-2">
-                        <div style="width:55px;margin: 0 auto;">
-                            <img src="img/cw_icon.png" width="55px" height="55px" alt="">
-                        </div>
+                                <p><a href="#" target="_blank">招聘</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                            </div>
+                            <div class="col-xs-2">
+                                <div style="width:55px;margin: 0 auto;">
+                                    <img src="img/jjz.png" width="55px" height="55px" alt="">
+                                </div>
+                                <p><a href="#" target="_blank">二手市场</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                            </div>
+                            <div class="col-xs-2">
+                                <div style="width:55px;margin: 0 auto;">
+                                    <img src="img/jz.png" width="55px" height="55px" alt="">
+                                </div>
+                                <p><a href="#" target="_blank">房产</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                            </div>
+                            <div class="col-xs-2">
+                                <div style="width:55px;margin: 0 auto;">
+                                    <img src="img/zp_icon.png" width="55px" height="55px" alt="">
+                                </div>
+                                <p><a href="#" target="_blank">二手车</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                            </div>
+                            <div class="col-xs-2">
+                                <div style="width:55px;margin: 0 auto;">
+                                    <img src="img/cw_icon.png" width="55px" height="55px" alt="">
+                                </div>
 
-                        <p><a href="#" target="_blank">宠物</a></p>
-                        <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
-                    </div>
-                    <div class="col-xs-2">
-                        <div style="width:55px;margin: 0 auto;">
-                            <img src="img/jz.png" width="55px" height="55px" alt="">
+                                <p><a href="#" target="_blank">宠物</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                            </div>
+                            <div class="col-xs-2">
+                                <div style="width:55px;margin: 0 auto;">
+                                    <img src="img/jz.png" width="55px" height="55px" alt="">
+                                </div>
+                                <p><a href="#" target="_blank">装饰建材</a></p>
+                                <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
+                            </div>
                         </div>
-                        <p><a href="#" target="_blank">装饰建材</a></p>
-                        <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
                     </div>
                 </div>
+
             </div>
             <div class="col-xs-4">
                 <div class="panel panel_self">
@@ -303,13 +211,10 @@
                     <div class="panel-heading"><h4>房产信息</h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
-                            <li><a href="#">旺铺/店面/仓库/厂房</a></li>
-                            <li><a href="#">个人二手房出售</a></li>
-                            <li><a href="#">中介二手房出售</a></li>
-                            <li><a href="#">出租房屋</a></li>
-                            <li><a href="#">求购房屋</a></li>
-                            <li><a href="#">求租房屋</a></li>
-                            <li><a href="#">房屋装修/工程/施工</a></li>
+
+                        <#list fangchan as fc>
+                            <li><a href="#">${fc.scName}</a></li>
+                        </#list>
                         </ul>
                     </div>
                 </div>
@@ -317,12 +222,10 @@
                     <div class="panel-heading"><h4>宠物</h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
-                            <li><a href="#">狗狗</a></li>
-                            <li><a href="#">猫猫</a></li>
-                            <li><a href="#">用品</a></li>
-                            <li><a href="#">鱼</a></li>
-                            <li><a href="#">鸟</a></li>
-                            <li><a href="#">其他</a></li>
+
+                        <#list chongwu as cw>
+                            <li><a href="#">${cw.scName}</a></li>
+                        </#list>
                         </ul>
                     </div>
                 </div>
@@ -332,22 +235,10 @@
                     <div class="panel-heading"><h4>二手市场</h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
-                            <li><a href="#">手机交易/配件</a></li>
-                            <li><a href="#">二手电脑/配件</a></li>
-                            <li><a href="#">数码产品/游戏机</a></li>
-                            <li><a href="#">虚拟物品/QQ号</a></li>
-                            <li><a href="#">宠物买卖/领养/用品</a></li>
-                            <li><a href="#">二手汽车买卖</a></li>
-                            <li><a href="#">摩托车/电动车/单车</a></li>
-                            <li><a href="#">饰品/化妆品</a></li>
-                            <li><a href="#">家具/日用品/家用电器</a></li>
-                            <li><a href="#">食品</a></li>
-                            <li><a href="#">母婴儿童用品</a></li>
-                            <li><a href="#">办公用品/办公设备</a></li>
-                            <li><a href="#">服装/鞋帽/箱包</a></li>
-                            <li><a href="#">文化体育用品/乐器</a></li>
-                            <li><a href="#">健身卡/优惠券/电影票</a></li>
-                            <li><a href="#">个人求购/专业收购</a></li>
+
+                        <#list ershou as es>
+                            <li><a href="#">${es.scName}</a></li>
+                        </#list>
                         </ul>
                     </div>
                 </div>
@@ -356,22 +247,11 @@
                 <div class="panel panel_self">
                     <div class="panel-heading"><h4>招聘</h4></div>
                     <div class="panel-body" >
-                        <ul class="list_clear" style="width: 160px;float: left">
-                            <li><a href="#">保安/司机</a></li>
-                            <li><a href="#">二手电脑/配件</a></li>
-                            <li><a href="#">数码产品/游戏机</a></li>
-                            <li><a href="#">虚拟物品/QQ号</a></li>
-                            <li><a href="#">宠物买卖/领养/用品</a></li>
-                            <li><a href="#">二手汽车买卖</a></li>
-                            <li><a href="#">摩托车/电动车/单车</a></li>
 
-                        </ul>
-                        <ul class="list_clear" style="width: 160px;float: left">
-
-                            <li><a href="#">服装/鞋帽/箱包</a></li>
-                            <li><a href="#">文化体育用品/乐器</a></li>
-                            <li><a href="#">健身卡/优惠券/电影票</a></li>
-                            <li><a href="#">个人求购/专业收购</a></li>
+                        <ul class="list_clear">
+                        <#list zhaopin as zp>
+                            <li><a href="#">${zp.scName}</a></li>
+                        </#list>
                         </ul>
                     </div>
                 </div>
@@ -379,22 +259,12 @@
                 <div class="panel panel_self">
                     <div class="panel-heading"><h4>名企招聘</h4></div>
                     <div class="panel-body" >
-                        <ul class="list_clear" style="width: 160px;float: left">
-                            <li><a href="#">保安/司机</a></li>
-                            <li><a href="#">二手电脑/配件</a></li>
-                            <li><a href="#">数码产品/游戏机</a></li>
-                            <li><a href="#">虚拟物品/QQ号</a></li>
-                            <li><a href="#">宠物买卖/领养/用品</a></li>
-                            <li><a href="#">二手汽车买卖</a></li>
-                            <li><a href="#">摩托车/电动车/单车</a></li>
 
-                        </ul>
-                        <ul class="list_clear" style="width: 160px;float: left">
+                        <ul class="list_clear">
+                        <#list mingqi as mq>
+                            <li><a href="#">${mq.scName}</a></li>
+                        </#list>
 
-                            <li><a href="#">服装/鞋帽/箱包</a></li>
-                            <li><a href="#">文化体育用品/乐器</a></li>
-                            <li><a href="#">健身卡/优惠券/电影票</a></li>
-                            <li><a href="#">个人求购/专业收购</a></li>
                         </ul>
                     </div>
                 </div>
@@ -404,39 +274,12 @@
                     <div class="panel-heading"><h4>生活服务</h4></div>
                     <div class="panel-body">
                         <ul class="list_clear" style="width: 160px;float: left">
-                            <li><a href="#">手机交易/配件</a></li>
-                            <li><a href="#">二手电脑/配件</a></li>
-                            <li><a href="#">数码产品/游戏机</a></li>
-                            <li><a href="#">虚拟物品/QQ号</a></li>
-                            <li><a href="#">宠物买卖/领养/用品</a></li>
-                            <li><a href="#">二手汽车买卖</a></li>
-                            <li><a href="#">摩托车/电动车/单车</a></li>
-                            <li><a href="#">饰品/化妆品</a></li>
-                            <li><a href="#">家具/日用品/家用电器</a></li>
 
-                            <li><a href="#">宠物买卖/领养/用品</a></li>
-                            <li><a href="#">二手汽车买卖</a></li>
-                            <li><a href="#">摩托车/电动车/单车</a></li>
-                            <li><a href="#">饰品/化妆品</a></li>
-                            <li><a href="#">家具/日用品/家用电器</a></li>
+                        <#list shenghuo as sh>
+                            <li><a href="#">${sh.scName}</a></li>
+                        </#list>
                         </ul>
-                        <ul class="list_clear" style="width: 160px;float: left">
-                            <li><a href="#">手机交易/配件</a></li>
-                            <li><a href="#">二手电脑/配件</a></li>
-                            <li><a href="#">数码产品/游戏机</a></li>
-                            <li><a href="#">虚拟物品/QQ号</a></li>
-                            <li><a href="#">宠物买卖/领养/用品</a></li>
-                            <li><a href="#">二手汽车买卖</a></li>
-                            <li><a href="#">摩托车/电动车/单车</a></li>
-                            <li><a href="#">饰品/化妆品</a></li>
-                            <li><a href="#">家具/日用品/家用电器</a></li>
 
-                            <li><a href="#">宠物买卖/领养/用品</a></li>
-                            <li><a href="#">二手汽车买卖</a></li>
-                            <li><a href="#">摩托车/电动车/单车</a></li>
-                            <li><a href="#">饰品/化妆品</a></li>
-                            <li><a href="#">家具/日用品/家用电器</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -454,7 +297,7 @@
 </div>
 <#-- 页脚-->
 <div class="footerPage" style="margin-top: 30px;background: none repeat scroll 0 0 #f4f4f4;">
-    <div class="container">
+    <div class="container_self">
         <div class="row">
             <div class="col-xs-3">
                 <div class="logo">
