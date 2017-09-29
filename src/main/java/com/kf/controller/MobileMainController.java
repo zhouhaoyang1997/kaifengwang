@@ -54,4 +54,5 @@ public class MobileMainController {
         modelAndView.addObject("mingqi", mingqi);
         return modelAndView;
     }
+
 }

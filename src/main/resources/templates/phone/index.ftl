@@ -42,7 +42,7 @@
                 <a style="color:;" target="_self" href="#">首页</a>
             </li>
             <li class="item ">
-                <a style="color:;" target="_self" href="menulist.ftl">信息分类</a>
+                <a style="color:;" target="_self" href="menulist">信息分类</a>
             </li>
         </ul>
     </div>
