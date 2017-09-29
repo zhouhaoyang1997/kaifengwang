@@ -4,7 +4,9 @@
 <script type="text/javascript" src="../js/admin/fileinput.js"></script>
 <script type="text/javascript" src="../js/admin/fileinput_locale_zh.js"></script>
 
-
+<script>
+    menuSelected("ADManage");
+</script>
 <form class="form-horizontal required-validate" action="" enctype="multipart/form-data" method="post"
       onsubmit="return iframeCallback(this, pageAjaxDone)">
     <div class="form-group">

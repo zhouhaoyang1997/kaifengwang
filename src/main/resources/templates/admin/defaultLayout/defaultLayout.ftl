@@ -18,6 +18,7 @@
     <script type="text/javascript" src="../js/admin/jquery.min.js"></script>
     <script src="../js/admin/bootstrap.min.js"></script>
     <script src="../js/admin/klorofil-common.js"></script>
+    <script src="../js/admin/index.js"></script>
 
 </head>
 <body>

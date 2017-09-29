@@ -1,5 +1,6 @@
 <#import "defaultLayout/defaultLayout.ftl" as defaultLayout>
 <@defaultLayout.layout>
+
 <div class="panel">
     <div class="panel-heading">
         <div class="right">

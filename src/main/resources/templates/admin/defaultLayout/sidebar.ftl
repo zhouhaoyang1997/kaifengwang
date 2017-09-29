@@ -2,11 +2,14 @@
 <div id="sidebar-nav" class="sidebar">
     <div class="sidebar-scroll">
         <nav>
-            <ul class="nav">
-                <li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>菜单列表</span></a></li>
-                <li><a href="/pushInfoManage" class=""><i class="lnr lnr-code"></i> <span>发布信息管理</span></a></li>
-                <li><a href="/ADManage" class=""><i class="lnr lnr-cog"></i> <span>广告管理</span></a></li>
-                <li><a href="/databaseBackup" class=""><i class="lnr lnr-alarm"></i> <span>数据库备份</span></a></li>
+            <ul class="nav" id="menu">
+                <li><a href="index.html" class="active" id="menuList"><i class="lnr lnr-home"></i> <span>菜单列表</span></a>
+                </li>
+                <li><a href="/pushInfoManage" id="pushInfoManage"><i class="lnr lnr-code"></i> <span>发布信息管理</span></a>
+                </li>
+                <li><a href="/ADManage" class="" id="ADManage"><i class="lnr lnr-cog"></i> <span>广告管理</span></a></li>
+                <li><a href="/databaseBackup" id="databaseBackup" class=""><i class="lnr lnr-alarm"></i>
+                    <span>数据库备份</span></a></li>
                 <li>
                     <a href="#users" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i>
                         <span>会员管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -17,7 +20,8 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="/adminsManage" class=""><i class="lnr lnr-star"></i> <span>管理员设置</span></a></li>
+                <li><a href="/adminsManage" id="adminsManage" class=""><i class="lnr lnr-star"></i>
+                    <span>管理员设置</span></a></li>
 
             <#--<li>-->
             <#--<a href="#admins" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i>-->
