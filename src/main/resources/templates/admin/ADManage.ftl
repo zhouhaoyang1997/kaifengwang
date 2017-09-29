@@ -38,7 +38,6 @@
         </div>
     </div>
 </form>
-    <#noparse>
     <script type="text/javascript">
         var projectfileoptions = {
             showUpload: false,
@@ -63,5 +62,4 @@
             }
         });
     </script>
-    </#noparse>
 </@defaultLayout.layout>

@@ -16,6 +16,10 @@ public class AdminController extends WebMvcConfigurerAdapter {
         registry.addViewController("/pushInfoManage").setViewName("/admin/pushInfoManage");
         registry.addViewController("/ADManage").setViewName("/admin/AdManage");
         registry.addViewController("/databaseBackup").setViewName("/admin/databaseBackup");
+        registry.addViewController("/editUserInfo").setViewName("/admin/editUserInfo");
+        registry.addViewController("/blackList").setViewName("/admin/blackList");
+        registry.addViewController("/adminsManage").setViewName("/admin/adminsManage");
+        registry.addViewController("/addNewSecondClass").setViewName("/admin/addNewSecondClass");
     }
 
 

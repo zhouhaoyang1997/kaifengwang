@@ -1,7 +1,7 @@
 <!-- WRAPPER -->
 <div id="wrapper">
     <!-- NAVBAR -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top ">
         <div class="brand">
             <a href="index.html"><img src="../img/admin/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
         </div>
