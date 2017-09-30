@@ -42,7 +42,7 @@ public class UserController {
             modelAndView = new ModelAndView("redirect:/index");
         }else{
             modelAndView = new ModelAndView("login");
-            modelAndView.addObject("error","用户名或密码错误");
+            modelAndView.addObject("error","用户名或密码错误!");
         }
         return modelAndView;
     }
