@@ -1,5 +1,8 @@
 <#import "defaultLayout/defaultLayout.ftl" as defaultLayout>
 <@defaultLayout.layout>
+<script>
+    menuSelected("adminsManage");
+</script>
 <div class="panel">
     <div class="panel-heading">
         <div>

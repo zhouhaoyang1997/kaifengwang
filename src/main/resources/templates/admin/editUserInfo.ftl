@@ -1,5 +1,8 @@
 <#import "defaultLayout/defaultLayout.ftl" as defaultLayout>
 <@defaultLayout.layout>
+<script>
+    menuSelected("users");
+</script>
 <div class="panel">
     <div class="panel-body" style="display: block;">
         <form class="form-horizontal">

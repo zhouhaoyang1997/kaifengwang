@@ -1,5 +1,8 @@
 <#import "defaultLayout/defaultLayout.ftl" as defaultLayout>
 <@defaultLayout.layout>
+<script>
+    menuSelected("databaseBackup");
+</script>
 <div class="panel">
     <div class="panel-body">
         <form class="form-horizontal">

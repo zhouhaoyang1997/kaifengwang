@@ -1,6 +1,8 @@
 <#import "defaultLayout/defaultLayout.ftl" as defaultLayout>
 <@defaultLayout.layout>
-
+<script>
+    menuSelected("addNewSecondClass");
+</script>
 <div class="panel">
     <div class="panel-heading">
         <div class="right">
