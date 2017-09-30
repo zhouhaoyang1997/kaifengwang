@@ -8,4 +8,8 @@
         SELECT * FROM push_info_class where mc_id=#{mcId}
     </select>
 
+    <select id="selectAllPicId" resultType="java.lang.Integer">
+        SELECT pic_id FROM push_info_class WHERE mc_id=#{mcId}
+    </select>
+
 </mapper>

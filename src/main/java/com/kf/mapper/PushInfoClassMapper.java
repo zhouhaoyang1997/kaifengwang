@@ -9,5 +9,7 @@ import java.util.List;
 public interface PushInfoClassMapper {
 
     List<PushInfoClass> selectAll(@Param("mcId") int mcId);
+
+    List<Integer> selectAllPicId(@Param("mcId") int mcId);
 }
 

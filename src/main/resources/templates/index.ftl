@@ -3,10 +3,10 @@
 <head lang="zh">
     <title>首页</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/bootstrap.min.css" >
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/menu.css">
 </head>
 <body>
 <#--头部开始 -->
@@ -17,7 +17,7 @@
                 <div class="user-menu">
                     <ul>
                         <li><p>欢迎来到开封城市网!</p></li>
-                        <li><a href="#"><i class="fa fa-heart"></i> 快速发布信息</a></li>
+                        <li><a href="${request.contextPath}/push/chooseMc"><i class="fa fa-heart"></i> 快速发布信息</a></li>
                         <li><a href="#"><i class="fa fa-user"></i> 修改/删除信息</a></li>
                         <li><a href="#"><i class="fa fa-phone"></i> 手机浏览</a></li>
                     </ul>
@@ -40,7 +40,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="logo">
-                    <h1><a href="/index">开封<span>城市网</span></a></h1>
+                    <h1><a href="${request.contextPath}/index">开封<span>城市网</span></a></h1>
                 </div>
             </div>
 
@@ -144,7 +144,7 @@
                                     <img src="img/zp_icon.png" width="55px" height="55px" alt="">
                                 </div>
 
-                                <p><a href="#" target="_blank">招聘</a></p>
+                                <p><a href="${request.contextPath}/list?mcId=1" target="_blank">招聘</a></p>
                                 <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
                             </div>
                             <div class="col-xs-2">
@@ -206,21 +206,21 @@
         <div class="row">
             <div class="col-xs-2">
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4>房产信息</h4></div>
+                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=2">房产信息</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
                         <#list fangchan as fc>
-                            <li><a href="#">${fc.scName}</a></li>
+                            <li><a href="${request.contextPath}/list?mcId=2&scId=${fc.scId}">${fc.scName}</a></li>
                         </#list>
                         </ul>
                     </div>
                 </div>
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4>宠物</h4></div>
+                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=5">宠物</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
                         <#list chongwu as cw>
-                            <li><a href="#">${cw.scName}</a></li>
+                            <li><a href="${request.contextPath}/list?mcId=5&scId=${cw.scId}">${cw.scName}</a></li>
                         </#list>
                         </ul>
                     </div>
@@ -228,11 +228,11 @@
             </div>
             <div class="col-xs-2">
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4>二手市场</h4></div>
+                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=3">二手市场</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
                         <#list ershou as es>
-                            <li><a href="#">${es.scName}</a></li>
+                            <li><a href="${request.contextPath}/list?mcId=3&scId=${es.scId}">${es.scName}</a></li>
                         </#list>
                         </ul>
                     </div>
@@ -240,22 +240,22 @@
             </div>
             <div class="col-xs-4">
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4>招聘</h4></div>
+                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=1">招聘</a></h4></div>
                     <div class="panel-body" >
                         <ul class="list_clear">
                         <#list zhaopin as zp>
-                            <li><a href="#">${zp.scName}</a></li>
+                            <li><a href="${request.contextPath}/list?mcId=1&scId=${zp.scId}">${zp.scName}</a></li>
                         </#list>
                         </ul>
                     </div>
                 </div>
 
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4>名企招聘</h4></div>
+                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=6">名企招聘</a></h4></div>
                     <div class="panel-body" >
                         <ul class="list_clear">
                         <#list mingqi as mq>
-                            <li><a href="#">${mq.scName}</a></li>
+                            <li><a href="${request.contextPath}/list?mcId=6&scId=${mq.scId}">${mq.scName}</a></li>
                         </#list>
 
                         </ul>
@@ -264,11 +264,11 @@
             </div>
             <div class="col-xs-4">
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4>生活服务</h4></div>
+                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=4">生活服务</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear" style="width: 160px;float: left">
                         <#list shenghuo as sh>
-                            <li><a href="#">${sh.scName}</a></li>
+                            <li><a href="${request.contextPath}/list?mcId=4&scId=${sh.scId}">${sh.scName}</a></li>
                         </#list>
                         </ul>
 

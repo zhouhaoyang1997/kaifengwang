@@ -75,7 +75,7 @@
 </div> <!-- End site branding area -->
 
 <!--轮播图 -->
-<div class="slider_width">
+<div class="slider_width" id="lunbotu">
 
     <div class="slider-area">
         <div id="slide-list" class="carousel carousel-fade slide" data-ride="carousel">
@@ -177,9 +177,9 @@
                     <div class="col-xs-1"><span class="lanmutitle">栏目分类:</span></div>
                     <div class="col-xs-11">
                         <ul class="lanmu_ul">
-                            <li class="active"><a href="#">不限</a></li>
+                            <li class="active" id="notController"><a href="${request.contextPath}/list?mcId=${currMcId}&districtId=${currDistrictId!""}<#if currTags??&&(currTags?size>0)>&tagId=<#list currTags as ct>${ct.tagId}-${ct.tcId}--</#list></#if>">不限</a></li>
                         <#list zhaopin as zp>
-                            <li><a href="#">${zp.scName}</a></li>
+                            <li id="lanmu${zp.scId}"><a href="${request.contextPath}/list?mcId=${currMcId}&districtId=${currDistrictId!""}&scId=${zp.scId}<#if currTags??&&(currTags?size>0)>&tagId=<#list currTags as ct>${ct.tagId}-${ct.tcId}--</#list></#if>">${zp.scName}</a></li>
                         </#list>
                         </ul>
                     </div>
@@ -189,33 +189,22 @@
                         <div class="col-xs-1"><span class="lanmutitle">${tg.tagName}:</span></div>
                         <div class="col-xs-11">
                             <ul class="lanmu_ul2">
-                                <li class="active"><a href="#">不限</a></li>
+                                <li class="active" id="tag${tg.tagId}"><a href="${request.contextPath}/list?mcId=${currMcId}&districtId=${currDistrictId!""}&scId=${currScId!""}&tagId=<#list currTags as ct><#if ct.tagId!=tg.tagId>${ct.tagId}-${ct.tcId}--</#if></#list>">不限</a></li>
                                 <#list tg.tagContents as tagContent>
-                                    <li><a href="#">${tagContent.tcName}</a></li>
+                                    <li id="tagValue${tagContent.tcId}"><a href="${request.contextPath}/list?mcId=${currMcId}&districtId=${currDistrictId!""}&scId=${currScId!""}&tagId=${tg.tagId}-${tagContent.tcId}<#list currTags as ct><#if ct.tagId!=tg.tagId>--${ct.tagId}-${ct.tcId}</#if></#list>">${tagContent.tcName}</a></li>
                                 </#list>
                             </ul>
                         </div>
                     </div>
                 </#list>
-
                 <div class="row" style="border-bottom: 1px #e6e6e6 dashed;">
                     <div class="col-xs-1"><span class="lanmutitle">地点:</span></div>
                     <div class="col-xs-11">
                         <ul class="lanmu_ul2">
-                            <li class="active"><a href="#">不限</a></li>
+                            <li class="active" id="districtNo"><a href="${request.contextPath}/list?mcId=${currMcId}&scId=${currScId!""}<#if currTags??&&(currTags?size>0)>&tagId=<#list currTags as ct>${ct.tagId}-${ct.tcId}--</#list></#if>">不限</a></li>
                             <#list districts as ds>
-                                <li><a href="#">${ds.districtName}</a></li>
+                                <li id="district${ds.districtId}"><a href="${request.contextPath}/list?mcId=${currMcId}&scId=${currScId!""}&districtId=${ds.districtId}<#if currTags??&&(currTags?size>0)>&tagId=<#list currTags as ct>${ct.tagId}-${ct.tcId}--</#list></#if>">${ds.districtName}</a></li>
                             </#list>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-1"><span class="lanmutitle">已选:</span></div>
-                    <div class="col-xs-11">
-                        <ul class="lanmu_ul2">
-                        <#list districts as ds>
-                            <li><a href="#">${ds.districtName}</a></li>
-                        </#list>
                         </ul>
                     </div>
                 </div>
@@ -229,26 +218,45 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-11">
-                            <#list jobInfos as job>
-                                <div class="row hover_info">
-                                    <div class="col-xs-3">
-                                        <div class="info_title"><a href="#">${job.piTitle}</a></div>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <span>新思路传媒公司 </span>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <span class="info_yuan">1232</span>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <span>东湖</span>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <span>17-09-10</span>
-                                    </div>
-                                </div>
-                            </#list>
+                            <#if pushInfos??&&(pushInfos?size>0)>
+                                <#list pushInfos as pushInfo>
+                                    <div class="row hover_info">
+                                        <div class="col-xs-5 padding-top1">
+                                            <div class="info_title"><a href="#">${pushInfo.piTitle}</a></div>
+                                            <#list pushInfo.tagValues as tagValue>
+                                            <#if tagValue.tagName=='月薪'>
+                                                <span class="label label-danger">${tagValue.tcName}&nbsp;元/月</span>
+                                            <#else>
+                                                <span class="label label-success">${tagValue.tcName}</span>
+                                            </#if>
 
+                                            </#list>
+                                        </div>
+                                        <div class="col-xs-3 padding_top">
+                                            <#if pushInfo.otherInfos??&&(pushInfo.otherInfos?size>0)>
+                                                <#list pushInfo.otherInfos as otherInfo>
+                                                    <#if otherInfo.picName??&&otherInfo.picName='公司名称'>
+                                                        <span>${otherInfo.pcContent}</span>
+                                                    </#if>
+                                                </#list>
+                                            </#if>
+                                            <#if currMcId??&&currMcId!=1>
+                                                <span>${pushInfo.piContactPerson}</span>
+                                            </#if>
+                                        </div>
+                                        <div class="col-xs-2 padding_top">
+                                            <span>${(pushInfo.piDistrictName)!""}</span>
+                                        </div>
+                                        <div class="col-xs-2 padding_top">
+                                            <span class="info_yuan">${(pushInfo.piPushDate)!""}</span>
+                                        </div>
+                                    </div>
+                                </#list>
+                            <#else>
+                            <div class="row hover_info">
+                                <span>抱歉，暂时没有符合该条件的职位，请重新修改搜索条件后再搜索、筛选</span>
+                            </div>
+                            </#if>
                         </div>
                         <!-- 广告位-->
                         <div class="col-xs-1"></div>
@@ -312,5 +320,37 @@
 <script type="text/javascript" src="js/menu.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+<#if currScId??||currDistrictId??||(currTags?size>0)>
+    <script type="text/javascript">
+    $(function () {
+        $("#lunbotu").css("display","none");
+    });
+    </script>
+}
+</#if>
+<#if currScId??>
+    <script type="text/javascript">
+        $(function () {
+            $("#notController").removeClass("active");
+            $("#lanmu${currScId}").addClass("active");
+        });
+    </script>
+</#if>
+<#if currDistrictId??>
+<script type="text/javascript">
+    $(function () {
+        $("#districtNo").removeClass("active");
+        $("#district${currDistrictId}").addClass("active");
+    })
+</script>
+</#if>
+    <script type="text/javascript">
+<#list currTags as ct>
+        $(function () {
+            $("#tag${ct.tagId}").removeClass("active");
+            $("#tagValue${ct.tcId}").addClass("active");
+        });
+</#list>
+    </script>
 </body>
 </html>

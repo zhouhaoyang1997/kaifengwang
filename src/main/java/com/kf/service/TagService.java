@@ -17,4 +17,8 @@ public class TagService {
     public List<Tag> getAllTag(int mcId){
         return tagMapper.selectAllTag(mcId);
     }
+
+    public List<Integer> getAllTagId(int mcId){
+        return tagMapper.selectAllTagId(mcId);
+    }
 }

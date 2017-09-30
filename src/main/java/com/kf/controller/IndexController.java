@@ -41,4 +41,6 @@ public class IndexController {
         ModelAndView modelAndView = new ModelAndView("phone/index");
         return modelAndView;
     }
+
+
 }

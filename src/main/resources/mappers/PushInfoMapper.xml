@@ -2,9 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kf.mapper.PushInfoMapper" >
 
-    <select id="selectAllJob" resultType="com.kf.pojo.PushInfo">
-        select DISTINCT push_info.pi_id,pi_title,mc_name,user_name,pi_address,pi_img,pi_scan,pi_push_date,pi_chujia,pi_zhiding
- from push_info,user,mainclass,secondclass where push_info.pi_mc=mainclass.mc_id and push_info.pi_user=user.user_id;
+    <resultMap id="BasePushInfo" type="com.kf.pojo.PushInfo">
+        <result property="piId" column="pi_id"/>
+        <result property="piTitle" column="pi_title"/>
+        <result property="piMc" column="pi_mc"/>
+        <result property="piSc" column="pi_sc"/>
+        <result property="piScan" column="pi_scan"/>
+        <result property="piPushDate" column="pi_push_date"/>
+        <result property="piContactPerson" column="pi_contact_person"/>
+        <result property="piChujia" column="pi_chujia"/>
+        <result property="piZhiding" column="pi_zhiding"/>
+        <result property="piDistrictName" column="district_name"/>
+        <collection property="tagValues" ofType="com.kf.vo.TagValue">
+            <result property="tagId" column="tag_id"/>
+            <result property="tagName" column="tag_name"/>
+            <result property="tcName" column="tc_name"/>
+            <result property="tcId" column="tc_id"/>
+        </collection>
+
+        <collection property="otherInfos" ofType="com.kf.vo.OtherInfo">
+            <result property="pcId" column="pc_id"/>
+            <result property="picName" column="pic_name"/>
+            <result property="picId" column="pic_id"/>
+            <result property="pcContent" column="pc_content"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAllJob" resultMap="BasePushInfo">
+        select DISTINCT
+        push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,district_name,
+        pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,
+        tc_name,tagcontent.tc_id,tag.tag_name,tc_name
+        from user,push_info LEFT JOIN pic_content ON push_info.pi_id = pic_content.pc_id
+        LEFT JOIN push_info_class ON pic_content.pic_id=push_info_class.pic_id
+        LEFT JOIN push_info_tag ON push_info.pi_id = push_info_tag.pi_id
+        LEFT JOIN tagcontent ON push_info_tag.pi_tag_content=tagcontent.tc_id
+        LEFT JOIN tag ON tag.tag_id=tagcontent.tag_id
+        LEFT JOIN district ON push_info.pi_district=district.district_id
+        where push_info.pi_user=user.user_id
+        <if test="scId!=null and scId!=0">and pi_sc=#{scId}</if>
+        <if test="mcId!=null and mcId!=0">and pi_mc=#{mcId}</if>
+        <if test="districtId!=null and districtId!=0">and district_id=#{districtId}</if>
+        <if test="tagNum!=0">
+        and push_info.pi_id in (select pi_id FROM push_info_tag
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <foreach collection="tags" item="item" index="index" >
+                OR tag_id=#{item.tagId} and pi_tag_content=#{item.tcId}
+            </foreach>
+        </trim>
+        GROUP by pi_id having count(pi_id)=#{tagNum})
+        </if>
     </select>
 
+
+    <insert id="addPushInfo" parameterType="com.kf.pojo.PushInfo">
+        <selectKey keyProperty="piId" resultType="Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into push_info(pi_title,pi_content,pi_mc,pi_sc,pi_user,pi_address,
+        pi_img,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,pi_phone,pi_qq,pi_district) VALUES
+        (#{piTitle},#{piContent},#{piMc},#{piSc},#{piUser},#{piAddress},#{piImg},#{piScan},#{piPushDate},#{piChujia},#{piZhiding},#{piContactPerson},
+        #{piPhone},#{piQq},#{piDistrict})
+    </insert>
 </mapper>

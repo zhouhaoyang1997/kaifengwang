@@ -6,8 +6,16 @@ package com.kf.vo;
 public class TagValue {
     private int tagId;
     private String tagName;
-    private String tagContent;
-    private int mcId;
+    private String tcName;
+    private int tcId;
+
+    public int getTcId() {
+        return tcId;
+    }
+
+    public void setTcId(int tcId) {
+        this.tcId = tcId;
+    }
 
     public int getTagId() {
         return tagId;
@@ -25,19 +33,11 @@ public class TagValue {
         this.tagName = tagName;
     }
 
-    public String getTagContent() {
-        return tagContent;
+    public String getTcName() {
+        return tcName;
     }
 
-    public void setTagContent(String tagContent) {
-        this.tagContent = tagContent;
-    }
-
-    public int getMcId() {
-        return mcId;
-    }
-
-    public void setMcId(int mcId) {
-        this.mcId = mcId;
+    public void setTcName(String tcName) {
+        this.tcName = tcName;
     }
 }

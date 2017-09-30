@@ -10,5 +10,7 @@ import java.util.List;
  */
 @Mapper
 public interface TagMapper {
-    List<Tag> selectAllTag(@Param("mcId")int mcId);
+    List<Tag> selectAllTag(@Param("mcId") int mcId);
+
+    List<Integer> selectAllTagId(@Param("mcId") int mcId);
 }

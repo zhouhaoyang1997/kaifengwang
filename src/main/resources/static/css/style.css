@@ -339,13 +339,21 @@ ol.slide-indicators li.active {
     height:80px;
     border-bottom: solid 1px #f3f3f3;
     border-right:solid 1px #f3f3f3;
+
+}
+.hover_info .padding_top{
     padding-top:28px;
 }
+.hover_info .padding-top1{
+    padding-top:15px;
+}
 .info_title{
-    height:22px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    font-size: 16px;color: #000;
+    height:24px;
+    font-size: 18px;color: #000;font-weight: 600;
+}
+.info_title a:hover{
+    text-decoration: none;
+    color: #ff552e;
 }
 .info_yuan{
     color: #ff552e;

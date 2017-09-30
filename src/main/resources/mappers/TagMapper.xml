@@ -16,4 +16,9 @@
         SELECT * FROM tag,tagContent,tm WHERE tag.tag_id=tagContent.tag_id and mc_id=#{mcId} and tm.tag_id=tag.tag_id
     </select>
 
+    <select id="selectAllTagId" resultType="java.lang.Integer">
+        SELECT tag_id FROM tm WHERE mc_id=#{mcId}
+    </select>
+   
+
 </mapper>

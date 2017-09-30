@@ -16,4 +16,8 @@ public class PushInfoClassService {
         return picm.selectAll(mcId);
     }
 
+    //得到所有其他信息id
+    public List<Integer> getAllPushId(int mcId){
+        return picm.selectAllPicId(mcId);
+    }
 }
