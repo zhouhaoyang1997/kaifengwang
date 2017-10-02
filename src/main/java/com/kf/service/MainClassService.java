@@ -19,4 +19,10 @@ public class MainClassService {
     public List<MainClass> getMainClass(){
         return mainClassMapper.selectAllClass();
     }
+
+
+
+    public String getMcName(Integer mcId){
+        return mainClassMapper.selectMcName(mcId);
+    }
 }

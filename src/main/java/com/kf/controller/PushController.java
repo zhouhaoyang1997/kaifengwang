@@ -9,16 +9,16 @@ import java.util.UUID;
 import java.io.File;
 
 import com.kf.util.BasePath;
+import com.kf.vo.Choose;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by 18236 on 2017/9/27.
@@ -52,13 +52,17 @@ public class PushController {
 
     @Autowired
     private PushInfoService pushInfoService;
+
+
+    @Autowired
+    private SecondClassService secondClassService;
     /**
      * 选择主类及副类
      * @return
      */
-    @RequestMapping("/push/chooseMc")
+    @RequestMapping("/push/choose")
     public ModelAndView chooseMainClass(){
-        ModelAndView modelAndView = new ModelAndView("chooseMc");
+        ModelAndView modelAndView = new ModelAndView("choose");
         List<MainClass> mainClass= mainClassService.getMainClass();
         modelAndView.addObject("mainClass",mainClass);
         return modelAndView;
@@ -66,20 +70,51 @@ public class PushController {
 
 
     /**
+     * 用户未登录但选择了主类和副类将进入这里
+     * @param choose
+     * @return
+     */
+    @GetMapping("/push/login")
+    public ModelAndView pushLogin(Choose choose){
+        return toChoose(choose,"modalLogin");
+    }
+
+    /**
+     * 组装用户的选择
+     * @param choose
+     */
+    private ModelAndView toChoose(Choose choose,String toPage){
+        ModelAndView modelAndView=null;
+        //如果用户没有选择或条件缺失,返回选择页面
+        if(choose==null||choose.getMcId()==null||choose.getScId()==null){
+            modelAndView=new ModelAndView("redirect:/push/choose");
+        }else{
+            String mcName = mainClassService.getMcName(choose.getMcId());
+            String scName = secondClassService.getScName(choose.getScId());
+            choose.setMcName(mcName);
+            choose.setScName(scName);
+            modelAndView = new ModelAndView(toPage);
+            modelAndView.addObject("choose",choose);
+        }
+        return modelAndView;
+    }
+
+    /**
      * 填写信息,
      * @return
      */
     @RequestMapping("/push/fill")
-    public ModelAndView chooseSecondClass(int mcId,int scId){
-        ModelAndView modelAndView = new ModelAndView("pushInfo");
-        List<District> districts = districtService.getAllDistrict();
-        List<Tag> tags = tagService.getAllTag(mcId);
-        List<PushInfoClass> pushInfoClasses = pushInfoClassService.getAllPush(mcId);
-        modelAndView.addObject("mcId",mcId);
-        modelAndView.addObject("scId",scId);
-        modelAndView.addObject("districts",districts);
-        modelAndView.addObject("tags",tags);
-        modelAndView.addObject("pushInfoClasses",pushInfoClasses);
+    public ModelAndView chooseSecondClass(Choose choose){
+        ModelAndView modelAndView = toChoose(choose,"pushInfo");
+        if(modelAndView.getViewName().equals("pushInfo")){
+            List<District> districts = districtService.getAllDistrict();
+            List<Tag> tags = tagService.getAllTag(choose.getMcId());
+            List<PushInfoClass> pushInfoClasses = pushInfoClassService.getAllPush(choose.getMcId());
+            modelAndView.addObject("choose",choose);
+            modelAndView.addObject("districts",districts);
+            modelAndView.addObject("tags",tags);
+            modelAndView.addObject("pushInfoClasses",pushInfoClasses);
+        }
         return modelAndView;
     }
 

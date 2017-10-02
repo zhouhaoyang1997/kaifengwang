@@ -13,7 +13,9 @@
         </collection>
     </resultMap>
 
-
+    <select id="selectMcName" resultType="java.lang.String">
+        SELECT mc_name from mainclass WHERE mc_id=#{mcId}
+    </select>
 
     <select id="selectAllClass" resultMap="BaseMainClass">
         SELECT * FROM mainclass,secondclass where mainclass.mc_id=secondclass.sc_mc_id

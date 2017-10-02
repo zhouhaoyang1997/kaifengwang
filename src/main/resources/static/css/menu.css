@@ -29,7 +29,6 @@
     border: 1px solid #dbdbdb;
     background: rgba(253, 253, 253, 1);
     width: 100.2%;
-    height:400px;
     top: 55px;
     left: -1px;
     z-index: 99;
@@ -53,9 +52,9 @@
 
 .menu_ul{
     list-style: none;
-    height:260px;
 }
 .menu_ul li{
-    width: 160px;
+    padding:10px 20px;
+
     float: left;
 }

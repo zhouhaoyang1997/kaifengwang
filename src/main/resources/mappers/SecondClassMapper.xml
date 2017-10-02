@@ -8,4 +8,8 @@
         SELECT * FROM secondclass,mainclass WHERE sc_mc_id=#{mcId} and sc_mc_id=mc_id
     </select>
 
+
+    <select id="selectScName" resultType="java.lang.String">
+        SELECT sc_name from secondclass WHERE sc_id=#{scId}
+    </select>
 </mapper>

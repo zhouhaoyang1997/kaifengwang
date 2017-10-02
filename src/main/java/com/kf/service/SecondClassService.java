@@ -23,4 +23,8 @@ public class SecondClassService {
     public List<SecondClass> getAllSecondClass(int mcId){
         return secondClassMapper.selectAllSecondClass( mcId);
     }
+
+    public String getScName(Integer scId){
+        return secondClassMapper.selectScName(scId);
+    }
 }

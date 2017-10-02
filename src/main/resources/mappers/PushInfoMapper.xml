@@ -7,9 +7,15 @@
         <result property="piTitle" column="pi_title"/>
         <result property="piMc" column="pi_mc"/>
         <result property="piSc" column="pi_sc"/>
+        <result property="userId" column="user_id"/>
+        <result property="piMcName" column="mc_name"/>
+        <result property="piScName" column="sc_name"/>
         <result property="piScan" column="pi_scan"/>
         <result property="piPushDate" column="pi_push_date"/>
         <result property="piContactPerson" column="pi_contact_person"/>
+        <result property="piPhone" column="pi_phone"/>
+        <result property="piQq" column="pi_qq"/>
+        <result property="piImg" column="pi_img"/>
         <result property="piChujia" column="pi_chujia"/>
         <result property="piZhiding" column="pi_zhiding"/>
         <result property="piDistrictName" column="district_name"/>
@@ -27,6 +33,23 @@
             <result property="pcContent" column="pc_content"/>
         </collection>
     </resultMap>
+
+
+    <select id="selectInfoByPiId" resultMap="BasePushInfo">
+        SELECT DISTINCT push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,pi_content,pi_user,pi_img,pi_scan,pi_phone,pi_qq,
+        district_name,pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,
+        tc_name,tagcontent.tc_id,tag.tag_name,sc_name,mc_name
+        from user,mainclass,secondclass,push_info
+        LEFT JOIN pic_content ON push_info.pi_id = pic_content.pc_id
+        LEFT JOIN push_info_class ON pic_content.pic_id=push_info_class.pic_id
+        LEFT JOIN push_info_tag ON push_info.pi_id = push_info_tag.pi_id
+        LEFT JOIN tagcontent ON push_info_tag.pi_tag_content=tagcontent.tc_id
+        LEFT JOIN tag ON tag.tag_id=tagcontent.tag_id
+        LEFT JOIN district ON push_info.pi_district=district.district_id
+        where push_info.pi_user=user.user_id  AND pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id AND push_info.pi_id=#{piId}
+    </select>
+
+
 
     <select id="selectAllJob" resultMap="BasePushInfo">
         select DISTINCT
@@ -47,7 +70,7 @@
         and push_info.pi_id in (select pi_id FROM push_info_tag
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
             <foreach collection="tags" item="item" index="index" >
-                OR tag_id=#{item.tagId} and pi_tag_content=#{item.tcId}
+                OR pi_tag_content=#{item}
             </foreach>
         </trim>
         GROUP by pi_id having count(pi_id)=#{tagNum})

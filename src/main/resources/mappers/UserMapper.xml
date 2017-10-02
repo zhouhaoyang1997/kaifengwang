@@ -2,8 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kf.mapper.UserMapper" >
 
+    <!--插入用户并返回id值 -->
     <insert id="addUser" parameterType="com.kf.pojo.User">
-        INSERT INTO USER (user_name,user_password) VALUES (#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR})
+        <selectKey keyProperty="userId" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO USER (user_name,user_password,user_email) VALUES (#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR},#{userEmail})
     </insert>
 
 

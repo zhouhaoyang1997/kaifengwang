@@ -12,8 +12,9 @@ import java.util.List;
 @Mapper
 public interface PushInfoMapper {
 
-    List<PushInfo> selectAllJob(@Param("mcId")Integer mcId, @Param("scId") Integer scId,@Param("districtId")Integer districtId, @Param("tags") List<TagValue> tags,@Param("tagNum")Integer tagNum);
+    List<PushInfo> selectAllJob(@Param("mcId")Integer mcId, @Param("scId") Integer scId,@Param("districtId")Integer districtId, @Param("tags") List<String> tags,@Param("tagNum")Integer tagNum);
 
+    PushInfo selectInfoByPiId(@Param("piId")Integer piId);
 
     void addPushInfo(PushInfo pushInfo);
 }

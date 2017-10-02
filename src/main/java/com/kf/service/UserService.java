@@ -16,7 +16,7 @@ public class UserService {
     public UserMapper userMapper;
 
     public void addUser(User user){
-        userMapper.addUser(user);
+       userMapper.addUser(user);
     }
 
     public User getUser(User user){

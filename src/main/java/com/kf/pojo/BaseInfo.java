@@ -11,8 +11,10 @@ public class BaseInfo {
     private String piTitle;
     private String piContent;
     private Integer piMc;
+    private String piMcName;
     private Integer piSc;
     private String piUser;
+    private Integer userId;
     private String piAddress;
     private String piImg;
     private int piScan;
@@ -23,6 +25,31 @@ public class BaseInfo {
     private String piDistrictName;
     private Timestamp piPushDate;
     private double piChujia;
+    private String piScName;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getPiScName() {
+        return piScName;
+    }
+
+    public void setPiScName(String piScName) {
+        this.piScName = piScName;
+    }
+
+    public String getPiMcName() {
+        return piMcName;
+    }
+
+    public void setPiMcName(String piMcName) {
+        this.piMcName = piMcName;
+    }
 
     public String getPiDistrictName() {
         return piDistrictName;

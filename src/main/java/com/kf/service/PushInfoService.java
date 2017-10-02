@@ -14,12 +14,16 @@ public class PushInfoService {
     @Autowired
     private PushInfoMapper pushInfoMapper;
 
-    public List<PushInfo> getAllJob(Integer mcId, Integer scId,Integer districtId, List<TagValue> tags,Integer tagNum){
-        return pushInfoMapper.selectAllJob(mcId,scId,districtId,tags,tagNum);
+    public List<PushInfo> getAllJob(Integer mcId, Integer scId,Integer districtId,List<String> tagValues,Integer tagNum){
+        return pushInfoMapper.selectAllJob(mcId,scId,districtId,tagValues,tagNum);
     }
 
     public Integer addPushInfo(PushInfo pushInfo){
         pushInfoMapper.addPushInfo(pushInfo);
         return pushInfo.getPiId();
+    }
+
+    public PushInfo getInfoByPiId(Integer piId){
+        return pushInfoMapper.selectInfoByPiId(piId);
     }
 }

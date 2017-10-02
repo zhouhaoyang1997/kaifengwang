@@ -12,7 +12,7 @@ body {
   background-color: #f0f0f0;
 }
 body.style-3 {
-  background: #ffffff url(../img/login_bg.jpg) no-repeat;
+  background: url(../img/login_bg.jpg) no-repeat;
   background-size:100%
 }
 
