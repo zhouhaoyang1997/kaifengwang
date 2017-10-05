@@ -41,8 +41,9 @@ public class LoginInterceptor implements HandlerInterceptor{
             user.setUserPassword(userPassword);
             user.setUserName(userName);
             //从原有cookie中取出用户,进行验证如果正确放入session.
-            if(userService.getUser(user)!=null){
-                session.setAttribute("user",user);
+            User newUser = userService.getUser(user);
+            if(newUser!=null){
+                session.setAttribute("user",newUser);
             }else{
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/timeout");
                 return false;

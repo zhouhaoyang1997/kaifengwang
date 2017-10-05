@@ -2,6 +2,7 @@ package com.kf.controller;
 
 import com.kf.pojo.User;
 import com.kf.service.UserService;
+import com.kf.util.CommonUtil;
 import com.kf.util.CookieUtil;
 import com.kf.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,24 +31,31 @@ public class UserController {
     public ModelAndView login(User user, String remember, HttpServletRequest request, HttpServletResponse response){
         //用户名密码正确,当前用户存入session
         ModelAndView modelAndView = null;
-        User user1 = userService.getUser(user);
-        if(user1!=null){
-            HttpSession session = request.getSession();
-            session.setAttribute("user",user1);
-            //用户点击了记住我
-            if(remember!=null&&!remember.isEmpty()){
-                CookieUtil.addCookie(response,"userName",user.getUserName());
-                CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
+        //如果用户输入了信息
+        if(CommonUtil.isNotNullAndNotEmpty(user.getUserPassword())&&CommonUtil.isNotNullAndNotEmpty(user.getUserPassword())){
+            user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
+            User user1 = userService.getUser(user);
+            if(user1!=null){
+                HttpSession session = request.getSession();
+                session.setAttribute("user",user1);
+                //用户点击了记住我
+                if(remember!=null&&!remember.isEmpty()){
+                    CookieUtil.addCookie(response,"userName",user.getUserName());
+                    CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
+                }
+                //默认登陆后返回首页,如果session中有值,则返回用户点击登陆的页面
+                String url="/index";
+                if(session.getAttribute("lastedUrl")!=null){
+                    url=(String)session.getAttribute("lastedUrl");
+                }
+                modelAndView = new ModelAndView("redirect:"+url);
+            }else{
+                modelAndView = new ModelAndView("login");
+                modelAndView.addObject("error","用户名或密码错误!");
             }
-            //默认登陆后返回首页,如果session中有值,则返回用户点击登陆的页面
-            String url="/index";
-            if(session.getAttribute("lastedUrl")!=null){
-                url=(String)session.getAttribute("lastedUrl");
-            }
-            modelAndView = new ModelAndView("redirect:"+url);
         }else{
             modelAndView = new ModelAndView("login");
-            modelAndView.addObject("error","用户名或密码错误!");
+            modelAndView.addObject("error","请输入合法的信息!");
         }
         return modelAndView;
     }

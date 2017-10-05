@@ -30,9 +30,10 @@ mybatis:
   configLocation: classpath:/mybatis-config.xml
 
 # LOGGING
-logging:
-    level:
-       com.kf.mapper: debug
+#logging:
+#    level:
+#       com.kf.mapper: debug
 
 path:
-  pathValue: C:/Users/18236/cg/src/main/resources/static/img/mainClass/
+
+  pathValue: C:/Users/18236/cg/src/main/resources/static/img/pushimg/

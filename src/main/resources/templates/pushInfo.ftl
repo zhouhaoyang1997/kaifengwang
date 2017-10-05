@@ -1,4 +1,5 @@
 <#include "public/default.ftl">
+<#import "spring.ftl" as spring />
 <#assign base="${request.contextPath}"/>
 <#include "public/pushdefault.ftl">
 <@header title="填写发布信息">
@@ -17,15 +18,22 @@
         </div>
         <div class="row" style="margin-top: 30px;">
             <form action="/push/info" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="piUser" value="${user.userId!""}">
+                <#if Session.user??>
+                    <input type="hidden" name="userId" value="${user.userId!""}">
+                </#if>
                 <input type="hidden" name="piMc" value="${choose.mcId}">
                 <input type="hidden" name="piSc" value="${choose.scId}">
                 <div class="form-group row">
                     <div class="col-xs-8">
                     <label><span style="color:red">*</span>信息标题:</label>
-                    <input type="text" name="piTitle" class="form-control" placeholder="请把长度控制在100个中文字符内">
+                    <input type="text" name="piTitle" class="form-control" placeholder="请输入信息标题2-100字符">
                     </div>
-                    <div class="col-sx-4"></div>
+                    <div class="col-sx-4">
+                    <#if pushError??>
+                    <@spring.bind "pushError.piTitle" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-xs-2">
@@ -78,6 +86,12 @@
                 <textarea name="piContent" class="form-control" cols="50" rows="15">
 
                 </textarea>
+                </div>
+                <div class="col-xs-4">
+                <#if pushError??>
+                    <@spring.bind "pushError.piContent" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
                 </div>
             </div>
 
@@ -179,7 +193,12 @@
                     <div class="col-xs-5">
                         <input type="text" name="piContactPerson" class="form-control">
                     </div>
-                    <div class="col-xs-5"></div>
+                    <div class="col-xs-5">
+                    <#if pushError??>
+                    <@spring.bind "pushError.piContactPerson" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
+                    </div>
 
                 </div>
                 <div class="form-group row">
@@ -189,7 +208,12 @@
                     <div class="col-xs-5">
                         <input type="text" name="piPhone" class="form-control">
                     </div>
-                    <div class="col-xs-5"></div>
+                    <div class="col-xs-5">
+                    <#if pushError??>
+                    <@spring.bind "pushError.piPhone" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
+                    </div>
 
                 </div>
 
@@ -200,7 +224,12 @@
                     <div class="col-xs-5">
                         <input type="text" name="piAddress" class="form-control">
                     </div>
-                    <div class="col-xs-5"></div>
+                    <div class="col-xs-5">
+                    <#if pushError??>
+                    <@spring.bind "pushError.piAddress" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
+                    </div>
 
                 </div>
 

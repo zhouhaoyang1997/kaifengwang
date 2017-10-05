@@ -1,7 +1,7 @@
 <#include "public/default.ftl">
 <@header title="首页">
-<link rel="stylesheet" href="${request.contextPath}/css/style.css">
-<link rel="stylesheet" href="${request.contextPath}/css/menu.css">
+<link rel="stylesheet" href="${base}/css/style.css">
+<link rel="stylesheet" href="${base}/css/menu.css">
 </@header>
 <#--头部开始 -->
 <@headerArea>
@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="logo">
-                    <h1><a href="${request.contextPath}/index">开封<span>城市网</span></a></h1>
+                    <h1><a href="${base}/index">开封<span>城市网</span></a></h1>
                 </div>
             </div>
 
@@ -26,9 +26,9 @@
                 <div class="search-box">
                     <form action="" method="post">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="输入你感兴趣信息">
+                            <input type="text" class="form-control search_box" placeholder="输入你感兴趣信息">
                             <span class="input-group-btn" >
-                                <button class="btn btn-danger"  type="button">搜索</button>
+                                <button class="btn btn_search"  type="button">搜索</button>
                             </span>
                         </div>
                     </form>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="pushing-item">
-                    <a href="#"><i class="fa fa-edit"></i>免费发布信息</a>
+                    <a href="${base}/push/choose"><i class="fa fa-edit"></i>免费发布信息</a>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
                                     <img src="img/zp_icon.png" width="55px" height="55px" alt="">
                                 </div>
 
-                                <p><a href="${request.contextPath}/list?mcId=1" target="_blank">招聘</a></p>
+                                <p><a href="${base}/list?mcId=1" target="_blank">招聘</a></p>
                                 <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
                             </div>
                             <div class="col-xs-2">
@@ -174,21 +174,21 @@
         <div class="row">
             <div class="col-xs-2">
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=2">房产信息</a></h4></div>
+                    <div class="panel-heading"><h4><a href="${base}/list?mcId=2">房产信息</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
                         <#list fangchan as fc>
-                            <li><a href="${request.contextPath}/list?mcId=2&scId=${fc.scId}">${fc.scName}</a></li>
+                            <li><a href="${base}/list?mcId=2&scId=${fc.scId}">${fc.scName}</a></li>
                         </#list>
                         </ul>
                     </div>
                 </div>
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=5">宠物</a></h4></div>
+                    <div class="panel-heading"><h4><a href="${base}/list?mcId=5">宠物</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
                         <#list chongwu as cw>
-                            <li><a href="${request.contextPath}/list?mcId=5&scId=${cw.scId}">${cw.scName}</a></li>
+                            <li><a href="${base}/list?mcId=5&scId=${cw.scId}">${cw.scName}</a></li>
                         </#list>
                         </ul>
                     </div>
@@ -196,11 +196,11 @@
             </div>
             <div class="col-xs-2">
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=3">二手市场</a></h4></div>
+                    <div class="panel-heading"><h4><a href="${base}/list?mcId=3">二手市场</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
                         <#list ershou as es>
-                            <li><a href="${request.contextPath}/list?mcId=3&scId=${es.scId}">${es.scName}</a></li>
+                            <li><a href="${base}/list?mcId=3&scId=${es.scId}">${es.scName}</a></li>
                         </#list>
                         </ul>
                     </div>
@@ -208,11 +208,11 @@
             </div>
             <div class="col-xs-4">
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=1">招聘</a></h4></div>
+                    <div class="panel-heading"><h4><a href="${base}/list?mcId=1">招聘</a></h4></div>
                     <div class="panel-body" >
                         <ul class="list_clear">
                         <#list zhaopin as zp>
-                            <li><a href="${request.contextPath}/list?mcId=1&scId=${zp.scId}">${zp.scName}</a></li>
+                            <li><a href="${base}/list?mcId=1&scId=${zp.scId}">${zp.scName}</a></li>
                         </#list>
                         </ul>
                     </div>
@@ -223,7 +223,7 @@
                     <div class="panel-body" >
                         <ul class="list_clear">
                         <#list mingqi as mq>
-                            <li><a href="${request.contextPath}/list?mcId=6&scId=${mq.scId}">${mq.scName}</a></li>
+                            <li><a href="${base}/list?mcId=6&scId=${mq.scId}">${mq.scName}</a></li>
                         </#list>
 
                         </ul>
@@ -232,11 +232,11 @@
             </div>
             <div class="col-xs-4">
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4><a href="${request.contextPath}/list?mcId=4">生活服务</a></h4></div>
+                    <div class="panel-heading"><h4><a href="${base}/list?mcId=4">生活服务</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear" style="width: 160px;float: left">
                         <#list shenghuo as sh>
-                            <li><a href="${request.contextPath}/list?mcId=4&scId=${sh.scId}">${sh.scName}</a></li>
+                            <li><a href="${base}/list?mcId=4&scId=${sh.scId}">${sh.scName}</a></li>
                         </#list>
                         </ul>
 
@@ -251,12 +251,12 @@
 <div class="advert">
     <div class="container">
         <div class="row">
-            <img src="img/advert.jpg" alt="开学那点事">
+            <img src="${base}/img/advert.jpg" alt="开学那点事">
         </div>
     </div>
 </div>
 <@footer>
-<script type="text/javascript" src="js/menu.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+<script type="text/javascript" src="${base}/js/menu.js"></script>
+<script src="${base}/js/owl.carousel.min.js"></script>
+<script src="${base}/js/main.js"></script>
 </@footer>

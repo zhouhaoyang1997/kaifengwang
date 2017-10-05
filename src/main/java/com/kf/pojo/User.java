@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
  * Created by 18236 on 2017/9/24.
  */
 public class User {
-    @Length(min=3,max=10,message = "用户名长度必须在3-10个字符之间!")
+    @Length(min=2,max=8,message = "用户名长度必须在2-8个字符之间!")
     private String userName;
     @Length(min=6,max=20,message = "密码长度必须在6-20个字符之间!")
     private String userPassword;

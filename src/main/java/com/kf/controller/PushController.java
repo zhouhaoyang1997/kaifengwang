@@ -4,6 +4,8 @@ import com.kf.pojo.*;
 import com.kf.service.*;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.io.File;
@@ -12,13 +14,13 @@ import com.kf.util.BasePath;
 import com.kf.vo.Choose;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 /**
  * Created by 18236 on 2017/9/27.
@@ -128,11 +130,20 @@ public class PushController {
      * @throws IOException
      */
     @RequestMapping(value = "/push/info",method = RequestMethod.POST)
-    @ResponseBody
-    public String pushInfo(@RequestParam("pic") MultipartFile pics[], PushInfo pushInfo, HttpServletRequest request)throws IOException{
-        Integer mcId = pushInfo.getPiMc();
-        if(mcId!=null&&mcId!=0){
+    public ModelAndView pushInfo(@RequestParam("pic") MultipartFile pics[], @Valid @ModelAttribute("pushError") PushInfo pushInfo, BindingResult br, HttpServletRequest request)throws IOException{
+        ModelAndView modelAndView = null;
+        if(br.hasErrors()){
+            if(pushInfo.getPiMc()==null||pushInfo.getPiSc()==null||pushInfo.getPiDistrict()==null||pushInfo.getUserId()==null){
 
+                modelAndView = new ModelAndView("redirect:/push/choose");
+            }else{
+                Choose choose = new Choose();
+                choose.setScId(pushInfo.getPiSc());
+                choose.setMcId(pushInfo.getPiMc());
+                modelAndView = chooseSecondClass(choose);
+            }
+        }else{
+            Integer mcId = pushInfo.getPiMc();
             if(null != pics && pics.length > 0) {
                 //配置获去图片存放路径        暂未规定图片大小
                 String savePath = basePath.getPathValue();
@@ -142,34 +153,40 @@ public class PushController {
                         String originalName = pic.getOriginalFilename();
                         String suffix = originalName.substring(originalName.lastIndexOf(".") + 1);
                         String filePath = "class"+mcId+"/"+UUID.randomUUID().toString() + "." + suffix;
-
                         pic.transferTo(new File(savePath + filePath));
                         sb=sb+"img/pushimg/"+filePath+"#";
                     }
                 }
                 //如果上传了图片,把图片路径存入数据库
                 if(!sb.isEmpty()){
+                    sb=sb.substring(0,sb.length()-1);
                     pushInfo.setPiImg(sb);
                 }
             }
-
+            //设置当前时间
+            Timestamp ts = new Timestamp(new Date().getTime());
+            pushInfo.setPiPushDate(ts);
             //返回自增长的id
             Integer piId = pushInfoService.addPushInfo(pushInfo);
             //通过mcId获取搜有的tagId,并将所有的tag和他的之存储到数据库表push_info_tag中
             List<Integer> tagsId = tagService.getAllTagId(mcId);
             for(Integer tagId:tagsId){
                 Integer value = Integer.valueOf(request.getParameter("tag"+tagId));
-                pushInfoTagService.addPushInfoTag(tagId,piId,value);
+                if(value!=null){
+                    pushInfoTagService.addPushInfoTag(tagId,piId,value);
+                }
             }
             //获取所有的其他信息id 并将信息插入数据库
             List<Integer> picsId= pushInfoClassService.getAllPushId(mcId);
             for(Integer picId:picsId){
                 String value = request.getParameter("pic"+picId);
-                picContentService.addPicContent(picId,piId,value);
+                if(value!=null&&!value.trim().isEmpty()){
+                    picContentService.addPicContent(picId,piId,value);
+                }
             }
+            modelAndView=new ModelAndView("redirect:/info?piId="+piId);
         }
-
-        return pushInfo.getPiTitle();
+        return modelAndView;
     }
 
 }

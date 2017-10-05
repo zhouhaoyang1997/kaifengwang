@@ -1,6 +1,6 @@
 <#include "public/default.ftl">
 <#assign base="${request.contextPath}"/>
-<@header title="开封网招聘">
+<@header title="开封城市网${currMc.mcName}">
 <link rel="stylesheet" href="${request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${request.contextPath}/css/menu.css">
 </@header>

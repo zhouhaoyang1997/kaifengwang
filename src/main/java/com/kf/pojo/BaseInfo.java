@@ -1,5 +1,9 @@
 package com.kf.pojo;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 /**
@@ -8,27 +12,45 @@ import java.sql.Timestamp;
  */
 public class BaseInfo {
     private Integer piId;
+    @Length(min = 4,max = 100,message = "标题长度应在在4-100之间")
     private String piTitle;
+    @Length(min=10,max = 2500,message = "内容应在5-2500之间")
     private String piContent;
+    @NotNull(message = "错误的提交")
     private Integer piMc;
     private String piMcName;
+    @NotNull(message = "错误的提交")
     private Integer piSc;
     private String piUser;
+    @NotNull(message = "错误的提交")
     private Integer userId;
+    @Length(min = 2,max=150,message = "请输入2-150个字符之间的文字")
     private String piAddress;
     private String piImg;
     private int piScan;
+    @Length(min=2,max=8,message = "请输入正确的联系人姓名,2-8个字符,例如'王女士'")
     private String piContactPerson;
+    @Length(min=11,max = 11,message = "请输入正确的手机号")
     private String piPhone;
     private String piQq;
-    private int piDistrict;
+    @NotNull(message = "错误的提交")
+    private Integer piDistrict;
     private String piDistrictName;
     private Timestamp piPushDate;
     private double piChujia;
     private String piScName;
+    private String piZhiding;
 
     public Integer getUserId() {
         return userId;
+    }
+
+    public Integer getPiDistrict() {
+        return piDistrict;
+    }
+
+    public void setPiDistrict(Integer piDistrict) {
+        this.piDistrict = piDistrict;
     }
 
     public void setUserId(Integer userId) {
@@ -99,13 +121,6 @@ public class BaseInfo {
         this.piQq = piQq;
     }
 
-    public int getPiDistrict() {
-        return piDistrict;
-    }
-
-    public void setPiDistrict(int piDistrict) {
-        this.piDistrict = piDistrict;
-    }
 
     public Integer getPiMc() {
         return piMc;
@@ -190,5 +205,4 @@ public class BaseInfo {
         this.piZhiding = piZhiding;
     }
 
-    private String piZhiding;
 }

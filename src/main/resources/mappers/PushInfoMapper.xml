@@ -8,8 +8,10 @@
         <result property="piMc" column="pi_mc"/>
         <result property="piSc" column="pi_sc"/>
         <result property="userId" column="user_id"/>
+        <result property="piUser" column="user_name"/>
         <result property="piMcName" column="mc_name"/>
         <result property="piScName" column="sc_name"/>
+        <result property="piContent" column="pi_content"/>
         <result property="piScan" column="pi_scan"/>
         <result property="piPushDate" column="pi_push_date"/>
         <result property="piContactPerson" column="pi_contact_person"/>
@@ -19,6 +21,7 @@
         <result property="piChujia" column="pi_chujia"/>
         <result property="piZhiding" column="pi_zhiding"/>
         <result property="piDistrictName" column="district_name"/>
+        <result property="piAddress" column="pi_address"/>
         <collection property="tagValues" ofType="com.kf.vo.TagValue">
             <result property="tagId" column="tag_id"/>
             <result property="tagName" column="tag_name"/>
@@ -37,7 +40,7 @@
 
     <select id="selectInfoByPiId" resultMap="BasePushInfo">
         SELECT DISTINCT push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,pi_content,pi_user,pi_img,pi_scan,pi_phone,pi_qq,
-        district_name,pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,
+        district_name,pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,pi_address,
         tc_name,tagcontent.tc_id,tag.tag_name,sc_name,mc_name
         from user,mainclass,secondclass,push_info
         LEFT JOIN pic_content ON push_info.pi_id = pic_content.pc_id
@@ -84,7 +87,7 @@
         </selectKey>
         insert into push_info(pi_title,pi_content,pi_mc,pi_sc,pi_user,pi_address,
         pi_img,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,pi_phone,pi_qq,pi_district) VALUES
-        (#{piTitle},#{piContent},#{piMc},#{piSc},#{piUser},#{piAddress},#{piImg},#{piScan},#{piPushDate},#{piChujia},#{piZhiding},#{piContactPerson},
+        (#{piTitle},#{piContent},#{piMc},#{piSc},#{userId},#{piAddress},#{piImg},#{piScan},#{piPushDate},#{piChujia},#{piZhiding},#{piContactPerson},
         #{piPhone},#{piQq},#{piDistrict})
     </insert>
 </mapper>

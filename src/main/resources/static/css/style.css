@@ -135,6 +135,18 @@ z-index: 999;}
     padding: 10px;
     position: relative;
 }
+.btn_search{
+    background: #ff552e;
+    color: #fff;
+}
+.search_box{
+    border:1px solid #ff552e;
+}
+
+.btn_search:hover{
+    background: #ff4400;
+}
+
 .pushing-item a {
     color: #666;
 }

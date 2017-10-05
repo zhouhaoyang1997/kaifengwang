@@ -31,7 +31,7 @@
                     <ul class="list-unstyled list-inline">
                         <#nested >
                         <#if Session.user??>
-                        <li><a href="#">${user.userName}</a></li>
+                        <li><a href="${base}/user/info?userId=${user.userId}">${user.userName}</a></li>
                         <#--该方法返回当前页面uri -->
                         <li><a href="${base}/logout">注销</a></li>
                         <#else>

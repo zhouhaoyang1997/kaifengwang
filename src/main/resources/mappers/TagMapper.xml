@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id="selectAllTag"  resultMap="BaseTag">
-        SELECT * FROM tag,tagContent,tm WHERE tag.tag_id=tagContent.tag_id and mc_id=#{mcId} and tm.tag_id=tag.tag_id
+        SELECT * FROM tag,tagcontent,tm WHERE tag.tag_id=tagcontent.tag_id and mc_id=#{mcId} and tm.tag_id=tag.tag_id
     </select>
 
     <select id="selectAllTagId" resultType="java.lang.Integer">
