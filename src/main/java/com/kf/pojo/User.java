@@ -3,6 +3,8 @@ package com.kf.pojo;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
+import java.sql.Timestamp;
+
 /**
  * 用户实体类
  * Created by 18236 on 2017/9/24.
@@ -18,6 +20,60 @@ public class User {
     @Email(message = "请输入正确的邮箱!")
     private String userEmail;
     private Integer userId;
+    private Timestamp createTime;
+    private Timestamp lastedTime;
+    private String userDescription;
+    private Integer status;
+    private Integer userPush;
+    private Integer userCollection;
+
+    public Integer getUserCollection() {
+        return userCollection;
+    }
+
+    public void setUserCollection(Integer userCollection) {
+        this.userCollection = userCollection;
+    }
+
+    public Integer getUserPush() {
+        return userPush;
+    }
+
+    public void setUserPush(Integer userPush) {
+        this.userPush = userPush;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
+    public Timestamp getLastedTime() {
+        return lastedTime;
+    }
+
+    public void setLastedTime(Timestamp lastedTime) {
+        this.lastedTime = lastedTime;
+    }
+
+    public String getUserDescription() {
+        return userDescription;
+    }
+
+    public void setUserDescription(String userDescription) {
+        this.userDescription = userDescription;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Integer getUserId() {
         return userId;

@@ -31,9 +31,22 @@
                     <ul class="list-unstyled list-inline">
                         <#nested >
                         <#if Session.user??>
-                        <li><a href="${base}/user/info?userId=${user.userId}">${user.userName}</a></li>
+                        <li  class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">${user.userName}</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="${base}/user/info">账户设置</a></li>
+                                <li><a href="${base}/user/personal">个人中心</a></li>
+                                <li><a href="${base}/user/extension">推广中心</a></li>
+                                <li class="divider"></li>
+                                <li><a href="${base}/user/attc">公司认证</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">我的简历</a></li>
+                            </ul>
+                        </li>
                         <#--该方法返回当前页面uri -->
-                        <li><a href="${base}/logout">注销</a></li>
+                        <li>
+                            <a href="${base}/logout">注销</a>
+                        </li>
                         <#else>
                             <li><a href="${base}/login">登录</a></li>
                             <li><a href="${base}/register">注册</a></li>

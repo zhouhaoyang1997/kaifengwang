@@ -12,8 +12,7 @@ public class Md5Util {
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             BASE64Encoder base64en = new BASE64Encoder();
-            String newStr=base64en.encode(md5.digest(str.getBytes("utf-8")));
-            return newStr;
+            return base64en.encode(md5.digest(str.getBytes("utf-8")));
 
         } catch (Exception e) {
             return null;

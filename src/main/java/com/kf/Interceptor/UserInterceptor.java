@@ -1,5 +1,6 @@
 package com.kf.Interceptor;
 
+import com.kf.pojo.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 

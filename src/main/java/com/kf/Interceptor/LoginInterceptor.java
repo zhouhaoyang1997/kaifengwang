@@ -19,14 +19,14 @@ import javax.servlet.http.HttpSession;
 public class LoginInterceptor implements HandlerInterceptor{
 
     @Autowired
-    public UserService userService;
+    private UserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String url = httpServletRequest.getRequestURI();
-        //不对 超时 进行拦截
+        //不对 超时 登录 进行拦截
         HttpSession session=httpServletRequest.getSession();
-        if(url.contains("timeout")){
+        if(url.contains("timeout")||url.contains("login")){
             return true;
         }
 

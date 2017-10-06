@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by 18236 on 2017/9/24.
@@ -36,6 +38,10 @@ public class UserController {
             user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
             User user1 = userService.getUser(user);
             if(user1!=null){
+                //修改最后登陆日期
+                Timestamp time = new Timestamp(new Date().getTime());
+                userService.updateUserLastLoginTime(user1.getUserId(),time);
+                //session记住当前用户
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user1);
                 //用户点击了记住我
@@ -75,7 +81,9 @@ public class UserController {
             url=(String)session.getAttribute("lastedUrl");
         }
         //移除session
-        session.removeAttribute("user");
+        if(session.getAttribute("user")!=null){
+            session.removeAttribute("user");
+        }
         //移除cookie
         CookieUtil.removeCookie(response,request,"userName");
         CookieUtil.removeCookie(response,request,"userPassword");
@@ -100,6 +108,8 @@ public class UserController {
         }else{
             //对用户的密码进行md5加密,同时对密码自动加上前缀和后缀
             user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
+            user.setCreateTime(new Timestamp(new Date().getTime()));//当前时间作为用户创建时间
+            user.setLastedTime(new Timestamp(new Date().getTime()));//当前时间作为用户最后登陆时间
             userService.addUser(user);
             HttpSession session = request.getSession();
             session.setAttribute("user",user);

@@ -40,6 +40,16 @@ public class BaseInfo {
     private double piChujia;
     private String piScName;
     private String piZhiding;
+    //当前信息状态,0正常,1被删除,2正在审核,
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Integer getUserId() {
         return userId;
