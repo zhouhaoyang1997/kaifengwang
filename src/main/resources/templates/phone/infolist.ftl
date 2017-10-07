@@ -38,7 +38,10 @@
 
         <ul class="tab cfix">
             <li class="item"><a href="javascript:void(0);"><span id="str_a_node">分类</span><em></em></a></li>            <li class="item"><a href="javascript:void(0);"><span id="str_b_node">区域</span><em></em></a></li>
-            <li class="item"><a href="javascript:void(0);"><span id="str_salary_node">月薪</span><em></em></a></li>
+        <#list tags as tag>
+            <li class="item"><a href="javascript:void(0);"><span id="str_salary_node">${tag.tagName}</span><em></em></a>
+            </li>
+        </#list>
         </ul>
 
         <div class="inner" style="display:none;">
@@ -54,55 +57,18 @@
         <div class="inner" style="display:none;">
             <ul>
                 <li><a href="index.php?mod=category&cityid=1&catid=4" class='selected'>不限</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >新区</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >老区</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
-                <li><a href="index.php?mod=category&cityid=1&catid=4" >啦啦啦</a></li>
+            <#list districts as d>
+                <li><a href="index.php?mod=category&cityid=1&catid=4">${d.districtName}</a></li>
+            </#list>
             </ul>
         </div>
+<#list
+        <div class="inner" style="display:none;">
+            <ul>
+                <a class="selected" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1">不限</a>
 
-        <div class="inner" style="display:none;">
-            <ul>
-                <a class="selected" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1">不限</a>
                 <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&salary=1">面议</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&salary=2">1000以下</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&salary=3">1000~2000</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&salary=4">2000~3000</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&salary=5">3000~6000</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&salary=6">6000~8000</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&salary=7">8000以上</a>
-            </ul>
-        </div>
-        <div class="inner" style="display:none;">
-            <ul>
-                <a class="selected" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1">不限</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&danweixingzhi=1">私营</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&danweixingzhi=2">国有</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&danweixingzhi=3">股份制</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&danweixingzhi=4">外商独资办事处</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&danweixingzhi=5">中外合资/合作</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&danweixingzhi=6">上市公司</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&danweixingzhi=7">事业单位</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&danweixingzhi=8">政府机关</a>
-            </ul>
-        </div>
-        <div class="inner" style="display:none;">
-            <ul>
-                <a class="selected" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1">不限</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&education=1">初中及以下</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&education=2">高中/中专</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&education=3">大专</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&education=4">本科</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&education=5">硕士</a>
-                <a class="" href="index.php?mod=category&cityid=1&mod=category&catid=4&cityid=1&education=6">博士及以上</a>
+
             </ul>
         </div>
         <div class="inner_parent" id="parent_container" style="display:none;"><div class="innercontent"></div></div>
