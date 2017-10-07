@@ -1,5 +1,6 @@
 package com.kf.pojo;
 
+import com.kf.vo.OtherInfo;
 import com.kf.vo.TagValue;
 
 import java.util.List;

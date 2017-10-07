@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kf.mapper.PushInfoClassMapper" >
+
+
+
+    <select id="selectAll" resultType="com.kf.pojo.PushInfoClass">
+        SELECT * FROM push_info_class where mc_id=#{mcId}
+    </select>
+
+    <select id="selectAllPicId" resultType="java.lang.Integer">
+        SELECT pic_id FROM push_info_class WHERE mc_id=#{mcId}
+    </select>
+
+</mapper>

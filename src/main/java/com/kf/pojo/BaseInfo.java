@@ -7,24 +7,93 @@ import java.sql.Timestamp;
  * Created by 18236 on 2017/9/26.
  */
 public class BaseInfo {
-    private int piId;
+    private Integer piId;
     private String piTitle;
     private String piContent;
-    private String mcName;
-    private String scName;
-    private String userName;
+    private Integer piMc;
+    private Integer piSc;
+    private String piUser;
     private String piAddress;
     private String piImg;
     private int piScan;
+    private String piContactPerson;
+    private String piPhone;
+    private String piQq;
+    private int piDistrict;
+    private String piDistrictName;
     private Timestamp piPushDate;
     private double piChujia;
 
-    public int getPiId() {
+    public String getPiDistrictName() {
+        return piDistrictName;
+    }
+
+    public void setPiDistrictName(String piDistrictName) {
+        this.piDistrictName = piDistrictName;
+    }
+
+    public String getPiUser() {
+        return piUser;
+    }
+
+    public void setPiUser(String piUser) {
+        this.piUser = piUser;
+    }
+
+    public Integer getPiId() {
         return piId;
     }
 
-    public void setPiId(int piId) {
+    public void setPiId(Integer piId) {
         this.piId = piId;
+    }
+
+    public String getPiContactPerson() {
+        return piContactPerson;
+    }
+
+    public void setPiContactPerson(String piContactPerson) {
+        this.piContactPerson = piContactPerson;
+    }
+
+    public String getPiPhone() {
+        return piPhone;
+    }
+
+    public void setPiPhone(String piPhone) {
+        this.piPhone = piPhone;
+    }
+
+    public String getPiQq() {
+        return piQq;
+    }
+
+    public void setPiQq(String piQq) {
+        this.piQq = piQq;
+    }
+
+    public int getPiDistrict() {
+        return piDistrict;
+    }
+
+    public void setPiDistrict(int piDistrict) {
+        this.piDistrict = piDistrict;
+    }
+
+    public Integer getPiMc() {
+        return piMc;
+    }
+
+    public void setPiMc(Integer piMc) {
+        this.piMc = piMc;
+    }
+
+    public Integer getPiSc() {
+        return piSc;
+    }
+
+    public void setPiSc(Integer piSc) {
+        this.piSc = piSc;
     }
 
     public String getPiTitle() {
@@ -43,29 +112,8 @@ public class BaseInfo {
         this.piContent = piContent;
     }
 
-    public String getMcName() {
-        return mcName;
-    }
 
-    public void setMcName(String mcName) {
-        this.mcName = mcName;
-    }
 
-    public String getScName() {
-        return scName;
-    }
-
-    public void setScName(String scName) {
-        this.scName = scName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getPiAddress() {
         return piAddress;

@@ -1,20 +1,32 @@
-package com.kf.pojo;
+package com.kf.vo;
 
 /**
  * Created by 18236 on 2017/9/27.
  */
 public class OtherInfo {
-    private int pi_id;
+    private int pcId;
     private String picName;
+    private int picId;
+
     private String pcContent;
 
-    public int getPi_id() {
-        return pi_id;
+    public int getPcId() {
+        return pcId;
     }
 
-    public void setPi_id(int pi_id) {
-        this.pi_id = pi_id;
+    public void setPcId(int pcId) {
+        this.pcId = pcId;
     }
+
+    public int getPicId() {
+        return picId;
+    }
+
+    public void setPicId(int picId) {
+        this.picId = picId;
+    }
+
+
 
     public String getPicName() {
         return picName;

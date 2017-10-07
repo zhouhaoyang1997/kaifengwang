@@ -36,4 +36,6 @@ public class IndexController {
         modelAndView.addObject("mingqi", mingqi);
         return modelAndView;
     }
+
+
 }

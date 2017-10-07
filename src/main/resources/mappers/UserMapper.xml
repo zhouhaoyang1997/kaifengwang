@@ -6,4 +6,8 @@
         INSERT INTO USER (user_name,user_password) VALUES (#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR})
     </insert>
 
+
+    <select id="selectUser" parameterType="com.kf.pojo.User" resultType="com.kf.pojo.User">
+        SELECT * FROM user where user_name=#{userName} and user_password=#{userPassword}
+    </select>
 </mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kf.mapper.PicContentMapper" >
+
+    <insert id="insertPicContent">
+      INSERT INTO pic_content(pic_id,pc_id,pc_content) VALUES (#{picId},#{piId},#{pcContent})
+    </insert>
+
+
+</mapper>
