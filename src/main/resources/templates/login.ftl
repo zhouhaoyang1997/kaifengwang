@@ -3,7 +3,7 @@
 <head lang="zh">
     <title>登录开封城市网</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/login.css">
 </head>

@@ -14,7 +14,7 @@ public class PicContentService {
     @Autowired
     public PicContentMapper picContentMapper;
 
-    public void addPicContent(int picId,Integer piId,String pcContent){
-        picContentMapper.insertPicContent(picId,piId,pcContent);
+    public void addPicContent(int picId, Integer piId, String pcContent) {
+        picContentMapper.insertPicContent(picId, piId, pcContent);
     }
 }

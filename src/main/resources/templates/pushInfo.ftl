@@ -3,7 +3,7 @@
 <head lang="zh">
     <title>免费发布信息</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${request.contextPath}/css/menu.css">
@@ -39,8 +39,8 @@
                 <input type="hidden" name="piSc" value="${scId}">
                 <div class="form-group row">
                     <div class="col-xs-6">
-                    <label><span style="color:red">*</span>信息标题:</label>
-                    <input type="text" name="piTitle" class="form-control" placeholder="请把长度控制在100个中文字符内">
+                        <label><span style="color:red">*</span>信息标题:</label>
+                        <input type="text" name="piTitle" class="form-control" placeholder="请把长度控制在100个中文字符内">
                     </div>
                     <div class="col-sx-6"></div>
                 </div>
@@ -49,7 +49,7 @@
                         <label><span style="color:red">*</span>所属地区:</label>
                     </div>
                     <div class="col-xs-4">
-                    <select name="piDistrict" id="district">
+                        <select name="piDistrict" id="district">
                     <#list districts as ds>
                         <option value="${ds.districtId}">${ds.districtName}</li></option>
                     </#list>
@@ -58,13 +58,13 @@
                     <div class="col-xs-6"></div>
                 </div>
 
-                <#list tags as tag>
+            <#list tags as tag>
                 <div class="form-group row">
                     <div class="col-xs-2">
-                    <label><span style="color:red">*</span>${tag.tagName}:</label>
+                        <label><span style="color:red">*</span>${tag.tagName}:</label>
                     </div>
                     <div class="col-xs-4">
-                    <select name="tag${tag.tagId}">
+                        <select name="tag${tag.tagId}">
                         <#list tag.tagContents as tc>
                             <option value="${tc.tcId}">${tc.tcName}</li></option>
                         </#list>
@@ -74,7 +74,7 @@
                     <div class="col-xs-6"></div>
 
                 </div>
-                </#list>
+            </#list>
 
             <#list pushInfoClasses as pic>
                 <div class="form-group row">
@@ -90,13 +90,13 @@
             </#list>
 
                 <label><span style="color:red">*</span>内容:</label>
-            <div class="form-group row">
-                <div class="col-xs-6">
+                <div class="form-group row">
+                    <div class="col-xs-6">
                 <textarea name="piContent" class="form-control" cols="50" rows="15">
 
                 </textarea>
+                    </div>
                 </div>
-            </div>
 
 
                 <div class="form-group row">
@@ -105,7 +105,8 @@
                             <div class="col-xs-3">
                                 <div class="h4">添加图片</div>
                                 <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
-                                    <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                                    <div class="fileinput-new thumbnail"
+                                         style="width: 200px;height: auto;max-height:150px;">
                                         <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
                                              src="${request.contextPath}/img/noimage.png" alt=""/>
                                     </div>
@@ -125,7 +126,8 @@
                             <div class="col-xs-3">
                                 <div class="h4">添加图片</div>
                                 <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
-                                    <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                                    <div class="fileinput-new thumbnail"
+                                         style="width: 200px;height: auto;max-height:150px;">
                                         <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
                                              src="${request.contextPath}/img/noimage.png" alt=""/>
                                     </div>
@@ -145,7 +147,8 @@
                             <div class="col-xs-3">
                                 <div class="h4">添加图片</div>
                                 <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
-                                    <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                                    <div class="fileinput-new thumbnail"
+                                         style="width: 200px;height: auto;max-height:150px;">
                                         <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
                                              src="${request.contextPath}/img/noimage.png" alt=""/>
                                     </div>
@@ -165,7 +168,8 @@
                             <div class="col-xs-3">
                                 <div class="h4">添加图片</div>
                                 <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
-                                    <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                                    <div class="fileinput-new thumbnail"
+                                         style="width: 200px;height: auto;max-height:150px;">
                                         <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
                                              src="${request.contextPath}/img/noimage.png" alt=""/>
                                     </div>
@@ -184,7 +188,6 @@
                             </div>
                         </div>
                     </div>
-
 
 
                 </div>

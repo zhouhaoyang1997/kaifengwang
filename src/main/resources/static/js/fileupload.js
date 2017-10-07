@@ -1,4 +1,5 @@
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var isIE = window.navigator.appName == 'Microsoft Internet Explorer';
 
@@ -30,7 +31,7 @@
         this.listen()
     };
 
-    Fileinput.prototype.listen = function() {
+    Fileinput.prototype.listen = function () {
         this.$input.on('change.bs.fileinput', $.proxy(this.change, this));
         $(this.$input[0].form).on('reset.bs.fileinput', $.proxy(this.reset, this));
 
@@ -38,8 +39,8 @@
         this.$element.find('[data-dismiss="fileinput"]').on('click.bs.fileinput', $.proxy(this.clear, this))
     };
 
-    Fileinput.prototype.change = function(e) {
-        var files = e.target.files === undefined ? (e.target && e.target.value ? [{ name: e.target.value.replace(/^.+\\/, '')}] : []) : e.target.files;
+    Fileinput.prototype.change = function (e) {
+        var files = e.target.files === undefined ? (e.target && e.target.value ? [{name: e.target.value.replace(/^.+\\/, '')}] : []) : e.target.files;
 
         e.stopPropagation();
 
@@ -59,7 +60,7 @@
             var preview = this.$preview;
             var element = this.$element;
 
-            reader.onload = function(re) {
+            reader.onload = function (re) {
                 var $img = $('<img>');
                 $img[0].src = re.target.result;
                 files[0].result = re.target.result;
@@ -67,7 +68,7 @@
                 element.find('.fileinput-filename').text(file.name);
 
                 // if parent has max-height, using `(max-)height: 100%` on child doesn't take padding and border into account
-                if (preview.css('max-height') != 'none') $img.css('max-height', parseInt(preview.css('max-height'), 10) - parseInt(preview.css('padding-top'), 10) - parseInt(preview.css('padding-bottom'), 10)  - parseInt(preview.css('border-top'), 10) - parseInt(preview.css('border-bottom'), 10));
+                if (preview.css('max-height') != 'none') $img.css('max-height', parseInt(preview.css('max-height'), 10) - parseInt(preview.css('padding-top'), 10) - parseInt(preview.css('padding-bottom'), 10) - parseInt(preview.css('border-top'), 10) - parseInt(preview.css('border-bottom'), 10));
 
                 preview.html($img);
                 element.addClass('fileinput-exists').removeClass('fileinput-new');
@@ -86,7 +87,7 @@
         }
     };
 
-    Fileinput.prototype.clear = function(e) {
+    Fileinput.prototype.clear = function (e) {
         if (e) e.preventDefault();
 
         this.$hidden.val('');
@@ -113,7 +114,7 @@
         }
     };
 
-    Fileinput.prototype.reset = function() {
+    Fileinput.prototype.reset = function () {
         this.clear();
 
         this.$hidden.val(this.original.hiddenVal);
@@ -126,7 +127,7 @@
         this.$element.trigger('reset.bs.fileinput')
     };
 
-    Fileinput.prototype.trigger = function(e) {
+    Fileinput.prototype.trigger = function (e) {
         this.$input.trigger('click');
         e.preventDefault()
     };

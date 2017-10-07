@@ -20,7 +20,7 @@ public class TagService {
         return tagMapper.selectAllTag(mcId);
     }
 
-    public List<Integer> getAllTagId(int mcId){
+    public List<Integer> getAllTagId(int mcId) {
         return tagMapper.selectAllTagId(mcId);
     }
 }

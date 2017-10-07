@@ -122,46 +122,56 @@
         <div class="index_slider">
             <div class="index_slider-wrap">
                 <div class="page">
-                    <a href="#" class="item food">
+                    <a href="infolist?mcId=1" class="item food">
                         <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>二手货</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/cw_icon.png"></div>房屋租售</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>全职招聘</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/jjz.png"></div>兼职招聘</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/cw_icon.png"></div>找工作</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/jz.png"></div>交友/征</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/cw_icon.png"></div>宠物</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/jz.png"></div>生活服务</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/cw_icon.png"></div>教育培训</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/cw_icon.png"></div>商务服务</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/cw_icon.png"></div>车辆服务</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/jz.png"></div>旅游/酒</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>休闲/生</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/jjz.png"></div>医疗健康</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/jjz.png"></div>丽人美容</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>建材/装</a>
-                    <a href="#" class="item food">
-                        <div class="icon"><img src="../img/phone/pic/jjz.png"></div>农贸市场</a>
+                    <a href="" class="item food">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                    <a href="" class="item food">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                    <a href="" class="item food">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                    <a href="" class="item food">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                    <a href="" class="item food">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="clearfix"></div>
+    <div class="index-category">
+        <div class=""><h4 style="margin-left: -80%;margin-top: 5px">生活服务</h4></div>
+        <div class="index_slider">
+            <div class="index_slider-wrap">
+                <div class="page2">
+                    <a href="" class="item block">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                    <a href="" class="item block">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                    <a href="" class="item block">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                    <a href="" class="item block">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                    <a href="" class="item block">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                    <a href="" class="item block">
+                        <div class="icon"><img src="../img/phone/pic/zp_icon.png"></div>
+                        二手货</a>
+                </div>
+            </div>
+        </div>
 
+    </div>
 </div>
 
 <div class="clear"></div>

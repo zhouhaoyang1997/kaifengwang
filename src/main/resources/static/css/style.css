@@ -201,17 +201,27 @@ a{
     padding: 15% auto;
 }
 
-.slider-area {clear: both}
-.slider-area, .promo-area, .brands-area, .maincontent-area, .footer-top-area, .product-widget-area, .product-breadcroumb-area, .single-product-area {position: relative;overflow: hidden}
+.slider-area {
+    clear: both
+}
+
+.slider-area, .promo-area, .brands-area, .maincontent-area, .footer-top-area, .product-widget-area, .product-breadcroumb-area, .single-product-area {
+    position: relative;
+    overflow: hidden
+}
 
 .slide-text-wrapper {
     height: 500px;
 }
 .slide-text-wrapper {
-    display: table;width: 100%;
+    display: table;
+    width: 100%;
 }
 
-.slide-text {display: table-cell;vertical-align: middle}
+.slide-text {
+    display: table-cell;
+    vertical-align: middle
+}
 
 
 .slide-bg {
@@ -219,7 +229,9 @@ a{
     left: 0;
     position: absolute;
     top: 0;
-    width: 100%;background-position: center;background-size: cover
+    width: 100%;
+    background-position: center;
+    background-size: cover
 }
 .slide-bg:after {
     background: none repeat scroll 0 0 #000;
@@ -231,15 +243,34 @@ a{
     top: 0;
     width: 100%;
 }
-.slide-one {background-image: url(../img/zhaopin/zp_silder_3.jpg)}
-.slide-two {background-image: url(../img/zhaopin/zp_silder_2.jpg)}
-.slide-three {background-image: url(../img/zhaopin/zp_silder_3.jpg)}
-.slide-text {color: #fff;font-size: 18px;font-weight: 200}
-.slide-text h2 {
-    font-size: 45px;font-weight: 200
+
+.slide-one {
+    background-image: url(../img/zhaopin/zp_silder_3.jpg)
 }
 
-.slide-content {position: relative;z-index: 9;padding: 30px}
+.slide-two {
+    background-image: url(../img/zhaopin/zp_silder_2.jpg)
+}
+
+.slide-three {
+    background-image: url(../img/zhaopin/zp_silder_3.jpg)
+}
+
+.slide-text {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 200
+}
+.slide-text h2 {
+    font-size: 45px;
+    font-weight: 200
+}
+
+.slide-content {
+    position: relative;
+    z-index: 9;
+    padding: 30px
+}
 .slide-content:before {
     background: none repeat scroll 0 0 #000;
     content: "";
@@ -297,73 +328,89 @@ ol.slide-indicators li.active {
     width: 10px;
 }
 
-.readmore:hover {background: #222;text-decoration: none;color: #fff;border: 1px solid #fff}
+.readmore:hover {
+    background: #222;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff
+}
 
-.slider_width{
+.slider_width {
     margin: 0 auto;
 }
-.lanmu_ul,.lanmu_ul2
-{
+
+.lanmu_ul, .lanmu_ul2 {
     list-style: none;
 }
-.lanmu_ul2 li{
+
+.lanmu_ul2 li {
     margin: 0 20px 0 0;
 
     padding: 5px 0;
     float: left;
 }
 
-.lanmu_ul li{
+.lanmu_ul li {
     margin: 0;
     width: 150px;
     padding: 5px 0;
     float: left;
 }
-.lanmu_ul2>.active>a{
+
+.lanmu_ul2 > .active > a {
     color: #ff552e;
 }
-.lanmu_ul .active>a{
+
+.lanmu_ul .active > a {
     color: #ff552e;
 }
-.lanmutitle{
-    font-size:15px;
+
+.lanmutitle {
+    font-size: 15px;
     color: #3d8de2;
 }
 
-.now_position{
+.now_position {
     margin-top: 10px;
 }
 
-
-.hover_info{
-    height:80px;
+.hover_info {
+    height: 80px;
     border-bottom: solid 1px #f3f3f3;
-    border-right:solid 1px #f3f3f3;
+    border-right: solid 1px #f3f3f3;
 
 }
-.hover_info .padding_top{
-    padding-top:28px;
+
+.hover_info .padding_top {
+    padding-top: 28px;
 }
-.hover_info .padding-top1{
-    padding-top:15px;
+
+.hover_info .padding-top1 {
+    padding-top: 15px;
 }
-.info_title{
-    height:24px;
-    font-size: 18px;color: #000;font-weight: 600;
+
+.info_title {
+    height: 24px;
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
 }
-.info_title a:hover{
+
+.info_title a:hover {
     text-decoration: none;
     color: #ff552e;
 }
-.info_yuan{
+
+.info_yuan {
     color: #ff552e;
 }
 
-.hover_info:hover{
+.hover_info:hover {
     background: #ddd;
 }
-.container_self{
-    width:1200px;
-    margin:0 auto;
-    padding:0;
+
+.container_self {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0;
 }

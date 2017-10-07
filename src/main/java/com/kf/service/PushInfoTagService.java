@@ -10,7 +10,7 @@ public class PushInfoTagService {
     @Autowired
     private PushInfoTagMapper pushInfoTagMapper;
 
-    public void addPushInfoTag(Integer tagId,Integer piId,Integer piTagContent){
-        pushInfoTagMapper.insertPushInfoTag(tagId,piId,piTagContent);
+    public void addPushInfoTag(Integer tagId, Integer piId, Integer piTagContent) {
+        pushInfoTagMapper.insertPushInfoTag(tagId, piId, piTagContent);
     }
 }

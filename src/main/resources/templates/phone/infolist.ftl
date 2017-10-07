@@ -44,7 +44,9 @@
         <div class="inner" style="display:none;">
             <ul>
                 <a class="selected" href="index.php?mod=category&catid=4" class="t">不限</a></li>
-                <a class="" href="index.php?mod=category&catid=51">营业员/店员</a>
+            <#list secondClassList as sc>
+                <a class="" href="index.php?mod=category&catid=51">${sc.scName}</a>
+            </#list>
             </ul>
 
         </div>
@@ -106,6 +108,7 @@
         <div class="inner_parent" id="parent_container" style="display:none;"><div class="innercontent"></div></div>
         <div class="inner_child" id="inner_container" style="display:none;"><div class="innercontent"></div></div>
     </div>
+    <div class="fullbg" id="fullbg" style="height: 1632px; display: none"><i class="pull2"></i></div>
     <div class="infolst_w">
         <ul class="list-info">
         <#--结果集合-->
@@ -139,6 +142,7 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();</script></p>
+
 <div class="footer">
     <!--360自动提交收录代码-->
     <script>

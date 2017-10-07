@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.kf.mapper.PushInfoMapper" >
+<mapper namespace="com.kf.mapper.PushInfoMapper">
 
     <resultMap id="BasePushInfo" type="com.kf.pojo.PushInfo">
         <result property="piId" column="pi_id"/>
@@ -44,13 +44,13 @@
         <if test="mcId!=null and mcId!=0">and pi_mc=#{mcId}</if>
         <if test="districtId!=null and districtId!=0">and district_id=#{districtId}</if>
         <if test="tagNum!=0">
-        and push_info.pi_id in (select pi_id FROM push_info_tag
-        <trim prefix="WHERE" prefixOverrides="AND |OR ">
-            <foreach collection="tags" item="item" index="index" >
-                OR tag_id=#{item.tagId} and pi_tag_content=#{item.tcId}
-            </foreach>
-        </trim>
-        GROUP by pi_id having count(pi_id)=#{tagNum})
+            and push_info.pi_id in (select pi_id FROM push_info_tag
+            <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                <foreach collection="tags" item="item" index="index">
+                    OR tag_id=#{item.tagId} and pi_tag_content=#{item.tcId}
+                </foreach>
+            </trim>
+            GROUP by pi_id having count(pi_id)=#{tagNum})
         </if>
     </select>
 

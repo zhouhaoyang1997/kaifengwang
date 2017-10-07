@@ -25,41 +25,42 @@ public class UserController {
     public UserService userService;
 
 
-    @RequestMapping(value = "/lg",method = RequestMethod.POST)
-    public ModelAndView login(User user, String remember, HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "/lg", method = RequestMethod.POST)
+    public ModelAndView login(User user, String remember, HttpServletRequest request, HttpServletResponse response) {
         //用户名密码正确,当前用户存入session
         ModelAndView modelAndView = null;
-        if(userService.getUser(user)!=null){
+        if (userService.getUser(user) != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("user",user);
+            session.setAttribute("user", user);
             //用户点击了记住我
-            if(remember!=null&&!remember.isEmpty()){
-                Cookie cookie = new Cookie("userName",user.getUserName());
-                Cookie passCookie = new Cookie("userPassword",user.getUserPassword());
+            if (remember != null && !remember.isEmpty()) {
+                Cookie cookie = new Cookie("userName", user.getUserName());
+                Cookie passCookie = new Cookie("userPassword", user.getUserPassword());
                 response.addCookie(cookie);
                 response.addCookie(passCookie);
             }
             modelAndView = new ModelAndView("redirect:/index");
-        }else{
+        } else {
             modelAndView = new ModelAndView("login");
-            modelAndView.addObject("error","用户名或密码错误");
+            modelAndView.addObject("error", "用户名或密码错误");
         }
         return modelAndView;
     }
 
-    @RequestMapping(value="reg",method = RequestMethod.POST)
-    public ModelAndView register(User user){
+    @RequestMapping(value = "reg", method = RequestMethod.POST)
+    public ModelAndView register(User user) {
         ModelAndView modelAndView = new ModelAndView("redirect:/index");
         return modelAndView;
     }
 
     @RequestMapping("/login")
-    public ModelAndView loginFtl(){
+    public ModelAndView loginFtl() {
         ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;
     }
+
     @RequestMapping("/register")
-    public ModelAndView regFtl(){
+    public ModelAndView regFtl() {
         ModelAndView modelAndView = new ModelAndView("reg");
         return modelAndView;
     }

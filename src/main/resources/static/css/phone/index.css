@@ -26,9 +26,34 @@
 	position: relative
 }
 
+.index-category .page2 {
+    float: left;
+    padding: 0;
+    width: 100%;
+    height: 280px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    position: relative
+}
 .index-category .item {
-	width: 25%;
+    width: 15%;
 	padding: 13px 0 0;
+    margin-left: 5px;
+    display: block;
+    float: left;
+    color: #333;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box
+}
+
+.index-category .block {
+    width: 30%;
+    height: 50%;
+    background-color: #e6e6e6;
+    padding: 13px 0 0;
+    margin-left: 5px;
+    margin-top: 5px;
 	display: block;
 	float: left;
 	color: #333;
@@ -54,6 +79,9 @@
 	background-size: auto auto
 }
 
+.index-category .block .icon {
+    background-size: auto auto
+}
 .select_03 {
 	border: 1px solid #f63;
 	margin: 15px 10px 15px 10px;
