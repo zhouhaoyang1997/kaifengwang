@@ -40,13 +40,13 @@ public class MobileMainController {
     @GetMapping("/menulist")
     public ModelAndView menulist() {
         ModelAndView modelAndView = new ModelAndView("phone/menulist");
-        List<SecondClass> zhaoPin = secondClassService.getAllSecondClass(1);
+        List<SecondClass> zhaopin = secondClassService.getAllSecondClass(1);
         List<SecondClass> fangchan = secondClassService.getAllSecondClass(2);
         List<SecondClass> ershou = secondClassService.getAllSecondClass(3);
         List<SecondClass> shenghuo = secondClassService.getAllSecondClass(4);
         List<SecondClass> chongwu = secondClassService.getAllSecondClass(5);
         List<SecondClass> mingqi = secondClassService.getAllSecondClass(6);
-        modelAndView.addObject("zhaopin", zhaoPin);
+        modelAndView.addObject("zhaopin", zhaopin);
         modelAndView.addObject("fangchan", fangchan);
         modelAndView.addObject("ershou", ershou);
         modelAndView.addObject("shenghuo", shenghuo);
