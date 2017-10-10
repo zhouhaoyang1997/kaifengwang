@@ -237,7 +237,7 @@ ${base}/list?mcId=${currMc.mcId}<#nested ><#if currTags??><#list currTags as tag
                                 </#list>
                             <#else>
                             <div class="row hover_info">
-                                <span>抱歉，暂时没有符合该条件的职位，请重新修改搜索条件后再搜索、筛选</span>
+                                <span>抱歉，暂时没有符合该条件的信息，请重新修改搜索条件后再搜索、筛选</span>
                             </div>
                             </#if>
                         </div>

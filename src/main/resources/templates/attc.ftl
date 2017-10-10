@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/userInfo.css">
 <link rel="stylesheet" href="${base}/css/fileupload.css">
+<link rel="stylesheet" href="${base}/css/default.css">
 </@header>
 <@headerArea>
 <li><a href="${base}/index">回首页</a></li>
@@ -37,7 +38,7 @@
                      <div class="link"><i class="fa fa-id-card-o"></i>公司认证<i class="fa fa-chevron-down"></i></div>
                     <ul class="submenu" style="display: block;">
                         <li class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">开始认证</a></li>
-                        <li class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">信息修改</a></li>
+                        <li><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">信息修改</a></li>
                     </ul>
                 </li>
                 <li><div class="link"><i class="fa fa-globe"></i>我的简历</div></li>
@@ -51,15 +52,135 @@
                         <div class="panel panel-default">
                             <div class="panel-heading"><h3>开始认证</h3></div>
                             <div class="panel-body">
-                                123123
+                                <form action="">
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label><span style="color:red">*</span>企业名称:</label>
+
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" placeholder="请输入企业名称">
+                                        </div>
+                                        <div class="col-xs-5"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label><span style="color:red">*</span>注册号:</label>
+
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" placeholder="请输入注册号">
+                                        </div>
+                                        <div class="col-xs-5"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label><span style="color:red">*</span>法人代表:</label>
+
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" placeholder="请输入法人代表">
+                                        </div>
+                                        <div class="col-xs-5"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label><span style="color:red">*</span>营业期限:</label>
+
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" placeholder="请输入营业时间">
+                                        </div>
+                                        <div class="col-xs-5"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label><span style="color:red">*</span>上传凭证:</label>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                                                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
+                                                         src="${base}/img/noimage.png" alt=""/>
+                                                </div>
+                                                <div><span>恳请您上传有效、清晰的营业执照图片（最多上传1张，每张最大10M）</span></div>
+                                                <div class="fileinput-preview fileinput-exists thumbnail"
+                                                     style="max-width: 200px; max-height: 150px;"></div>
+                                                <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                        </span>
+                                                    <a href="javascript:;" class="btn btn-warning fileinput-exists"
+                                                       data-dismiss="fileinput">移除</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-5"></div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-offset-4 col-sm-4">
+                                            <button type="submit" class="btn btn-danger">确认提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>
                     <div role="tabpanel"  class="tab-pane" id="profile">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><h3>我的收藏</h3></div>
+                            <div class="panel-heading"><h3>信息修改</h3></div>
                             <div class="panel-body">
+                                <form action="">
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label><span style="color:red">*</span>企业名称:</label>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" disabled>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <span>修改企业名称,企业营业执照,企业法人,企业注册号,恳请您重新认证企业!</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label><span style="color:red">*</span>企业地址:</label>
 
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" >
+                                        </div>
+                                        <div class="col-xs-5"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label><span style="color:red">*</span>企业网址:</label>
+
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" >
+                                        </div>
+                                        <div class="col-xs-5"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label><span style="color:red">*</span>企业简介:</label>
+
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <textarea name="piContent" style="width:600px;height:400px;visibility:hidden;"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-offset-4 col-sm-4">
+                                            <button type="submit" class="btn btn-danger">确认提交</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -76,4 +197,20 @@
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/js/fileupload.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/kindeditor-min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/zh-CN.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="piContent"]', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            allowImageUpload : false,
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+        });
+    });
+</script>
 </@push_footer>

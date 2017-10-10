@@ -57,8 +57,12 @@ body { font-family: 'Titillium Web', sans-serif; }
     width: 160px;
     float: left;
 }
-
+.list_clear li a{
+    font-size:16px;
+    color: #0E8ED8;
+}
 .user-menu li a {
+
     display: block;
     font-size: 13px;
     margin-right: 5px;
@@ -85,6 +89,10 @@ body { font-family: 'Titillium Web', sans-serif; }
     margin-left: -50px;
     min-width: 100px;
     text-align: center;
+}
+a{
+    color: #555555;
+    text-decoration: none;
 }
 
 .mainmenu-area {
@@ -192,10 +200,6 @@ z-index: 999;}
     background: none repeat scroll 0 0 #000;
 }
 
-a{
-    color: #666;
-    text-decoration: none;
-}
 /* 搜索下的快速点击*/
 .quickClick{
     margin-top:5px;
@@ -221,6 +225,10 @@ a{
 .panel_self{
     border: 1px solid #f3f3f3;
 }
+.panel_self .panel-heading h4 a{
+    color: #ff552e;
+}
+
 .panel_self .panel-body{
     padding-top: 0;
 }
@@ -430,7 +438,7 @@ ol.slide-indicators li.active {
 }
 .gg_box{
     width:1200px;
-    height:40px;
+    height:60px;
     background-size: 100%
 }
 .footerPage{

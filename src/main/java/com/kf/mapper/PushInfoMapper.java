@@ -1,5 +1,6 @@
 package com.kf.mapper;
 
+import com.kf.pojo.BaseInfo;
 import com.kf.pojo.PushInfo;
 import com.kf.vo.TagValue;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,4 +18,14 @@ public interface PushInfoMapper {
     PushInfo selectInfoByPiId(@Param("piId")Integer piId);
 
     void addPushInfo(PushInfo pushInfo);
+
+    List<BaseInfo> selectBaseInfoByPiIdAndStatus(@Param("userId")Integer userId,@Param("status")Integer status);
+
+    List<BaseInfo> selectCollectionByUserId(@Param("userId")Integer userId);
+
+    /**
+     * 修改当前信息状态,可用于删除信息,将信息处于审核状态
+     * @param status
+     */
+    void updatePushInfoStatus(@Param("piId") Integer piId,@Param("status")Integer status);
 }

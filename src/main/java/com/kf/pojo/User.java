@@ -26,6 +26,15 @@ public class User {
     private Integer status;
     private Integer userPush;
     private Integer userCollection;
+    private String userImg;
+
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
+    }
 
     public Integer getUserCollection() {
         return userCollection;

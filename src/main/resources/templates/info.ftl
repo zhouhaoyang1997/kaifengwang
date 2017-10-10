@@ -13,14 +13,14 @@
     <div class="row">
         <div class="col-md-3">
             <div class="logo">
-                <h1><a href="${base}/index">开封<span>${info.piMcName!""}</span></a></h1>
+                <h1><a href="${base}/index">开封<span>${info.mcName!""}</span></a></h1>
             </div>
         </div>
         <div class="col-md-7"></div>
         <div class="col-md-2">
             <div style="margin-top:15px">
                 <button onclick="" class="btn btn-info">发布信息</button>
-                <#if info.piMcName="招聘">
+                <#if info.mcName="招聘">
                     <button onclick="" class="btn btn-info">登记简历</button>
                 </#if>
             </div>
@@ -31,7 +31,7 @@
 <div class="container_self">
     <div class="row">
         <div class="now_position">
-            <i class="fa fa-home"></i><a href="/index">开封城市网</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}">${info.piMcName}</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}&scId=${info.piSc}">${info.piScName}</a>
+            <i class="fa fa-home"></i><a href="/index">开封城市网</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}">${info.mcName}</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}&scId=${info.piSc}">${info.scName}</a>
         </div>
     </div>
     <div class="row">

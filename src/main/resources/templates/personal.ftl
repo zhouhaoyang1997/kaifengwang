@@ -4,9 +4,9 @@
 <#assign base="${request.contextPath}"/>
 <@header title="开封网招聘">
 <link rel="stylesheet" href="${base}/css/style.css">
+<link rel="stylesheet" href="${base}/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/userInfo.css">
-<link rel="stylesheet" href="${base}/css/fileupload.css">
 </@header>
 <@headerArea>
 <li><a href="${base}/index">回首页</a></li>
@@ -46,7 +46,7 @@
         <div class="col-md-9">
             <div style="margin-top: 20px;">
                 <!-- Tab panes -->
-                <div class="tab-content">
+                <div class="tab-content personal_tab">
                     <div role="tabpanel" class="tab-pane active" id="home">
                         <div class="panel panel-default">
                             <div class="panel-heading"><h3>我的发布</h3></div>
@@ -54,22 +54,20 @@
                                 <div>
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#newInfo" aria-controls="home" role="tab" data-toggle="tab">最新消息</a></li>
-                                        <li role="presentation"><a href="#showInfo" aria-controls="profile" role="tab" data-toggle="tab">显示中的消息</a></li>
-                                        <li role="presentation"><a href="#checkInfo" aria-controls="messages" role="tab" data-toggle="tab">审核中的消息</a></li>
+                                        <li role="presentation" class="active"><a href="#newInfo" aria-controls="home" role="tab" data-toggle="tab">所有信息</a></li>
                                         <li role="presentation"><a href="#deleteInfo" aria-controls="settings" role="tab" data-toggle="tab">已删除的信息</a></li>
-                                        <li role="presentation"><a href="#noShowInfo" aria-controls="settings" role="tab" data-toggle="tab">未显示的信息</a></li>
                                     </ul>
 
                                     <!-- Tab panes -->
                                     <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane active" id="newInfo">
-                                            xxxxxx
+                                        <div role="tabpanel" class="tab-pane active" style="margin-left: 0;margin-top: 10px;" id="newInfo">
+                                            <table class="table" id="table">
+                                            </table>
                                         </div>
-                                        <div role="tabpanel" class="tab-pane" id="showInfo">...</div>
-                                        <div role="tabpanel" class="tab-pane" id="checkInfo">...</div>
-                                        <div role="tabpanel" class="tab-pane" id="deleteInfo">...</div>
-                                        <div role="tabpanel" class="tab-pane" id="noShowInfo">...</div>
+                                        <div role="tabpanel" class="tab-pane" style="margin-left: 0;margin-top: 10px;" id="deleteInfo">
+                                            <table class="table" id="deleteTable">
+                                            </table>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -80,7 +78,9 @@
                         <div class="panel panel-default">
                             <div class="panel-heading"><h3>我的收藏</h3></div>
                             <div class="panel-body">
+                                <table class="table" id="collectionTable">
 
+                                </table>
                             </div>
                         </div>
 
@@ -106,7 +106,9 @@
 <@push_footer>
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${base}/js/fileupload.js"></script>
+<script type="text/javascript" src="${base}/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="${base}/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="${base}/js/personal.js"></script>
 </@push_footer>
 
 

@@ -34,12 +34,12 @@
         UPDATE user SET user_password=#{userPassword} WHERE user_id=#{userId}
     </update>
 
-    <select id="selectUserByUserPhone" resultType="com.kf.pojo.User">
-        SELECT * from user WHERE user_phone=#{userPhone}
+    <select id="selectUserCountByUserPhone" resultType="java.lang.Integer">
+        SELECT count(user_id) from user WHERE user_phone=#{userPhone} and user_id!=#{userId}
     </select>
 
-    <select id="selectUserByUserEmail" resultType="com.kf.pojo.User">
-        SELECT * from user WHERE user_email=#{userEmail}
+    <select id="selectUserCountByUserEmail" resultType="java.lang.Integer">
+        SELECT count(user_id) from user WHERE user_email=#{userEmail} and user_id!=#{userId}
     </select>
 
     <update id="updateUserPhone">
@@ -49,5 +49,13 @@
 
     <update id="updateUserEmail">
         UPDATE user SET user_email=#{userEmail} where user_id=#{userId}
+    </update>
+
+    <update id="updateUserProfileInfo">
+        UPDATE user SET user_description=#{userDescription} where user_id=#{userId}
+    </update>
+
+    <update id="updateUserImg">
+        UPDATE user SET user_img=#{userImg} where user_id=#{userId}
     </update>
 </mapper>

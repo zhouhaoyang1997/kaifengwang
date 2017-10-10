@@ -29,6 +29,8 @@ public class CookieUtil {
     public static void addCookie(HttpServletResponse response,String name,String value){
         if(name!=null&&value!=null){
             Cookie cookie = new Cookie(name,value);
+            //cookie有效期为七天
+            cookie.setMaxAge(60*60*12*7);
             response.addCookie(cookie);
         }
     }

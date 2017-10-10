@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/fileupload.css">
+<link rel="stylesheet" href="${base}/css/default.css">
 </@header>
 <@push_header>
 </@push_header>
@@ -83,9 +84,7 @@
                 <label><span style="color:red">*</span>内容:</label>
             <div class="form-group row">
                 <div class="col-xs-8">
-                <textarea name="piContent" class="form-control" cols="50" rows="15">
-
-                </textarea>
+                    <textarea name="piContent" style="width:800px;height:400px;visibility:hidden;"></textarea>
                 </div>
                 <div class="col-xs-4">
                 <#if pushError??>
@@ -255,4 +254,20 @@
 <script type="text/javascript" src="${request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${request.contextPath}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${request.contextPath}/js/fileupload.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/kindeditor-min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/zh-CN.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="piContent"]', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            allowImageUpload : false,
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+        });
+    });
+</script>
 </@push_footer>

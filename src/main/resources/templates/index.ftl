@@ -141,7 +141,7 @@
                                     <img src="img/cw_icon.png" width="55px" height="55px" alt="">
                                 </div>
 
-                                <p><a href="#" target="_blank">宠物</a></p>
+                                <p><a href="#" target="_blank">名师培优</a></p>
                                 <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
                             </div>
                             <div class="col-xs-2">
@@ -184,7 +184,7 @@
                     </div>
                 </div>
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4><a href="${base}/list?mcId=5">宠物</a></h4></div>
+                    <div class="panel-heading"><h4><a href="${base}/list?mcId=5">名师培优</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
                         <#list chongwu as cw>

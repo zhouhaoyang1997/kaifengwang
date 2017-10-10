@@ -120,6 +120,10 @@ body.style-3 {
 
 .btn-primary {
   height: 50px;
+  width:100px;
+  font-size:18px;
+  font-weight: 800;
+  margin-top: 15px;
   padding-right: 20px;
   padding-left: 20px;
   border: none;
@@ -144,4 +148,18 @@ input, textarea {
   opacity: 0;
 }
 
+.qq_lg:hover{
+  background: url("../img/qq_bg.png") no-repeat;
+}
+.qq_lg{
+  margin-left:5px;
+  width:44px;
+  height: 44px;
+  background: url("../img/qq.png") no-repeat;
+}
+
+
+.form-box{
+  margin-top:30px;
+}
 /*# sourceMappingURL=style.css.map */

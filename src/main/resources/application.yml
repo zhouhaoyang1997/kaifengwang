@@ -3,8 +3,7 @@ server:
   context-path:
   session:
     cookie:
-      #cookie有效期为一天
-      max-age: 720
+      path: /
 
 spring:
   #数据源配置
@@ -35,5 +34,5 @@ logging:
        com.kf.mapper: debug
 
 path:
-
   pathValue: C:/Users/18236/cg/src/main/resources/static/img/pushimg/
+  headImgPath: C:/Users/18236/cg/src/main/resources/static/img/headImg/

@@ -36,11 +36,15 @@ public interface UserMapper {
 
     void updateUserPwd(@Param("userId")Integer userId,@Param("userPassword")String userPassword);
 
-    User selectUserByUserPhone(@Param("userPhone")String userPhone);
+    Integer selectUserCountByUserPhone(@Param("userId")Integer userId,@Param("userPhone")String userPhone);
 
-    User selectUserByUserEmail(@Param("userEmail")String userEmail);
+    Integer selectUserCountByUserEmail(@Param("userId")Integer userId,@Param("userEmail")String userEmail);
 
     void updateUserPhone(@Param("userId")Integer userId,@Param("userPhone") String userPhone);
 
     void updateUserEmail(@Param("userId")Integer userId,@Param("userEmail") String userEmail);
+
+    void updateUserProfileInfo(@Param("userDescription")String userDescription,@Param("userId")Integer userId);
+
+    void updateUserImg(@Param("userId")Integer userId,@Param("userImg")String userImg);
 }

@@ -9,8 +9,8 @@
         <result property="piSc" column="pi_sc"/>
         <result property="userId" column="user_id"/>
         <result property="piUser" column="user_name"/>
-        <result property="piMcName" column="mc_name"/>
-        <result property="piScName" column="sc_name"/>
+        <result property="mcName" column="mc_name"/>
+        <result property="scName" column="sc_name"/>
         <result property="piContent" column="pi_content"/>
         <result property="piScan" column="pi_scan"/>
         <result property="piPushDate" column="pi_push_date"/>
@@ -90,4 +90,21 @@
         (#{piTitle},#{piContent},#{piMc},#{piSc},#{userId},#{piAddress},#{piImg},#{piScan},#{piPushDate},#{piChujia},#{piZhiding},#{piContactPerson},
         #{piPhone},#{piQq},#{piDistrict})
     </insert>
+
+
+    <select id="selectBaseInfoByPiIdAndStatus" resultType="com.kf.pojo.BaseInfo">
+        select DISTINCT * from push_info,secondclass,mainclass where pi_user=#{userId} AND pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id
+        <if test="status!=null">
+and status=#{status}
+        </if>
+    </select>
+
+    <select id="selectCollectionByUserId" resultType="com.kf.pojo.BaseInfo">
+        SELECT DISTINCT * FROM push_info,secondclass,mainclass,collection
+        where pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id AND status=0 AND user_id=#{userId} AND collection.pi_id=push_info.pi_id
+    </select>
+
+    <update id="updatePushInfoStatus">
+        UPDATE push_info SET status=#{status} WHERE pi_id=#{piId}
+    </update>
 </mapper>
