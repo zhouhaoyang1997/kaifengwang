@@ -35,9 +35,12 @@ public class PushInfoService {
      * @return
      */
     public List<BaseInfo> getBaseInfoByUserIdAndStatus(Integer userId,Integer status){
-       return pushInfoMapper.selectBaseInfoByPiIdAndStatus(userId,status);
+        return pushInfoMapper.selectBaseInfoByPiIdAndStatus(userId,status);
     }
 
+    public List<BaseInfo> getBaseInfoByUserIdAndOpStatus(Integer userId,Integer status){
+        return pushInfoMapper.selectBaseInfoByPiIdAndOpStatus(userId,status);
+    }
     /**
      * 通过用户id查到当前用户收藏的信息
      * @param userId
@@ -47,7 +50,7 @@ public class PushInfoService {
         return pushInfoMapper.selectCollectionByUserId(userId);
     }
 
-    public void updatePushInfoStatus(Integer piId,Integer status){
-        pushInfoMapper.updatePushInfoStatus(piId,status);
+    public void updatePushInfoStatus(Integer piId,Integer userId,Integer status){
+        pushInfoMapper.updatePushInfoStatus(piId,userId,status);
     }
 }

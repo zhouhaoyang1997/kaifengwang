@@ -32,21 +32,22 @@ public class PersonalController {
         return modelAndView;
     }
 
-    @PostMapping("/user/allPush")
+    @GetMapping("/user/allPush")
     @ResponseBody
     public List<BaseInfo> allPush(Integer limit,Integer offset,HttpServletRequest request){
         Integer userId = SessionUtil.getUserId(request);
-        return pushInfoService.getBaseInfoByUserIdAndStatus(userId,null);
+        //查询出除去删除的信息
+        return pushInfoService.getBaseInfoByUserIdAndOpStatus(userId,1);
     }
 
-    @PostMapping("/user/deletePush")
+    @GetMapping("/user/deletePush")
     @ResponseBody
     public List<BaseInfo> deletePush(Integer limit,Integer offset,HttpServletRequest request){
         Integer userId = SessionUtil.getUserId(request);
         return pushInfoService.getBaseInfoByUserIdAndStatus(userId,1);
     }
 
-    @PostMapping("/user/collectionPush")
+    @GetMapping("/user/collectionPush")
     @ResponseBody
     public List<BaseInfo> collectionPush(Integer limit,Integer offset,HttpServletRequest request){
         Integer userId = SessionUtil.getUserId(request);
@@ -55,16 +56,27 @@ public class PersonalController {
 
     @GetMapping("/user/deleteInfo")
     @ResponseBody
-    public String deleteInfo(Integer piId,Integer piUser,HttpServletRequest request){
+    public String deleteInfo(Integer piId,HttpServletRequest request){
         Integer userId = SessionUtil.getUserId(request);
-        if(userId!=null&&piUser!=null&&piId!=null&&userId.equals(piUser)){
+        if(userId!=null&&piId!=null){
             //确保该信息是该用户发的
-
-            pushInfoService.updatePushInfoStatus(piId,1);
+            pushInfoService.updatePushInfoStatus(piId,userId,1);
             return "ok:删除成功";
         }else{
             return "no:不合法的请求";
         }
+    }
 
+    @GetMapping("/user/recoverInfo")
+    @ResponseBody
+    public String recoverInfo(Integer piId,HttpServletRequest request){
+        Integer userId = SessionUtil.getUserId(request);
+        if(userId!=null&&piId!=null){
+            //确保该信息是该用户发的
+            pushInfoService.updatePushInfoStatus(piId,userId,0);
+            return "ok:已恢复";
+        }else{
+            return "no:不合法的请求";
+        }
     }
 }

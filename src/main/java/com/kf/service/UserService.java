@@ -113,4 +113,13 @@ public class UserService {
     public void updateUserImg(String userImg,Integer userId){
         userMapper.updateUserImg(userId,userImg);
     }
+
+    /**
+     * 修改当前用户公司认证状态
+     * @param userId
+     * @param attc
+     */
+    public void updateUserAttc(Integer userId,Integer attc){
+        userMapper.updateUserAttc(userId,attc);
+    }
 }

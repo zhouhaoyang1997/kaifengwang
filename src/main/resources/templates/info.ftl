@@ -40,18 +40,18 @@
                 <div class="col-md-4 push_base_static">
                     <span>发布时间:${info.piPushDate?string("yyyy-MM-dd")}</span> <span>浏览量:${info.piScan}</span>
                 </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4 push_base_static">
+                <div class="col-md-5"></div>
+                <div class="col-md-3 push_base_static">
                     <a href="/"><i class="fa fa-calendar"></i> 收藏</a>  <a href="#"> 举报</a>  <a href="#" style="color: #red;">置顶</a>
                 </div>
             </div>
             <div class="row push_base_title">
                 <div class="col-md-8">
-                    <h2>${info.piTitle}</h2>
+                    <h1>${info.piTitle}</h1>
                 </div>
             </div>
             <div class="row push_base_data">
-                <div class="col-md-5">
+                <div class="col-md-7">
                     <div id="myCarousel" class="carousel slide">
                         <!-- 轮播（Carousel）内容 -->
                         <div class="carousel-inner">
@@ -82,7 +82,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-5">
                     <table class="push_base_list">
                     <#list info.tagValues as tv>
                         <tr>
@@ -114,7 +114,14 @@
         </div>
 
         <div class="person_box">
-            <h4>${info.piUser}</h4>
+
+        <#if infoUser.userImg??>
+            <img src="${base}/${infoUser.userImg}" class="img-circle touxiang" alt="">
+        <#else>
+            <img src="${base}/img/noimage.png" class="img-circle touxiang" alt="">
+        </#if>
+            <h4 style="text-align: center">${info.piUser}</h4>
+            <h5 style="text-align: center">${infoUser.createTime?datetime}注册</h5>
         </div>
     </div>
     <div class="row">

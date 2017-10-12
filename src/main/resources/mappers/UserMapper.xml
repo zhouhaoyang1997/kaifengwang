@@ -58,4 +58,8 @@
     <update id="updateUserImg">
         UPDATE user SET user_img=#{userImg} where user_id=#{userId}
     </update>
+
+    <update id="updateUserAttc">
+        UPDATE user SET user_attc=#{userAttc} where user_id=#{userId}
+    </update>
 </mapper>

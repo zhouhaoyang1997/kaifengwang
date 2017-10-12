@@ -40,7 +40,7 @@
 
     <select id="selectInfoByPiId" resultMap="BasePushInfo">
         SELECT DISTINCT push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,pi_content,pi_user,pi_img,pi_scan,pi_phone,pi_qq,
-        district_name,pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,pi_address,
+        district_name,pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,pi_address,user.user_id,
         tc_name,tagcontent.tc_id,tag.tag_name,sc_name,mc_name
         from user,mainclass,secondclass,push_info
         LEFT JOIN pic_content ON push_info.pi_id = pic_content.pc_id
@@ -70,13 +70,13 @@
         <if test="mcId!=null and mcId!=0">and pi_mc=#{mcId}</if>
         <if test="districtId!=null and districtId!=0">and district_id=#{districtId}</if>
         <if test="tagNum!=0">
-        and push_info.pi_id in (select pi_id FROM push_info_tag
-        <trim prefix="WHERE" prefixOverrides="AND |OR ">
-            <foreach collection="tags" item="item" index="index" >
-                OR pi_tag_content=#{item}
-            </foreach>
-        </trim>
-        GROUP by pi_id having count(pi_id)=#{tagNum})
+            and push_info.pi_id in (select pi_id FROM push_info_tag
+            <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                <foreach collection="tags" item="item" index="index" >
+                    OR pi_tag_content=#{item}
+                </foreach>
+            </trim>
+            GROUP by pi_id having count(pi_id)=#{tagNum})
         </if>
     </select>
 
@@ -86,8 +86,8 @@
             select LAST_INSERT_ID()
         </selectKey>
         insert into push_info(pi_title,pi_content,pi_mc,pi_sc,pi_user,pi_address,
-        pi_img,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,pi_phone,pi_qq,pi_district) VALUES
-        (#{piTitle},#{piContent},#{piMc},#{piSc},#{userId},#{piAddress},#{piImg},#{piScan},#{piPushDate},#{piChujia},#{piZhiding},#{piContactPerson},
+        pi_img,pi_scan,pi_push_date,pi_chujia,pi_contact_person,pi_phone,pi_qq,pi_district) VALUES
+        (#{piTitle},#{piContent},#{piMc},#{piSc},#{userId},#{piAddress},#{piImg},#{piScan},#{piPushDate},#{piChujia},#{piContactPerson},
         #{piPhone},#{piQq},#{piDistrict})
     </insert>
 
@@ -95,7 +95,14 @@
     <select id="selectBaseInfoByPiIdAndStatus" resultType="com.kf.pojo.BaseInfo">
         select DISTINCT * from push_info,secondclass,mainclass where pi_user=#{userId} AND pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id
         <if test="status!=null">
-and status=#{status}
+            and status=#{status}
+        </if>
+    </select>
+
+    <select id="selectBaseInfoByPiIdAndOpStatus" resultType="com.kf.pojo.BaseInfo">
+        SELECT DISTINCT * from push_info,secondclass,mainclass where pi_user=#{userId} AND pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id
+        <if test="status!=null">
+            and status!=#{status}
         </if>
     </select>
 
@@ -105,6 +112,6 @@ and status=#{status}
     </select>
 
     <update id="updatePushInfoStatus">
-        UPDATE push_info SET status=#{status} WHERE pi_id=#{piId}
+        UPDATE push_info SET status=#{status} WHERE pi_id=#{piId} and pi_user=#{userId}
     </update>
 </mapper>

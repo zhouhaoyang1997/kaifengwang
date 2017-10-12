@@ -14,7 +14,6 @@ public class User {
     private String userName;
     @Length(min=6,max=20,message = "密码长度必须在6-20个字符之间!")
     private String userPassword;
-    private String userAvator;
     @Length(min=11,max=11,message = "请输入正确的手机号!")
     private String userPhone;
     @Email(message = "请输入正确的邮箱!")
@@ -27,6 +26,18 @@ public class User {
     private Integer userPush;
     private Integer userCollection;
     private String userImg;
+    /**
+     * 公司是否认证,0未认证,1已认证
+     */
+    private Integer userAttc;
+
+    public Integer getUserAttc() {
+        return userAttc;
+    }
+
+    public void setUserAttc(Integer userAttc) {
+        this.userAttc = userAttc;
+    }
 
     public String getUserImg() {
         return userImg;
@@ -92,13 +103,6 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserAvator() {
-        return userAvator;
-    }
-
-    public void setUserAvator(String userAvator) {
-        this.userAvator = userAvator;
-    }
 
     public String getUserPhone() {
         return userPhone;

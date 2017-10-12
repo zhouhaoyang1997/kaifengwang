@@ -15,6 +15,16 @@ public class BasePath {
 
     private String headImgPath;
 
+    private String companyImgPath;
+
+    public String getCompanyImgPath() {
+        return companyImgPath;
+    }
+
+    public void setCompanyImgPath(String companyImgPath) {
+        this.companyImgPath = companyImgPath;
+    }
+
     public String getHeadImgPath() {
         return headImgPath;
     }

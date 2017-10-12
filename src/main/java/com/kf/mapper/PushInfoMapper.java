@@ -19,7 +19,21 @@ public interface PushInfoMapper {
 
     void addPushInfo(PushInfo pushInfo);
 
+    /**
+     * 查询某个状态的信息
+     * @param userId
+     * @param status
+     * @return
+     */
     List<BaseInfo> selectBaseInfoByPiIdAndStatus(@Param("userId")Integer userId,@Param("status")Integer status);
+
+    /**
+     * 上面的方法的对立面,查询出某个状态之外的信息
+     * @param userId
+     * @param status
+     * @return
+     */
+    List<BaseInfo> selectBaseInfoByPiIdAndOpStatus(@Param("userId")Integer userId,@Param("status")Integer status);
 
     List<BaseInfo> selectCollectionByUserId(@Param("userId")Integer userId);
 
@@ -27,5 +41,5 @@ public interface PushInfoMapper {
      * 修改当前信息状态,可用于删除信息,将信息处于审核状态
      * @param status
      */
-    void updatePushInfoStatus(@Param("piId") Integer piId,@Param("status")Integer status);
+    void updatePushInfoStatus(@Param("piId") Integer piId,@Param("userId")Integer userId,@Param("status")Integer status);
 }

@@ -47,4 +47,11 @@ public interface UserMapper {
     void updateUserProfileInfo(@Param("userDescription")String userDescription,@Param("userId")Integer userId);
 
     void updateUserImg(@Param("userId")Integer userId,@Param("userImg")String userImg);
+
+    /**
+     * 修改当前用户公司认证状态
+     * @param userId
+     * @param userAttc
+     */
+    void updateUserAttc(@Param("userId")Integer userId,@Param("userAttc")Integer userAttc);
 }

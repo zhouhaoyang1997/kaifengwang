@@ -1,7 +1,7 @@
 $('#collectionTable').bootstrapTable({
     pagination: true, //分页
     url:'/user/collectionPush',
-    method: 'post',
+    method: 'get',
     cache: false,
     pageNumber: 1,   //初始化加载第一页，默认第一页
     pageSize: 5,
@@ -41,7 +41,7 @@ $('#collectionTable').bootstrapTable({
 $('#table').bootstrapTable({
     pagination: true, //分页
     url:'/user/allPush',
-    method: 'post',
+    method: 'get',
     cache: false,
     pageNumber: 1,   //初始化加载第一页，默认第一页
     pageSize: 5,
@@ -102,7 +102,7 @@ $('#table').bootstrapTable({
 $('#deleteTable').bootstrapTable({
     pagination: true, //分页
     url:'/user/deletePush',
-    method: 'post',
+    method: 'get',
     cache: false,
     pageNumber: 1,   //初始化加载第一页，默认第一页
     pageSize: 5,
