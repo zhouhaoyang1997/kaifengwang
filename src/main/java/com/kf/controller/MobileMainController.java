@@ -35,6 +35,7 @@ public class MobileMainController {
 
     @Autowired
     private TagService tagService;
+
     @Autowired
     private PushInfoService pushInfoService;
 

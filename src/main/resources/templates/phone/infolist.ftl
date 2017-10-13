@@ -110,7 +110,7 @@
             <#if pushInfos??&&(pushInfos?size>0)>
                 <#list pushInfos as pushInfo>
                         <li class="">
-                            <a href="index.php?mod=information&id=1229554">
+                            <a href="">
                                 <dl>
                                     <dt class="tit" style="">${pushInfo.piTitle!""}&nbsp;<span
                                             style="background:#339966; color:#FFFFFF; font-size:14px; padding:0 2px;text-align:center;">1图</span>
