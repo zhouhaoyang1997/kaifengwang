@@ -1,0 +1,203 @@
+.user_nav{
+    width:100%;
+    height:80px;
+    background: #ff552e;
+}
+.user_logo h2{
+    margin: 18px 0 18px 0;
+    font-weight: 600;
+}
+.user_logo h2 a {
+    color: #fff;
+}
+.user_logo h2 a:hover {text-decoration: none;opacity: .7}
+.user_logo h2 a span {
+    color: #fff;
+}
+.user_bar h4{
+    margin: 30px 0 10px 0;
+    font-weight: 400;
+}
+.user_bar h4 a {
+    color: #fff;
+}
+.user_bar h4 a:hover {text-decoration: none;opacity: .7}
+.push_btn{
+    background: #ff552e;border: 1px solid #fff;margin-top: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+ul {
+    list-style-type: none;
+}
+
+/** =======================
+ * Contenedor Principal
+ ===========================*/
+h1 {
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.accordion {
+    width: 100%;
+    max-width: 360px;
+    margin: 30px auto 20px;
+    background: #FFF;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.accordion .link {
+    cursor: pointer;
+    display: block;
+    padding: 15px 15px 15px 42px;
+    color: #4D4D4D;
+    font-size: 14px;
+    font-weight: 700;
+    border-bottom: 1px solid #CCC;
+    position: relative;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link {
+    border-bottom: 0;
+}
+
+.accordion li i {
+    position: absolute;
+    top: 16px;
+    left: 12px;
+    font-size: 18px;
+    color: #595959;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+    right: 12px;
+    left: auto;
+    font-size: 16px;
+}
+
+.accordion li.open .link {
+    color: #00AAFF;
+}
+
+.accordion li.open i {
+    color: #00AAFF;
+}
+.accordion li.open i.fa-chevron-down {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/**
+ * Submenu
+ -----------------------------*/
+.submenu {
+    display: none;
+    background: #fafafa;
+    font-size: 14px;
+}
+
+.submenu li {
+    border-bottom: 1px solid #4b4a5e;
+}
+
+.submenu a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    padding: 12px;
+    padding-left: 42px;
+    -webkit-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+.submenu a:hover {
+    background: #00AAFF;
+    color: #FFF;
+}
+/*http://www.jq22.com*/
+.zhuceshijian{
+    padding-top:50px;
+    padding-left: 30px;
+}
+.tab-content .tab-pane{
+    margin-top: 30px;
+    margin-left:30px;
+}
+.profile-left {
+    padding-left: 0;
+    float: left;
+    width: 100%;
+    height: 100%;
+    background-color: #F8F8F8;
+}
+.profile-header {
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+.profile-header .profile-main {
+    position: relative;
+    padding: 20px;
+    background: url(../img/profile-bg.png) no-repeat;
+    background-size: cover;
+}
+.profile-header .overlay {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.profile-header .profile-stat {
+    position: relative;
+    background-color: #00AAFF;
+}
+.profile-detail {
+    padding-bottom: 30px;
+}
+.profile-info {
+    padding: 0 20px;
+    margin: 40px 0;
+}
+.profile-info .heading {
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+.profile-info ul > li {
+    margin-bottom: 8px;
+}
+ul.list-justify > li span {
+    float: right;
+}
+.text-center {
+    text-align: center;
+}
+.profile-header .profile-stat .stat-item {
+    padding: 20px;
+    position: relative;
+}

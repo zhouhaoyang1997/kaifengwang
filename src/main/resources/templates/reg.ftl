@@ -1,9 +1,10 @@
+<#import "spring.ftl" as spring />
 <!DOCTYPE HTML>
 <html>
 <head lang="zh">
     <title>欢迎注册</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css" >
     <link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/login.css">
 </head>
@@ -12,26 +13,38 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-push-8">
-            <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeInRight">
+            <form action="${request.contextPath}/register" id="commentForm" method="post" class="fh5co-form animate-box">
                 <h2>注册</h2>
                 <div class="form-group">
                     <label for="name" class="sr-only">用户名</label>
-                    <input type="text" class="form-control" id="name" placeholder="用户名">
+                    <input type="text" class="form-control" name="userName" id="name" minlength="2" maxlength="10" placeholder="用户名" >
                 </div>
+                <#if userDetail??>
+                    <@spring.bind "userDetail.userName" />
+                    <@spring.showErrors "<br>"/>
+                </#if>
                 <div class="form-group">
                     <label for="email" class="sr-only">邮箱</label>
-                    <input type="email" class="form-control" id="email" placeholder="邮箱">
+                    <input type="email" class="form-control" name="userEmail" id="email" placeholder="邮箱" >
                 </div>
+            <#if userDetail??>
+                <@spring.bind "userDetail.userEmail" />
+                <@spring.showErrors "<br>"/>
+            </#if>
                 <div class="form-group">
                     <label for="password" class="sr-only">密码</label>
-                    <input type="password" class="form-control" id="password" placeholder="密码">
+                    <input type="password" class="form-control" name="userPassword" minlength="6" maxlength="15" id="password" placeholder="密码" >
                 </div>
+            <#if userDetail??>
+                <@spring.bind "userDetail.userPassword" />
+                <@spring.showErrors "<br>"/>
+            </#if>
                 <div class="form-group">
                     <label for="re-password" class="sr-only">确认密码</label>
-                    <input type="password" class="form-control" id="re-password" placeholder="确认密码">
+                    <input type="password" class="form-control" equalTo="#password" id="re-password" minlength="6" maxlength="15" placeholder="确认密码" >
                 </div>
                 <div class="form-group">
-                    <label for="remember"><input type="checkbox" id="remember"> 记住我</label>
+                    <label for="remember"><input type="checkbox" name="remember" id="remember"> 记住我?公共场合不建议使用!</label>
                 </div>
                 <div class="form-group">
                     <p>已经注册? <a href="${request.contextPath}/login">登录</a></p>
@@ -45,4 +58,17 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="${request.contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/messages_zh.js"></script>
+<script>
+    $.validator.setDefaults({
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+    $().ready(function() {
+        $("#commentForm").validate();
+    });
+</script>
 </html>

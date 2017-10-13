@@ -9,4 +9,7 @@ import java.util.List;
 @Mapper
 public interface SecondClassMapper {
     List<SecondClass> selectAllSecondClass(@Param("mcId") int mcId);
+
+
+    String selectScName(@Param("scId")Integer scId);
 }

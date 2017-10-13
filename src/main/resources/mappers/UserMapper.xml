@@ -2,12 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kf.mapper.UserMapper" >
 
+    <!--插入用户并返回id值 -->
     <insert id="addUser" parameterType="com.kf.pojo.User">
-        INSERT INTO USER (user_name,user_password) VALUES (#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR})
+        <selectKey keyProperty="userId" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user (user_name,user_password,user_email) VALUES (#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR},#{userEmail})
     </insert>
 
 
     <select id="selectUser" parameterType="com.kf.pojo.User" resultType="com.kf.pojo.User">
         SELECT * FROM user where user_name=#{userName} and user_password=#{userPassword}
     </select>
+
+    <update id="updateUserLastLoginTime">
+        UPDATE user SET lasted_time =#{time} WHERE user_id = #{userId}
+    </update>
+
+
+    <select id="selectUserInfoByUserId" resultType="com.kf.pojo.User">
+        SELECT * FROM user where user_id=#{userId}
+    </select>
+
+
+    <select id="selectUserCollectionByUserId" resultType="java.lang.Integer">
+      SELECT pi_id FROM collection WHERE user_id = #{userId}
+    </select>
+
+
+    <update id="updateUserPwd">
+        UPDATE user SET user_password=#{userPassword} WHERE user_id=#{userId}
+    </update>
+
+    <select id="selectUserByUserPhone" resultType="com.kf.pojo.User">
+        SELECT * from user WHERE user_phone=#{userPhone}
+    </select>
+
+    <select id="selectUserByUserEmail" resultType="com.kf.pojo.User">
+        SELECT * from user WHERE user_email=#{userEmail}
+    </select>
+
+    <update id="updateUserPhone">
+        UPDATE user SET user_phone=#{userPhone} where user_id=#{userId}
+    </update>
+
+
+    <update id="updateUserEmail">
+        UPDATE user SET user_email=#{userEmail} where user_id=#{userId}
+    </update>
 </mapper>
