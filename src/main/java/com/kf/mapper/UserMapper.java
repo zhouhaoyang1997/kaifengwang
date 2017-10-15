@@ -36,9 +36,15 @@ public interface UserMapper {
 
     void updateUserPwd(@Param("userId")Integer userId,@Param("userPassword")String userPassword);
 
+    //下面的两个方法是判断是否有除了该用户之外的该手机号
     Integer selectUserCountByUserPhone(@Param("userId")Integer userId,@Param("userPhone")String userPhone);
 
     Integer selectUserCountByUserEmail(@Param("userId")Integer userId,@Param("userEmail")String userEmail);
+
+    //下面的方式是全局判断
+    Integer selectUserByUserEmail(@Param("userEmail")String userEmail);
+
+    Integer selectUserByUserName(@Param("userName")String userName);
 
     void updateUserPhone(@Param("userId")Integer userId,@Param("userPhone") String userPhone);
 

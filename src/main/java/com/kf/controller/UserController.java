@@ -6,6 +6,7 @@ import com.kf.util.CommonUtil;
 import com.kf.util.CookieUtil;
 import com.kf.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,8 @@ import java.sql.Timestamp;
  * Created by 18236 on 2017/9/24.
  */
 @Controller
-public class UserController {
+public class UserController{
+
 
     @Autowired
     public UserService userService;
@@ -139,6 +141,22 @@ public class UserController {
         return modelAndView;
     }
 
+    @PostMapping("/unIsEx")
+    @ResponseBody
+    public String unIsEx(String userName){
+        if(CommonUtil.isNotNullAndNotEmpty(userName)&&userService.userNameIsNotExists(userName)){
+            return "true";
+        }
+        return "false";
+    }
 
+    @PostMapping("/ueIsEx")
+    @ResponseBody
+    public String ueIsEx(String userEmail){
+        if(CommonUtil.isNotNullAndNotEmpty(userEmail)&&userService.userEmailIsNotExists(userEmail)){
+            return "true";
+        }
+        return "false";
+    }
 
 }

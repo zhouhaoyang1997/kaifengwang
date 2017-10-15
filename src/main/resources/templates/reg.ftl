@@ -19,7 +19,7 @@
                     <div class="col-sm-offset-1 col-sm-10">
                         <div class="form-group">
                             <label for="name" class="sr-only">用户名</label>
-                            <input type="text" class="form-control" name="userName" id="name" minlength="2" maxlength="10" placeholder="用户名" >
+                            <input type="text" class="form-control" name="userName" id="name" minlength="4" maxlength="10" placeholder="用户名" >
                         </div>
                     <#if userDetail??>
                         <@spring.bind "userDetail.userName" />
@@ -73,7 +73,58 @@
         }
     });
     $().ready(function() {
-        $("#commentForm").validate();
+        jQuery.validator.addMethod("regex",
+                function(value, element, params) {
+                    var exp = new RegExp(params);
+                    return exp.test(value);
+                }, "格式错误");
+
+        $("#commentForm").validate({
+            rules:{
+                userName:{
+                    required:true,
+                    regex: /^[a-zA-Z0-9_-]{4,10}$/,
+                    remote:{
+                        type:'post',
+                        url:'/unIsEx',
+                        data:{
+                            userName:function () {
+                                return $("#name").val();
+                            }
+                        },
+                        dataFilter:function (data,type) {
+                            return data==="true";
+                        }
+                    }
+                },
+                userEmail:{
+                    required:true,
+
+                    remote:{
+                        type:'post',
+                        url:'/ueIsEx',
+                        data:{
+                            userEmail:function () {
+                                return $("#email").val();
+                            }
+                        },
+                        dataFilter:function (data,type) {
+                            return data==="true";
+                        }
+                    }
+                }
+            },
+            messages:{
+                userName:{
+                    remote:"用户名已被使用了",
+                    regex:'用户名不合法（字母开头，允许4-10字节，允许字母数字下划线)'
+                },
+                userEmail:{
+                    remote:"邮箱已经被使用了"
+
+                }
+            }
+        });
     });
 </script>
 </html>

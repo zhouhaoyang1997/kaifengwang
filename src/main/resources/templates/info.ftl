@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/info.css">
+
 </@header>
 <@headerArea>
 <li><a href="${base}/index">回首页</a></li>
@@ -40,9 +41,20 @@
                 <div class="col-md-4 push_base_static">
                     <span>发布时间:${info.piPushDate?string("yyyy-MM-dd")}</span> <span>浏览量:${info.piScan}</span>
                 </div>
-                <div class="col-md-5"></div>
-                <div class="col-md-3 push_base_static">
-                    <a href="/"><i class="fa fa-calendar"></i> 收藏</a>  <a href="#"> 举报</a>  <a href="#" style="color: #red;">置顶</a>
+                <div class="col-md-4"></div>
+                <div class="col-md-4 push_base_static">
+                    <span id="collect">
+                        <#if collected>
+                            <i class="fa fa-calendar"></i> 已收藏
+                        <#else>
+                            <a href="javascript:;" style="margin-right: 0;" id="collect_a"><i class="fa fa-calendar"></i> 收藏</a>
+                        </#if>
+                    </span>
+                <#if Session.user??>
+                    <a href="#tipInfo" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
+                <#else>
+                    <a href="#myModal" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
+                </#if>   <a href="${base}/about/service" style="color:red;"><i class="fa fa-level-up"></i>推广服务</a>
                 </div>
             </div>
             <div class="row push_base_title">
@@ -52,34 +64,39 @@
             </div>
             <div class="row push_base_data">
                 <div class="col-md-7">
-                    <div id="myCarousel" class="carousel slide">
+                    <div>
                         <!-- 轮播（Carousel）内容 -->
                         <div class="carousel-inner">
-                            <#if info.piImg??>
-                            <#list info.piImg?split("#") as piImg>
-                                <#if piImg_index==0>
-                                    <div class="item active">
-                                        <img src="${base}/${piImg}" class="img-thumbnail">
-                                    </div>
+
+                            <div class="imgnav" id="imgnav">
+                                <div id="img">
+                                <#if info.piImg??>
+                                    <#list info.piImg?split("#") as piImg>
+                                            <img src="${base}/${piImg}" class="img-thumbnail" width="100%" height="400"/>
+                                    </#list>
                                 <#else>
-                                    <div class="item">
-                                        <img src="${base}/${piImg}" class="img-thumbnail">
-                                    </div>
+                                    <img src="${base}/img/noimage.png" class="img-thumbnail" width="100%" height="400"/>
                                 </#if>
-                            </#list>
-                            <#else>
-                                <div class="item active">
-                                    <img src="${base}/img/noimage.png" class="img-thumbnail">
+                                    <div id="front" title="上一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
+                                    <div id="next" title="下一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
                                 </div>
-                            </#if>
+                                <div id="cbtn">
+                                    <i class="picSildeLeft"><img src="${base}/img/picSlideLeft.gif"/></i>
+                                    <i class="picSildeRight"><img src="${base}/img/picSlideRight.gif"/></i>
+                                    <div id="cSlideUl">
+                                        <ul>
+                                        <#if info.piImg??>
+                                            <#list info.piImg?split("#") as piImg>
+                                                <li><img src="${base}/${piImg}" class="img-thumbnail" /></li>
+                                            </#list>
+                                        <#else>
+                                            <li><img src="${base}/img/noimage.png" class="img-thumbnail" /></li>
+                                        </#if>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- 轮播（Carousel）导航 -->
-                        <a class="carousel-control left" href="#myCarousel"
-                           data-slide="prev">&lsaquo;
-                        </a>
-                        <a class="carousel-control right" href="#myCarousel"
-                           data-slide="next">&rsaquo;
-                        </a>
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -132,7 +149,134 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="container logo_login">
+                        <h1>开封<span>城市网</span></h1>
+                        <p >欢迎你的登陆</p>
+                    </div>
+                    <div class="container loginForm">
+                        <form action="${base}/login" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="userName" placeholder="用户名">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="userPassword" placeholder="密码">
+                            </div>
+                            <span style="color:red">${error!""}</span>
+                            <div class="form-group">
+                                <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
+                            </div>
+                            <div class="form-group">
+                                <p>没有账号? <a href="${base}/register">注册</a> | <a href="javascript:;">忘记密码?</a></p>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <div class="form-group" style="margin-top:20px">
+                                        <input type="submit" value="登录" style="width: 100px" class="btn btn-danger">
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <a href="#"><div class="qq_lg"></div><span>QQ登陆</span></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="tipInfo" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="container logo_login">
+                        <p >信息举报中心</p>
+                    </div>
+                    <div class="container loginForm">
+                        <form id="tipForm" action="${base}/tipInfo" method="post">
+                            <div class="form-group">
+                                <label for="">信息Id:</label>
+                                <input type="text" readonly class="form-control"  name="piId"  value="${info.piId}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">举报信息</label>
+                                <input type="text" disabled class="form-control" name="piTitle"  value="${info.piTitle}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">您的意见</label>
+                                <textarea class="form-control" required minlength="5" maxlength="240" name="tipContent"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <div class="form-group" style="margin-top:20px">
+                                        <input type="submit" value="确认举报" style="width: 100px" class="btn btn-danger">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 <@footer>
+<script src="${base}/js/silder.js" type="text/javascript"></script>
+<script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${base}/js/messages_zh.js"></script>
+<script>
+    $(function () {
+        $("#collect_a").click(function () {
+            $.ajax({
+                url:'${base}/collect?piId=${info.piId}',
+                type:'get',
+                success:function (result) {
+                    var res=result.split(":");
+                    if(res[0]==="ok"){
+                        $("#collect").html('<i class="fa fa-calendar"></i> 已收藏');
+                    }else{
+                        alert(res[1]);
+                    }
+                }
+            })
+        });
+
+        $("#tipForm").validate({
+            submitHandler:function (form) {
+                $.ajax({
+                    url:'${base}/tipInfo',
+                    type:'post',
+                    data:$("#tipForm").serialize(),
+                    success:function (result) {
+                        var res=result.split(":");
+                        //如果举报成功,关闭模态框,提示举报成功
+                        if(res[0]==="ok"){
+                            $("#tipInfo").modal('hide');
+                            alert(res[1]);
+                        }else{
+                            alert(res[1]);
+                        }
+                    }
+                })
+            }
+        });
+    });
+
+
+</script>
 
 </@footer>

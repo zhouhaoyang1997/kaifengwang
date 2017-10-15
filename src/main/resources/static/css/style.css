@@ -456,3 +456,15 @@ ol.slide-indicators li.active {
     height: 44px;
     background: url("../img/qq.png") no-repeat;
 }
+.footer_ul ul{
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+.footer_ul ul li a{
+    text-decoration: none;
+
+}
+.footer_ul ul li a:hover{
+    color: #ff552e;
+}

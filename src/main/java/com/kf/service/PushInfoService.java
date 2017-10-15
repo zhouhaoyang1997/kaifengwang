@@ -19,6 +19,10 @@ public class PushInfoService {
         return pushInfoMapper.selectAllJob(mcId,scId,districtId,tagValues,tagNum);
     }
 
+    public boolean getPushIsExists(Integer piId){
+        return pushInfoMapper.selectPushForPushExists(piId)!=null;
+    }
+
     public Integer addPushInfo(PushInfo pushInfo){
         pushInfoMapper.addPushInfo(pushInfo);
         return pushInfo.getPiId();
@@ -52,5 +56,14 @@ public class PushInfoService {
 
     public void updatePushInfoStatus(Integer piId,Integer userId,Integer status){
         pushInfoMapper.updatePushInfoStatus(piId,userId,status);
+    }
+
+
+    public void addCollection(Integer userId,Integer piId){
+        pushInfoMapper.addCollection(piId, userId);
+    }
+
+    public boolean collectionIsExists(Integer userId,Integer piId){
+        return pushInfoMapper.collectionIsExists(piId, userId)!=null;
     }
 }

@@ -83,6 +83,14 @@ public class UserService {
         return userMapper.selectUserCountByUserEmail(userId,userEmail)==0;
     }
 
+    public boolean userNameIsNotExists(String userName){
+        return userMapper.selectUserByUserName(userName)==0;
+    }
+
+    public boolean userEmailIsNotExists(String userEmail){
+        return userMapper.selectUserByUserEmail(userEmail)==0;
+    }
+
     /**
      * 修改手机号
      * @param userId

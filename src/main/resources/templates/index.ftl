@@ -60,7 +60,7 @@
                     <div class="megapanel">
                         <ul class="menu_ul">
                             <#list zhaopin as zp>
-                                <li><a href="#">${zp.scName}</a></li>
+                                <li><a href="${base}/list?mcId=1&scId=${zp.scId}">${zp.scName}</a></li>
                             </#list>
                         </ul>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="megapanel">
                         <ul class="menu_ul">
                         <#list ershou as es>
-                            <li><a href="#">${es.scName}</a></li>
+                            <li><a href="${base}/list?mcId=3&scId=${es.scId}">${es.scName}</a></li>
                             </#list>
                         </ul>
                     </div>
@@ -78,7 +78,7 @@
                     <div class="megapanel">
                         <ul class="menu_ul">
                         <#list fangchan as fc>
-                            <li><a href="#">${fc.scName}</a></li>
+                            <li><a href="${base}/list?mcId=2&scId=${fc.scId}">${fc.scName}</a></li>
                             </#list>
                         </ul>
                     </div>
@@ -87,7 +87,7 @@
                     <div class="megapanel">
                         <ul class="menu_ul">
                         <#list shenghuo as sh>
-                            <li><a href="#">${sh.scName}</a></li>
+                            <li><a href="${base}/list?mcId=4&scId=${sh.scId}">${sh.scName}</a></li>
                             </#list>
                         </ul>
                     </div>

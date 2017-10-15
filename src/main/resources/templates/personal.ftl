@@ -71,7 +71,7 @@
                                                                                   role="tab" data-toggle="tab">所有信息</a>
                                         </li>
                                         <li role="presentation"><a href="#deleteInfo" aria-controls="settings"
-                                                                   role="tab" data-toggle="tab">已删除的信息</a></li>
+                                                                   role="tab" data-toggle="tab">信息回收站</a></li>
                                     </ul>
 
                                     <!-- Tab panes -->
@@ -120,7 +120,21 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                您确认删除该条信息吗?
+                <input type="hidden" id="piIdHidden" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="removeBtn" class="btn btn-primary">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <@push_footer>

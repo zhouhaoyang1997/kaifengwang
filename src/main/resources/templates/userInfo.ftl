@@ -60,7 +60,12 @@
                                     <div class="profile-header">
                                         <div class="overlay"></div>
                                         <div class="profile-main">
-                                            <img src="${base}/${userInfo.userImg}" width="100px" height="100px" class="img-circle" alt="Avatar">
+                                            <#if userInfo.userImg??>
+                                                <img src="${base}/${userInfo.userImg}" width="100px" height="100px" class="img-circle" alt="Avatar">
+                                            <#else>
+                                                <img src="${base}/img/noimage.png" width="100px" height="100px" class="img-circle" alt="Avatar">
+                                            </#if>
+
                                             <h3 class="name">${userInfo.userName}</h3>
                                             <span>开封城市网欢迎你</span>
                                         </div>

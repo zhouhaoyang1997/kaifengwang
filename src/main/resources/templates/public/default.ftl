@@ -32,7 +32,7 @@
                         <#nested >
                         <#if Session.user??>
                         <li  class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">${user.userName}</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${user.userName}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="${base}/user/info">账户设置</a></li>
                                 <li><a href="${base}/user/personal">个人中心</a></li>
@@ -45,7 +45,7 @@
                         </li>
                         <#--该方法返回当前页面uri -->
                         <li>
-                            <a href="${base}/logout">注销</a>
+                            <a href="${base}/logout"><i class="fa fa-window-close"></i> 注销</a>
                         </li>
                         <#else>
                             <li><a href="${base}/login">登录</a></li>
@@ -69,33 +69,29 @@
                     <h1><a href="/index">开封<span>城市网</span></a></h1>
                 </div>
             </div>
-            <div class="col-xs-2">
-                <div style="list-style: none">
-                    <h4>关于我们</h4>
-                    <li><p>本站公告</p></li>
-                    <li><p>加盟与合作</p></li>
-                    <li><p>网站地图</p></li>
-
-                </div>
+            <div class="col-xs-2 footer_ul">
+                <ul>
+                    <li><h4>关于我们</h4></li>
+                    <li><p><a href="${base}/about/cpdesc">公司介绍</a></p></li>
+                    <li><p><a href="${base}/about/contact">联系方式</a></p></li>
+                    <li><p><a href="${base}/about/friend">友情链接</a></p></li>
+                </ul>
             </div>
 
-            <div class="col-xs-2">
-                <div style="list-style: none">
-                    <h4>服务支持</h4>
-                    <li><p>推广服务</p></li>
-                    <li><p>渠道招商</p></li>
-                    <li><p>举报平台</p></li>
-
-                </div>
+            <div class="col-xs-2 footer_ul">
+                <ul>
+                    <li><h4>服务支持</h4></li>
+                    <li><p><a href="${base}/about/service">推广服务</a></p></li>
+                    <li><p><a href="${base}/about/charge">收费标准</a></p></li>
+                    <li><p><a href="${base}/about/attc">企业认证</a></p></li>
+                </ul>
             </div>
-            <div class="col-xs-2">
-                <div style="list-style: none">
-                    <h4>帮助中心</h4>
-                    <li><p>常见问题</p></li>
-                    <li><p>更多帮助</p></li>
-                    <li><p>意见反馈</p></li>
-                    <li><p>隐私权条款</p></li>
-                </div>
+            <div class="col-xs-2 footer_ul">
+                <ul>
+                    <li><h4>帮助中心</h4></li>
+                    <li><p><a href="${base}/about/help">使用帮助</a></p></li>
+                    <li><p><a href="${base}/about/law">隐私权条款</a></p></li>
+                </ul>
             </div>
             <div class="col-xs-3">
                 <div style="list-style: none">
@@ -104,8 +100,7 @@
             </div>
         </div>
         <div class="row">
-            <p style="text-align: center">Copyright © 河南开封 ｜xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx所有</p>
-            <p style="text-align: center">河南大学网站工作室</p>
+            <p style="text-align: center">Copyright © 河南开封 ｜河南省麦芒网络科技有限公司所有</p>
         </div>
     </div>
 </div>

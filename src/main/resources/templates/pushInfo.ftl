@@ -18,7 +18,7 @@
             <div class="col-xs-4"><span>3 发布成功</span></div>
         </div>
         <div class="row" style="margin-top: 30px;">
-            <form action="/push/info" method="post" enctype="multipart/form-data">
+            <form action="/push/info" method="post" id="pushForm" enctype="multipart/form-data">
                 <#if Session.user??>
                     <input type="hidden" name="userId" value="${user.userId!""}">
                 </#if>
@@ -27,7 +27,7 @@
                 <div class="form-group row">
                     <div class="col-xs-8">
                     <label><span style="color:red">*</span>信息标题:</label>
-                    <input type="text" name="piTitle" class="form-control" placeholder="请输入信息标题2-100字符">
+                        <input type="text" name="piTitle" class="form-control" placeholder="请输入信息标题" maxlength="100" minlength="3">
                     </div>
                     <div class="col-sx-4">
                     <#if pushError??>
@@ -77,10 +77,8 @@
                         <input type="text" name="pic${pic.picId}" class="form-control">
                     </div>
                     <div class="col-xs-5"></div>
-
                 </div>
             </#list>
-
                 <label><span style="color:red">*</span>内容:</label>
             <div class="form-group row">
                 <div class="col-xs-8">
@@ -93,8 +91,6 @@
                     </#if>
                 </div>
             </div>
-
-
                 <div class="form-group row">
                     <div class="col-xs-12">
                         <div class="row">
@@ -180,17 +176,13 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
-
                 <div class="form-group row">
                     <div class="col-xs-2">
                         <label><span style="color:red">*</span>联系人:</label>
                     </div>
                     <div class="col-xs-5">
-                        <input type="text" name="piContactPerson" class="form-control">
+                        <input type="text" name="piContactPerson" minlength="2" maxlength="5" class="form-control">
                     </div>
                     <div class="col-xs-5">
                     <#if pushError??>
@@ -198,14 +190,13 @@
                     <@spring.showErrors "<br>"/>
                     </#if>
                     </div>
-
                 </div>
                 <div class="form-group row">
                     <div class="col-xs-2">
                         <label><span style="color:red">*</span>联系电话:</label>
                     </div>
                     <div class="col-xs-5">
-                        <input type="text" name="piPhone" class="form-control">
+                        <input type="text" name="piPhone" maxlength="11" minlength="11" class="form-control">
                     </div>
                     <div class="col-xs-5">
                     <#if pushError??>
@@ -213,15 +204,13 @@
                     <@spring.showErrors "<br>"/>
                     </#if>
                     </div>
-
                 </div>
-
                 <div class="form-group row">
                     <div class="col-xs-2">
                         <label><span style="color:red">*</span>详细地址:</label>
                     </div>
                     <div class="col-xs-5">
-                        <input type="text" name="piAddress" class="form-control">
+                        <input type="text" name="piAddress" minlength="2" maxlength="150" class="form-control">
                     </div>
                     <div class="col-xs-5">
                     <#if pushError??>
@@ -229,9 +218,7 @@
                     <@spring.showErrors "<br>"/>
                     </#if>
                     </div>
-
                 </div>
-
                 <div class="form-group row">
                     <div class="col-xs-2">
                         <label>QQ:</label>
@@ -242,7 +229,6 @@
                     <div class="col-xs-5"></div>
                 </div>
                 <div class="form-group">
-
                     <button type="submit" class="btn btn-info">确认提交</button>
                 </div>
 
@@ -251,11 +237,13 @@
     </div>
 </div>
 <@push_footer>
-<script type="text/javascript" src="${request.contextPath}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${request.contextPath}/js/fileupload.js"></script>
-<script type="text/javascript" src="${request.contextPath}/js/kindeditor-min.js"></script>
-<script type="text/javascript" src="${request.contextPath}/js/zh-CN.js"></script>
+<script type="text/javascript" src="${base}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${base}/js/fileupload.js"></script>
+<script type="text/javascript" src="${base}/js/kindeditor-min.js"></script>
+<script type="text/javascript" src="${base}/js/zh-CN.js"></script>
+<script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${base}/js/messages_zh.js"></script>
 <script type="text/javascript">
     var editor;
     KindEditor.ready(function(K) {
@@ -266,8 +254,43 @@
             items : [
                 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
                 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-                'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+                'insertunorderedlist' ]
         });
     });
+
+    $(function () {
+        jQuery.validator.addMethod("regex",
+                function(value, element, params) {
+                    var exp = new RegExp(params);
+                    return exp.test(value);
+                }, "格式错误");
+        $("#pushForm").validate({
+            rules:{
+                piTitle:{
+                    required:true,
+                    regex:/^[a-zA-Z0-9\u4e00-\u9fa5]+$/
+                },
+                piContactPerson:{
+                    required:true,
+                    regex:/^[\u4e00-\u9fa5]+$/
+                },
+                piPhone:{
+                    required:true,
+                    regex:/^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\d{8}$/
+                }
+            },
+            messages:{
+                piTitle:{
+                    regex:'标题仅可以使用数字,中文,英文'
+                },
+                piContactPerson:{
+                    regex:'请输入合适的联系人,如王女士'
+                },
+                piPhone:{
+                    regex:'请输入合法的手机号'
+                }
+            }
+        })
+    })
 </script>
 </@push_footer>

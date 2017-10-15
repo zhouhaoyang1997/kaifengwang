@@ -60,3 +60,41 @@
     height:120px;
     margin-left:28px;
 }
+
+ul, ol{list-style: none;
+    padding:0;}
+li{margin:0;
+    padding:0;}
+.cbody988{ margin:0 auto;width:988px; position:relative;}
+.cbody937{ margin:0 auto;width:937px; position:relative; padding-left:7px;}
+input,select,textarea,img{vertical-align:middle;}
+img{ border:0;}
+ul,li{list-style-type:none;}
+a:link,a:visited{text-decoration:none; color:#343434;}
+a:hover{text-decoration:underline; color:#0F6BD0;}
+.overhide{overflow:hidden;text-indent:-100em;}
+/*位置属性*/
+.marTop10{margin-top:10px;}
+.left{	float:left;}
+.right{	float:right;}
+.clear {clear: both;}
+.clearfix:after {clear: both;content: '';display: block;font-size: 0;line-height: 0;visibility: hidden;width: 0;height: 0;}
+.clearfix {display: inline-block;}
+
+.imgnav{ width:100%; margin:10px auto;position:relative;}
+#content{margin:0px auto;  line-height:19px;}
+#content p{ text-indent:2em; color:#333;}
+
+#img{ z-index:10; width:100%; position:relative; text-align:center;}
+#img img{ height:380px; display:none; border:4px solid #000;}
+#cbtn{background:#EAEBF0; position:relative; height:122px; border:1px solid #D6D9DC; margin-top:12px; }
+#cbtn ul{position:relative; width:10000px; height:122px;}
+#cbtn ul li{ float:left; padding:8px 3px 3px 3px; width:116px; height:86px; cursor:pointer; text-align:center; margin-right:20px; position:relative;}
+#cbtn ul li img{ width:116px; height:86px; display:block;}
+#cbtn ul li tt{ background:#000; color:#FFF; position:absolute; right:4px; bottom:4px; z-index:20; font-family:"宋体" ;font-size:12px; line-height:16px; padding:0 5px;}
+
+.ctrl div{ clear:both;}
+#cSlideUl{width:400px; height:116px;overflow:hidden; position:relative; top:10px; margin:0 auto;}
+.picSildeLeft{cursor:pointer; position:absolute; top:32px; left:10px; z-index:9;}
+.picSildeRight{cursor:pointer; position:absolute; top:32px; right:10px; z-index:9;}
+

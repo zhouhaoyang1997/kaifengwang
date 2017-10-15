@@ -114,4 +114,19 @@
     <update id="updatePushInfoStatus">
         UPDATE push_info SET status=#{status} WHERE pi_id=#{piId} and pi_user=#{userId}
     </update>
+
+    <select id="selectPushForPushExists" resultType="java.lang.Integer">
+        SELECT pi_id from push_info WHERE pi_id=#{piId}
+    </select>
+
+
+    <insert id="addCollection">
+        insert INTO collection(user_id,pi_id) values(#{userId},#{piId})
+    </insert>
+
+    <select id="collectionIsExists" resultType="java.lang.Integer">
+        SELECT user_id from collection where pi_id=#{piId} and user_id=#{userId}
+    </select>
+
+
 </mapper>

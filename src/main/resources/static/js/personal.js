@@ -93,7 +93,7 @@ $('#table').bootstrapTable({
         title:'操作',
         formatter:function (value,row,index) {
             var s = '<a class = "save" href="javascript:void(0)">修改</a>';
-            var d = '<a class = "remove" href="javascript:void(0)">删除</a>';
+            var d = '<a id="remove" data-toggle="modal" href="javascript:void(0)" onclick="removeModal('+row.piId+')">删除</a>';
             return s+' '+d;
         }
     }]
@@ -140,3 +140,32 @@ $('#deleteTable').bootstrapTable({
         }
     }]
 });
+
+
+$("#removeBtn").click(function () {
+    $.ajax({
+        url:'/user/deleteInfo?piId='+$("#piIdHidden").val(),
+        type:'get',
+        success:function (result) {
+            var res=result.split(":");
+            if(res[0]==="ok"){
+                //刷新bootstrap-table
+                $("#table").bootstrapTable("refresh",{
+                    url:'/user/allPush'
+                });
+                $("#deleteTable").bootstrapTable("refresh",{
+                    url:'/user/deletePush'
+                });
+                $("#deleteModal").modal("hide");
+            }else{
+                $("#deleteModal").modal("hide");
+                alert(res[1]);
+            }
+        }
+    })
+});
+
+function removeModal(piId) {
+    $("#piIdHidden").val(piId);
+    $("#deleteModal").modal("show");
+}

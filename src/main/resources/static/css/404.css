@@ -2,7 +2,7 @@
     50%{transform: translateX(-25%) translateZ(0) scaleY(0.55)}
     100%{transform: translateX(-50%) translateZ(0) scaleY(1)}}
 .waveWrapper{overflow: hidden;position: absolute;left: 0;right: 0;bottom: 0;top: 0;margin: auto;}
-.waveWrapperInner{position: absolute;width: 100%;overflow: hidden;height: 100%;bottom: -1px;background-image: url(../img/404/404bg.svg);background-repeat: no-repeat;background-size:100%;}
+.waveWrapperInner{position: absolute;width: 100%;overflow: hidden;height: 100%;bottom: -1px;background-image: url(/img/404/404bg.svg);background-repeat: no-repeat;background-size:100%;}
 .bgTop{z-index: 15;opacity: 0.5;}
 .bgMiddle{z-index: 10;opacity: 0.75;}
 .bgBottom{z-index: 5;}
