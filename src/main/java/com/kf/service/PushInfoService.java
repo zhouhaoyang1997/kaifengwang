@@ -66,4 +66,8 @@ public class PushInfoService {
     public boolean collectionIsExists(Integer userId,Integer piId){
         return pushInfoMapper.collectionIsExists(piId, userId)!=null;
     }
+
+    public PushInfo getInfoByPiIdAndUserId(Integer userId,Integer piId){
+        return pushInfoMapper.selectInfoByPiIdAndUserId(piId,userId);
+    }
 }

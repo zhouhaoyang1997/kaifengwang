@@ -1,6 +1,8 @@
 package com.kf.controller;
 
 import com.kf.pojo.BaseInfo;
+import com.kf.pojo.PushInfo;
+import com.kf.service.DistrictService;
 import com.kf.service.PushInfoService;
 import com.kf.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class PersonalController {
     @Autowired
     private PushInfoService pushInfoService;
 
+    @Autowired
+    private DistrictService districtService;
 
     @GetMapping("/user/personal")
     public ModelAndView personal(){
@@ -77,6 +81,25 @@ public class PersonalController {
             return "ok:已恢复";
         }else{
             return "no:不合法的请求";
+        }
+    }
+
+    @GetMapping("/user/alterInfo")
+    public ModelAndView alterInfo(Integer piId,HttpServletRequest request){
+        Integer userId = SessionUtil.getUserId(request);
+        ModelAndView modelAndView = null;
+        if(userId!=null&&piId!=null){
+            //使用userID和piId查询信息
+
+            PushInfo pushInfo = pushInfoService.getInfoByPiIdAndUserId(userId,piId);
+
+            modelAndView = new ModelAndView("alterInfo");
+            modelAndView.addObject("pushInfo",pushInfo);
+            return modelAndView;
+        }else{
+            //出错,跳转首页
+            modelAndView = new ModelAndView("redirect:/index");
+            return modelAndView;
         }
     }
 }

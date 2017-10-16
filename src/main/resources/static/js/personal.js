@@ -92,7 +92,7 @@ $('#table').bootstrapTable({
         field:'option',
         title:'操作',
         formatter:function (value,row,index) {
-            var s = '<a class = "save" href="javascript:void(0)">修改</a>';
+            var s = '<a href="${base}/user/alterInfo?piId='+row.piId+'">修改</a>';
             var d = '<a id="remove" data-toggle="modal" href="javascript:void(0)" onclick="removeModal('+row.piId+')">删除</a>';
             return s+' '+d;
         }

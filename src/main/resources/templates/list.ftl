@@ -205,7 +205,7 @@ ${base}/list?mcId=${currMc.mcId}<#nested ><#if currTags??><#list currTags as tag
                                 <#list pushInfos as pushInfo>
                                     <div class="row hover_info">
                                         <div class="col-xs-5 padding-top1">
-                                            <div class="info_title"><a href="${base}/info/?piId=${pushInfo.piId}">${pushInfo.piTitle}</a></div>
+                                            <div class="info_title"><a href="${base}/info?piId=${pushInfo.piId}">${pushInfo.piTitle}</a></div>
                                             <#list pushInfo.tagValues as tagValue>
                                             <#if tagValue.tagName=='月薪'>
                                                 <span class="label label-danger">${tagValue.tcName}&nbsp;元/月</span>
