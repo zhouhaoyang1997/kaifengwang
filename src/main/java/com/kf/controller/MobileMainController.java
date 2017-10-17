@@ -1,9 +1,6 @@
 package com.kf.controller;
 
-import com.kf.pojo.District;
-import com.kf.pojo.PushInfo;
-import com.kf.pojo.SecondClass;
-import com.kf.pojo.Tag;
+import com.kf.pojo.*;
 import com.kf.service.*;
 import com.kf.vo.CurrMain;
 import com.kf.vo.TagValue;
@@ -39,12 +36,27 @@ public class MobileMainController {
     @Autowired
     private PushInfoService pushInfoService;
 
+    @Autowired
+    private PushInfoClassService pushInfoClassService;
+
     @GetMapping("/index")
     public ModelAndView phoneIndex(){
         ModelAndView modelAndView = new ModelAndView("phone/index");
 
         return modelAndView;
     }
+    @GetMapping("/push")
+    public ModelAndView push(String mcId,String scId){
+        ModelAndView modelAndView = new ModelAndView("phone/pushTable");
+            List<District> districts = districtService.getAllDistrict();
+            List<Tag> tags = tagService.getAllTag(Integer.valueOf(mcId));
+            List<PushInfoClass> pushInfoClasses = pushInfoClassService.getAllPush(Integer.valueOf(mcId));
+            modelAndView.addObject("districts",districts);
+            modelAndView.addObject("tags",tags);
+            modelAndView.addObject("pushInfoClasses",pushInfoClasses);
+        return modelAndView;
+    }
+
 
     @RequestMapping("/infolist")
     public ModelAndView quanzhizhaopin(Integer mcId, @RequestParam(required = false) Integer scId,@RequestParam(required = false) Integer districtId,
@@ -103,9 +115,14 @@ public class MobileMainController {
         return new ModelAndView("phone/infomation");
     }
 
-    @GetMapping("/menulist")
-    public ModelAndView menulist() {
-        ModelAndView modelAndView = new ModelAndView("phone/menulist");
+    @RequestMapping("/menulist")
+    public ModelAndView menulist(String methon) {
+        ModelAndView modelAndView = null;
+        if( "view".equals(methon))
+        { modelAndView = new ModelAndView("phone/menulist");}
+        if( "push".equals(methon))
+        {  modelAndView = new ModelAndView("phone/push");}
+
         List<SecondClass> zhaopin = secondClassService.getAllSecondClass(1);
         List<SecondClass> fangchan = secondClassService.getAllSecondClass(2);
         List<SecondClass> ershou = secondClassService.getAllSecondClass(3);
