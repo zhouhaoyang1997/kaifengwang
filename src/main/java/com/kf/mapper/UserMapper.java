@@ -36,11 +36,28 @@ public interface UserMapper {
 
     void updateUserPwd(@Param("userId")Integer userId,@Param("userPassword")String userPassword);
 
-    User selectUserByUserPhone(@Param("userPhone")String userPhone);
+    //下面的两个方法是判断是否有除了该用户之外的该手机号
+    Integer selectUserCountByUserPhone(@Param("userId")Integer userId,@Param("userPhone")String userPhone);
 
-    User selectUserByUserEmail(@Param("userEmail")String userEmail);
+    Integer selectUserCountByUserEmail(@Param("userId")Integer userId,@Param("userEmail")String userEmail);
+
+    //下面的方式是全局判断
+    Integer selectUserByUserEmail(@Param("userEmail")String userEmail);
+
+    Integer selectUserByUserName(@Param("userName")String userName);
 
     void updateUserPhone(@Param("userId")Integer userId,@Param("userPhone") String userPhone);
 
     void updateUserEmail(@Param("userId")Integer userId,@Param("userEmail") String userEmail);
+
+    void updateUserProfileInfo(@Param("userDescription")String userDescription,@Param("userId")Integer userId);
+
+    void updateUserImg(@Param("userId")Integer userId,@Param("userImg")String userImg);
+
+    /**
+     * 修改当前用户公司认证状态
+     * @param userId
+     * @param userAttc
+     */
+    void updateUserAttc(@Param("userId")Integer userId,@Param("userAttc")Integer userAttc);
 }

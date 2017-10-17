@@ -11,7 +11,27 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "path")
 public class BasePath {
 
-    public String pathValue;
+    private String pathValue;
+
+    private String headImgPath;
+
+    private String companyImgPath;
+
+    public String getCompanyImgPath() {
+        return companyImgPath;
+    }
+
+    public void setCompanyImgPath(String companyImgPath) {
+        this.companyImgPath = companyImgPath;
+    }
+
+    public String getHeadImgPath() {
+        return headImgPath;
+    }
+
+    public void setHeadImgPath(String headImgPath) {
+        this.headImgPath = headImgPath;
+    }
 
     public String getPathValue() {
         return pathValue;

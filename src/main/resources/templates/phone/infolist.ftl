@@ -1,3 +1,7 @@
+<#assign base="${request.contextPath}"/>
+<#macro url>
+${base}/m/infolist?mcId=${currMc.mcId}<#nested ><#if currTags??><#list currTags as tagStr>&tagId=${tagStr.tagId}-${tagStr.tcId}</#list></#if>
+</#macro>
 <!DOCTYPE html>
 <html lang="zh-CN" class="index_page">
 <head>
@@ -40,9 +44,6 @@
     <div class="filter2" id="filter2">
 
         <ul class="tab cfix">
-            <#--<input type="hidden" name="scId" value="${currScId}！“”">-->
-            <#--<input type="hidden" name="mcId" value="${currMcId}！“”">-->
-            <#--<input type="hidden" name="currTags" value="${tagValues}">-->
             <li class="item"><a href="javascript:void(0);"><span id="str_a_node">分类</span><em></em></a></li>
             <li class="item"><a href="javascript:void(0);"><span id="str_b_node">区域</span><em></em></a></li>
         <#list tags as tag>
@@ -53,9 +54,9 @@
 
         <div class="inner" style="display:none;">
             <ul>
-                <a class="selected" href="${request.contextPath}/m/infolist?mcId=${currMcId}&districtId=${currDistrictId!""}<#if currTags??&&(currTags?size>0)>&tagId=<#list currTags as ct>${ct.tagId}-${ct.tcId}--</#list></#if>">不限</a></li>
-            <#list secondClassList as sc>
-                <a class=""  href="${request.contextPath}/m/infolist?mcId=${currMcId}&districtId=${currDistrictId!""}&scId=${sc.scId}<#if currTags??&&(currTags?size>0)>&tagId=<#list currTags as ct>${ct.tagId}-${ct.tcId}--</#list></#if>">${sc.scName}</a>
+                <a class="selected" href="<@url><#if currDistrictId??>&districtId=${currDistrictId}</#if></@url>">不限</a></li>
+            <#list secondClass as sc>
+                <a class=""  href="<@url>&scId=${sc.scId}<#if currDistrictId??>&districtId=${currDistrictId}</#if></@url>">${sc.scName}</a>
             </#list>
             </ul>
 
@@ -63,19 +64,19 @@
 
         <div class="inner" style="display:none;">
             <ul>
-                <li><a  class='selected' href="${request.contextPath}/m/infolist?mcId=${currMcId}&scId=${currScId!""}<#if currTags??&&(currTags?size>0)>&tagId=<#list currTags as ct>${ct.tagId}-${ct.tcId}--</#list></#if>">不限</a></li>
-            <#list districts as d>
-                <li><a  href="${request.contextPath}/m/infolist?mcId=${currMcId}&scId=${currScId!""}&districtId=${d.districtId}<#if currTags??&&(currTags?size>0)>&tagId=<#list currTags as ct>${ct.tagId}-${ct.tcId}--</#list></#if>">${d.districtName}</a></li>
+                <li><a  class='selected' href="<@url><#if currScId??>&scId=${currScId}</#if></@url>">不限</a></li>
+            <#list districts as ds>
+                <li><a  href="<@url><#if currScId??>&scId=${currScId}</#if>&districtId=${ds.districtId}</@url>">${ds.districtName}</a></li>
             </#list>
             </ul>
         </div>
 
-    <#list tags as tag>
+    <#list tags as tg>
         <div class="inner" style="display:none;">
             <ul>
-                <a class="selected" href="${request.contextPath}/m/infolist?mcId=${currMcId}&districtId=${currDistrictId!""}&scId=${currScId!""}&tagId=<#list currTags as ct><#if ct.tagId!=tag.tagId>${ct.tagId}-${ct.tcId}--</#if></#list>">不限</a>
-                <#list tag.tagContents as tagContent>
-                    <a class="" href="${request.contextPath}/m/infolist?mcId=${currMcId}&districtId=${currDistrictId!""}&scId=${currScId!""}&tagId=${tag.tagId}-${tagContent.tcId}<#list currTags as ct><#if ct.tagId!=tag.tagId>--${ct.tagId}-${ct.tcId}</#if></#list>">${tagContent.tcName}</a>
+                <a class="selected" href="<@url><#if currScId??>&scId=${currScId}</#if><#if currDistrictId??>&districtId=${currDistrictId}</#if>&tagId=${tg.tagId}-0</@url>">不限</a>
+                <#list tg.tagContents as tagContent>
+                    <a class="" href="<@url><#if currScId??>&scId=${currScId}</#if><#if currDistrictId??>&districtId=${currDistrictId}</#if>&tagId=${tg.tagId}-${tagContent.tcId}</@url>">${tagContent.tcName}</a>
                 </#list>
             </ul>
         </div>

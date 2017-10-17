@@ -1,0 +1,44 @@
+.mainmenu-about{
+    background: none repeat scroll 0 0 #ff552e;
+    font-family: "Roboto Condensed",sans-serif;
+    text-transform: uppercase;
+    width: 100%;
+    z-index: 999;
+}
+
+.mainmenu-about ul.navbar-nav li a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 20px;
+}
+.mainmenu-about ul.navbar-nav li :hover {
+    background: #ff552e;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 20px;
+}
+.mainmenu-about .active{
+    border-bottom:3px solid #0E8ED8;
+}
+
+
+.container_self .panel{
+    margin-top:20px;
+}
+.table-title{
+    margin:0;
+}
+.left_menu{
+    margin-bottom:0;
+    padding:0;width:100%; list-style:none;
+    display:inline-block;
+    position:relative;
+    font-family: "HelveticaNeue", "Helvetica Neue",Helvetica, Arial, sans-serif;
+    font-size:15px;
+}
+.left_menu li{
+    margin-top:10px;
+    padding-bottom:10px;
+    border-bottom:1px solid #e8e8e8;
+}

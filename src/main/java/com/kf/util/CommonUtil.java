@@ -31,4 +31,17 @@ public class CommonUtil {
         return m.matches();
     }
 
+    public static boolean isEmail(String email){
+        if(email==null){
+            return false;
+        }
+        String RULE_EMAIL = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$";
+        //正则表达式的模式
+        Pattern p = Pattern.compile(RULE_EMAIL);
+        //正则表达式的匹配器
+        Matcher m = p.matcher(email);
+        //进行正则匹配
+        return m.matches();
+    }
 }
+

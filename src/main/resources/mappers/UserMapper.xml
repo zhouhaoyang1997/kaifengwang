@@ -7,7 +7,7 @@
         <selectKey keyProperty="userId" resultType="java.lang.Integer">
             select LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO user (user_name,user_password,user_email) VALUES (#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR},#{userEmail})
+        INSERT INTO user (user_name,user_password,user_email,create_time,lasted_time) VALUES (#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR},#{userEmail},#{createTime},#{lastedTime})
     </insert>
 
 
@@ -30,16 +30,24 @@
     </select>
 
 
+    <select id="selectUserByUserEmail" resultType="java.lang.Integer">
+        SELECT count(user_id) from user WHERE user_email=#{userEmail}
+    </select>
+
     <update id="updateUserPwd">
         UPDATE user SET user_password=#{userPassword} WHERE user_id=#{userId}
     </update>
 
-    <select id="selectUserByUserPhone" resultType="com.kf.pojo.User">
-        SELECT * from user WHERE user_phone=#{userPhone}
+    <select id="selectUserCountByUserPhone" resultType="java.lang.Integer">
+        SELECT count(user_id) from user WHERE user_phone=#{userPhone} and user_id!=#{userId}
     </select>
 
-    <select id="selectUserByUserEmail" resultType="com.kf.pojo.User">
-        SELECT * from user WHERE user_email=#{userEmail}
+    <select id="selectUserCountByUserEmail" resultType="java.lang.Integer">
+        SELECT count(user_id) from user WHERE user_email=#{userEmail} and user_id!=#{userId}
+    </select>
+
+    <select id="selectUserByUserName" resultType="java.lang.Integer">
+        SELECT count(user_id) from user where user_name=#{userName}
     </select>
 
     <update id="updateUserPhone">
@@ -49,5 +57,17 @@
 
     <update id="updateUserEmail">
         UPDATE user SET user_email=#{userEmail} where user_id=#{userId}
+    </update>
+
+    <update id="updateUserProfileInfo">
+        UPDATE user SET user_description=#{userDescription} where user_id=#{userId}
+    </update>
+
+    <update id="updateUserImg">
+        UPDATE user SET user_img=#{userImg} where user_id=#{userId}
+    </update>
+
+    <update id="updateUserAttc">
+        UPDATE user SET user_attc=#{userAttc} where user_id=#{userId}
     </update>
 </mapper>

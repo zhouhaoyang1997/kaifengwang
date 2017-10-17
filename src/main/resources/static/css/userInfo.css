@@ -201,3 +201,6 @@ ul.list-justify > li span {
     padding: 20px;
     position: relative;
 }
+.personal_tab a{
+    color: #428bca;
+}

@@ -7,16 +7,7 @@
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/userInfo.css">
 <link rel="stylesheet" href="${base}/css/fileupload.css">
-<script type="text/javascript" src="${base}/js/jquery.min.js"></script>
-<script type="text/javascript">
-    function alterClick(value) {
-        $("#"+value).removeAttr("disabled");
-        $("#alter"+value+"Btn").css("display","none");
-        $("#enter"+value+"Btn").css("display","block");
-    }
 
-
-</script>
 </@header>
 <@headerArea>
 <li><a href="${base}/index">回首页</a></li>
@@ -69,7 +60,12 @@
                                     <div class="profile-header">
                                         <div class="overlay"></div>
                                         <div class="profile-main">
-                                            <img src="${base}/img/user-medium.png" class="img-circle" alt="Avatar">
+                                            <#if userInfo.userImg??>
+                                                <img src="${base}/${userInfo.userImg}" width="100px" height="100px" class="img-circle" alt="Avatar">
+                                            <#else>
+                                                <img src="${base}/img/noimage.png" width="100px" height="100px" class="img-circle" alt="Avatar">
+                                            </#if>
+
                                             <h3 class="name">${userInfo.userName}</h3>
                                             <span>开封城市网欢迎你</span>
                                         </div>
@@ -114,8 +110,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                     <div role="tabpanel"  class="tab-pane" id="profile">
                         <div class="panel panel-default">
@@ -169,12 +163,12 @@
                                             <input type="text" class="form-control" id="Phone" disabled value="${userInfo.userPhone!""}" minlength="11" maxlength="11">
                                         </div>
                                         <div class="col-sm-1">
-                                            <button type="button" class="btn btn-primary" onclick="alterClick('Phone')" id="alterPhoneBtn">修改</button>
+                                            <button type="button" class="btn btn-primary" id="alterPhoneBtn">修改</button>
                                             <button type="button" class="btn btn-success" id="enterPhoneBtn" style="display: none;">确认</button>
 
                                         </div>
                                         <div class="col-sm-3">
-                                            <span id="phoneError"></span>
+                                            <span id="PhoneError"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -183,19 +177,25 @@
                                             <input type="email" class="form-control" id="Email" disabled value="${userInfo.userEmail!""}" name="email" >
                                         </div>
                                         <div class="col-sm-1">
-                                            <button type="button" class="btn btn-primary" onclick="alterClick('Email')" id="alterEmailBtn">修改</button>
+                                            <button type="button" class="btn btn-primary"  id="alterEmailBtn">修改</button>
                                             <button type="button" class="btn btn-success" id="enterEmailBtn" style="display: none;">确认</button>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <span id="EmailError"></span>
                                         </div>
 
                                     </div>
                                     <div class="form-group">
                                         <label for="ProfileInfo" class="col-sm-2">个人简介</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="ProfileInfo" minlength="2" maxlength="100" name="profileInfo" >
+                                            <input type="text" class="form-control" id="ProfileInfo" disabled value="${userInfo.userDescription!""}" minlength="2" maxlength="100" name="profileInfo" >
                                         </div>
-                                        <div class="col-sm-2">
-                                            <button type="button" class="btn btn-primary" onclick="alterClick('ProfileInfo')" id="alterProfileInfoBtn">修改</button>
+                                        <div class="col-sm-1">
+                                            <button type="button" class="btn btn-primary" id="alterProfileInfoBtn">修改</button>
                                             <button type="button" class="btn btn-success" id="enterProfileInfoBtn" style="display: none;">确认</button>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <span id="ProfileInfoError"></span>
                                         </div>
                                     </div>
                                 </form>
@@ -207,11 +207,17 @@
                         <div class="panel panel-default">
                             <div class="panel-heading"><h3>修改头像</h3></div>
                             <div class="panel-body">
-                                <form class="form-horizontal" role="form">
+                                <form class="form-horizontal" enctype="multipart/form-data" action="${base}/user/alterHead" method="post" role="form">
                                     <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
                                         <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
-                                            <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
-                                                 src="${base}/img/noimage.png" alt=""/>
+                                            <#if userInfo.userImg??>
+                                                <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
+                                                     src="${base}/${userInfo.userImg}"/>
+                                                <#else>
+                                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
+                                                         src="${base}/img/noImage.png"/>
+                                            </#if>
+
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"
                                              style="max-width: 200px; max-height: 150px;"></div>
@@ -219,7 +225,7 @@
                         <span class="btn btn-primary btn-file">
                             <span class="fileinput-new">选择文件</span>
                             <span class="fileinput-exists">换一张</span>
-                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                            <input type="file" name="file" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
                         </span>
                                             <a href="javascript:;" class="btn btn-warning fileinput-exists"
                                                data-dismiss="fileinput">移除</a>
@@ -245,7 +251,7 @@
 
 
 <@push_footer>
-
+<script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/js/fileupload.js"></script>
 <script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
@@ -263,21 +269,33 @@
         $("#alterInfo").validate();
 
 
-        $("#enterPhoneBtn").click(function () {
-            $.ajax({
-                type:'get',
-                url:'${base}/user/alterPhone?userPhone='+$("#Phone").val(),
-                success:function (result) {
-                    var res = result.split(":");
-                    if(res[0]==="ok"){
-                        alert("修改手机号成功");
-                    }else{
-                        $("#phoneError").html(res[1]);
-                    }
-                }
-            })
-        });
+        var item = "Phone,Email,ProfileInfo".split(",");
+        item.forEach(function (p1, p2, p3) {
+            $("#alter"+p1+"Btn").click(function () {
+                $("#"+p1).removeAttr("disabled");
+                $("#alter"+p1+"Btn").css("display","none");
+                $("#enter"+p1+"Btn").css("display","block");
+            });
 
+            $("#enter"+p1+"Btn").click(function () {
+                $.ajax({
+                    type:'get',
+                    url:'${base}/user/alter'+p1+'?user'+p1+'='+$("#"+p1).val(),
+                    success:function (result) {
+                        var res = result.split(":");
+                        if(res[0]==="ok"){
+                            alert(res[1]);
+                            $("#enter"+p1+"Btn").css("display","none");
+                            $("#alter"+p1+"Btn").css("display","block");
+                            $("#"+p1).attr("disabled","disabled");
+                        }else{
+                            $("#"+p1+"Error").html(res[1]);
+
+                        }
+                    }
+                })
+            });
+        });
     });
 </script>
 <#if alterPwdError??>
@@ -288,7 +306,13 @@
     })
 </script>
 </#if>
-
+<#if headInfo??>
+<script type="text/javascript">
+    alert("${headInfo}");
+    $("#home").removeClass("active");
+    $("#messages").addClass("active");
+</script>
+</#if>
 </@push_footer>
 
 

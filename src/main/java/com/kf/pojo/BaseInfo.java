@@ -18,7 +18,25 @@ public class BaseInfo {
     private String piContent;
     @NotNull(message = "错误的提交")
     private Integer piMc;
-    private String piMcName;
+    private String mcName;
+    private String scName;
+
+    public String getMcName() {
+        return mcName;
+    }
+
+    public void setMcName(String mcName) {
+        this.mcName = mcName;
+    }
+
+    public String getScName() {
+        return scName;
+    }
+
+    public void setScName(String scName) {
+        this.scName = scName;
+    }
+
     @NotNull(message = "错误的提交")
     private Integer piSc;
     private String piUser;
@@ -39,6 +57,7 @@ public class BaseInfo {
     private Timestamp piPushDate;
     private double piChujia;
     private String piScName;
+
     private String piZhiding;
     //当前信息状态,0正常,1被删除,2正在审核,
     private Integer status;
@@ -75,13 +94,6 @@ public class BaseInfo {
         this.piScName = piScName;
     }
 
-    public String getPiMcName() {
-        return piMcName;
-    }
-
-    public void setPiMcName(String piMcName) {
-        this.piMcName = piMcName;
-    }
 
     public String getPiDistrictName() {
         return piDistrictName;

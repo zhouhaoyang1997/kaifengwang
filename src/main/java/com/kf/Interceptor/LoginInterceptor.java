@@ -24,6 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String url = httpServletRequest.getRequestURI();
+
         //不对 超时 登录 进行拦截
         HttpSession session=httpServletRequest.getSession();
         if(url.contains("timeout")||url.contains("login")){

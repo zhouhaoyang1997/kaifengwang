@@ -70,8 +70,8 @@ public class UserService {
      * @param userPhone
      * @return
      */
-    public boolean userPhoneIsNotExists(String userPhone){
-        return userMapper.selectUserByUserPhone(userPhone)==null;
+    public boolean userPhoneIsNotExists(Integer userId,String userPhone){
+        return userMapper.selectUserCountByUserPhone(userId,userPhone)==0;
     }
 
     /**
@@ -79,8 +79,16 @@ public class UserService {
      * @param userEmail
      * @return
      */
+    public boolean userEmailIsNotExists(Integer userId,String userEmail){
+        return userMapper.selectUserCountByUserEmail(userId,userEmail)==0;
+    }
+
+    public boolean userNameIsNotExists(String userName){
+        return userMapper.selectUserByUserName(userName)==0;
+    }
+
     public boolean userEmailIsNotExists(String userEmail){
-        return userMapper.selectUserByUserEmail(userEmail)==null;
+        return userMapper.selectUserByUserEmail(userEmail)==0;
     }
 
     /**
@@ -99,5 +107,27 @@ public class UserService {
      */
     public void updateUserEmail(Integer userId,String userEmail){
         userMapper.updateUserEmail(userId,userEmail);
+    }
+
+    public void updateUserDescription(String ud,Integer userId){
+        userMapper.updateUserProfileInfo(ud,userId);
+    }
+
+    /**
+     * 修改用户头像
+     * @param userImg
+     * @param userId
+     */
+    public void updateUserImg(String userImg,Integer userId){
+        userMapper.updateUserImg(userId,userImg);
+    }
+
+    /**
+     * 修改当前用户公司认证状态
+     * @param userId
+     * @param attc
+     */
+    public void updateUserAttc(Integer userId,Integer attc){
+        userMapper.updateUserAttc(userId,attc);
     }
 }

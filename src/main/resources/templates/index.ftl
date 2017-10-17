@@ -60,7 +60,7 @@
                     <div class="megapanel">
                         <ul class="menu_ul">
                             <#list zhaopin as zp>
-                                <li><a href="#">${zp.scName}</a></li>
+                                <li><a href="${base}/list?mcId=1&scId=${zp.scId}">${zp.scName}</a></li>
                             </#list>
                         </ul>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="megapanel">
                         <ul class="menu_ul">
                         <#list ershou as es>
-                            <li><a href="#">${es.scName}</a></li>
+                            <li><a href="${base}/list?mcId=3&scId=${es.scId}">${es.scName}</a></li>
                             </#list>
                         </ul>
                     </div>
@@ -78,7 +78,7 @@
                     <div class="megapanel">
                         <ul class="menu_ul">
                         <#list fangchan as fc>
-                            <li><a href="#">${fc.scName}</a></li>
+                            <li><a href="${base}/list?mcId=2&scId=${fc.scId}">${fc.scName}</a></li>
                             </#list>
                         </ul>
                     </div>
@@ -87,7 +87,7 @@
                     <div class="megapanel">
                         <ul class="menu_ul">
                         <#list shenghuo as sh>
-                            <li><a href="#">${sh.scName}</a></li>
+                            <li><a href="${base}/list?mcId=4&scId=${sh.scId}">${sh.scName}</a></li>
                             </#list>
                         </ul>
                     </div>
@@ -141,7 +141,7 @@
                                     <img src="img/cw_icon.png" width="55px" height="55px" alt="">
                                 </div>
 
-                                <p><a href="#" target="_blank">宠物</a></p>
+                                <p><a href="#" target="_blank">名师培优</a></p>
                                 <p style="font-size: 12px;"><a href="#">全职</a> / <a href="#">兼职</a> / <a href="#">简历</a></p>
                             </div>
                             <div class="col-xs-2">
@@ -184,7 +184,7 @@
                     </div>
                 </div>
                 <div class="panel panel_self">
-                    <div class="panel-heading"><h4><a href="${base}/list?mcId=5">宠物</a></h4></div>
+                    <div class="panel-heading"><h4><a href="${base}/list?mcId=5">名师培优</a></h4></div>
                     <div class="panel-body">
                         <ul class="list_clear">
                         <#list chongwu as cw>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kf.mapper.CompanyMapper" >
+
+
+    <insert id="insertCompany" parameterType="com.kf.pojo.Company">
+        <selectKey keyProperty="companyId" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into company(cp_name,cp_contactPerson,cp_num,cp_pz_img,cp_user) VALUES (#{cpName},#{cpContactPerson},#{cpNum},#{cpPzImg},#{cpUser})
+    </insert>
+
+</mapper>

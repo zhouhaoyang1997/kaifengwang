@@ -4,10 +4,8 @@ import com.kf.pojo.District;
 import com.kf.pojo.PushInfo;
 import com.kf.pojo.SecondClass;
 import com.kf.pojo.Tag;
-import com.kf.service.DistrictService;
-import com.kf.service.PushInfoService;
-import com.kf.service.SecondClassService;
-import com.kf.service.TagService;
+import com.kf.service.*;
+import com.kf.vo.CurrMain;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +24,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/m")
 public class MobileMainController {
+    @Autowired
+    public MainClassService mainClassService;
 
     @Autowired
     public SecondClassService secondClassService;
@@ -46,47 +46,57 @@ public class MobileMainController {
         return modelAndView;
     }
 
-    @GetMapping("/infolist")
-    public ModelAndView quanzhizhaopin(Integer mcId, @RequestParam(required = false) Integer scId, @RequestParam(required = false) Integer districtId,
-                                       @RequestParam(required = false) String tagId) {
+    @RequestMapping("/infolist")
+    public ModelAndView quanzhizhaopin(Integer mcId, @RequestParam(required = false) Integer scId,@RequestParam(required = false) Integer districtId,
+                                       @RequestParam(required = false)String[] tagId) {
         ModelAndView modelAndView = new ModelAndView("phone/infolist");
         List<Tag> tags = tagService.getAllTag(mcId);
-        List<TagValue> tagValues = new ArrayList<TagValue>();
-        //切分tagId
-        if (tagId != null && !tagId.isEmpty()) {
-            String[] allTags = tagId.split("--");
-            System.out.print(allTags[0]);
-            for (String tagStr : allTags) {
-                String[] fromTag = tagStr.split("-");
-                TagValue tagValue = new TagValue();
-                tagValue.setTagId(Integer.valueOf(fromTag[0]));
-                tagValue.setTcId(Integer.valueOf(fromTag[1]));
-                tagValues.add(tagValue);
-            }
-        }
-        List<SecondClass> secondClassList = secondClassService.getAllSecondClass(mcId);
+        List<SecondClass> secondClass = secondClassService.getAllSecondClass(mcId);
         List<District> districts = districtService.getAllDistrict();
-
-        //查询符合条件的所有信息
-        List<PushInfo> pushInfos = pushInfoService.getAllJob(mcId, scId, districtId, tagValues, tagValues.size());
+        List<TagValue> newTagId = new ArrayList<>();
+        List<String> tagValue = getTagValue(tagId,newTagId);
+        List<PushInfo> pushInfos = pushInfoService.getAllJob(mcId,scId,districtId,tagValue,tagValue.size());
         //查询二级类别
-        modelAndView.addObject("secondClassList", secondClassList);
+        modelAndView.addObject("secondClass",secondClass);
         //查询所有行政区域
-        modelAndView.addObject("districts", districts);
+        modelAndView.addObject("districts",districts);
         //查询所有标签
-        modelAndView.addObject("tags", tags);
-        modelAndView.addObject("pushInfos", pushInfos);
-        //设置当前的栏目
-        modelAndView.addObject("currScId", scId);
-        //设置当前大类
-        modelAndView.addObject("currMcId", mcId);
+        modelAndView.addObject("tags",tags);
+        modelAndView.addObject("pushInfos",pushInfos);
+        //设置当前的大类
+        CurrMain currMain = new CurrMain();
+        currMain.setMcId(mcId);
+        currMain.setMcName(mainClassService.getMcName(mcId));
+        modelAndView.addObject("currMc",currMain);
+        //设置当前栏目
+        modelAndView.addObject("currScId",scId);
 
         //当前tag类
-        modelAndView.addObject("currTags", tagValues);
+        modelAndView.addObject("currTags",newTagId);
         //当前所选地区
-        modelAndView.addObject("currDistrictId", districtId);
+        modelAndView.addObject("currDistrictId",districtId);
         return modelAndView;
     }
+    //对前台发来的url去重
+    private List<String>  getTagValue(String[] tagId,List<TagValue> newTagId){
+        List<String> tagValue = new ArrayList<>();
+        if(tagId!=null&&tagId.length>0){
+            List<String> tagName=new ArrayList<String>();
+            for(String str:tagId){
+                String[] tag = str.split("-");
+                if(!tagName.contains(tag[0])&&!tag[1].equals("0")){
+                    tagValue.add(tag[1]);
+                    TagValue tagValue1 = new TagValue();
+                    tagValue1.setTagId(Integer.valueOf(tag[0]));
+                    tagValue1.setTcId(Integer.valueOf(tag[1]));
+                    newTagId.add(tagValue1);
+                }
+                tagName.add(tag[0]);
+            }
+        }
+        return tagValue;
+    }
+
 
     @GetMapping("/infomation")
     public ModelAndView information(){
