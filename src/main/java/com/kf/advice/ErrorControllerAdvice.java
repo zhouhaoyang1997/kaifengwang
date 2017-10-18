@@ -17,7 +17,7 @@ public class ErrorControllerAdvice {
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
         mav.addObject("url", req.getRequestURL());
-        mav.setViewName("phone/505");
+        mav.setViewName("phone/500");
         return mav;
 
     }
