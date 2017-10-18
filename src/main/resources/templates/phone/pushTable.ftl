@@ -18,15 +18,17 @@
     <link type="text/css" rel="stylesheet" href="../css/phone/global.css">
     <link type="text/css" rel="stylesheet" href="../css/phone/style.css">
     <link type="text/css" rel="stylesheet" href="../css/phone/all.css">
-    <link type="text/css" rel="stylesheet" href="../css/phone/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../css/phone/bootstrap.min1.css">
+    <link type="text/css" rel="stylesheet" href="../css/phone/fileinput.css">
 </head>
 
 <body class="orange">
-
 <div class="wrapper">
     <script src="../js/phone/jq_min.211_1.js"></script>
     <script src="../js/phone/common_1.js"></script>
     <script src="../js/phone/bootstrap.min.js"></script>
+    <script src="../js/phone/fileinput.js"></script>
+    <script src="../js/phone/fileinput_locale_zh.js"></script>
     <div class="header">
         <div id="ipageTitle">信息分类</div>
         <div class="search left8" id="search" onclick="searchOnClik()"></div>
@@ -43,14 +45,14 @@
     <div class="panel-body">
         <form class="form-horizontal" role="form">
             <div class="form-group">
-                <label for="firstname" class="col-xs-3 control-label">信息标题</label>
+                <label for="firstname" class="col-xs-3 control-label"><span style="color:red">*</span>信息标题</label>
                 <div class="col-xs-9">
                     <input type="text" class="form-control" id="userId">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="firstname" class="col-xs-3 control-label">所属地区</label>
+                <label for="firstname" class="col-xs-3 control-label"><span style="color:red">*</span>所属地区</label>
                 <div class="col-xs-9">
                     <select class="form-control">
                     <#list districts as ds>
@@ -89,19 +91,60 @@
                 <div class="col-xs-5"></div>
             </div>
         </#list>
-            <#--此处后期检查字数-->
-            <div class="form-group">
+            <div class="form-group ">
                 <div class="col-xs-3">
-                <label for="name">详细信息</label>
+                    <label><span style="color:red">*</span>联系人:</label>
+                </div>
+                <div class="col-xs-9">
+                    <input type="text" name="piContactPerson" minlength="2" maxlength="5" class="form-control">
                 </div>
                 <div class="col-xs-12">
-                <textarea class="form-control" style="width: 330px;height: 160px;"></textarea>
+                <#if pushError??>
+                    <@spring.bind "pushError.piContactPerson" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
                 </div>
             </div>
+            <div class="form-group ">
+                <div class="col-xs-3">
+                    <label><span style="color:red">*</span>联系电话:</label>
+                </div>
+                <div class="col-xs-9">
+                    <input type="text" name="piPhone" maxlength="11" minlength="11" class="form-control">
+                </div>
+                <div class="col-xs-12">
+                <#if pushError??>
+                    <@spring.bind "pushError.piPhone" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 control-label">要上传的图片</label>
+                <div class="col-xs-12 tl th">
+                    <input type="file" name="image" class="projectfile" value=""/>
+                    <input type="file" name="image" class="projectfile" value=""/>
+                    <input type="file" name="image" class="projectfile" value=""/>
+                    <input type="file" name="image" class="projectfile" value=""/>
+                    <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2.0M</p>
+                </div>
+            </div>
+
+        <#--此处后期检查字数-->
+            <div class="form-group">
+                <div class="col-xs-3">
+                    <label for="name">详细信息</label>
+                </div>
+                <div class="col-xs-12">
+                    <textarea class="form-control" style="width: 330px;height: 160px;"></textarea>
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-info">确认提交</button>
+            </div>
+
         </form>
     </div>
-</div>
-
 </div>
 <div class="clear"></div>
 <p class="footer_02">&copy;copyright开封城市网版权所有. </p>
@@ -141,4 +184,30 @@
         s.parentNode.insertBefore(bp, s);
     })();
     </script>
+    <script type="text/javascript">
+        var projectfileoptions = {
+            showUpload: false,
+            showRemove: false,
+            language: 'zh',
+            allowedPreviewTypes: ['image'],
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            maxFileSize: 20000,
+        };
+        // 文件上传框
+        $('input[class=projectfile]').each(function () {
+            var imageurl = $(this).attr("value");
+            if (imageurl) {
+                var op = $.extend({
+                    initialPreview: [ // 预览图片的设置
+                        "<img src='" + imageurl + "' class='file-preview-image'>",]
+                }, projectfileoptions);
+
+                $(this).fileinput(op);
+            } else {
+                $(this).fileinput(projectfileoptions);
+            }
+        });
+    </script>
+</body>
+
 </html>
