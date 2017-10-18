@@ -22,6 +22,7 @@
         <result property="piZhiding" column="pi_zhiding"/>
         <result property="piDistrictName" column="district_name"/>
         <result property="piAddress" column="pi_address"/>
+        <result property="piDistrict" column="pi_district"/>
         <collection property="tagValues" ofType="com.kf.vo.TagValue">
             <result property="tagId" column="tag_id"/>
             <result property="tagName" column="tag_name"/>
@@ -52,9 +53,9 @@
         where push_info.pi_user=user.user_id  AND pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id AND push_info.pi_id=#{piId}
     </select>
 
-    <select id="selectInfoByPiIdAndUserId" resultMap="basePushInfo">
+    <select id="selectInfoByPiIdAndUserId" resultMap="BasePushInfo">
         SELECT DISTINCT push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,pi_content,pi_user,pi_img,pi_scan,pi_phone,pi_qq,
-        district_name,pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,pi_address,user.user_id,
+        district_name,pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,pi_address,user.user_id,pi_district,
         tc_name,tagcontent.tc_id,tag.tag_name,sc_name,mc_name
         from user,mainclass,secondclass,push_info
         LEFT JOIN pic_content ON push_info.pi_id = pic_content.pc_id

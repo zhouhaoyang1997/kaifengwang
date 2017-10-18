@@ -1,10 +1,13 @@
 package com.kf.controller;
 
-import com.kf.pojo.BaseInfo;
-import com.kf.pojo.PushInfo;
+import com.kf.pojo.*;
 import com.kf.service.DistrictService;
+import com.kf.service.PushInfoClassService;
 import com.kf.service.PushInfoService;
+import com.kf.service.TagService;
 import com.kf.util.SessionUtil;
+import com.kf.vo.OtherInfo;
+import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.PublicKey;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 /**
  * Created by 18236 on 2017/10/7.
  */
@@ -25,7 +31,15 @@ public class PersonalController {
     private PushInfoService pushInfoService;
 
     @Autowired
+    private PushInfoClassService pushInfoClassService;
+
+    @Autowired
     private DistrictService districtService;
+
+
+    @Autowired
+    private TagService tagService;
+
 
     @GetMapping("/user/personal")
     public ModelAndView personal(){
@@ -90,11 +104,20 @@ public class PersonalController {
         ModelAndView modelAndView = null;
         if(userId!=null&&piId!=null){
             //使用userID和piId查询信息
-
             PushInfo pushInfo = pushInfoService.getInfoByPiIdAndUserId(userId,piId);
-
+            Map<String,String> tagMap = new HashMap<>();
+            for(TagValue tagValue:pushInfo.getTagValues()){
+                tagMap.put(tagValue.getTagName(),tagValue.getTcName());
+            }
+            List<District> district = districtService.getAllDistrict();
+            List<Tag> tags = tagService.getAllTag(pushInfo.getPiMc());
+            List<PushInfoClass> pushInfoClasses = pushInfoClassService.getAllPush(pushInfo.getPiMc());
             modelAndView = new ModelAndView("alterInfo");
+            modelAndView.addObject("districts",district);
             modelAndView.addObject("pushInfo",pushInfo);
+            modelAndView.addObject("tags",tags);
+            modelAndView.addObject("pushInfoClasses",pushInfoClasses);
+            modelAndView.addObject("tagMap",tagMap);
             return modelAndView;
         }else{
             //出错,跳转首页

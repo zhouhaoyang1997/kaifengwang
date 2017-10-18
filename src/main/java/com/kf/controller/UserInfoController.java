@@ -154,6 +154,7 @@ public class UserInfoController {
         }
     }
 
+
     /**
      * 修改头像
      * @param request
