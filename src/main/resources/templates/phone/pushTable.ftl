@@ -43,7 +43,7 @@
 </div>
 <div class="panel">
     <div class="panel-body">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post" action="/#">
             <div class="form-group">
                 <label for="firstname" class="col-xs-3 control-label"><span style="color:red">*</span>信息标题</label>
                 <div class="col-xs-9">
@@ -191,7 +191,7 @@
             language: 'zh',
             allowedPreviewTypes: ['image'],
             allowedFileExtensions: ['jpg', 'png', 'gif'],
-            maxFileSize: 20000,
+            maxFileSize: 2000,
         };
         // 文件上传框
         $('input[class=projectfile]').each(function () {

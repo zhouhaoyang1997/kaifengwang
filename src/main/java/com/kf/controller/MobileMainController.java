@@ -5,10 +5,7 @@ import com.kf.service.*;
 import com.kf.vo.CurrMain;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -46,7 +43,7 @@ public class MobileMainController {
         return modelAndView;
     }
     @GetMapping("/push")
-    public ModelAndView push(String mcId,String scId){
+    public ModelAndView pushInput(String mcId,String scId){
         ModelAndView modelAndView = new ModelAndView("phone/pushTable");
             List<District> districts = districtService.getAllDistrict();
             List<Tag> tags = tagService.getAllTag(Integer.valueOf(mcId));
@@ -54,6 +51,12 @@ public class MobileMainController {
             modelAndView.addObject("districts",districts);
             modelAndView.addObject("tags",tags);
             modelAndView.addObject("pushInfoClasses",pushInfoClasses);
+        return modelAndView;
+    }
+
+    @PostMapping("/push")
+    public ModelAndView pushSave(){
+        ModelAndView modelAndView = new ModelAndView("phone/pushTable");
         return modelAndView;
     }
 

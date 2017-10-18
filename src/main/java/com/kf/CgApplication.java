@@ -39,19 +39,19 @@ public class CgApplication {
 		return factory.createMultipartConfig();
 	}
 
-	/**
-	 * 错误处理
-	 * @return
-	 */
-	@Bean
-	public EmbeddedServletContainerCustomizer containerCustomizer() {
-
-		return new EmbeddedServletContainerCustomizer() {
-			@Override
-			public void customize(ConfigurableEmbeddedServletContainer container) {
-				ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404.html");
-				container.addErrorPages(error404Page);
-			}
-		};
-	}
+//	/**
+//	 * 错误处理
+//	 * @return
+//	 */
+//	@Bean
+//	public EmbeddedServletContainerCustomizer containerCustomizer() {
+//
+//		return new EmbeddedServletContainerCustomizer() {
+//			@Override
+//			public void customize(ConfigurableEmbeddedServletContainer container) {
+//				ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404.html");
+//				container.addErrorPages(error404Page);
+//			}
+//		};
+//	}
 }
