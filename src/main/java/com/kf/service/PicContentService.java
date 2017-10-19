@@ -17,4 +17,8 @@ public class PicContentService {
     public void addPicContent(int picId,Integer piId,String pcContent){
         picContentMapper.insertPicContent(picId,piId,pcContent);
     }
+
+    public void updatePicContent(int picId,Integer piId,String pcContent){
+        picContentMapper.updatePicContent(picId,piId,pcContent);
+    }
 }

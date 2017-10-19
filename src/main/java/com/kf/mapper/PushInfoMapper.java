@@ -59,4 +59,6 @@ public interface PushInfoMapper {
     Integer collectionIsExists(@Param("piId") Integer piId,@Param("userId") Integer userId);
 
     PushInfo selectInfoByPiIdAndUserId(@Param("piId")Integer piId,@Param("userId")Integer userId);
+
+    void updateInfoByPushInfo(BaseInfo baseInfo);
 }

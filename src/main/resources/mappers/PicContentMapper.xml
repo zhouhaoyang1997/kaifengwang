@@ -6,5 +6,8 @@
       INSERT INTO pic_content(pic_id,pc_id,pc_content) VALUES (#{picId},#{piId},#{pcContent})
     </insert>
 
+    <update id="updatePicContent">
+        UPDATE pic_content SET pc_content=#{pcContent} WHERE pic_id=#{picId} and pc_id=#{piId}
+    </update>
 
 </mapper>

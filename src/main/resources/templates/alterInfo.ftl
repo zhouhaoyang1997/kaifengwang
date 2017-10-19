@@ -20,6 +20,8 @@
             <div class="tab-pane active" id="base">
                 <div class="row" style="margin-top: 30px;">
                     <form action="/user/alterBaseInfo" method="post" id="pushForm">
+                        <input type="hidden" name="piId" value="${pushInfo.piId}">
+                        <input type="hidden" name="piMc" value="${pushInfo.piMc}">
                         <div class="form-group row">
                             <div class="col-xs-8">
                                 <label><span style="color:red">*</span>信息标题:</label>
@@ -181,19 +183,6 @@
                                     </div>
                                 </div>
                                     </#list>
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 </div>
                                 <div class="form-group row" style="margin-top: 30px">
                                     <div class="col-md-offset-4 col-md-4">

@@ -70,4 +70,8 @@ public class PushInfoService {
     public PushInfo getInfoByPiIdAndUserId(Integer userId,Integer piId){
         return pushInfoMapper.selectInfoByPiIdAndUserId(piId,userId);
     }
+
+    public void updatePushInfo(BaseInfo baseInfo){
+        pushInfoMapper.updateInfoByPushInfo(baseInfo);
+    }
 }

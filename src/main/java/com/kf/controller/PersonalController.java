@@ -1,21 +1,21 @@
 package com.kf.controller;
 
 import com.kf.pojo.*;
-import com.kf.service.DistrictService;
-import com.kf.service.PushInfoClassService;
-import com.kf.service.PushInfoService;
-import com.kf.service.TagService;
+import com.kf.service.*;
 import com.kf.util.SessionUtil;
 import com.kf.vo.OtherInfo;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +36,11 @@ public class PersonalController {
     @Autowired
     private DistrictService districtService;
 
+    @Autowired
+    private PushInfoTagService pushInfoTagService;
+
+    @Autowired
+    private PicContentService picContentService;
 
     @Autowired
     private TagService tagService;
@@ -123,6 +128,40 @@ public class PersonalController {
             //出错,跳转首页
             modelAndView = new ModelAndView("redirect:/index");
             return modelAndView;
+        }
+    }
+
+    @PostMapping("/user/alterBaseInfo")
+    public ModelAndView alterInfo(@Valid @ModelAttribute("pushError") BaseInfo baseInfo, BindingResult br, HttpServletRequest request){
+        if(br.hasErrors()){
+            return alterInfo(baseInfo.getPiId(),request);
+        }else{
+            //如果信息没错,更新信息;
+            Integer userId=SessionUtil.getUserId(request);
+            if(userId!=null){
+                baseInfo.setUserId(userId);
+                pushInfoService.updatePushInfo(baseInfo);
+                //通过mcId获取搜有的tagId,并将所有的tag和他的之存储到数据库表push_info_tag中
+                List<Integer> tagsId = tagService.getAllTagId(baseInfo.getPiMc());
+                for(Integer tagId:tagsId){
+                    Integer value = Integer.valueOf(request.getParameter("tag"+tagId));
+                    if(value!=null){
+                        pushInfoTagService.updateInfoTag(tagId,baseInfo.getPiId(),value);
+                    }
+                }
+                //获取所有的其他信息id 并将信息插入数据库
+                List<Integer> picsId= pushInfoClassService.getAllPushId(baseInfo.getPiMc());
+                for(Integer picId:picsId){
+                    String value = request.getParameter("pic"+picId);
+                    if(value!=null&&!value.trim().isEmpty()){
+                        picContentService.updatePicContent(picId,baseInfo.getPiId(),value);
+                    }
+                }
+
+                return new ModelAndView("redirect:/info?piId="+baseInfo.getPiId());
+            }else{
+                return new ModelAndView("redirect:/index");
+            }
         }
     }
 }

@@ -39,6 +39,11 @@
     </resultMap>
 
 
+    <update id="updateInfoByPushInfo" parameterType="com.kf.pojo.BaseInfo">
+        UPDATE push_info SET pi_title=#{piTitle},pi_content=#{piContent},pi_address=#{piAddress},pi_contact_person=#{piContactPerson},pi_phone=#{piPhone},pi_qq=#{piQq},pi_district=#{piDistrict}
+        WHERE pi_id=#{piId} and pi_user=#{userId}
+    </update>
+
     <select id="selectInfoByPiId" resultMap="BasePushInfo">
         SELECT DISTINCT push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,pi_content,pi_user,pi_img,pi_scan,pi_phone,pi_qq,
         district_name,pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,pi_address,user.user_id,
