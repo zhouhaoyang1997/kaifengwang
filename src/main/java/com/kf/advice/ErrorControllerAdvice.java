@@ -1,5 +1,7 @@
 package com.kf.advice;
 
+import org.springframework.boot.autoconfigure.web.ErrorController;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -10,13 +12,14 @@ import java.util.Map;
 public class ErrorControllerAdvice {
     public static final String DEFAULT_ERROR_VIEW = "error";
 
-    @ExceptionHandler(value = NumberFormatException.class)
+    @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
         mav.addObject("url", req.getRequestURL());
-        mav.setViewName("phone/505");
+        mav.setViewName("phone/500");
         return mav;
 
     }
 }
+
