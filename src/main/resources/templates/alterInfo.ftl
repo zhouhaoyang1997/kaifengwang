@@ -161,7 +161,7 @@
 
                             <form enctype="multipart/form-data" >
                                 <div class="form-group">
-                                    <input id="picUpload" type="file" name="pic"   class="file-loading">
+                                    <input id="picUpload" type="file" name="pic" multiple  class="file-loading">
                                 </div>
 
                             </form>
@@ -177,7 +177,6 @@
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/js/fileinput.min.js"></script>
 <script type="text/javascript" src="${base}/js/zh.js"></script>
-<script type="text/javascript" src="${base}/js/theme.js"></script>
 <script type="text/javascript" src="${base}/js/kindeditor-min.js"></script>
 <script type="text/javascript" src="${base}/js/zh-CN.js"></script>
 <script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
@@ -240,29 +239,40 @@
         });
 //http://blog.csdn.net/github_36086968/article/details/72830855;;;;http://plugins.krajee.com/file-input#ajax-uploads
         function initUpload(result) {
+            var flag=0;
+            if(result!==""){
+                flag=result.split("#").length;
+            }
             $("#picUpload").fileinput({
                 uploadUrl:'${base}/user/uploadPic',
                 uploadAsync:true,
-                showUpload: true,//是否显示上传按钮
+                showUpload: false,//是否显示上传按钮
                 showRemove: false,//是否显示删除按钮
                 showCaption: true,//是否显示输入框
                 showPreview:true,
-                showCancel:true,
+                showCancel:false,
+                showClose:false,
+                layoutTemplates:{
+                    actionUpload:''
+                },
                 dropZoneEnabled: false,
-                maxFileCount: 4,
+                maxFileCount: 4-flag,
+                maxFileSize:1024*10,
+                language:'zh',
+                overwriteInitial: false,
+                initialPreviewFileType: 'image',
                 initialPreviewShowDelete:true,
                 msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
                 initialPreview: initPhoto(result),
                 previewFileIcon: '<i class="fa fa-file"></i>',
-                allowedPreviewTypes: ['image'],
                 initialPreviewConfig: initConfig(result)
-            }).on('filepredelete',function(event, key, jqXHR, data) {
-                if(!confirm("确定删除原文件？删除后不可恢复")){
-                    return false;
-                }});
+            })
         }
 
         function initPhoto(result) {
+            if(result===""){
+                return "";
+            }
             var imgUrl = result.split("#");
             for(var i=0;i<imgUrl.length;i++){
                 imgUrl[i]='<img src="${base}/'+imgUrl[i]+'" class="file-preview-image" style="width:200px;height:100px;"/>';
@@ -270,6 +280,9 @@
             return imgUrl;
         }
         function initConfig(result){
+            if(result===""){
+                return "";
+            }
             var config=new Array();
             var imgUrl = result.split("#");
             for(var i=0;i<imgUrl.length;i++){
@@ -277,8 +290,8 @@
                     caption: imgUrl[i].substring(imgUrl[i].lastIndexOf("/")+1),
                     width: '120px',
                     url: '${base}/user/picDelete',
-                    key: 100,
-                    extra: {id: i}
+                    key: ${pushInfo.piId},
+                    extra:{urlId:i}
                 };
             }
             return config;

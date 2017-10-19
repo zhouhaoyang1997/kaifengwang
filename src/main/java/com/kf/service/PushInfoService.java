@@ -78,4 +78,8 @@ public class PushInfoService {
     public void updatePushInfo(BaseInfo baseInfo){
         pushInfoMapper.updateInfoByPushInfo(baseInfo);
     }
+
+    public void updatePicUrl(String piImg,Integer piId,Integer userId){
+        pushInfoMapper.updatePicUrl(piImg,piId,userId);
+    }
 }

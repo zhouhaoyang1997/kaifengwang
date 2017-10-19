@@ -63,4 +63,6 @@ public interface PushInfoMapper {
     void updateInfoByPushInfo(BaseInfo baseInfo);
 
     String selectPicUrl(@Param("piId")Integer piId,@Param("userId")Integer userId);
+
+    void updatePicUrl(@Param("piImg")String piImg,@Param("piId")Integer piId,@Param("userId")Integer userId);
 }

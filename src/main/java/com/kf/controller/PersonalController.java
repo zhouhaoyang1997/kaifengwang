@@ -3,20 +3,19 @@ package com.kf.controller;
 import com.kf.pojo.*;
 import com.kf.service.*;
 import com.kf.util.SessionUtil;
+import com.kf.vo.Flag;
 import com.kf.vo.OtherInfo;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -165,22 +164,54 @@ public class PersonalController {
         }
     }
 
-//    @PostMapping("/user/alterPicInfo")
-//    public ModelAndView alterPicInfo(HttpServletRequest request){
-//
-//    };
+    @PostMapping("/user/uploadPic")
+    @ResponseBody
+    public String alterPicInfo(HttpServletRequest request){
+        return "ok";
+    };
 
     @GetMapping("/user/initPic")
     @ResponseBody
     public String getPicInfo(Integer piId,HttpServletRequest request){
         Integer userId=SessionUtil.getUserId(request);
-        return pushInfoService.getImgUrl(piId,userId);
+        String imgStr = pushInfoService.getImgUrl(piId,userId);
+        if(imgStr!=null){
+            return pushInfoService.getImgUrl(piId,userId);
+        }
+        return "";
     }
 
     @PostMapping("/user/picDelete")
     @ResponseBody
-    public String deletePic(Integer id){
-        System.out.print(id);
-        return "ok";
+    public Flag deletePic(Integer key,Integer urlId,HttpServletRequest request){
+        Integer userId=SessionUtil.getUserId(request);
+        System.out.print(urlId);
+        String imgStr = pushInfoService.getImgUrl(key,userId);
+
+        StringBuffer stringBuffer = new StringBuffer();
+        if(imgStr!=null){
+            String[] imgUrl = imgStr.split("#");
+            for(int i=0;i<imgUrl.length;i++){
+                if(i!=urlId){
+                    stringBuffer.append(imgUrl[i]);
+                    stringBuffer.append("#");
+                }
+            }
+            //更改图片url
+
+            pushInfoService.updatePicUrl(getUrl(stringBuffer),key,userId);
+        }
+        Flag flag = new Flag();
+        flag.setFlag("true");
+        return flag;
+    }
+
+    private String getUrl(StringBuffer stringBuffer){
+        if(stringBuffer.length()>0){
+            String sb = stringBuffer.toString();
+            return sb.substring(0,sb.length()-1);
+        }else{
+            return null;
+        }
     }
 }

@@ -152,4 +152,8 @@
         SELECT pi_img FROM push_info WHERE pi_id=#{piId} and pi_user=#{userId}
     </select>
 
+    <update id="updatePicUrl">
+        UPDATE push_info set pi_img=#{piImg} WHERE pi_id=#{piId} and pi_user=#{userId}
+    </update>
+
 </mapper>
