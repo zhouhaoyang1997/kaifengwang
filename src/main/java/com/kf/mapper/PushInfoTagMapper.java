@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Param;
 public interface PushInfoTagMapper {
 
     void insertPushInfoTag(@Param("tagId") Integer tagId, @Param("piId") Integer piId, @Param("piTagContent") Integer piTagContent);
+
+    void updatePushInfoTag(@Param("tagId") Integer tagId, @Param("piId") Integer piId, @Param("piTagContent") Integer piTagContent);
 }

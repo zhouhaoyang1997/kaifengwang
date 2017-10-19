@@ -57,4 +57,12 @@ public interface PushInfoMapper {
      * @return
      */
     Integer collectionIsExists(@Param("piId") Integer piId,@Param("userId") Integer userId);
+
+    PushInfo selectInfoByPiIdAndUserId(@Param("piId")Integer piId,@Param("userId")Integer userId);
+
+    void updateInfoByPushInfo(BaseInfo baseInfo);
+
+    String selectPicUrl(@Param("piId")Integer piId,@Param("userId")Integer userId);
+
+    void updatePicUrl(@Param("piImg")String piImg,@Param("piId")Integer piId,@Param("userId")Integer userId);
 }

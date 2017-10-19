@@ -16,8 +16,10 @@ public class RememberUserUrl implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         HttpSession session = httpServletRequest.getSession();
+        String method = httpServletRequest.getMethod();
+
         String uri = httpServletRequest.getRequestURI();
-        if(!uri.contains("login")&&!uri.contains("register")&&!uri.contains("timeout")&&!uri.contains("logout")&&!uri.contains("user")&&!uri.contains("error")){
+        if(method.equals("GET")&&!uri.contains("login")&&!uri.contains("register")&&!uri.contains("timeout")&&!uri.contains("logout")&&!uri.contains("user")&&!uri.contains("error")){
             //使用session记住当前访问链接,方便用户登陆后跳转回来
             String lastedUrl =  httpServletRequest.getRequestURI();
             if(httpServletRequest.getQueryString()!=null){

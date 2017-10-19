@@ -7,4 +7,8 @@
     </insert>
 
 
+    <update id="updatePushInfoTag">
+        UPDATE push_info_tag SET pi_tag_content=#{piTagContent} WHERE tag_id=#{tagId} AND pi_id=#{piId}
+    </update>
+
 </mapper>

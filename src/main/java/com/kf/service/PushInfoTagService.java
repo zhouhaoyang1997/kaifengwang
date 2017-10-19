@@ -13,4 +13,8 @@ public class PushInfoTagService {
     public void addPushInfoTag(Integer tagId, Integer piId, Integer piTagContent) {
         pushInfoTagMapper.insertPushInfoTag(tagId, piId, piTagContent);
     }
+
+    public void updateInfoTag(Integer tagId,Integer piId,Integer piTagContent){
+        pushInfoTagMapper.updatePushInfoTag(tagId,piId,piTagContent);
+    }
 }
