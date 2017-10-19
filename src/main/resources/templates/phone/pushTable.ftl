@@ -43,7 +43,7 @@
 </div>
 <div class="panel">
     <div class="panel-body">
-        <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post" action="/#">
+        <form class="form-horizontal" role="form"  method="post" action="/#">
             <div class="form-group">
                 <label for="firstname" class="col-xs-3 control-label"><span style="color:red">*</span>信息标题</label>
                 <div class="col-xs-9">
@@ -122,11 +122,10 @@
             <div class="form-group">
                 <label for="" class="col-xs-12 control-label">要上传的图片</label>
                 <div class="col-xs-12 tl th">
-                    <input type="file" name="image" class="projectfile" value=""/>
-                    <input type="file" name="image" class="projectfile" value=""/>
-                    <input type="file" name="image" class="projectfile" value=""/>
-                    <input type="file" name="image" class="projectfile" value=""/>
+                    <form enctype="multipart/form-data" >
+                    <input type="file" name="image[]" id="picUpload" multiple/>
                     <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2.0M</p>
+                    </form>
                 </div>
             </div>
 
@@ -185,27 +184,26 @@
     })();
     </script>
     <script type="text/javascript">
-        var projectfileoptions = {
-            showUpload: false,
-            showRemove: false,
-            language: 'zh',
-            allowedPreviewTypes: ['image'],
-            allowedFileExtensions: ['jpg', 'png', 'gif'],
-            maxFileSize: 2000,
-        };
+        $(function () {
+//            alert("a");
         // 文件上传框
-        $('input[class=projectfile]').each(function () {
-            var imageurl = $(this).attr("value");
-            if (imageurl) {
-                var op = $.extend({
-                    initialPreview: [ // 预览图片的设置
-                        "<img src='" + imageurl + "' class='file-preview-image'>",]
-                }, projectfileoptions);
-
-                $(this).fileinput(op);
-            } else {
-                $(this).fileinput(projectfileoptions);
-            }
+            $("#picUpload").fileinput({
+                uploadUrl: "/file-upload-single/1",
+                showUpload: false,//是否显示上传按钮
+                showRemove: false,//是否显示删除按钮
+                showCaption: true,//是否显示输入框
+                showPreview:true,
+                showCancel:false,
+                showClose:false,
+                dropZoneEnabled: false,
+                layoutTemplates:{
+                    actionUpload:'', //设置为空可去掉上传按钮
+                    //actionDelete:''; //设置为空可去掉删除按钮
+                },
+                maxFileCount: 4,
+                maxFileSize:1024*3,
+                language:'zh',
+            })
         });
     </script>
 </body>

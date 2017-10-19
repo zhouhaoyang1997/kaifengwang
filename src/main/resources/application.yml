@@ -35,9 +35,9 @@ logging:
        com.kf.mapper: debug
 
 path:
-  pathValue: C:/Users/18236/cg/src/main/resources/static/img/pushimg/
-  headImgPath: C:/Users/18236/cg/src/main/resources/static/img/headImg/
-  companyImgPath: C:/Users/ch/Desktop/cg/src/main/resources/static/img/company/
+  pathValue: /Users/zhy/IdeaProjects/kaifengwang/src/main/resources/static/img/pushimg/
+  headImgPath: /Users/zhy/IdeaProjects/kaifengwang/src/main/resources/static/img/headImg/
+  companyImgPath: /Users/zhy/IdeaProjects/kaifengwang/src/main/resources/static/img/company/
 #  pathValue: C:/Users/ch/Desktop/cg/src/main/resources/static/img/pushimg/
 #  headImgPath: C:/Users/ch/Desktop/cg/src/main/resources/static/img/headImg/
 # companyImgPath: C:/Users/ch/Desktop/cg/src/main/resources/static/img/company/

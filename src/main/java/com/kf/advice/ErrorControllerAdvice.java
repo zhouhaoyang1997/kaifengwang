@@ -10,16 +10,16 @@ import java.util.Map;
 
 @ControllerAdvice
 public class ErrorControllerAdvice {
-    public static final String DEFAULT_ERROR_VIEW = "error";
-
-    @ExceptionHandler(value = Exception.class)
-    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", e);
-        mav.addObject("url", req.getRequestURL());
-        mav.setViewName("phone/500");
-        return mav;
-
-    }
+//    public static final String DEFAULT_ERROR_VIEW = "error";
+//
+//    @ExceptionHandler(value = Exception.class)
+//    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("exception", e);
+//        mav.addObject("url", req.getRequestURL());
+//        mav.setViewName("phone/500");
+//        return mav;
+//
+//    }
 }
 
