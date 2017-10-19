@@ -67,6 +67,10 @@ public class PushInfoService {
         return pushInfoMapper.collectionIsExists(piId, userId)!=null;
     }
 
+    public String getImgUrl(Integer piId,Integer userId){
+        return  pushInfoMapper.selectPicUrl(piId,userId);
+    }
+
     public PushInfo getInfoByPiIdAndUserId(Integer userId,Integer piId){
         return pushInfoMapper.selectInfoByPiIdAndUserId(piId,userId);
     }

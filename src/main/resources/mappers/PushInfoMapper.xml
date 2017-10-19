@@ -148,4 +148,8 @@
     </select>
 
 
+    <select id="selectPicUrl" resultType="java.lang.String">
+        SELECT pi_img FROM push_info WHERE pi_id=#{piId} and pi_user=#{userId}
+    </select>
+
 </mapper>

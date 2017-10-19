@@ -5,7 +5,7 @@
 <@header title="填写发布信息">
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
-<link rel="stylesheet" href="${base}/css/fileupload.css">
+<link rel="stylesheet" href="${base}/css/fileinput.min.css">
 <link rel="stylesheet" href="${base}/css/default.css">
 </@header>
 <@push_header>
@@ -159,36 +159,11 @@
                 <div class="form-group row">
                     <div class="col-xs-12">
 
-                            <form action="${base}/user/alterPicInfo" enctype="multipart/form-data" method="post">
-                                <div class="row">
-                                    <#list pushInfo.piImg?split('#') as imgUrl>
-                                <div class="col-xs-3">
-                                    <div class="h4">添加图片</div>
-                                    <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
-                                        <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
-                                            <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
-                                                 src="${base}/${imgUrl}" alt=""/>
-                                        </div>
-                                        <div class="fileinput-preview fileinput-exists thumbnail"
-                                             style="max-width: 200px; max-height: 150px;"></div>
-                                        <div>
-                            <span class="btn btn-primary btn-file">
-                                <span class="fileinput-new">选择文件</span>
-                                <span class="fileinput-exists">换一张</span>
-                                <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
-                            </span>
-                                            <a href="javascript:;" class="btn btn-warning fileinput-exists"
-                                               data-dismiss="fileinput">移除</a>
-                                        </div>
-                                    </div>
+                            <form enctype="multipart/form-data" >
+                                <div class="form-group">
+                                    <input id="picUpload" type="file" name="pic"   class="file-loading">
                                 </div>
-                                    </#list>
-                                </div>
-                                <div class="form-group row" style="margin-top: 30px">
-                                    <div class="col-md-offset-4 col-md-4">
-                                        <button type="submit" class="btn btn-info">确认提交</button>
-                                    </div>
-                                </div>
+
                             </form>
                     </div>
                 </div>
@@ -200,7 +175,9 @@
 <@push_footer>
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${base}/js/fileupload.js"></script>
+<script type="text/javascript" src="${base}/js/fileinput.min.js"></script>
+<script type="text/javascript" src="${base}/js/zh.js"></script>
+<script type="text/javascript" src="${base}/js/theme.js"></script>
 <script type="text/javascript" src="${base}/js/kindeditor-min.js"></script>
 <script type="text/javascript" src="${base}/js/zh-CN.js"></script>
 <script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
@@ -252,6 +229,60 @@
                 }
             }
         })
+    });
+    $(function () {
+        $.ajax({
+            url:'${base}/user/initPic?piId='+${pushInfo.piId},
+            type:'get',
+            success:function (result) {
+                initUpload(result);
+            }
+        });
+//http://blog.csdn.net/github_36086968/article/details/72830855;;;;http://plugins.krajee.com/file-input#ajax-uploads
+        function initUpload(result) {
+            $("#picUpload").fileinput({
+                uploadUrl:'${base}/user/uploadPic',
+                uploadAsync:true,
+                showUpload: true,//是否显示上传按钮
+                showRemove: false,//是否显示删除按钮
+                showCaption: true,//是否显示输入框
+                showPreview:true,
+                showCancel:true,
+                dropZoneEnabled: false,
+                maxFileCount: 4,
+                initialPreviewShowDelete:true,
+                msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
+                initialPreview: initPhoto(result),
+                previewFileIcon: '<i class="fa fa-file"></i>',
+                allowedPreviewTypes: ['image'],
+                initialPreviewConfig: initConfig(result)
+            }).on('filepredelete',function(event, key, jqXHR, data) {
+                if(!confirm("确定删除原文件？删除后不可恢复")){
+                    return false;
+                }});
+        }
+
+        function initPhoto(result) {
+            var imgUrl = result.split("#");
+            for(var i=0;i<imgUrl.length;i++){
+                imgUrl[i]='<img src="${base}/'+imgUrl[i]+'" class="file-preview-image" style="width:200px;height:100px;"/>';
+            }
+            return imgUrl;
+        }
+        function initConfig(result){
+            var config=new Array();
+            var imgUrl = result.split("#");
+            for(var i=0;i<imgUrl.length;i++){
+                config[i]= {
+                    caption: imgUrl[i].substring(imgUrl[i].lastIndexOf("/")+1),
+                    width: '120px',
+                    url: '${base}/user/picDelete',
+                    key: 100,
+                    extra: {id: i}
+                };
+            }
+            return config;
+        }
     })
 </script>
 </@push_footer>

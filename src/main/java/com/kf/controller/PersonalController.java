@@ -164,4 +164,23 @@ public class PersonalController {
             }
         }
     }
+
+//    @PostMapping("/user/alterPicInfo")
+//    public ModelAndView alterPicInfo(HttpServletRequest request){
+//
+//    };
+
+    @GetMapping("/user/initPic")
+    @ResponseBody
+    public String getPicInfo(Integer piId,HttpServletRequest request){
+        Integer userId=SessionUtil.getUserId(request);
+        return pushInfoService.getImgUrl(piId,userId);
+    }
+
+    @PostMapping("/user/picDelete")
+    @ResponseBody
+    public String deletePic(Integer id){
+        System.out.print(id);
+        return "ok";
+    }
 }
