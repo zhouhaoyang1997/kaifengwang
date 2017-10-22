@@ -119,15 +119,15 @@
                     </#if>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="" class="col-xs-12 control-label">要上传的图片</label>
-                <div class="col-xs-12 tl th">
-                    <form enctype="multipart/form-data" >
-                    <input type="file" name="image[]" id="picUpload" multiple/>
-                    <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2.0M</p>
-                    </form>
-                </div>
-            </div>
+            <#--<div class="form-group">-->
+                <#--<label for="" class="col-xs-12 control-label">要上传的图片</label>-->
+                <#--<div class="col-xs-12 tl th">-->
+                    <#--<form enctype="multipart/form-data" >-->
+                    <#--<input type="file" name="image[]" id="picUpload" multiple/>-->
+                    <#--<p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2.0M</p>-->
+                    <#--</form>-->
+                <#--</div>-->
+            <#--</div>-->
 
         <#--此处后期检查字数-->
             <div class="form-group">
@@ -139,7 +139,7 @@
                 </div>
             </div>
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-info">确认提交</button>
+                <button type="submit" class="btn btn-info">下一步</button>
             </div>
 
         </form>
@@ -183,29 +183,29 @@
         s.parentNode.insertBefore(bp, s);
     })();
     </script>
-    <script type="text/javascript">
-        $(function () {
-//            alert("a");
-        // 文件上传框
-            $("#picUpload").fileinput({
-                uploadUrl: "/file-upload-single/1",
-                showUpload: false,//是否显示上传按钮
-                showRemove: false,//是否显示删除按钮
-                showCaption: true,//是否显示输入框
-                showPreview:true,
-                showCancel:false,
-                showClose:false,
-                dropZoneEnabled: false,
-                layoutTemplates:{
-                    actionUpload:'', //设置为空可去掉上传按钮
-                    //actionDelete:''; //设置为空可去掉删除按钮
-                },
-                maxFileCount: 4,
-                maxFileSize:1024*3,
-                language:'zh',
-            })
-        });
-    </script>
+    <#--<script type="text/javascript">-->
+        <#--$(function () {-->
+<#--//            alert("a");-->
+        <#--// 文件上传框-->
+            <#--$("#picUpload").fileinput({-->
+                <#--uploadUrl: "#",-->
+                <#--showUpload: false,//是否显示上传按钮-->
+                <#--showRemove: false,//是否显示删除按钮-->
+                <#--showCaption: true,//是否显示输入框-->
+                <#--showPreview:true,-->
+                <#--showCancel:false,-->
+                <#--showClose:false,-->
+                <#--dropZoneEnabled: false,-->
+                <#--layoutTemplates:{-->
+                    <#--actionUpload:'', //设置为空可去掉上传按钮-->
+                    <#--//actionDelete:''; //设置为空可去掉删除按钮-->
+                <#--},-->
+                <#--maxFileCount: 4,-->
+                <#--maxFileSize:1024*3,-->
+                <#--language:'zh',-->
+            <#--})-->
+        <#--});-->
+    <#--</script>-->
 </body>
 
 </html>
