@@ -1,5 +1,6 @@
 package com.kf.controller;
 
+import com.kf.exception.PiIdNotFoundException;
 import com.kf.pojo.PushInfo;
 import com.kf.pojo.Tip;
 import com.kf.pojo.User;
@@ -33,13 +34,19 @@ public class InfoController {
     private TipService tipService;
 
     @RequestMapping("/info")
-    public ModelAndView Info(Integer piId,HttpServletRequest request){
+    public ModelAndView Info(Integer piId,HttpServletRequest request)throws Exception{
         //下面这行的user是userId
         Integer user=SessionUtil.getUserId(request);
         ModelAndView modelAndView = new ModelAndView("info");
         if(piId!=null){
             PushInfo pushInfo = pushInfoService.getInfoByPiId(piId);
-            Integer userId = pushInfo.getUserId();
+            Integer userId = null;
+            try{
+                userId = pushInfo.getUserId();
+            }
+            catch (Exception e){
+                throw new PiIdNotFoundException("404","对不起,可能您要查看的信息已经被删除");
+            }
             User infoUser = userService.getUserByUserId(userId);
             modelAndView.addObject("info",pushInfo);
             modelAndView.addObject("infoUser",infoUser);

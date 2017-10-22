@@ -19,7 +19,7 @@
                     <div class="col-sm-offset-1 col-sm-10">
                         <div class="form-group">
                             <label for="name" class="sr-only">用户名</label>
-                            <input type="text" class="form-control" name="userName" id="name" minlength="4" maxlength="10" placeholder="用户名" >
+                            <input type="text" class="form-control" name="userName" id="name" minlength="4" maxlength="16" placeholder="用户名" >
                         </div>
                     <#if userDetail??>
                         <@spring.bind "userDetail.userName" />
@@ -83,7 +83,7 @@
             rules:{
                 userName:{
                     required:true,
-                    regex: /^[a-zA-Z0-9_-]{4,10}$/,
+                    regex: /^[a-zA-Z0-9_-]{4,16}$/,
                     remote:{
                         type:'post',
                         url:'/unIsEx',
@@ -117,7 +117,7 @@
             messages:{
                 userName:{
                     remote:"用户名已被使用了",
-                    regex:'用户名不合法（字母开头，允许4-10字节，允许字母数字下划线)'
+                    regex:'用户名不合法（字母开头，允许4-16位长，允许字母数字下划线)'
                 },
                 userEmail:{
                     remote:"邮箱已经被使用了"

@@ -44,11 +44,17 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4 push_base_static">
                     <span id="collect">
-                        <#if collected>
-                            <i class="fa fa-calendar"></i> 已收藏
-                        <#else>
-                            <a href="javascript:;" style="margin-right: 0;" id="collect_a"><i class="fa fa-calendar"></i> 收藏</a>
-                        </#if>
+<#if Session.user??>
+    <#if collected>
+        <i class="fa fa-calendar"></i> 已收藏
+    <#else>
+        <a href="javascript:;" style="margin-right: 0;" id="collect_a"><i class="fa fa-calendar"></i> 收藏</a>
+    </#if>
+    <#else>
+        <a href="#myModal" style="margin-right: 0;" data-toggle="modal"><i class="fa fa-calendar"></i> 收藏</a>
+</#if>
+
+
                     </span>
                 <#if Session.user??>
                     <a href="#tipInfo" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
@@ -67,32 +73,36 @@
                     <div>
                         <!-- 轮播（Carousel）内容 -->
                         <div class="carousel-inner">
-
-                            <div class="imgnav" id="imgnav">
-                                <div id="img">
-                                <#if info.piImg??>
-                                    <#list info.piImg?split("#") as piImg>
-                                            <img src="${base}/${piImg}" class="img-thumbnail" width="100%" height="400"/>
-                                    </#list>
-                                <#else>
-                                    <img src="${base}/img/noimage.png" class="img-thumbnail" width="100%" height="400"/>
-                                </#if>
-                                    <div id="front" title="上一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
-                                    <div id="next" title="下一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
-                                </div>
-                                <div id="cbtn">
-                                    <i class="picSildeLeft"><img src="${base}/img/picSlideLeft.gif"/></i>
-                                    <i class="picSildeRight"><img src="${base}/img/picSlideRight.gif"/></i>
-                                    <div id="cSlideUl">
-                                        <ul>
+                            <div id="wrapper">
+                                <!--滚动看图-->
+                                <div id="picSlideWrap" class="clearfix">
+                                    <div class="imgnav" id="imgnav">
+                                        <div id="img">
                                         <#if info.piImg??>
                                             <#list info.piImg?split("#") as piImg>
-                                                <li><img src="${base}/${piImg}" class="img-thumbnail" /></li>
+                                                    <img src="${base}/${piImg}" class="img-thumbnail" width="100%" height="400"/>
                                             </#list>
                                         <#else>
-                                            <li><img src="${base}/img/noimage.png" class="img-thumbnail" /></li>
+                                            <img src="${base}/img/noimage.png" class="img-thumbnail" width="100%" height="400"/>
                                         </#if>
-                                        </ul>
+                                            <div id="front" title="上一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
+                                            <div id="next" title="下一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
+                                        </div>
+                                        <div id="cbtn">
+                                            <i class="picSildeLeft"><img src="${base}/img/picSlideLeft.gif"/></i>
+                                            <i class="picSildeRight"><img src="${base}/img/picSlideRight.gif"/></i>
+                                            <div id="cSlideUl">
+                                                <ul>
+                                                <#if info.piImg??>
+                                                    <#list info.piImg?split("#") as piImg>
+                                                        <li><img src="${base}/${piImg}" class="img-thumbnail" /></li>
+                                                    </#list>
+                                                <#else>
+                                                    <li><img src="${base}/img/noimage.png" class="img-thumbnail" /></li>
+                                                </#if>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -115,14 +125,30 @@
                     </table>
                 </div>
             </div>
-            <div class="row push_base_other">
+            <div class="push_base_other row">
                 <div class="col-md-8">
-                    <p>联系人: <span style="margin-left: 30px;">${info.piContactPerson}</span></p>
-                    <p>联系电话: <span style="margin-left: 30px;">${info.piPhone}</span></p>
-                <#if info.piQq??>
-                    <p>qq: <span style="margin-left: 30px;">${info.piQq}</span></p>
-                </#if>
-                    <p>详细地址: <span style="margin-left: 30px;">${info.piAddress}</span></p>
+                    <table class="push_base_list">
+                        <tr>
+                            <td>联系人:&nbsp; </td>
+                            <td>${info.piContactPerson}</td>
+                        </tr>
+                        <tr>
+                            <td>联系电话:&nbsp; </td>
+                            <td><span class="contact_method">${info.piPhone?replace(info.piPhone?substring(7,11),"****")}</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><a class="btn btn-danger" href="#completedNum" data-toggle="modal">点击查看完整号码</a></td>
+                        </tr>
+                        <tr>
+                            <td>详细地址:&nbsp; </td>
+                            <td>${info.piAddress}</td>
+                        </tr>
+                        <tr>
+                            <td>qq:&nbsp; </td>
+                            <td>${info.piQq}</td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="col-md-4 jinggao">
                     <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
@@ -150,6 +176,31 @@
         </div>
     </div>
 
+    <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="container logo_login">
+                        <p >查看联系方式</p>
+                    </div>
+
+                    <div class="container alterInfo">
+                        <span>联系时,就说是在开封城市网看到的。谢谢!</span>
+                    </div>
+                    <div class="container phoneNum">
+                        <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
+                        <span>${info.piPhone}</span>
+                    </div>
+                    <div class="person_contact" style="margin-top: 10px;">
+                        <p style="text-align: center">联系人:${info.piContactPerson}</p>
+                    </div>
+                </div>
+                <div class="modal-footer"><span>期待您对此信息满意!</span></div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">

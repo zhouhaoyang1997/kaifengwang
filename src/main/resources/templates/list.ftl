@@ -3,6 +3,7 @@
 <@header title="开封城市网${currMc.mcName}">
 <link rel="stylesheet" href="${request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${request.contextPath}/css/menu.css">
+<link rel="stylesheet" href="${base}/css/list.css">
 </@header>
 
 <@headerArea>
@@ -32,9 +33,9 @@ ${base}/list?mcId=${currMc.mcId}<#nested ><#if currTags??><#list currTags as tag
                 <div class="search-box">
                     <form action="" method="post">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="输入你感兴趣信息">
+                            <input type="text" class="form-control search_box" placeholder="输入你感兴趣信息">
                             <span class="input-group-btn" >
-                                <button class="btn btn-danger"  type="button">搜索</button>
+                                <button class="btn btn_search"  type="button">搜索</button>
                             </span>
                         </div>
                     </form>
@@ -196,11 +197,20 @@ ${base}/list?mcId=${currMc.mcId}<#nested ><#if currTags??><#list currTags as tag
 
 
         <div class="now_position">
-            <div class="panel panel_self">
-                <div class="panel-heading"><h4>开封${currMc.mcName}</h4></div>
-                <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading ">
                     <div class="row">
-                        <div class="col-xs-11">
+                        <div class="col-xs-8">
+                            <h4 style="color: #ff552e;">开封${currMc.mcName}</h4>
+                        </div>
+                        <div class="col-xs-4">
+                            <span>您知道吗？ <a href="${base}/about/service" style="color: #ff552e">置顶</a>发布的信息可使成交率提高50%！</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" style="min-height: 1000px;">
+                    <div class="row">
+                        <div class="col-xs-10">
                             <#if pushInfos??&&(pushInfos?size>0)>
                                 <#list pushInfos as pushInfo>
                                     <div class="row hover_info">
@@ -242,17 +252,61 @@ ${base}/list?mcId=${currMc.mcId}<#nested ><#if currTags??><#list currTags as tag
                             </#if>
                         </div>
                         <!-- 广告位-->
-                        <div class="col-xs-1"></div>
+                        <div class="col-xs-2">
+                            <img src="${base}/img/gg_fz.jpg" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<div class="asid_share" id="asid_share">
+    <div class="asid_share_box relative">
+        <a href="#"><img alt="我有话说" title="我有话说" class="adid_icon" src="img/icon_say.png"></a>
+    </div>
+    <div class="asid_share_box relative">
+        <a href="#"><img alt="新版帮助" title="新版帮助" class="adid_icon" src="img/icon_help.png"></a>
+        <div class="asid_share_triangle" style="display:none;">
+            <em class="border_sj">&#9670;</em>
+            <span class="con_sj">&#9670;</span>
+        </div>
+        <div class="asid_sha_layer" style="display:none;">
+            <ul class="asid_help_list" style="width:130px;">
+                <li><a href="#">测试数据</a></li>
+                <li><a href="#">测试数据</a></li>
+                <li><a href="#">测试数据</a></li>
+                <li><a href="#">测试数据</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="asid_share_box relative" style="display:none;">
+        <a href="#"><img alt="返回顶部" title="返回顶部" class="adid_icon" src="img/icon_back.png"></a>
+    </div>
+</div>
+
+
 <@footer>
+<script src="${base}js/hhshare.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //图片滚动特效
+        $('#asid_share').hhShare({
+            cenBox     : 'asid_share_box',  //里边的小层
+            icon       : 'adid_icon',
+            addClass   : 'red_bag',
+            titleClass : 'asid_title',
+            triangle   : 'asid_share_triangle', //鼠标划过显示图层，边上的小三角
+            showBox    : 'asid_sha_layer' //鼠标划过显示图层
+        });
+    });
+</script>
+
 
     <#if currScId??||currDistrictId??||(currTags?size>0)>
     <script type="text/javascript">

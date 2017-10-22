@@ -14,7 +14,7 @@ public class BaseInfo {
     private Integer piId;
     @Length(min = 4,max = 100,message = "标题长度应在在4-100之间")
     private String piTitle;
-    @Length(min=10,max = 2500,message = "内容应在5-2500之间")
+    @Length(min=10,max = 2500,message = "内容应在10-2500之间")
     private String piContent;
     private Integer piMc;
     private String mcName;

@@ -15,7 +15,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-offset-8 col-md-4">
-                        <a class="btn push_btn" href="#">发布信息</a>
+                        <a class="btn push_btn" href="${base}/push/choose">发布信息</a>
                     </div>
                 </div>
             </div>

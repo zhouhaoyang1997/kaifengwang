@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     var index=0;
     var length=$("#img img").length;
@@ -17,19 +16,12 @@ $(document).ready(function(){
     function slideNext(){
         if(index >= 0 && index < length-1) {
             ++index;
-            showImg(index);}
-        // }else{
-        //     if(confirm("已经是最后一张,点击确定重新浏览！")){
-        //         showImg(0);
-        //         index=0;
-        //         aniPx=(length-5)*142+'px'; //所有图片数 - 可见图片数 * 每张的距离 = 最后一张滚动到第一张的距离
-        //         $("#cSlideUl ul").animate({ "left": "+="+aniPx },200);
-        //         i=1;
-        //     }
-        //     return false;
-        // }
-        if(i<0 || i>length-5) {return false;}
-        $("#cSlideUl ul").animate({ "left": "-=142px" },200)
+            showImg(index);
+        }else{
+            return false;
+        }
+        if(i<0 || i>length-3) {return false;}
+        $("#cSlideUl ul").animate({ "left": "-=142px" },200);
         i++;
     }
 
@@ -38,7 +30,7 @@ $(document).ready(function(){
             --index;
             showImg(index);
         }
-        if(i<2 || i>length+5) {return false;}
+        if(i<2 || i>length+3) {return false;}
         $("#cSlideUl ul").animate({ "left": "+=142px" },200)
         i--;
     }
@@ -64,4 +56,4 @@ $(document).ready(function(){
     },function(){
         $(this).children("a").fadeOut();
     })
-})
+});

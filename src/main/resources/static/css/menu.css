@@ -2,7 +2,7 @@
     padding:0;width:100%; list-style:none;display:inline-block;position:relative;font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size:15px}
 .megamenu li{margin-bottom:0px;display:inline;}
 .megamenu>li>a{
-    color: #ff552e;
+    color: #ffffff;
     float: left;
     padding: 1.0em 2.8em;
     text-decoration: none;
@@ -14,7 +14,12 @@
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
-.megamenu>li.active>a{color:#fff;background: #ff552e}
+.caret{
+    border-top-color:#FFFFFF;
+}
+
+.megamenu>li.active>a{color:#fff;background: #ff956e
+}
 .megamenu>li.right{float:right}
 .megamenu .dropdown,.megamenu .dropdown li .dropdown{
     list-style:none;margin:0;padding:0;display:none;position:absolute;z-index:999;width:160px;border:solid 1px rgba(0,0,0,0.1);background:#fff}
@@ -42,11 +47,11 @@
     height: 55px;
 }
 /* 鼠标一开菜单操作*/
-.skyblue>li:hover>a,.skyblue .dropdown li:hover>a{color:#fff; background:#ff552e;}
+.skyblue>li:hover>a,.skyblue .dropdown li:hover>a{color:#fff; background:#ff956e;}
 .skyblue .megapanel img:hover,.skyblue form.contact input[type="text"]:focus,.skyblue form.contact textarea:focus{}
 /* start megamenu colors */
 .skyblue li a.color1:hover{
-    background:#ff552e;
+    background:#ff956e;
     color: #ffffff;
 }
 

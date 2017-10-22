@@ -220,13 +220,18 @@ public class UserInfoController {
 
     @GetMapping("/user/attc")
     public ModelAndView attc(){
-        ModelAndView modelAndView = new ModelAndView("attc");
+        ModelAndView modelAndView = new ModelAndView("about/attc");
         return modelAndView;
     }
 
     @GetMapping("/user/extension")
     public ModelAndView extension(){
-        ModelAndView modelAndView = new ModelAndView("extension");
+        ModelAndView modelAndView = new ModelAndView("about/service");
         return modelAndView;
+    }
+
+    @GetMapping("/user/resume")
+    public ModelAndView resume(){
+        return new ModelAndView("resume");
     }
 }

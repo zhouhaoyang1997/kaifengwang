@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 80
   context-path:
   session:
     cookie:
@@ -10,8 +10,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/kfcg?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
-#    password: xdjr1230-KFCG
-    password: 123
+    password: xdjr1230-KFCG
+#    password: 123
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   mvc:
@@ -35,9 +35,9 @@ logging:
        com.kf.mapper: debug
 
 path:
-  pathValue: C:/Users/ch/IdeaProjects/kaifengwang/src/main/resources/static/img/pushimg/
-  headImgPath: C:/Users/ch/IdeaProjects/kaifengwang/src/main/resources/static/img/headImg/
-  companyImgPath: C:/Users/ch/IdeaProjects/kaifengwang/src/main/resources/static/img/company/
+  pathValue: C:/Users/18236/Desktop/
+  headImgPath: C:/Users/18236/IdeaProjects/kaifengwang/src/main/resources/static/img/headImg/
+  companyImgPath: C:/Users/18236/IdeaProjects/kaifengwang/src/main/resources/static/img/company/
 #  pathValue: C:/Users/ch/Desktop/cg/src/main/resources/static/img/pushimg/
 #  headImgPath: C:/Users/ch/Desktop/cg/src/main/resources/static/img/headImg/
 # companyImgPath: C:/Users/ch/Desktop/cg/src/main/resources/static/img/company/

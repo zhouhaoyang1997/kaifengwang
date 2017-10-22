@@ -40,12 +40,30 @@
 .push_base_other{
     border-top:1px dashed #dbdbdb;
 }
-
+.contact_method{
+    font-size:18px;
+    font-weight: 500;
+    color: #ff552e;
+}
 .jinggao{
     margin-top:20px;
     height: 100px;
     width: 33.33%;
     background: #F7F7F7;
+}
+.alterInfo{
+    margin-top:20px;
+    width:80%;
+    height:40px;
+    font-size: 20px;
+    background: #F7F7F7;
+}
+.phoneNum{
+    margin-top:20px;
+    width:80%;
+    height:40px;
+    font-size: 25px;
+    color: #000;
 }
 .person_box{
     width: 18%;
@@ -88,10 +106,9 @@ a:hover{text-decoration:underline; color:#0F6BD0;}
 #img{ z-index:10; width:100%; position:relative; text-align:center;}
 #img img{ height:380px; display:none; border:4px solid #000;}
 #cbtn{background:#EAEBF0; position:relative; height:122px; border:1px solid #D6D9DC; margin-top:12px; }
-#cbtn ul{position:relative; width:10000px; height:122px;}
+#cbtn ul{position:relative; width:1000px; height:122px;}
 #cbtn ul li{ float:left; padding:8px 3px 3px 3px; width:116px; height:86px; cursor:pointer; text-align:center; margin-right:20px; position:relative;}
 #cbtn ul li img{ width:116px; height:86px; display:block;}
-#cbtn ul li tt{ background:#000; color:#FFF; position:absolute; right:4px; bottom:4px; z-index:20; font-family:"宋体" ;font-size:12px; line-height:16px; padding:0 5px;}
 
 .ctrl div{ clear:both;}
 #cSlideUl{width:400px; height:116px;overflow:hidden; position:relative; top:10px; margin:0 auto;}

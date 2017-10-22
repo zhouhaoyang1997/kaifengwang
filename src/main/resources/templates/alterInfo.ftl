@@ -160,6 +160,7 @@
                     <div class="col-xs-12">
 
                             <form enctype="multipart/form-data" >
+                                <label for="">您最多只能上传4张图片,且每张图片不能大于2M</label>
                                 <div class="form-group">
                                     <input id="picUpload" type="file" name="pic" multiple  class="file-loading">
                                 </div>
@@ -239,14 +240,10 @@
         });
 //http://blog.csdn.net/github_36086968/article/details/72830855;;;;http://plugins.krajee.com/file-input#ajax-uploads
         function initUpload(result) {
-            var flag=0;
-            if(result!==""){
-                flag=result.split("#").length;
-            }
             $("#picUpload").fileinput({
                 uploadUrl:'${base}/user/uploadPic',
-                uploadAsync:true,
-                showUpload: false,//是否显示上传按钮
+                uploadAsync:false,
+                showUpload: true,//是否显示上传按钮
                 showRemove: false,//是否显示删除按钮
                 showCaption: true,//是否显示输入框
                 showPreview:true,
@@ -256,16 +253,31 @@
                     actionUpload:''
                 },
                 dropZoneEnabled: false,
-                maxFileCount: 4-flag,
-                maxFileSize:1024*10,
+                maxFileSize:1024*2,
                 language:'zh',
+                maxFileCount: 4,
                 overwriteInitial: false,
                 initialPreviewFileType: 'image',
                 initialPreviewShowDelete:true,
+                validateInitialCount:true,
+                uploadExtraData:function (previewId,index) {
+                    return {piId:${pushInfo.piId},mcId:${pushInfo.piMc}}
+                },
                 msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
                 initialPreview: initPhoto(result),
                 previewFileIcon: '<i class="fa fa-file"></i>',
                 initialPreviewConfig: initConfig(result)
+            }).on('filebatchuploadsuccess',function (event,data) {
+                //同步上传上传成功后执行此事件
+                if(data.response.flag==="true"){
+                    window.location.href="/info?piId="+${pushInfo.piId};
+                }
+            }).on('filepredelete',function (jqXHR) {
+                var abort=true;
+                if (confirm("你确定要删除该文件吗?删除后不可恢复")) {
+                    abort = false;
+                }
+                return abort;
             })
         }
 
