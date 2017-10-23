@@ -2,6 +2,7 @@ package com.kf.mapper;
 
 import com.kf.pojo.BaseInfo;
 import com.kf.pojo.PushInfo;
+import com.kf.vo.OtherInfo;
 import com.kf.vo.TagValue;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -66,4 +67,12 @@ public interface PushInfoMapper {
     String selectPicUrl(@Param("piId")Integer piId,@Param("userId")Integer userId);
 
     void updatePicUrl(@Param("piImg")String piImg,@Param("piId")Integer piId,@Param("userId")Integer userId);
+
+
+    void updateInfoReadNum(@Param("piId")Integer piId);
+
+
+    List<TagValue> selectAllTagByPiId(@Param("piId")Integer piId);
+
+    List<OtherInfo> selectAllPicByPiId(@Param("piId")Integer piId);
 }

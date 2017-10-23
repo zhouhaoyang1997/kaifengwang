@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="logo">
-                    <h1><a href="${base}/index">开封<span>城市网</span></a></h1>
+                    <h1><a href="${base}/index">开封<span>麦芒网</span></a></h1>
                 </div>
             </div>
 

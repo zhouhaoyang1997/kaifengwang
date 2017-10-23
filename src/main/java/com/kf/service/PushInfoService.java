@@ -1,8 +1,11 @@
 package com.kf.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.kf.mapper.PushInfoMapper;
 import com.kf.pojo.BaseInfo;
 import com.kf.pojo.PushInfo;
+import com.kf.util.PageUtil;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +18,20 @@ public class PushInfoService {
     @Autowired
     private PushInfoMapper pushInfoMapper;
 
-    public List<PushInfo> getAllJob(Integer mcId, Integer scId,Integer districtId,List<String> tagValues,Integer tagNum){
-        return pushInfoMapper.selectAllJob(mcId,scId,districtId,tagValues,tagNum);
+
+    //进行分页查询
+    public List<PushInfo> getAllJob(Integer mcId, Integer scId, Integer districtId,
+                                    List<String> tagValues, Integer tagNum, Integer pageNum, Integer pageSize, PageUtil pageUtil){
+        PageHelper.startPage(pageNum,pageSize);
+        List<PushInfo> basePush = pushInfoMapper.selectAllJob(mcId,scId,districtId,tagValues,tagNum);
+        PageInfo<PushInfo> pageInfo=new PageInfo<>(basePush);
+        pageUtil.setPageNums(pageInfo.getPages());
+        pageUtil.setTotal(pageInfo.getTotal());
+        for(PushInfo pushInfo:basePush){
+            pushInfo.setTagValues(pushInfoMapper.selectAllTagByPiId(pushInfo.getPiId()));
+            pushInfo.setOtherInfos(pushInfoMapper.selectAllPicByPiId(pushInfo.getPiId()));
+        }
+        return basePush;
     }
 
     public boolean getPushIsExists(Integer piId){
@@ -85,5 +100,14 @@ public class PushInfoService {
 
     public void deletePushInfo(Integer piId,Integer userId){
         pushInfoMapper.deletePushInfo(piId,userId);
+    }
+
+
+    /**
+     * 修改当前信息的阅读量
+     * @param piId
+     */
+    public void updateInfoScan(Integer piId){
+        pushInfoMapper.updateInfoReadNum(piId);
     }
 }

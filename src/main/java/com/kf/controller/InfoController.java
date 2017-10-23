@@ -42,6 +42,8 @@ public class InfoController {
             PushInfo pushInfo = pushInfoService.getInfoByPiId(piId);
             Integer userId = null;
             try{
+                //更新数据库
+                pushInfoService.updateInfoScan(pushInfo.getPiId());
                 userId = pushInfo.getUserId();
             }
             catch (Exception e){

@@ -1,5 +1,6 @@
 package com.kf.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.kf.pojo.District;
 import com.kf.pojo.PushInfo;
 import com.kf.pojo.SecondClass;
@@ -9,6 +10,8 @@ import com.kf.service.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kf.util.BasePage;
+import com.kf.util.PageUtil;
 import com.kf.vo.CurrMain;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,9 @@ public class ListController {
     private TagService tagService;
 
     @Autowired
+    private BasePage basePage;
+
+    @Autowired
     private PushInfoService pushInfoService;
 
     /**
@@ -46,14 +52,17 @@ public class ListController {
      */
     @RequestMapping("/list")
     public ModelAndView jobPage(Integer mcId, @RequestParam(required = false) Integer scId,@RequestParam(required = false) Integer districtId,
-                                @RequestParam(required = false)String[] tagId){
+                                @RequestParam(required = false)String[] tagId,@RequestParam(defaultValue = "0") Integer pno){
         ModelAndView modelAndView=new ModelAndView("list");
         List<Tag> tags = tagService.getAllTag(mcId);
         List<SecondClass> secondClass = secondClassService.getAllSecondClass(mcId);
         List<District> districts = districtService.getAllDistrict();
         List<TagValue> newTagId = new ArrayList<>();
         List<String> tagValue = getTagValue(tagId,newTagId);
-        List<PushInfo> pushInfos = pushInfoService.getAllJob(mcId,scId,districtId,tagValue,tagValue.size());
+        //默认每页显示
+        PageUtil pageUtil = new PageUtil();
+        List<PushInfo> pushInfos = pushInfoService.getAllJob(mcId,scId,districtId,tagValue,tagValue.size(),
+                pno,basePage.getPageSize(),pageUtil);
         //查询二级类别
         modelAndView.addObject("secondClass",secondClass);
         //查询所有行政区域
@@ -73,6 +82,9 @@ public class ListController {
         modelAndView.addObject("currTags",newTagId);
         //当前所选地区
         modelAndView.addObject("currDistrictId",districtId);
+
+        //page对象返回页面
+        modelAndView.addObject("pageUtil",pageUtil);
         return modelAndView;
     }
     //对前台发来的url去重
