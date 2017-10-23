@@ -38,11 +38,12 @@ public interface PushInfoMapper {
     List<BaseInfo> selectCollectionByUserId(@Param("userId")Integer userId);
 
     /**
-     * 修改当前信息状态,可用于删除信息,将信息处于审核状态
+     * 修改当前信息状态,将信息处于审核状态
      * @param status
      */
     void updatePushInfoStatus(@Param("piId") Integer piId,@Param("userId")Integer userId,@Param("status")Integer status);
 
+    void deletePushInfo(@Param("piId") Integer piId,@Param("userId")Integer userId);
 
     Integer selectPushForPushExists(@Param("piId")Integer piId);
 

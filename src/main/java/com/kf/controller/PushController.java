@@ -4,6 +4,7 @@ import com.kf.pojo.*;
 import com.kf.service.*;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -11,8 +12,11 @@ import java.util.UUID;
 import java.io.File;
 
 import com.kf.util.BasePath;
+import com.kf.util.FileUtil;
 import com.kf.vo.Choose;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +31,9 @@ import javax.validation.Valid;
  */
 @Controller
 public class PushController {
+
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @Autowired
     public MainClassService mainClassService;
@@ -147,16 +154,7 @@ public class PushController {
             if(null != pics && pics.length > 0) {
                 //配置获去图片存放路径        暂未规定图片大小
                 String savePath = basePath.getPathValue();
-                String sb = ""; //存入数据库图片路径
-                for (MultipartFile pic : pics) {
-                    if(!pic.isEmpty()){
-                        String originalName = pic.getOriginalFilename();
-                        String suffix = originalName.substring(originalName.lastIndexOf(".") + 1);
-                        String filePath = "class"+mcId+"/"+UUID.randomUUID().toString() + "." + suffix;
-                        pic.transferTo(new File(savePath + filePath));
-                        sb=sb+"img/pushimg/"+filePath+"#";
-                    }
-                }
+                String sb = FileUtil.addPic(pics,"img/pushimg/",savePath);
                 //如果上传了图片,把图片路径存入数据库
                 if(!sb.isEmpty()){
                     sb=sb.substring(0,sb.length()-1);
@@ -189,4 +187,13 @@ public class PushController {
         return modelAndView;
     }
 
+    @GetMapping("/img/pushimg/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<?> getFile(@PathVariable String filename) {
+        try {
+            return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(basePath.getPathValue()+"/img/pushimg/",filename).toString()));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

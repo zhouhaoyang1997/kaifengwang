@@ -14,10 +14,10 @@
 <@user_nav>
 
 <div class="col-md-3">
-    <div class="user_bar"><h4><a href="#" class="active">个人中心</a></h4></div>
+    <div class="user_bar"><h4><a href="${base}/user/personal" style="font-size: 18px;font-weight: 600">个人中心</a></h4></div>
 </div>
 <div class="col-md-3">
-    <div class="user_bar"><h4><a href="#">账户设置</a></h4></div>
+    <div class="user_bar"><h4><a href="${base}/user/info">账户设置</a></h4></div>
 </div>
 </@user_nav>
 
@@ -32,7 +32,7 @@
                         <li class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">我的发布</a>
                         </li>
                         <li><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">我的收藏</a></li>
-                        <li><a href="#changeInfo" aria-controls="changeInfo" role="tab" data-toggle="tab">帮助信息</a></li>
+                        <li><a href="${base}/about/help">帮助信息</a></li>
                     </ul>
                 </li>
                 <li>
@@ -42,18 +42,16 @@
                 </li>
                 <li>
                     <a href="${base}/user/extension">
-                        <div class="link"><i class="fa fa-mobile"></i>推广中心<i class="fa fa-chevron-down"></i></div>
+                        <div class="link"><i class="fa fa-mobile"></i>推广中心</div>
                     </a>
                 </li>
                 <li>
                     <a href="${base}/user/attc">
-                        <div class="link"><i class="fa fa-id-card-o"></i>公司认证<i class="fa fa-chevron-down"></i></div>
+                        <div class="link"><i class="fa fa-id-card-o"></i>公司认证</div>
                     </a>
 
                 </li>
-                <li>
-                    <div class="link"><i class="fa fa-globe"></i>我的简历</div>
-                </li>
+                <li><a href="${base}/user/resume"><div class="link"><i class="fa fa-globe"></i>我的简历</div></a></li>
             </ul>
         </div>
         <div class="col-md-9">
@@ -65,29 +63,7 @@
                             <div class="panel-heading"><h3>我的发布</h3></div>
                             <div class="panel-body">
                                 <div>
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#newInfo" aria-controls="home"
-                                                                                  role="tab" data-toggle="tab">所有信息</a>
-                                        </li>
-                                        <li role="presentation"><a href="#deleteInfo" aria-controls="settings"
-                                                                   role="tab" data-toggle="tab">信息回收站</a></li>
-                                    </ul>
-
-                                    <!-- Tab panes -->
-                                    <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane active"
-                                             style="margin-left: 0;margin-top: 10px;" id="newInfo">
-                                            <table class="table" id="table">
-                                            </table>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" style="margin-left: 0;margin-top: 10px;"
-                                             id="deleteInfo">
-                                            <table class="table" id="deleteTable">
-                                            </table>
-                                        </div>
-                                    </div>
-
+                                    <table class="table" id="table"></table>
                                 </div>
 
                             </div>
@@ -98,22 +74,12 @@
                         <div class="panel panel-default">
                             <div class="panel-heading"><h3>我的收藏</h3></div>
                             <div class="panel-body">
+                                <p>提醒:如果您收藏的信息被发布者删除了,这条信息将不会出现在您的收藏列表中</p>
                                 <table class="table" id="collectionTable">
 
                                 </table>
                             </div>
                         </div>
-
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="changeInfo">
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><h3>帮助中心</h3></div>
-                            <div class="panel-body">
-
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -125,7 +91,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                您确认删除该条信息吗?
+                您确认删除该条信息吗?删除后不可恢复!
                 <input type="hidden" id="piIdHidden" value="">
             </div>
             <div class="modal-footer">

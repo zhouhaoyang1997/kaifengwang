@@ -1,0 +1,124 @@
+@charset "utf-8";
+/**
+* User: huanhuan
+* QQ: 651471385
+* Email: th.wanghuan@gmail.com
+* 微博: huanhuan的天使
+* Data 2013-12-25
+* web:https://github.com/huanhuan1989
+            http://www.cnblogs.com/huanhuan1989/
+* Copyright：2005-2013 www.techholder.com Inc. All rights reserved.
+*/
+
+/*Initialization style*/
+
+.relative {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.pb6 {
+    padding-bottom: 6px;
+}
+
+/*asid_share*/
+.asid_share {
+    position: fixed;
+    width: 40px;
+    bottom: 15%;
+    right: 0;
+    z-index: 890;
+}
+
+* html #asid_share {
+    position: absolute;
+    top: expression(documentElement.scrollTop + "px");
+    margin: 300px 0 0 0;
+}
+
+.asid_share .asid_share_box {
+    width: 100%;
+    margin-bottom: 3px;
+    background: #d9d9d9;
+    text-align: center;
+}
+
+.asid_share .asid_share_box a {
+    display: block;
+    height: 35px;
+    padding-top: 5px;
+}
+
+.asid_share .asid_share_box a:hover {
+    background: #e12500;
+    text-decoration: none;
+}
+
+.asid_share .asid_share_box a:hover .asid_title, .asid_share .asid_share_box .asid_title {
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    padding-left: 6px;
+    line-height: 18px;
+    width: 30px;
+    margin-top: -2px;
+}
+
+.asid_share .red_bag {
+    background: #e12500;
+    text-decoration: none;
+}
+
+.asid_share .asid_sha_layer {
+    border: 1px solid #ccc;
+    background: #fff;
+    position: absolute;
+    right: 47px;
+    bottom: -44px;
+}
+
+.sweep_img {
+    padding: 10px;
+}
+
+
+.asid_share_box .asid_help_list li a {
+    line-height: 26px;
+    height: 26px;
+    padding: 0 0 0 14px;
+    text-align: left;
+}
+
+.asid_help_list li a:hover {
+    color: #fff;
+}
+
+.asid_share_triangle {
+    width: 12px;
+    height: 40px;
+    position: absolute;
+    right: 45px;
+    bottom: -12px;
+    z-index: 100;
+}
+
+.border_sj, .con_sj {
+    display: block;
+    width: 18px;
+    height: 28px;
+    font-size: 18px;
+    overflow: hidden;
+    font-family: SimSun;
+}
+
+.border_sj {
+    color: #ccc;
+    font-style: normal;
+}
+
+.con_sj {
+    color: white;
+    margin: -14px -2px 0 0;
+    margin: -28px 0 0 -2px;
+}

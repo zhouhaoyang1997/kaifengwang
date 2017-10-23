@@ -79,10 +79,10 @@
                     <div class="col-xs-5"></div>
                 </div>
             </#list>
-                <label><span style="color:red">*</span>内容:</label>
+                <label><span style="color:red">*</span>内容:你知道吗?描述的清除的信息的成功率会高30%!(请输入至少10个字符)</label>
             <div class="form-group row">
                 <div class="col-xs-8">
-                    <textarea name="piContent" style="width:800px;height:400px;visibility:hidden;"></textarea>
+                    <textarea name="piContent" minlength="10" maxlength="2000" style="width:800px;height:400px;visibility:hidden;"></textarea>
                 </div>
                 <div class="col-xs-4">
                 <#if pushError??>

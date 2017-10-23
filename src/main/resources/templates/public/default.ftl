@@ -21,7 +21,7 @@
                     <ul>
                         <li><p>欢迎来到开封城市网!</p></li>
                         <li><a href="${base}/push/choose"><i class="fa fa-heart"></i> 快速发布信息</a></li>
-                        <li><a href="#"><i class="fa fa-edit"></i> 修改/删除信息</a></li>
+                        <li><a href="${base}/user/personal"><i class="fa fa-edit"></i> 修改/删除信息</a></li>
                         <li><a href="#"><i class="fa fa-phone"></i> 手机浏览</a></li>
                     </ul>
                 </div>
@@ -40,7 +40,7 @@
                                 <li class="divider"></li>
                                 <li><a href="${base}/user/attc">公司认证</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">我的简历</a></li>
+                                <li><a href="${base}/user/resume">我的简历</a></li>
                             </ul>
                         </li>
                         <#--该方法返回当前页面uri -->

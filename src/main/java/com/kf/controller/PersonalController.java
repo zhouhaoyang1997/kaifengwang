@@ -2,18 +2,24 @@ package com.kf.controller;
 
 import com.kf.pojo.*;
 import com.kf.service.*;
+import com.kf.util.BasePath;
+import com.kf.util.FileUtil;
 import com.kf.util.SessionUtil;
 import com.kf.vo.Flag;
 import com.kf.vo.OtherInfo;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +50,8 @@ public class PersonalController {
     @Autowired
     private TagService tagService;
 
+    @Autowired
+    private BasePath basePath;
 
     @GetMapping("/user/personal")
     public ModelAndView personal(){
@@ -59,15 +67,9 @@ public class PersonalController {
     public List<BaseInfo> allPush(Integer limit,Integer offset,HttpServletRequest request){
         Integer userId = SessionUtil.getUserId(request);
         //查询出除去删除的信息
-        return pushInfoService.getBaseInfoByUserIdAndOpStatus(userId,1);
+        return pushInfoService.getBaseInfoByUserIdAndOpStatus(userId,null);
     }
 
-    @GetMapping("/user/deletePush")
-    @ResponseBody
-    public List<BaseInfo> deletePush(Integer limit,Integer offset,HttpServletRequest request){
-        Integer userId = SessionUtil.getUserId(request);
-        return pushInfoService.getBaseInfoByUserIdAndStatus(userId,1);
-    }
 
     @GetMapping("/user/collectionPush")
     @ResponseBody
@@ -82,25 +84,13 @@ public class PersonalController {
         Integer userId = SessionUtil.getUserId(request);
         if(userId!=null&&piId!=null){
             //确保该信息是该用户发的
-            pushInfoService.updatePushInfoStatus(piId,userId,1);
+            pushInfoService.deletePushInfo(piId,userId);
             return "ok:删除成功";
         }else{
             return "no:不合法的请求";
         }
     }
 
-    @GetMapping("/user/recoverInfo")
-    @ResponseBody
-    public String recoverInfo(Integer piId,HttpServletRequest request){
-        Integer userId = SessionUtil.getUserId(request);
-        if(userId!=null&&piId!=null){
-            //确保该信息是该用户发的
-            pushInfoService.updatePushInfoStatus(piId,userId,0);
-            return "ok:已恢复";
-        }else{
-            return "no:不合法的请求";
-        }
-    }
 
     @GetMapping("/user/alterInfo")
     public ModelAndView alterInfo(Integer piId,HttpServletRequest request){
@@ -166,10 +156,28 @@ public class PersonalController {
 
     @PostMapping("/user/uploadPic")
     @ResponseBody
-    public String alterPicInfo(HttpServletRequest request){
-        return "ok";
-    };
+    public Flag alterPicInfo(@RequestParam("pic")MultipartFile[] pic,Integer piId, Integer mcId,HttpServletRequest request)throws IOException{
+        Integer userId=SessionUtil.getUserId(request);
+        String baseImgStr = pushInfoService.getImgUrl(piId,userId);
+        String savePath = basePath.getPathValue();
+        String otherImgUrl = FileUtil.addPic(pic,"img/pushimg/",savePath);
+        if(baseImgStr!=null){
+            otherImgUrl=baseImgStr+"#"+otherImgUrl;
+        }
+        if(!otherImgUrl.isEmpty()){
+            pushInfoService.updatePicUrl(otherImgUrl.substring(0,otherImgUrl.length()-1),piId,userId);
+        }
+        Flag flag = new Flag();
+        flag.setFlag("true");
+        return flag;
+    }
 
+    /**
+     * 初始话图片
+     * @param piId
+     * @param request
+     * @return
+     */
     @GetMapping("/user/initPic")
     @ResponseBody
     public String getPicInfo(Integer piId,HttpServletRequest request){
@@ -185,7 +193,6 @@ public class PersonalController {
     @ResponseBody
     public Flag deletePic(Integer key,Integer urlId,HttpServletRequest request){
         Integer userId=SessionUtil.getUserId(request);
-        System.out.print(urlId);
         String imgStr = pushInfoService.getImgUrl(key,userId);
 
         StringBuffer stringBuffer = new StringBuffer();
@@ -195,6 +202,9 @@ public class PersonalController {
                 if(i!=urlId){
                     stringBuffer.append(imgUrl[i]);
                     stringBuffer.append("#");
+                }else{
+                    //删除该图片
+                    FileUtil.deleteImg(basePath.getPathValue()+imgUrl[i]);
                 }
             }
             //更改图片url

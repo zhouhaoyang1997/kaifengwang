@@ -12,7 +12,11 @@
     display: block;
     margin: 0 auto 15px;
 }
-a:focus { outline: 0px solid }
+a:hover{
+    text-decoration: none;
+
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -61,6 +65,11 @@ body { font-family: 'Titillium Web', sans-serif; }
     font-size:16px;
     color: #0E8ED8;
 }
+.list_clear li a:hover{
+    color: #ff552e;
+    text-decoration: none;
+}
+
 .user-menu li a {
 
     display: block;
@@ -90,13 +99,9 @@ body { font-family: 'Titillium Web', sans-serif; }
     min-width: 100px;
     text-align: center;
 }
-a{
-    color: #555555;
-    text-decoration: none;
-}
 
 .mainmenu-area {
-    background: #ffffff;
+    background: #ff552e;
 font-family: "Roboto Condensed",sans-serif;
 text-transform: uppercase;
 width: 100%;
@@ -113,8 +118,22 @@ z-index: 999;}
     font-size:18px;
     margin-bottom: 30px;
 }
+.iconDiv{
+    margin-top:10px;
+}
+.iconDiv .col-xs-2{
+    border-right:1px solid #f8f8f8;
+
+}
+.iconDiv .col-xs-2 div{
+    width:55px;margin: 0 auto;
+}
+
 .logo_login h1 span{
     color:#ff552e;
+}
+.site-branding-area{
+    min-height:88px;
 }
 .logo_login h1{
 
@@ -124,7 +143,7 @@ z-index: 999;}
 }
 .logo h1 {
     font-size: 40px;
-    margin: 18px 0 40px 0;
+    margin: 10px 0 14px 0;
     font-weight: 400;
 
 }
@@ -438,7 +457,7 @@ ol.slide-indicators li.active {
 }
 .gg_box{
     width:1200px;
-    height:60px;
+    height:90px;
     background-size: 100%
 }
 .footerPage{

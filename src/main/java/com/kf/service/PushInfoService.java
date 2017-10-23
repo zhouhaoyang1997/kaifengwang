@@ -82,4 +82,8 @@ public class PushInfoService {
     public void updatePicUrl(String piImg,Integer piId,Integer userId){
         pushInfoMapper.updatePicUrl(piImg,piId,userId);
     }
+
+    public void deletePushInfo(Integer piId,Integer userId){
+        pushInfoMapper.deletePushInfo(piId,userId);
+    }
 }

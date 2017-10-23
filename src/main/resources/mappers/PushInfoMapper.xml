@@ -156,4 +156,9 @@
         UPDATE push_info set pi_img=#{piImg} WHERE pi_id=#{piId} and pi_user=#{userId}
     </update>
 
+
+    <delete id="deletePushInfo">
+        DELETE FROM push_info where pi_id=#{piId} and pi_user=#{userId}
+    </delete>
+
 </mapper>

@@ -13,9 +13,12 @@
 <li><a href="${base}/index">回首页</a></li>
 </@headerArea>
 <@user_nav>
-
-<div class="col-md-3"><div class="user_bar"><h4><a href="#">个人中心</a></h4></div></div>
-<div class="col-md-3"><div class="user_bar"><h4><a href="#" class="active">账户设置</a></h4></div></div>
+<div class="col-md-3">
+    <div class="user_bar"><h4><a href="${base}/user/personal">个人中心</a></h4></div>
+</div>
+<div class="col-md-3">
+    <div class="user_bar"><h4><a href="${base}/user/info" style="font-size: 18px;font-weight: 600">账户设置</a></h4></div>
+</div>
 </@user_nav>
 
 <div class="container_self" style="min-height: 800px;">
@@ -37,12 +40,12 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="${base}/user/extension"><div class="link"><i class="fa fa-mobile"></i>推广中心<i class="fa fa-chevron-down"></i></div></a>
+                    <a href="${base}/user/extension"><div class="link"><i class="fa fa-mobile"></i>推广中心</div></a>
                 </li>
                 <li>
-                    <a href="${base}/user/attc"><div class="link"><i class="fa fa-id-card-o"></i>公司认证<i class="fa fa-chevron-down"></i></div></a>
+                    <a href="${base}/user/attc"><div class="link"><i class="fa fa-id-card-o"></i>公司认证</div></a>
                 </li>
-                <li><div class="link"><i class="fa fa-globe"></i>我的简历</div></li>
+                <li><a href="${base}/user/resume"><div class="link"><i class="fa fa-globe"></i>我的简历</div></a></li>
             </ul>
 
 
