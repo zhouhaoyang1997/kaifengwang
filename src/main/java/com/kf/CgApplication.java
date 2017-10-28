@@ -36,7 +36,7 @@ public class CgApplication {
 		factory.setMaxFileSize("3072KB"); //KB,MB
 		/// 设置总上传数据总大小
 		factory.setMaxRequestSize("102492KB");
-		factory.setLocation("C:/Users/18236/Desktop/");
+		factory.setLocation("/Users/zhy/Downloads/test");
 		return factory.createMultipartConfig();
 	}
 

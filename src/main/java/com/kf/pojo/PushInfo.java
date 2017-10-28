@@ -30,4 +30,5 @@ public class PushInfo extends BaseInfo {
         this.otherInfos = otherInfos;
     }
 
+
 }

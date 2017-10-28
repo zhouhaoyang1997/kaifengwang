@@ -1,40 +1,54 @@
-<#macro layout>
-<html>
-<head>
-    <title>Dashboard | Klorofil - Free Bootstrap Dashboard Template</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <!-- VENDOR CSS -->
-    <link rel="stylesheet" href="../css/admin/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/admin/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/admin/style.css">
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="../css/admin/main.css">
-    <!-- ICONS -->
-    <link rel="apple-touch-icon" sizes="76x76" href="../img/admin/apple-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="../img/admin/favicon.png">
-<#--js-->
-    <script type="text/javascript" src="../js/admin/jquery.min.js"></script>
-    <script src="../js/admin/bootstrap.min.js"></script>
-    <script src="../js/admin/klorofil-common.js"></script>
-    <script src="../js/admin/index.js"></script>
+<#--在基本宏里定义#compress 压缩页面指令-->
+<#--<#compress>-->
+<#macro base siteName title base_keywords="" base_js=[] base_css=[] cssPath="../css/phone/" jsPath="../js/phone/">
+    <#assign base = "${request.contextPath}"/>
 
+<!DOCTYPE html>
+<html lang="zh-CN" class="index_page">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,minimal-ui"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <meta name="format-detection" content="address=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="keywords" content=${base_keywords}/>
+    <meta name="description" content=${base_keywords}/>
+    <title>${siteName}</title>
+    <#--//遍历扩展页css-->
+    <#list base_css as c>
+        <link rel="stylesheet" href="${cssPath}${c}.css">
+    </#list>
+<#--//遍历公共js-->
+    <#list base_js as j>
+        <script src="${jsPath}${j}.js"></script>
+    </#list>
 </head>
-<body>
-    <#include "header.ftl">
-    <#include "sidebar.ftl">
-<div class="main">
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-        <div class="container-fluid">
-            <#nested >
-        </div>
+<body class="orange">
+
+<div class="wrapper">
+    <div class="header">
+        <div id="ipageTitle">${title}</div>
     </div>
-    <!-- END MAIN CONTENT -->
+    <div id="contactbar">
+        <a href="#" class="bottom_index_on">首页</a>
+        <a href="#" class="bottom_member">我的</a>
+        <a href="#" class="bottom_history">历史</a>
+        <a href="#" class="bottom_post">发布</a>
+    </div>
+    <#nested/>
 </div>
-    <#include "footer.ftl">
+<div class="clear"></div>
+<div class="clear"></div>
+<div class="clear"></div>
+<div class="footer_02">&copy;copyright开封麦芒网版权所有. </div>
 </body>
 </html>
 
 </#macro>
+<#--</#compress>-->

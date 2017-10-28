@@ -1,7 +1,6 @@
 package com.kf.pojo;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -16,6 +15,7 @@ public class BaseInfo {
     private String piTitle;
     @Length(min=10,max = 2500,message = "内容应在10-2500之间")
     private String piContent;
+    @NotNull(message = "错误的提交")
     private Integer piMc;
     private String mcName;
     private String scName;
@@ -35,9 +35,10 @@ public class BaseInfo {
     public void setScName(String scName) {
         this.scName = scName;
     }
-
+    @NotNull(message = "错误的提交")
     private Integer piSc;
     private String piUser;
+//    @NotNull(message = "错误的提交")
     private Integer userId;
     @Length(min = 2,max=150,message = "请输入2-150个字符之间的文字")
     private String piAddress;
@@ -224,4 +225,31 @@ public class BaseInfo {
         this.piZhiding = piZhiding;
     }
 
+    @Override
+    public String toString() {
+        return "BaseInfo{" +
+                "piId=" + piId +
+                ", piTitle='" + piTitle + '\'' +
+                ", piContent='" + piContent + '\'' +
+                ", piMc=" + piMc +
+                ", mcName='" + mcName + '\'' +
+                ", scName='" + scName + '\'' +
+                ", piSc=" + piSc +
+                ", piUser='" + piUser + '\'' +
+                ", userId=" + userId +
+                ", piAddress='" + piAddress + '\'' +
+                ", piImg='" + piImg + '\'' +
+                ", piScan=" + piScan +
+                ", piContactPerson='" + piContactPerson + '\'' +
+                ", piPhone='" + piPhone + '\'' +
+                ", piQq='" + piQq + '\'' +
+                ", piDistrict=" + piDistrict +
+                ", piDistrictName='" + piDistrictName + '\'' +
+                ", piPushDate=" + piPushDate +
+                ", piChujia=" + piChujia +
+                ", piScName='" + piScName + '\'' +
+                ", piZhiding='" + piZhiding + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

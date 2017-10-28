@@ -2,16 +2,27 @@ package com.kf.controller;
 
 import com.kf.pojo.*;
 import com.kf.service.*;
+import com.kf.util.BasePath;
+import com.kf.util.FileUtil;
 import com.kf.vo.CurrMain;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,43 +50,88 @@ public class MobileMainController {
 
     @Autowired
     private PushInfoClassService pushInfoClassService;
+    @Autowired
+    PushInfoTagService pushInfoTagService;
+    @Autowired
+    PicContentService picContentService;
+    @Autowired
+    private BasePath basePath;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
+
 
     @GetMapping("/index")
     public ModelAndView phoneIndex() {
         ModelAndView modelAndView = new ModelAndView("phone/index");
 
         return modelAndView;
+    } @GetMapping("/index1")
+    public ModelAndView phoneIndex1() {
+        ModelAndView modelAndView = new ModelAndView("phone/_index");
+
+        return modelAndView;
     }
 
-    @GetMapping("/push1")
-    public ModelAndView infoUpload(String mcId, String scId) {
-        ModelAndView modelAndView = new ModelAndView("phone/infoUpload");
+    @GetMapping("/push")
+    public ModelAndView infoTable(String mcId, String scId) {
+        ModelAndView modelAndView = new ModelAndView("phone/_infoUpload");
         List<District> districts = districtService.getAllDistrict();
         List<Tag> tags = tagService.getAllTag(Integer.valueOf(mcId));
         List<PushInfoClass> pushInfoClasses = pushInfoClassService.getAllPush(Integer.valueOf(mcId));
         modelAndView.addObject("districts", districts);
         modelAndView.addObject("tags", tags);
         modelAndView.addObject("pushInfoClasses", pushInfoClasses);
+        modelAndView.addObject("mcId", mcId);
+        modelAndView.addObject("scId", scId);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/push1",method = RequestMethod.POST)
+    public ModelAndView infoUpload(@Valid @ModelAttribute("pushError")PushInfo pushInfo,BindingResult result, HttpServletRequest request) {
+        ModelAndView modelAndView;
+        int mcId = pushInfo.getPiMc();
+        int scId = pushInfo.getPiSc();
+        System.out.println(pushInfo);
+        if(result.hasErrors()){
+             return new ModelAndView("redirect:/m/push?mcId="+pushInfo.getPiMc()+"&scId="+pushInfo.getPiSc());
+        }
+//        设置当前时间
+        Timestamp ts = new Timestamp(new Date().getTime());
+        pushInfo.setPiPushDate(ts);
+//        返回自增长的id
+        Integer piId = pushInfoService.addPushInfo(pushInfo);
+
+//        通过mcId获取搜有的tagId,并将所有的tag和他的之存储到数据库表push_info_tag中
+        List<Integer> tagsId = tagService.getAllTagId(mcId);
+        for(Integer tagId:tagsId){
+            Integer value = Integer.valueOf(request.getParameter("tag"+tagId));
+            if(value!=null){
+                pushInfoTagService.addPushInfoTag(tagId,piId,value);
+            }
+        }
+//        获取所有的其他信息id 并将信息插入数据库
+        List<Integer> picsId= pushInfoClassService.getAllPushId(mcId);
+        for(Integer picId:picsId){
+            String value = request.getParameter("pic"+picId);
+            if(value!=null&&!value.trim().isEmpty()){
+                picContentService.addPicContent(picId,piId,value);
+            }
+        }
+        return new ModelAndView("redirect:/m/push2");
     }
 
     @GetMapping("/push2")
     public ModelAndView picTable() {
-        ModelAndView modelAndView = new ModelAndView("phone/picUpload");
-        return modelAndView;
+        return new ModelAndView("phone/_picUpload");
     }
 
-    @PostMapping("/push")
-    public ModelAndView infpTable() {
-        ModelAndView modelAndView = new ModelAndView("phone/pushTable");
-        return modelAndView;
-    }
 
 
     @RequestMapping("/infolist")
     public ModelAndView quanzhizhaopin(Integer mcId, @RequestParam(required = false) Integer scId, @RequestParam(required = false) Integer districtId,
                                        @RequestParam(required = false) String[] tagId) {
-        ModelAndView modelAndView = new ModelAndView("phone/infolist");
+        ModelAndView modelAndView = new ModelAndView("phone/_infolist");
         List<Tag> tags = tagService.getAllTag(mcId);
         List<SecondClass> secondClass = secondClassService.getAllSecondClass(mcId);
         List<District> districts = districtService.getAllDistrict();
@@ -127,14 +183,14 @@ public class MobileMainController {
 
     @GetMapping("/infomation")
     public ModelAndView information() {
-        return new ModelAndView("phone/infomation");
+        return new ModelAndView("phone/_infomation");
     }
 
     @RequestMapping("/menulist")
     public ModelAndView menulist(String methon) {
         ModelAndView modelAndView = null;
         if ("view".equals(methon)) {
-            modelAndView = new ModelAndView("phone/menulist");
+            modelAndView = new ModelAndView("phone/_menulist");
         }
         if ("push".equals(methon)) {
             modelAndView = new ModelAndView("phone/push");
@@ -155,22 +211,26 @@ public class MobileMainController {
         return modelAndView;
     }
 
-    @PostMapping("/picUpload")
+    @PostMapping("/push3")
     public String picUpload(@RequestParam(value = "pic", required = true) MultipartFile pics[]) throws IOException {
-        if (null != pics && pics.length > 0) {
+        if(null != pics && pics.length > 0){
             //配置获去图片存放路径        暂未规定图片大小
-            String savePath = "/users/zhy/Pictures";
-            String sb = ""; //存入数据库图片路径
-            for (MultipartFile pic : pics) {
-                if (!pic.isEmpty()) {
-                    String originalName = pic.getOriginalFilename();
-                    String suffix = originalName.substring(originalName.lastIndexOf(".") + 1);
-                    String filePath = UUID.randomUUID().toString() + "." + suffix;
-                    pic.transferTo(new File(savePath + filePath));
-//                    sb=sb+"img/pushimg/"+filePath+"#";
-                }
-            }
+            String savePath = basePath.getPathValue();
+            String sb = FileUtil.addPic(pics,"img/pushimg/",savePath);//存入数据库图片路径
+            //更新信息
+            sb=sb.substring(0,sb.length()-1);
+            pushInfoService.updatePicUrl(sb,21,1);
+
         }
         return "ok";
     }
+        @GetMapping("/img/pushimg/{filename:.+}")
+        @ResponseBody
+        public ResponseEntity<?> getFile(@PathVariable String filename) {
+            try {
+                return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(basePath.getPathValue()+"/img/pushimg/",filename).toString()));
+            } catch (Exception e) {
+                return ResponseEntity.notFound().build();
+            }
+        }
 }

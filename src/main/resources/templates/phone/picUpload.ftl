@@ -24,8 +24,6 @@
 
 <body class="orange">
 <div class="wrapper">
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="http://malsup.github.io/jquery.form.js"></script>
     <script src="../js/phone/jq_min.211_1.js"></script>
     <script src="../js/phone/common_1.js"></script>
     <script src="../js/phone/bootstrap.min.js"></script>
@@ -105,7 +103,7 @@
         $(function () {
         // 文件上传框
             $("#picUpload").fileinput({
-                uploadUrl: "picUpload",
+                uploadUrl: "push3",
                 showUpload: false,//是否显示上传按钮
                 showRemove: false,//是否显示删除按钮
                 showCaption: true,//是否显示输入框
