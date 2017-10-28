@@ -1,6 +1,6 @@
 <#include "public/default.ftl">
 <#assign base="${request.contextPath}"/>
-<@header title="开封城市网${currMc.mcName}">
+<@header title="麦芒网${currMc.mcName}">
 <link rel="stylesheet" href="${request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${request.contextPath}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/list.css">
@@ -18,43 +18,12 @@
         </div>
     </div>
 </div>
-<div class="site-branding-area">
-    <div class="container_self" style="width: 1200px;">
-        <div class="row">
-            <div class="col-xs-3">
-                <div class="logo">
-                    <h1><a href="${base}/index">开封<span>${currMc.mcName}</span></a></h1>
-                </div>
-            </div>
 
-            <div class="col-xs-6">
-                <div class="search-box">
-                    <form action="" method="post">
-                        <div class="input-group">
-                            <input type="text" class="form-control search_box" placeholder="输入你感兴趣信息">
-                            <span class="input-group-btn" >
-                                <button class="btn btn_search"  type="button">搜索</button>
-                            </span>
-                        </div>
-                    </form>
-                    <div class="quickClick">
-                        <ul>
-                            <li><a href="#">丽人坊</a></li>
-                            <li><a href="#">找宠物</a></li>
-                            <li><a href="#" style="color: red;">农家乐</a></li>
-                            <li><a href="#">名车4s店</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-3">
-                <div class="pushing-item">
-                    <a href="#"><i class="fa fa-edit"></i>免费发布信息</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- End site branding area -->
+
+<@searchArea>
+<h1><a href="${base}/index">开封<span>${currMc.mcName}</span></a></h1>
+</@searchArea>
+
 
 <!--轮播图 -->
 <div class="slider_width" id="lunbotu">
@@ -149,7 +118,6 @@
 
 <!-- 下方显示职位类别及搜索-->
 <div class="container_self">
-    <div class="row">
         <div class="now_position">
             <i class="fa fa-home"></i><a href="/index">开封城市网</a>&nbsp;>&nbsp;<span>${currMc.mcName}</span>
         </div>
@@ -265,7 +233,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 
@@ -361,21 +328,6 @@
             //	this.selectPage(n);
             //  return false;
             //}
-        });
-
-
-
-
-
-
-        //图片滚动特效
-        $('#asid_share').hhShare({
-            cenBox     : 'asid_share_box',  //里边的小层
-            icon       : 'adid_icon',
-            addClass   : 'red_bag',
-            titleClass : 'asid_title',
-            triangle   : 'asid_share_triangle', //鼠标划过显示图层，边上的小三角
-            showBox    : 'asid_sha_layer' //鼠标划过显示图层
         });
     });
 </script>

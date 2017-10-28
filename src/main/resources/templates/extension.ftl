@@ -3,7 +3,7 @@
 <#include "public/pushdefault.ftl">
 <#include "public/userdefault.ftl">
 <#assign base="${request.contextPath}"/>
-<@header title="开封网招聘">
+<@header title="麦芒网推广服务">
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/userInfo.css">

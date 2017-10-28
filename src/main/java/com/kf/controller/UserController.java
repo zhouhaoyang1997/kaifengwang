@@ -59,6 +59,7 @@ public class UserController{
                 modelAndView = new ModelAndView("redirect:"+url);
             }else{
                 modelAndView = new ModelAndView("login");
+
                 modelAndView.addObject("error","用户名或密码错误!");
             }
         }else{
@@ -143,20 +144,16 @@ public class UserController{
 
     @PostMapping("/unIsEx")
     @ResponseBody
-    public String unIsEx(String userName){
-        if(CommonUtil.isNotNullAndNotEmpty(userName)&&userService.userNameIsNotExists(userName)){
-            return "true";
-        }
-        return "false";
+    public boolean unIsEx(String userName){
+
+        return CommonUtil.isNotNullAndNotEmpty(userName)&&userService.userNameIsNotExists(userName);
     }
 
     @PostMapping("/ueIsEx")
     @ResponseBody
-    public String ueIsEx(String userEmail){
-        if(CommonUtil.isNotNullAndNotEmpty(userEmail)&&userService.userEmailIsNotExists(userEmail)){
-            return "true";
-        }
-        return "false";
+    public boolean ueIsEx(String userEmail){
+
+        return CommonUtil.isNotNullAndNotEmpty(userEmail)&&userService.userEmailIsNotExists(userEmail);
     }
 
 }

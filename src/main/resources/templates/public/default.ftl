@@ -1,4 +1,4 @@
-<#macro header title="开封城市网">
+<#macro header title="麦芒网">
 <#assign base = "${request.contextPath}"/>
 <!DOCTYPE HTML>
 <html>
@@ -12,6 +12,58 @@
 <body>
 </#macro>
 
+
+<#macro searchArea>
+<div class="site-branding-area">
+    <div class="container_self" style="width: 1200px;">
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="logo">
+                    <#nested >
+                </div>
+            </div>
+
+            <div class="col-xs-6">
+                <div class="search-box">
+                    <form action="${base}/search" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control search_box" name="key" value="${keyWords!""}" placeholder="输入你感兴趣信息">
+                            <#if currDistrictId??>
+                                <input type="hidden" name="district" value="${currDistrictId}">
+                            </#if>
+                            <span class="input-group-btn">
+                                <button class="btn btn_search" type="submit">麦芒搜索</button>
+                            </span>
+                        </div>
+                    </form>
+                    <div class="quickClick">
+                        <ul id="hotSearch">
+                            <#--<#if hotSearches??>-->
+                            <#--<#list hotSearches as hotSearch>-->
+                            <#--<#if hotSearch.hotSearchBz==1>-->
+                                <#--<li><a href="${base}/search?key=${hotSearch.hotSearchCt}-->
+<#--<#if currDistrictId??>&district=${currDistrictId}</#if>" style="color: red;">${hotSearch.hotSearchCt}</a></li>-->
+                            <#--<#else>-->
+                                <#--<li><a href="${base}/search?key=${hotSearch.hotSearchCt}-->
+<#--<#if currDistrictId??>&district=${currDistrictId}</#if>" style="color: #aaa;">${hotSearch.hotSearchCt}</a></li>-->
+                            <#--</#if>-->
+                            <#--</#list>-->
+                            <#--</#if>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="pushing-item">
+                    <a href="${base}/push/choose"><i class="fa fa-edit"></i>免费发布信息</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</#macro>
+
 <#macro headerArea>
 <div class="header-area">
     <div class="container_self">
@@ -19,7 +71,7 @@
             <div class="col-xs-8">
                 <div class="user-menu">
                     <ul>
-                        <li><p>欢迎来到开封麦芒网!</p></li>
+                        <li><p>欢迎来到麦芒网!</p></li>
                         <li><a href="${base}/push/choose"><i class="fa fa-heart"></i> 快速发布信息</a></li>
                         <li><a href="${base}/user/personal"><i class="fa fa-edit"></i> 修改/删除信息</a></li>
                         <li><a href="#"><i class="fa fa-phone"></i> 手机浏览</a></li>
@@ -59,6 +111,7 @@
 </div> <!-- End header area -->
 </#macro>
 
+
 <#macro footer>
 <#-- 页脚-->
 <div class="footerPage" style="">
@@ -66,7 +119,7 @@
         <div class="row" style="padding-top: 15px;">
             <div class="col-xs-3">
                 <div class="logo">
-                    <h1><a href="/index">开封<span>麦芒网</span></a></h1>
+                    <h1><a href="/index"><span>麦芒网</span></a></h1>
                 </div>
             </div>
             <div class="col-xs-2 footer_ul">
@@ -106,6 +159,9 @@
 </div>
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
+<!-- 快速点击js-->
+<script type="text/javascript" src="${base}/js/basePath.js"></script>
+<script type="text/javascript" src="${base}/js/quickClick.js"></script>
     <#nested >
 </body>
 </html>

@@ -75,4 +75,7 @@ public interface PushInfoMapper {
     List<TagValue> selectAllTagByPiId(@Param("piId")Integer piId);
 
     List<OtherInfo> selectAllPicByPiId(@Param("piId")Integer piId);
+
+
+    List<PushInfo> selectByKeyAndDistrict(@Param("keyWords")String keyWords,@Param("districtId") Integer district);
 }

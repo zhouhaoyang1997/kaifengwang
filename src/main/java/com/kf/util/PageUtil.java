@@ -1,7 +1,16 @@
 package com.kf.util;
 
 public class PageUtil {
+
+
+    /**
+     * 总条数
+     */
     private Long total;
+
+    /**
+     * 总页码
+     */
     private Integer pageNums;
 
     public Long getTotal() {

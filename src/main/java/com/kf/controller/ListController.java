@@ -16,6 +16,7 @@ import com.kf.vo.CurrMain;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,8 +39,6 @@ public class ListController {
     @Autowired
     private TagService tagService;
 
-    @Autowired
-    private BasePage basePage;
 
     @Autowired
     private PushInfoService pushInfoService;
@@ -62,7 +61,7 @@ public class ListController {
         //默认每页显示
         PageUtil pageUtil = new PageUtil();
         List<PushInfo> pushInfos = pushInfoService.getAllJob(mcId,scId,districtId,tagValue,tagValue.size(),
-                pno,basePage.getPageSize(),pageUtil);
+                pno,pageUtil);
         //查询二级类别
         modelAndView.addObject("secondClass",secondClass);
         //查询所有行政区域
@@ -87,6 +86,22 @@ public class ListController {
         modelAndView.addObject("pageUtil",pageUtil);
         return modelAndView;
     }
+
+    @GetMapping("/search")
+    public ModelAndView searchPage(String key,@RequestParam(required = false) Integer districtId,@RequestParam(defaultValue = "0") Integer pno){
+        ModelAndView mav = new ModelAndView("searchInfo");
+        PageUtil pageUtil = new PageUtil();
+        List<PushInfo> pushInfos = pushInfoService.getAllInfoByKeyWords(key,districtId,pno,pageUtil);
+        List<District> districts = districtService.getAllDistrict();
+        mav.addObject("districts",districts);
+        mav.addObject("pageUtil",pageUtil);
+        mav.addObject("pushInfos",pushInfos);
+        mav.addObject("currDistrictId",districtId);
+        mav.addObject("keyWords",key);
+        return mav;
+    }
+
+
     //对前台发来的url去重
     private List<String>  getTagValue(String[] tagId,List<TagValue> newTagId){
         List<String> tagValue = new ArrayList<>();

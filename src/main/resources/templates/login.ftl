@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head lang="zh">
-    <title>登录开封城市网</title>
+    <title>登录麦芒网</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css" >
     <link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
@@ -15,7 +15,7 @@
         <div class="col-md-6 col-md-push-4">
             <!-- Start Sign In Form -->
             <form action="${request.contextPath}/login" method="post" id="commentForm" class="fh5co-form animate-box">
-                <h1 style="text-align: center">欢迎登录开封城市网</h1>
+                <h1 style="text-align: center">欢迎登录麦芒网</h1>
                 <div class="form-box row">
                     <div class="col-sm-offset-1 col-sm-10">
                     <div class="form-group">

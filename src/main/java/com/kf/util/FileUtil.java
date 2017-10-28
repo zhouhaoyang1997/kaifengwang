@@ -10,6 +10,7 @@ import java.util.UUID;
  * Created by 18236 on 2017/10/19.
  */
 public class FileUtil {
+
     public static String addPic(MultipartFile[] pics,String filePathPri,String savePath) throws IOException{
         String sb="";
         for (MultipartFile pic : pics) {
@@ -35,7 +36,7 @@ public class FileUtil {
      */
     public static boolean deleteImg(String fileName){
         File file = new File(fileName);
-        System.out.println("删除图片"+fileName);
+//        System.out.println("删除图片"+fileName);
         return file.exists()&&file.isFile()&&file.delete();
     }
 }

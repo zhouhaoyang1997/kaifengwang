@@ -15,44 +15,11 @@
     </div>
 </div>
 
-<div class="site-branding-area">
-    <div class="container_self">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="logo">
-                    <h1>
-                        <img src="${base}/img/kflogo2.png" width="60" height="60" alt="网站logo"><a href="${base}/index">开封<span>麦芒网</span></a></h1>
-                </div>
-            </div>
+<@searchArea>
+<h1><a href="${base}/index"><span>麦芒网</span></a></h1>
+</@searchArea>
 
-            <div class="col-sm-6">
-                <div class="search-box">
-                    <form action="" method="post">
-                        <div class="input-group">
-                            <input type="text" class="form-control search_box" placeholder="输入你感兴趣信息">
-                            <span class="input-group-btn" >
-                                <button class="btn btn_search"  type="button">搜索</button>
-                            </span>
-                        </div>
-                    </form>
-                    <div class="quickClick">
-                        <ul>
-                            <li><a href="#">丽人坊</a></li>
-                            <li><a href="#">找宠物</a></li>
-                            <li><a href="#" style="color: red;">农家乐</a></li>
-                            <li><a href="#">名车4s店</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="pushing-item">
-                    <a href="${base}/push/choose"><i class="fa fa-edit"></i>免费发布信息</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- End site branding area -->
+
 <#-- 菜单栏-->
 <div class="mainmenu-area">
     <div class="container_self" style="width: 1200px;">

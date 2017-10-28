@@ -36,4 +36,16 @@
             })
         })
     }
-})(jQuery)
+})(jQuery);
+
+$(function () {
+    //图片滚动特效
+    $('#asid_share').hhShare({
+        cenBox     : 'asid_share_box',  //里边的小层
+        icon       : 'adid_icon',
+        addClass   : 'red_bag',
+        titleClass : 'asid_title',
+        triangle   : 'asid_share_triangle', //鼠标划过显示图层，边上的小三角
+        showBox    : 'asid_sha_layer' //鼠标划过显示图层
+    });
+});

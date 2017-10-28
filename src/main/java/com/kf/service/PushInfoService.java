@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.kf.mapper.PushInfoMapper;
 import com.kf.pojo.BaseInfo;
 import com.kf.pojo.PushInfo;
+import com.kf.util.BasePage;
 import com.kf.util.PageUtil;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,15 @@ public class PushInfoService {
     private PushInfoMapper pushInfoMapper;
 
 
-    //进行分页查询
-    public List<PushInfo> getAllJob(Integer mcId, Integer scId, Integer districtId,
-                                    List<String> tagValues, Integer tagNum, Integer pageNum, Integer pageSize, PageUtil pageUtil){
-        PageHelper.startPage(pageNum,pageSize);
-        List<PushInfo> basePush = pushInfoMapper.selectAllJob(mcId,scId,districtId,tagValues,tagNum);
+    @Autowired
+    private BasePage basePage;
+
+    /**
+     * 该方法用于构造信息的tag和pic信息
+     * @param pageUtil
+     * @param basePush
+     */
+    private void initPushInfo(PageUtil pageUtil,List<PushInfo> basePush){
         PageInfo<PushInfo> pageInfo=new PageInfo<>(basePush);
         pageUtil.setPageNums(pageInfo.getPages());
         pageUtil.setTotal(pageInfo.getTotal());
@@ -31,6 +36,15 @@ public class PushInfoService {
             pushInfo.setTagValues(pushInfoMapper.selectAllTagByPiId(pushInfo.getPiId()));
             pushInfo.setOtherInfos(pushInfoMapper.selectAllPicByPiId(pushInfo.getPiId()));
         }
+    }
+
+
+    //进行分页查询
+    public List<PushInfo> getAllJob(Integer mcId, Integer scId, Integer districtId,
+                                    List<String> tagValues, Integer tagNum, Integer pageNum, PageUtil pageUtil){
+        PageHelper.startPage(pageNum,basePage.getPageSize());
+        List<PushInfo> basePush = pushInfoMapper.selectAllJob(mcId,scId,districtId,tagValues,tagNum);
+        initPushInfo(pageUtil,basePush);
         return basePush;
     }
 
@@ -110,4 +124,19 @@ public class PushInfoService {
     public void updateInfoScan(Integer piId){
         pushInfoMapper.updateInfoReadNum(piId);
     }
+
+
+    /**
+     * 搜索
+     *
+     */
+    public List<PushInfo> getAllInfoByKeyWords(String keyWords,Integer district,Integer pageNum,PageUtil pageUtil){
+        PageHelper.startPage(pageNum,basePage.getPageSize());
+        keyWords = "%"+keyWords+"%";
+        List<PushInfo> basePush = pushInfoMapper.selectByKeyAndDistrict(keyWords,district);
+        initPushInfo(pageUtil,basePush);
+        return basePush;
+    }
+
+
 }

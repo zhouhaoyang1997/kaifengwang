@@ -2,7 +2,7 @@
 <#include "public/pushdefault.ftl">
 <#include "public/userdefault.ftl">
 <#assign base="${request.contextPath}"/>
-<@header title="开封网招聘">
+<@header title="麦芒网">
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/userInfo.css">
@@ -70,7 +70,7 @@
                                             </#if>
 
                                             <h3 class="name">${userInfo.userName}</h3>
-                                            <span>开封城市网欢迎你</span>
+                                            <span>麦芒网欢迎你</span>
                                         </div>
                                         <div class="profile-stat">
                                             <div class="row">

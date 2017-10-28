@@ -133,7 +133,7 @@ z-index: 999;}
     color:#ff552e;
 }
 .site-branding-area{
-    min-height:88px;
+    min-height:78px;
 }
 .logo_login h1{
 
@@ -180,6 +180,10 @@ z-index: 999;}
 .search-box{
     margin-top:18px;
 }
+.btn_search:hover{
+    color: #FFFFFF;
+}
+
 
 .pushing-item{
     background: none repeat scroll 0 0 #ff552e;
@@ -223,7 +227,9 @@ z-index: 999;}
 .quickClick{
     margin-top:5px;
     height:20px;
-    font-size:14px;
+    font-size:10px;
+
+
 }
 .quickClick ul{
     margin:0;

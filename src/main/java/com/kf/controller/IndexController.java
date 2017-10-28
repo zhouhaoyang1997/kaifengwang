@@ -1,12 +1,15 @@
 package com.kf.controller;
 
+import com.kf.pojo.HotSearch;
 import com.kf.pojo.SecondClass;
+import com.kf.service.HotSearchService;
 import com.kf.service.SecondClassService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -17,7 +20,10 @@ public class IndexController {
 
 
     @Autowired
-    public SecondClassService secondClassService;
+    private SecondClassService secondClassService;
+
+    @Autowired
+    private HotSearchService hotSearchService;
 
     @RequestMapping("/index")
     public ModelAndView index(){
@@ -34,6 +40,7 @@ public class IndexController {
         modelAndView.addObject("shenghuo",shenghuo);
         modelAndView.addObject("chongwu",chongwu);
         modelAndView.addObject("mingqi",mingqi);
+
         return modelAndView;
     }
 
@@ -43,6 +50,11 @@ public class IndexController {
         return modelAndView;
     }
 
+    @GetMapping("/hotSearch")
+    @ResponseBody
+    public List<HotSearch> getHotSearch(){
+        return hotSearchService.getHotSearch(5);
+    }
 
 
 }

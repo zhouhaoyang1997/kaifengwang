@@ -99,8 +99,8 @@
 
 
     <select id="selectAllTagByPiId" resultType="com.kf.vo.TagValue">
-        SELECT DISTINCT push_info_tag.tag_id,tag.tag_name,tagContent.tc_name,tagContent.tc_id
-        FROM push_info_tag,tag,tagContent WHERE pi_id=#{piId} and push_info_tag.tag_id=tag.tag_id AND tagcontent.tc_id=pi_tag_content
+        SELECT DISTINCT push_info_tag.tag_id,tag.tag_name,tagcontent.tc_name,tagcontent.tc_id
+        FROM push_info_tag,tag,tagcontent WHERE pi_id=#{piId} and push_info_tag.tag_id=tag.tag_id AND tagcontent.tc_id=pi_tag_content
     </select>
 
     <select id="selectAllPicByPiId" resultType="com.kf.vo.OtherInfo">
@@ -175,5 +175,19 @@
     <delete id="deletePushInfo">
         DELETE FROM push_info where pi_id=#{piId} and pi_user=#{userId}
     </delete>
+
+
+    <select id="selectByKeyAndDistrict" resultMap="BasePushInfo">
+        select DISTINCT
+        push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,
+        pi_contact_person,district_name
+        from user,push_info LEFT JOIN pic_content ON push_info.pi_id = pic_content.pc_id
+        LEFT JOIN push_info_tag ON push_info.pi_id = push_info_tag.pi_id
+        LEFT JOIN tagcontent ON push_info_tag.pi_tag_content=tagcontent.tc_id
+        LEFT JOIN tag ON tag.tag_id=tagcontent.tag_id
+        LEFT JOIN district ON push_info.pi_district=district.district_id
+        where push_info.pi_user=user.user_id and pi_title LIKE #{keyWords}
+        <if test="districtId!=null and districtId!=0">and district_id=#{districtId}</if>
+    </select>
 
 </mapper>

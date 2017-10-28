@@ -9,7 +9,7 @@
             <div class="col-xs-8">
                 <div class="user-menu">
                     <ul>
-                        <li><p>欢迎来到开封城市网!</p></li>
+                        <li><p>欢迎来到开封麦芒网!</p></li>
                         <li><a href="${base}/push/choose"><i class="fa fa-heart"></i> 快速发布信息</a></li>
                         <li><a href="#"><i class="fa fa-user"></i> 修改/删除信息</a></li>
                         <li><a href="#"><i class="fa fa-phone"></i> 手机浏览</a></li>
@@ -47,7 +47,7 @@
                         <div class="modal-body">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <div class="container logo_login">
-                                    <h1>开封<span>城市网</span></h1>
+                                    <h1>开封<span>麦芒网</span></h1>
                                     <p >欢迎你的登陆</p>
                                 </div>
                             <div class="container loginForm">
