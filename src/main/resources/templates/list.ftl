@@ -236,29 +236,6 @@
 </div>
 
 
-<div class="asid_share" id="asid_share">
-    <div class="asid_share_box relative">
-        <a href="#"><img alt="我有话说" title="我有话说" class="adid_icon" src="img/icon_say.png"></a>
-    </div>
-    <div class="asid_share_box relative">
-        <a href="#"><img alt="新版帮助" title="新版帮助" class="adid_icon" src="img/icon_help.png"></a>
-        <div class="asid_share_triangle" style="display:none;">
-            <em class="border_sj">&#9670;</em>
-            <span class="con_sj">&#9670;</span>
-        </div>
-        <div class="asid_sha_layer" style="display:none;">
-            <ul class="asid_help_list" style="width:130px;">
-                <li><a href="#">测试数据</a></li>
-                <li><a href="#">测试数据</a></li>
-                <li><a href="#">测试数据</a></li>
-                <li><a href="#">测试数据</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="asid_share_box relative" style="display:none;">
-        <a href="#"><img alt="返回顶部" title="返回顶部" class="adid_icon" src="img/icon_back.png"></a>
-    </div>
-</div>
 
 
 <@footer>
@@ -277,6 +254,17 @@
 
     //init
     $(function(){
+        //回到顶部
+        $.goup({
+            trigger: 100,
+            bottomOffset: 150,
+            locationOffset: 100,
+            title: '回到顶部',
+            titleAsText: true
+        });
+
+
+
         var totalPage = ${pageUtil.pageNums};
         var totalRecords = ${pageUtil.total};
         var pageNo = getParameter('pno');

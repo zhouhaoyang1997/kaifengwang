@@ -16,7 +16,7 @@
 </div>
 
 <@searchArea>
-<h1><a href="${base}/index"><span>麦芒网</span></a></h1>
+<h1><img src="/img/kflogo2.png" width="48" height="48" alt="网站logo"><a href="${base}/index"><span>麦芒网</span></a></h1>
 </@searchArea>
 
 

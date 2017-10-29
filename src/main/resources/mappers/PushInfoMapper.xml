@@ -23,6 +23,7 @@
         <result property="piDistrictName" column="district_name"/>
         <result property="piAddress" column="pi_address"/>
         <result property="piDistrict" column="pi_district"/>
+        <result property="piIp" column="pi_ip"/>
         <collection property="tagValues" ofType="com.kf.vo.TagValue">
             <result property="tagId" column="tag_id"/>
             <result property="tagName" column="tag_name"/>
@@ -120,9 +121,9 @@
             select LAST_INSERT_ID()
         </selectKey>
         insert into push_info(pi_title,pi_content,pi_mc,pi_sc,pi_user,pi_address,
-        pi_img,pi_scan,pi_push_date,pi_chujia,pi_contact_person,pi_phone,pi_qq,pi_district) VALUES
+        pi_img,pi_scan,pi_push_date,pi_chujia,pi_contact_person,pi_phone,pi_qq,pi_district,pi_ip) VALUES
         (#{piTitle},#{piContent},#{piMc},#{piSc},#{userId},#{piAddress},#{piImg},#{piScan},#{piPushDate},#{piChujia},#{piContactPerson},
-        #{piPhone},#{piQq},#{piDistrict})
+        #{piPhone},#{piQq},#{piDistrict},#{piIp})
     </insert>
 
 

@@ -13,7 +13,7 @@ import java.io.IOException;
 public class XssFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("过滤器初始化");
+        //System.out.println("过滤器初始化");
     }
 
     @Override

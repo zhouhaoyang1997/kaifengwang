@@ -165,6 +165,10 @@ public class PushController {
             Timestamp ts = new Timestamp(new Date().getTime());
             pushInfo.setPiPushDate(ts);
             //返回自增长的id
+            // http://www.cnblogs.com/icerainsoft/p/3584532.html
+
+            pushInfo.setPiIp(request.getRemoteAddr());
+
             Integer piId = pushInfoService.addPushInfo(pushInfo);
             //通过mcId获取搜有的tagId,并将所有的tag和他的之存储到数据库表push_info_tag中
             List<Integer> tagsId = tagService.getAllTagId(mcId);

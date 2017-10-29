@@ -493,3 +493,12 @@ ol.slide-indicators li.active {
 .footer_ul ul li a:hover{
     color: #ff552e;
 }
+/*.footer_ul ul li p{*/
+    /*text-align: center;*/
+/*}*/
+/*.footer_ul{*/
+    /*border-right: 1px solid #aaa;*/
+/*}*/
+.foot_logo{
+    margin-left:60px;
+}

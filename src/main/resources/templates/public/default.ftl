@@ -118,8 +118,11 @@
     <div class="container_self">
         <div class="row" style="padding-top: 15px;">
             <div class="col-xs-3">
-                <div class="logo">
-                    <h1><a href="/index"><span>麦芒网</span></a></h1>
+                <div class="logo foot_logo">
+                    <h1 style="margin-top: 0;"><a href="/index"><span>麦芒网</span></a></h1>
+                    <p><span>客服电话:</span></p>
+                    <p style="font-size: 18px;color: #ff552e;">xxxxxxxx</p>
+                    <p style="font-size: 10px;color: #aaa;">工作时间:xxxx</p>
                 </div>
             </div>
             <div class="col-xs-2 footer_ul">

@@ -54,10 +54,19 @@ public class BaseInfo {
     private Timestamp piPushDate;
     private double piChujia;
     private String piScName;
+    private String piIp;
 
     private String piZhiding;
     //当前信息状态,0正常,1被删除,2正在审核,
     private Integer status;
+
+    public String getPiIp() {
+        return piIp;
+    }
+
+    public void setPiIp(String piIp) {
+        this.piIp = piIp;
+    }
 
     public Integer getStatus() {
         return status;
