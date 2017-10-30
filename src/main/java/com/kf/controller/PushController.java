@@ -102,6 +102,7 @@ public class PushController {
             String scName = secondClassService.getScName(choose.getScId());
             choose.setMcName(mcName);
             choose.setScName(scName);
+
             modelAndView = new ModelAndView(toPage);
             modelAndView.addObject("choose",choose);
         }

@@ -10,7 +10,7 @@
 <#-- 广告-->
 <div class="advert">
     <div class="container_self">
-        <div class="gg_box" style="background:url(${request.contextPath}/img/index_gg.jpg) no-repeat">
+        <div class="gg_box" style="background:url(${base}${advertMap["header"].advertUrl}) no-repeat">
         </div>
     </div>
 </div>

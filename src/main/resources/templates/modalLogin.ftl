@@ -51,7 +51,10 @@
                                     <p >欢迎你的登陆</p>
                                 </div>
                             <div class="container loginForm">
-                                <form action="${base}/login" method="post">
+                                <form action="${base}/modalLogin" method="post">
+                                    <input type="hidden" name="backPath" value="${base}/push/fill?mcId=${choose.mcId}&scId=${choose.scId}">
+                                    <input type="hidden" name="scId" value="${choose.scId}">
+                                    <input type="hidden" name="mcId" value="${choose.mcId}">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="userName" placeholder="用户名">
                                     </div>

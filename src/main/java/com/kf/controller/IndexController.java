@@ -1,13 +1,23 @@
 package com.kf.controller;
 
+import com.kf.pojo.Advert;
 import com.kf.pojo.HotSearch;
 import com.kf.pojo.SecondClass;
+import com.kf.service.AdvertService;
 import com.kf.service.HotSearchService;
 import com.kf.service.SecondClassService;
+
+import java.nio.file.Paths;
 import java.util.List;
+
+import com.kf.util.AdvertUtil;
+import com.kf.util.BasePath;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +31,15 @@ public class IndexController {
 
     @Autowired
     private SecondClassService secondClassService;
+
+    @Autowired
+    private BasePath basePath;
+
+    @Autowired
+    private AdvertService advertService;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @Autowired
     private HotSearchService hotSearchService;
@@ -40,7 +59,9 @@ public class IndexController {
         modelAndView.addObject("shenghuo",shenghuo);
         modelAndView.addObject("chongwu",chongwu);
         modelAndView.addObject("mingqi",mingqi);
-
+        //广告图片
+        List<Advert> adverts = advertService.getAdvertByPage("index");
+        modelAndView.addObject("advertMap", AdvertUtil.conversionMap(adverts));
         return modelAndView;
     }
 
@@ -56,5 +77,15 @@ public class IndexController {
         return hotSearchService.getHotSearch(5);
     }
 
+
+    @GetMapping("/img/advert/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<?> getFile(@PathVariable String filename) {
+        try {
+            return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(basePath.getPathValue()+"/img/advert/",filename).toString()));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
