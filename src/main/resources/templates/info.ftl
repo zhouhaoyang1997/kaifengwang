@@ -20,9 +20,9 @@
         <div class="col-md-7"></div>
         <div class="col-md-2">
             <div style="margin-top:15px">
-                <button onclick="" class="btn btn-info">发布信息</button>
+                <a href="${base}/push/choose" class="btn btn-info">发布信息</a>
                 <#if info.mcName="招聘">
-                    <button onclick="" class="btn btn-info">登记简历</button>
+                    <a href="${base}/user/resume" class="btn btn-info">登记简历</a>
                 </#if>
             </div>
         </div>

@@ -52,7 +52,6 @@
                                 </div>
                             <div class="container loginForm">
                                 <form action="${base}/modalLogin" method="post">
-                                    <input type="hidden" name="backPath" value="${base}/push/fill?mcId=${choose.mcId}&scId=${choose.scId}">
                                     <input type="hidden" name="scId" value="${choose.scId}">
                                     <input type="hidden" name="mcId" value="${choose.mcId}">
                                     <div class="form-group">

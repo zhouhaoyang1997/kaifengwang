@@ -1,6 +1,10 @@
 package com.kf.controller;
 
+import com.kf.pojo.District;
+import com.kf.pojo.SecondClass;
 import com.kf.pojo.User;
+import com.kf.service.DistrictService;
+import com.kf.service.SecondClassService;
 import com.kf.service.UserService;
 
 import java.io.File;
@@ -14,6 +18,7 @@ import com.kf.util.Md5Util;
 import com.kf.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -230,8 +235,5 @@ public class UserInfoController {
         return modelAndView;
     }
 
-    @GetMapping("/user/resume")
-    public ModelAndView resume(){
-        return new ModelAndView("resume");
-    }
+
 }

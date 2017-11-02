@@ -46,66 +46,31 @@ public class UserController{
         ModelAndView modelAndView = new ModelAndView("login");
         //如果用户输入了信息
         if(!br.hasErrors()){
-            login(modelAndView,user,remember,"index",request,response);
-        }else{
-            modelAndView.addObject("error","请输入合法的信息!");
-        }
-        return modelAndView;
-    }
-
-
-    @PostMapping("/modalLogin")
-    public ModelAndView modalLogin(@Valid @ModelAttribute("user")User user,BindingResult br, Choose choose, String remember, String backPath, HttpServletRequest request, HttpServletResponse response){
-        ModelAndView modelAndView =  toChoose(choose,"modalLogin");
-        //如果用户输入了信息
-        if(!br.hasErrors()){
-            login(modelAndView,user,remember,backPath,request,response);
-        }else{
-            modelAndView.addObject("error","请输入合法的信息!");
-        }
-        return modelAndView;
-    }
-
-    private void login(ModelAndView modelAndView, User user,String remember,String url,HttpServletRequest request,HttpServletResponse response){
-        user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
-        User user1 = userService.getUser(user);
-        if(user1!=null){
-            //修改最后登陆日期
-            Timestamp time = new Timestamp(new Date().getTime());
-            userService.updateUserLastLoginTime(user1.getUserId(),time);
-            //session记住当前用户
-            HttpSession session = request.getSession();
-            session.setAttribute("user",user1);
-            //用户点击了记住我
-            if(remember!=null&&!remember.isEmpty()){
-                CookieUtil.addCookie(response,"userName",user.getUserName());
-                CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
+            user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
+            User user1 = userService.getUser(user);
+            if(user1!=null){
+                //修改最后登陆日期
+                Timestamp time = new Timestamp(new Date().getTime());
+                userService.updateUserLastLoginTime(user1.getUserId(),time);
+                //session记住当前用户
+                HttpSession session = request.getSession();
+                session.setAttribute("user",user1);
+                //用户点击了记住我
+                if(remember!=null&&!remember.isEmpty()){
+                    CookieUtil.addCookie(response,"userName",user.getUserName());
+                    CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
+                }
+                //默认登陆后返回首页,如果session中有值,则返回用户点击登陆的页面
+                modelAndView.setViewName("redirect:/index");
+            }else{
+                modelAndView.addObject("error","用户名或密码错误!");
             }
-            //默认登陆后返回首页,如果session中有值,则返回用户点击登陆的页面
-            System.out.println(url);
-            modelAndView.setViewName("redirect:"+url);
         }else{
-            modelAndView.addObject("error","用户名或密码错误!");
-        }
-    }
-
-
-    private ModelAndView toChoose(Choose choose,String toPage){
-        ModelAndView modelAndView=null;
-        //如果用户没有选择或条件缺失,返回选择页面
-        if(choose==null||choose.getMcId()==null||choose.getScId()==null){
-            modelAndView=new ModelAndView("redirect:/push/choose");
-        }else{
-            String mcName = mainClassService.getMcName(choose.getMcId());
-            String scName = secondClassService.getScName(choose.getScId());
-            choose.setMcName(mcName);
-            choose.setScName(scName);
-
-            modelAndView = new ModelAndView(toPage);
-            modelAndView.addObject("choose",choose);
+            modelAndView.addObject("error","请输入合法的信息!");
         }
         return modelAndView;
     }
+
 
     /**
      * 注销

@@ -205,3 +205,8 @@ ul.list-justify > li span {
 .personal_tab a{
     color: #428bca;
 }
+.pt_title{
+    height: 39px;
+    line-height: 39px;
+    font-size: 16px;
+}

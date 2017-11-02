@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kf.mapper.ResumeMapper" >
+
+   <insert id="insertResume" parameterType="com.kf.pojo.Resume">
+      <selectKey resultType="java.lang.Integer" keyProperty="cvId">
+          select LAST_INSERT_ID()
+      </selectKey>
+       INSERT into cv(user_id,gra_coll,born_year,dream_work,gender,dream_district,jiguan,minzu,tall,marital_status,max_edu,gra_date,
+       stu_pro,english,computer,job_year,job_detail,income,jineng,zitui,phone,email,qq,real_name,weight,health,cv_img,other_stu,work_time)
+       VALUES(#{userId},#{graColl},#{bornYear},#{dreamWork},#{gender},#{dreamDistrict},#{jiguan},#{minzu},#{tall},#{maritalStatus},#{maxEdu},
+       #{graDate},#{stuPro},#{english},#{computer},#{jobYear},#{jobDetail},#{income},#{jineng},#{zitui},#{phone},#{email},#{qq},#{realName},
+       #{weight},#{health},#{cvImg},#{otherStu},#{workTime})
+   </insert>
+
+</mapper>

@@ -10,8 +10,10 @@
 <#-- 广告-->
 <div class="advert">
     <div class="container_self">
+    <#if advertMap["header"]??>
         <div class="gg_box" style="background:url(${base}${advertMap["header"].advertUrl}) no-repeat">
         </div>
+    </#if>
     </div>
 </div>
 
@@ -156,7 +158,7 @@
                         </#list>
                         </ul>
                         <div class="gg_img">
-                            <img src="${base}/img/gg_fz.jpg" class="img-thumbnail" style="width: 170px;height: 400px" alt="">
+                            <img src="${base}${advertMap["gg_fz"].advertUrl}" class="img-thumbnail" style="width: 170px;height: 400px" alt="">
                         </div>
                     </div>
                 </div>
@@ -184,7 +186,7 @@
                         </#list>
                         </ul>
                         <div class="gg_img">
-                            <img src="${base}/img/gg_zp.png" class="img-thumbnail" style="width: 350px;height: 100px" alt="">
+                            <img src="${base}${advertMap["gg_zp"].advertUrl}" class="img-thumbnail" style="width: 350px;height: 100px" alt="">
                         </div>
                     </div>
                 </div>
@@ -211,7 +213,7 @@
                         </#list>
                         </ul>
                         <div class="gg_img">
-                            <img src="${base}/img/ul_gg.png" class="img-thumbnail" style="width: 350px;height: 100px" alt="">
+                            <img src="${base}${advertMap["gg_py"].advertUrl}" class="img-thumbnail" style="width: 350px;height: 100px" alt="">
                         </div>
                     </div>
                 </div>
@@ -235,7 +237,7 @@
 <div class="advert">
     <div class="container">
         <div class="row">
-            <img src="${base}/img/advert.jpg" alt="开学那点事">
+            <img src="${base}${advertMap["footer"].advertUrl}" alt="开学那点事">
         </div>
     </div>
 </div>
