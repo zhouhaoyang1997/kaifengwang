@@ -54,6 +54,31 @@
                     </ul>
                 </div>
             </div>
+            <div class="row" style="border-bottom: 1px #e6e6e6 dashed;">
+                <div class="col-xs-1"><span class="lanmutitle">学历:</span></div>
+                <div class="col-xs-11">
+                    <ul class="lanmu_ul2">
+                        <li><a href="">不限</a></li>
+                        <li><a href="">初中</a></li>
+                        <li><a href="">高中/中专</a></li>
+                        <li><a href="">大专</a></li>
+                        <li><a href="">本科</a></li>
+                        <li><a href="">硕士</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row" style="border-bottom: 1px #e6e6e6 dashed;">
+                <div class="col-xs-1"><span class="lanmutitle">性别:</span></div>
+                <div class="col-xs-11">
+                    <ul class="lanmu_ul2">
+                        <li><a href="">不限</a></li>
+                        <li><a href="">男</a></li>
+                        <li><a href="">女</a></li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -73,15 +98,12 @@
             <div class="panel-body" style="min-height: 1000px;">
                 <div class="row">
                     <div class="col-xs-10">
-                        <div class="row">
+                        <div class="row hover_info">
                             <div class="col-xs-4 padding-top1">
                                 <div class="info_title "><strong>求职位</strong></div>
                             </div>
                             <div class="col-xs-2 padding_top">
-                                <strong>是否应届</strong>
-                            </div>
-                            <div class="col-xs-2 padding_top">
-                                <strong>年龄</strong>
+                                <strong>性别</strong>
                             </div>
                             <div class="col-xs-2 padding_top">
                                 <strong>工作年限</strong>
@@ -89,8 +111,33 @@
                             <div class="col-xs-2 padding_top">
                                 <strong>学历</strong>
                             </div>
+                            <div class="col-xs-2 padding_top">
+                                <strong>更新时间</strong>
+                            </div>
                         </div>
+                    <#list resumes as resume>
+                        <div class="row hover_info">
+                            <div class="col-xs-4 padding-top1">
+                                <div class="info_title">${resume.realName}</div>
+                                <span class="label label-info">${resume.scName}</span>
+                                <span class="label label-success">${resume.districtName}</span>
+                            </div>
+                            <div class="col-xs-2 padding_top">
+                                ${resume.gender}
+                            </div>
+                            <div class="col-xs-2 padding_top">
+                                ${resume.jobYear}
+                            </div>
+                            <div class="col-xs-2 padding_top">
+                                ${resume.maxEdu}
+                            </div>
+                            <div class="col-xs-2 padding_top">
+                                ${resume.updateTime?string("yyyy-MM-dd")}
+                            </div>
+                        </div>
+                    </#list>
                     </div>
+
                     <!-- 广告位-->
                     <div class="col-xs-2">
                         <img src="${base}/img/advert/gg_fz.jpg" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
@@ -113,10 +160,7 @@
 
 
 <@footer>
-<script src="${base}js/hhshare.js"></script>
-<script type="text/javascript" src="js/menu.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+<script src="${base}/js/hhshare.js"></script>
 <script type="text/javascript" src="${base}/js/kkpager.min.js"></script>
 <script type="text/javascript">
 

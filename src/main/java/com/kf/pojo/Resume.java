@@ -20,6 +20,16 @@ public class Resume {
     @NotNull(message = "错误的请求")
     private Integer dreamWork;
 
+    private String scName;
+
+    public String getScName() {
+        return scName;
+    }
+
+    public void setScName(String scName) {
+        this.scName = scName;
+    }
+
     private String gender;
     private Integer dreamDistrict;
     @NotBlank(message = "籍贯不能为空")
@@ -54,6 +64,34 @@ public class Resume {
     private String otherStu;
     private String workTime;
     private Integer openFlag;
+    private Timestamp updateTime;
+
+    private String dreamWorkStr;
+    private String districtName;
+
+    public String getDreamWorkStr() {
+        return dreamWorkStr;
+    }
+
+    public void setDreamWorkStr(String dreamWorkStr) {
+        this.dreamWorkStr = dreamWorkStr;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public Integer getOpenFlag() {
         return openFlag;

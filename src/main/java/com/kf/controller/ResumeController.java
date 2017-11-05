@@ -9,8 +9,10 @@ import com.kf.service.ResumeService;
 import com.kf.service.SecondClassService;
 import com.kf.util.BasePath;
 import com.kf.util.FileUtil;
+import com.kf.util.PageUtil;
 import com.kf.util.SessionUtil;
 import com.kf.vo.Flag;
+import com.kf.vo.ResumeMin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -49,14 +51,22 @@ public class ResumeController {
     private BasePath basePath;
 
     @GetMapping("/resume/list")
-    public ModelAndView getResumeList(@RequestParam(required = false)String scId,
-                                      @RequestParam(required = false) Integer districtId,
-                                      @RequestParam(defaultValue = "0") Integer pno){
+    public ModelAndView getResumeList(ResumeMin resumeMin,@RequestParam(defaultValue = "0") Integer pno){
         ModelAndView modelAndView = new ModelAndView("resumeList");
         List<SecondClass> secondClass = secondClassService.getAllSecondClass(1);
         List<District> districts = districtService.getAllDistrict();
+        if(resumeMin!=null){
+            resumeMin.setOpenFlag(1);
+        }else{
+            resumeMin = new ResumeMin();
+            resumeMin.setOpenFlag(1);
+        }
+        PageUtil pageUtil = new PageUtil();
+        List<Resume> resumes = resumeService.getResumeList(resumeMin,pno,pageUtil);
+        modelAndView.addObject("resumes",resumes);
         modelAndView.addObject("districts",districts);
         modelAndView.addObject("secondClass",secondClass);
+        modelAndView.addObject("pageUtil",pageUtil);
         return modelAndView;
     }
 

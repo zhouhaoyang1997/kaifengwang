@@ -239,10 +239,10 @@
 
 
 <@footer>
-<script src="${base}js/hhshare.js"></script>
-<script type="text/javascript" src="js/menu.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+<script src="${base}/js/hhshare.js"></script>
+<script type="text/javascript" src="${base}/js/menu.js"></script>
+<script src="${base}/js/owl.carousel.min.js"></script>
+<script src="${base}/js/main.js"></script>
 <script type="text/javascript" src="${base}/js/kkpager.min.js"></script>
 <script type="text/javascript">
 

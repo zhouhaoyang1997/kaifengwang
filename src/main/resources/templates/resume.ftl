@@ -216,8 +216,7 @@
                                         <div class="col-xs-4 input-group">
                                             <span  class="input-group-addon"><span style="color:red">*</span>最高学历:</span>
                                             <select name="maxEdu" id="maxSelect" class="form-control">
-                                                <option value="小学">小学</option>
-                                                <option value="初中">初中</option>
+                                                <option selected value="初中">初中</option>
                                                 <option value="高中/中专">高中/中专</option>
                                                 <option value="大专">大专</option>
                                                 <option value="本科">本科</option>
