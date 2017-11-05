@@ -176,9 +176,9 @@
             //总数据条数
             totalRecords : totalRecords,
             //链接前部
-            hrefFormer : '',
+            hrefFormer : 'search',
             //链接尾部
-            hrefLatter : '',
+            hrefLatter : '?key=${keyWords}',
             getLink : function(n){
                 return this.hrefFormer + this.hrefLatter + "&pno="+n;
             }

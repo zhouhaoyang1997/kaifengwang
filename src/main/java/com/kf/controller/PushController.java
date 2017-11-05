@@ -36,8 +36,6 @@ import javax.validation.Valid;
 @Controller
 public class PushController {
 
-    @Autowired
-    private ResourceLoader resourceLoader;
 
     @Autowired
     public MainClassService mainClassService;
@@ -233,13 +231,4 @@ public class PushController {
         return modelAndView;
     }
 
-    @GetMapping("/img/pushimg/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<?> getFile(@PathVariable String filename) {
-        try {
-            return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(basePath.getPathValue()+"/img/pushimg/",filename).toString()));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }

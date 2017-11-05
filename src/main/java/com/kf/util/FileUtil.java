@@ -15,19 +15,24 @@ public class FileUtil {
         String sb="";
         for (MultipartFile pic : pics) {
             if(!pic.isEmpty()){
-                String originalName = pic.getOriginalFilename();
-                String suffix = originalName.substring(originalName.lastIndexOf(".") + 1);
-                String filePath = filePathPri+ UUID.randomUUID().toString() + "." + suffix;
-                File file = new File(savePath + filePath);
+                File file = new File(savePath+getFilePath(pic,filePathPri));
                 if(!file.getParentFile().exists()){
                     file.getParentFile().mkdirs();
                 }
                 pic.transferTo(file);
-                sb=sb+filePath+"#";
+                sb=sb+getFilePath(pic,filePathPri)+"#";
             }
         }
         return sb;
     }
+
+    public static String getFilePath(MultipartFile file,String filePathPri){
+        String originalName = file.getOriginalFilename();
+        String suffix = originalName.substring(originalName.lastIndexOf(".") + 1);
+
+        return filePathPri+ UUID.randomUUID().toString() + "." + suffix;
+    }
+
 
     /**
      * 删除图片
