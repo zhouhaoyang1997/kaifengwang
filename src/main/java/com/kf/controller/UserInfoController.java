@@ -1,5 +1,6 @@
 package com.kf.controller;
 
+import com.kf.exception.UserNotLoginException;
 import com.kf.pojo.District;
 import com.kf.pojo.SecondClass;
 import com.kf.pojo.User;
@@ -12,10 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import com.kf.util.BasePath;
-import com.kf.util.CommonUtil;
-import com.kf.util.Md5Util;
-import com.kf.util.SessionUtil;
+import com.kf.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -48,16 +46,45 @@ public class UserInfoController {
      */
     @GetMapping("/user/info")
     public ModelAndView userInfo(HttpServletRequest request){
-        ModelAndView modelAndView = null;
         Integer userId= SessionUtil.getUserId(request);
-        if(userId!=null){
-            User user = userService.getUserByUserId(userId);
-            List<Integer> piIds = userService.getAllPiIdByUserId(userId);
-            modelAndView = new ModelAndView("userInfo");
-            modelAndView.addObject("userInfo",user);
-        }else{
-            modelAndView = new ModelAndView("redirect:/login");
+        if(userId==null){
+            throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
         }
+        User user = userService.getUserByUserId(userId);
+        ModelAndView modelAndView = new ModelAndView("user/userInfo");
+        modelAndView.addObject("userInfo",user);
+        return modelAndView;
+    }
+
+
+    @GetMapping("/user/info/pic")
+    public ModelAndView pic(HttpServletRequest request){
+        Integer userId= SessionUtil.getUserId(request);
+        ModelAndView modelAndView = new ModelAndView("user/pic");
+        try{
+            String userImg = userService.getUserByUserId(userId).getUserImg();
+            modelAndView.addObject("userImg",userImg);
+        }catch (Exception e){
+            throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/user/info/pwd")
+    public ModelAndView pwd(HttpServletRequest request){
+        Integer userId= SessionUtil.getUserId(request);
+        return new ModelAndView("user/pwd");
+    }
+
+    @GetMapping("/user/info/alterInfo")
+    public ModelAndView info(HttpServletRequest request){
+        Integer userId= SessionUtil.getUserId(request);
+        if(userId==null){
+            throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
+        }
+        User user = userService.getUserByUserId(userId);
+        ModelAndView modelAndView = new ModelAndView("user/alterInfo");
+        modelAndView.addObject("userInfo",user);
         return modelAndView;
     }
 
@@ -70,10 +97,11 @@ public class UserInfoController {
      */
     @PostMapping("/user/alterPwd")
     public ModelAndView alterPwd(HttpServletRequest request, String oldPwd, String newPwd){
-        ModelAndView modelAndView = null;
+        ModelAndView modelAndView=new ModelAndView("user/pwd");
         Integer userId=SessionUtil.getUserId(request);
-        if(userId!=null){
-            //如果字符串不为null且value不含空格
+        if(userId==null){
+            throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
+        }else{
             if(CommonUtil.isNotstrContainsBackspace(oldPwd)&&CommonUtil.isNotstrContainsBackspace(newPwd)){
                 HttpSession session = request.getSession();
                 User user = (User)session.getAttribute("user");
@@ -88,19 +116,14 @@ public class UserInfoController {
                         session.removeAttribute("user");
                         modelAndView=new ModelAndView("redirect:/login");
                     }else{
-                        modelAndView=userInfo(request);
                         modelAndView.addObject("alterPwdError","新密码输入不合法,请输入6-20位合法字符");
                     }
                 }else{
-                    modelAndView= userInfo(request);
                     modelAndView.addObject("alterPwdError","原密码输入不正确");
                 }
             }else{
-                modelAndView=userInfo(request);
                 modelAndView.addObject("alterPwdError","输入不合法");
             }
-        }else{
-            modelAndView = new ModelAndView("redirect:/login");
         }
         return modelAndView;
     }
@@ -113,8 +136,11 @@ public class UserInfoController {
     @ResponseBody
     public String alterUserInfo(String userPhone,HttpServletRequest request){
         Integer userId=SessionUtil.getUserId(request);
-        if(userId!=null){
+        if(userId==null){
+            throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
             //验证手机号是否符合规则
+
+        }else{
             if(CommonUtil.isPhoneNum(userPhone)){
                 //验证手机号是否已经存在,验证邮箱是否被除自己之外人使用
                 boolean phoneExists = userService.userPhoneIsNotExists(userId,userPhone);
@@ -127,8 +153,6 @@ public class UserInfoController {
             }else{
                 return "no:你输入的手机号不合法!";
             }
-        }else{
-            return "no:服务器开小差了!请刷新后再试!";
         }
     }
 
@@ -142,7 +166,9 @@ public class UserInfoController {
     @ResponseBody
     public String alterUserEmail(String userEmail,HttpServletRequest request){
         Integer userId=SessionUtil.getUserId(request);
-        if(userId!=null){
+        if(userId==null){
+            throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
+        }else{
             if(CommonUtil.isEmail(userEmail)){
                 boolean emailExists = userService.userEmailIsNotExists(userId,userEmail);
                 if(!emailExists){
@@ -154,8 +180,6 @@ public class UserInfoController {
             }else{
                 return "no:你输入的邮箱不合法!";
             }
-        }else{
-            return "no:服务器开小差了!请刷新后再试!";
         }
     }
 
@@ -169,36 +193,35 @@ public class UserInfoController {
     @PostMapping("/user/alterHead")
     public ModelAndView alterUserHead(HttpServletRequest request, MultipartFile file){
         Integer userId=SessionUtil.getUserId(request);
-        ModelAndView modelAndView = null;
-        if(userId!=null){
-            modelAndView= userInfo(request);
+        if(userId==null){
+            throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
+        }else{
+            User user = userService.getUserByUserId(userId);
+            ModelAndView modelAndView = null;
             if(file==null||file.isEmpty()){
+                modelAndView = pic(request);
                 modelAndView.addObject("headInfo","修改头像失败，文件上传为空");
                 return modelAndView;
             }else{
                 if(file.getSize()>1024*1024){
+                    modelAndView = pic(request);
                     modelAndView.addObject("headInfo","修改头像失败,上传文件过大,请上传1M以下图片");
                     return modelAndView;
                 }
-                String originalName = file.getOriginalFilename();
-                String suffix = originalName.substring(originalName.lastIndexOf(".") + 1);
-                String savePath = basePath.getHeadImgPath();
-                String filePath = UUID.randomUUID().toString() + "." + suffix;
+                String filePath = FileUtil.getFilePath(file,"img/headimg/");
                 try {
-                    file.transferTo(new File(savePath+filePath));
+                    file.transferTo(new File(basePath.getPathValue()+filePath));
+                    //将图片路径存入数据库
+                    userService.updateUserImg(filePath,userId,basePath.getPathValue()   );
+                    modelAndView = new ModelAndView("redirect:/user/info");
                 } catch (IOException e) {
+                    modelAndView = pic(request);
                     modelAndView.addObject("headInfo","修改头像失败,上传图片发生异常，请稍后再试");
                     return modelAndView;
                 }
-                //将图片路径存入数据库
-                String imgUrl = "img/headImg/"+filePath;
-                userService.updateUserImg(imgUrl,userId);
-                modelAndView.addObject("headInfo","修改头像成功!");
             }
-        }else{
-            modelAndView = new ModelAndView("redirect:/login");
+            return modelAndView;
         }
-        return modelAndView;
     }
 
     /**
@@ -211,12 +234,12 @@ public class UserInfoController {
     @ResponseBody
     public String alterUserProfileInfo(String userProfileInfo,HttpServletRequest request){
         Integer userId=SessionUtil.getUserId(request);
-        if(userId!=null){
+        if(userId==null){
+            throw new UserNotLoginException("500","对不起,您的登录信息已过期,请重新登录!");
+
+        }else{
             userService.updateUserDescription(userProfileInfo,userId);
             return "ok:个人信息修改成功!";
-        }
-        else{
-            return "no:服务器开小差了!请刷新后再试!";
         }
     }
 

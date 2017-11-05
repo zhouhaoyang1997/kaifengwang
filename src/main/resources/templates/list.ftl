@@ -219,7 +219,7 @@
                         </div>
                         <!-- 广告位-->
                         <div class="col-xs-2">
-                            <img src="${base}/img/gg_fz.jpg" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
+                            <img src="${base}/img/advert/gg_fz.jpg" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
                         </div>
                     </div>
 

@@ -2,6 +2,7 @@ package com.kf.service;
 
 import com.kf.mapper.ResumeMapper;
 import com.kf.pojo.Resume;
+import com.kf.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,27 @@ public class ResumeService {
      * @param resume
      * @return
      */
-    public Integer insertResume(Resume resume){
-        resumeMapper.insertResume(resume);
+    public Integer insertOrUpdateResume(Resume resume,String basePath){
+        Resume resume1 = getResume(resume.getUserId());
+        //如果数据库中已存在,更新
+        if(resume1!=null){
+            //如果已有图片则删除
+            if(resume1.getCvImg()!=null){
+                FileUtil.deleteImg(basePath+resume1.getCvImg());
+            }
+            resumeMapper.updateResume(resume);
+        }else{
+            resumeMapper.insertResume(resume);
+        }
         return resume.getCvId();
+    }
+
+
+    public Resume getResume(Integer userId){
+        return resumeMapper.selectResumeByUserId(userId);
+    }
+
+    public void updateResumeOpenFlag(Integer openFlag,Integer cvId){
+        resumeMapper.updateResumeCvOpenFlag(cvId,openFlag);
     }
 }

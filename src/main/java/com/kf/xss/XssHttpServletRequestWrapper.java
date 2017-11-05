@@ -37,7 +37,8 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper{
             int length = values.length;
             String[] escapeValues = new String[length];
             for(int i=0;i<length;i++){
-                escapeValues[i] = HtmlUtils.htmlEscape(values[i]);
+                //将所有的请求参数去空格化
+                escapeValues[i] = HtmlUtils.htmlEscape(values[i]).trim();
             }
             return escapeValues;
         }

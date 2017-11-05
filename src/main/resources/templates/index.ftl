@@ -67,7 +67,7 @@
                     </div>
                 </li>
                 <li><a class="color1" href="#">名企招聘</a></li>
-                <li><a class="color1" href="#">求职简历</a></li>
+                <li><a class="color1" href="${base}/resume/list">求职简历</a></li>
             </ul>
         </div>
     </div>

@@ -36,8 +36,6 @@ import javax.validation.Valid;
 @Controller
 public class PushController {
 
-    @Autowired
-    private ResourceLoader resourceLoader;
 
     @Autowired
     public MainClassService mainClassService;
@@ -75,7 +73,7 @@ public class PushController {
      * 选择主类及副类
      * @return
      */
-    @RequestMapping("/push/choose")
+    @GetMapping("/push/choose")
     public ModelAndView chooseMainClass(){
         ModelAndView modelAndView = new ModelAndView("choose");
         List<MainClass> mainClass= mainClassService.getMainClass();
@@ -135,17 +133,19 @@ public class PushController {
      */
     private ModelAndView toChoose(Choose choose,String toPage){
         ModelAndView modelAndView=null;
-        //如果用户没有选择或条件缺失,返回选择页面
-        if(choose==null||choose.getMcId()==null||choose.getScId()==null){
-            modelAndView=new ModelAndView("redirect:/push/choose");
-        }else{
+        //如果用户没有选择或条件缺失或条件有误,返回选择页面
+        if(choose!=null){
             String mcName = mainClassService.getMcName(choose.getMcId());
             String scName = secondClassService.getScName(choose.getScId());
-            choose.setMcName(mcName);
-            choose.setScName(scName);
-
-            modelAndView = new ModelAndView(toPage);
-            modelAndView.addObject("choose",choose);
+            if(mcName!=null&&scName!=null){
+                choose.setMcName(mcName);
+                choose.setScName(scName);
+                modelAndView = new ModelAndView(toPage);
+            }else{
+                modelAndView = new ModelAndView("redirect:/push/choose");
+            }
+        }else{
+            modelAndView = new ModelAndView("redirect:/push/choose");
         }
         return modelAndView;
     }
@@ -157,7 +157,7 @@ public class PushController {
     @RequestMapping("/push/fill")
     public ModelAndView chooseSecondClass(Choose choose){
         ModelAndView modelAndView = toChoose(choose,"pushInfo");
-        if(modelAndView.getViewName().equals("pushInfo")){
+        if(modelAndView!=null&&modelAndView.getViewName().equals("pushInfo")){
             List<District> districts = districtService.getAllDistrict();
             List<Tag> tags = tagService.getAllTag(choose.getMcId());
             List<PushInfoClass> pushInfoClasses = pushInfoClassService.getAllPush(choose.getMcId());
@@ -233,13 +233,4 @@ public class PushController {
         return modelAndView;
     }
 
-    @GetMapping("/img/pushimg/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<?> getFile(@PathVariable String filename) {
-        try {
-            return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(basePath.getPathValue()+"/img/pushimg/",filename).toString()));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }

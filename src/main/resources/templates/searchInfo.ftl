@@ -34,7 +34,7 @@
                 <ul class="lanmu_ul2">
                     <li class="active" id="districtNo"><a href="">不限</a></li>
                 <#list districts as ds>
-                    <li id="district${ds.districtId}"><a href="">${ds.districtName}</a></li>
+                    <li id="district${ds.districtId}"><a href="${base}/search?key=${keyWords}&districtId=${ds.districtId}">${ds.districtName}</a></li>
                 </#list>
                 </ul>
             </div>
@@ -176,9 +176,13 @@
             //总数据条数
             totalRecords : totalRecords,
             //链接前部
-            hrefFormer : '',
+            hrefFormer : 'search',
             //链接尾部
-            hrefLatter : '',
+            <#if currDistrictId??>
+                hrefLatter : '?key=${keyWords}&districtId=${currDistrictId}',
+            <#else>
+                hrefLatter : '?key=${keyWords}',
+            </#if>
             getLink : function(n){
                 return this.hrefFormer + this.hrefLatter + "&pno="+n;
             }

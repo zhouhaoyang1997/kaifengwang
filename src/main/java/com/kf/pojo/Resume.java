@@ -11,14 +11,12 @@ import java.sql.Timestamp;
  * Created by 18236 on 2017/11/2.
  */
 public class Resume {
-
-    @NotNull(message = "错误的请求")
     private Integer userId;
     private Integer cvId;
     @NotBlank(message = "毕业院校不能为空")
     private String graColl;
-    @NotEmpty(message = "毕业时间不能为空")
-    private Timestamp bornYear;
+    @NotEmpty(message = "出生日期不能为空")
+    private String bornYear;
     @NotNull(message = "错误的请求")
     private Integer dreamWork;
 
@@ -34,7 +32,7 @@ public class Resume {
     @NotNull(message = "错误的请求")
     private String maxEdu;
     @NotEmpty(message = "毕业时间不能为空")
-    private Timestamp graDate;
+    private String graDate;
 
     private String stuPro;
     private String english;
@@ -45,16 +43,25 @@ public class Resume {
     private String income;
     private String jineng;
     private String zitui;
-    @NotBlank(message = "联系手机不可为空")
     private String phone;
     private String email;
     private String qq;
+    @NotBlank(message = "真实姓名不能为空")
     private String realName;
     private Integer weight;
     private Integer health;
     private String cvImg;
     private String otherStu;
     private String workTime;
+    private Integer openFlag;
+
+    public Integer getOpenFlag() {
+        return openFlag;
+    }
+
+    public void setOpenFlag(Integer openFlag) {
+        this.openFlag = openFlag;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -80,13 +87,6 @@ public class Resume {
         this.graColl = graColl;
     }
 
-    public Timestamp getBornYear() {
-        return bornYear;
-    }
-
-    public void setBornYear(Timestamp bornYear) {
-        this.bornYear = bornYear;
-    }
 
     public Integer getDreamWork() {
         return dreamWork;
@@ -152,11 +152,19 @@ public class Resume {
         this.maxEdu = maxEdu;
     }
 
-    public Timestamp getGraDate() {
+    public String getBornYear() {
+        return bornYear;
+    }
+
+    public void setBornYear(String bornYear) {
+        this.bornYear = bornYear;
+    }
+
+    public String getGraDate() {
         return graDate;
     }
 
-    public void setGraDate(Timestamp graDate) {
+    public void setGraDate(String graDate) {
         this.graDate = graDate;
     }
 

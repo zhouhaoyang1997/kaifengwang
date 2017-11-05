@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-10-29 19:00:31
+Date: 2017-11-02 13:28:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,13 +25,20 @@ CREATE TABLE `advert` (
   `advert_url` varchar(100) DEFAULT NULL,
   `width` int(11) DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
-  `demo_url` varchar(100) NOT NULL,
+  `demo_url` varchar(100) DEFAULT NULL,
+  `expire_time` datetime DEFAULT NULL,
+  `advert_page` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`advert_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of advert
 -- ----------------------------
+INSERT INTO `advert` VALUES ('1', 'header', '/img/advert/index_gg.jpg', '1200', '80', null, '2017-10-30 18:48:52', 'index');
+INSERT INTO `advert` VALUES ('2', 'footer', '/img/advert/footer.jpg', '1200', '165', null, '2017-10-30 18:50:17', 'index');
+INSERT INTO `advert` VALUES ('3', 'gg_fz', '/img/advert/gg_fz.jpg', '160', '600', null, '2017-10-31 18:10:42', 'index');
+INSERT INTO `advert` VALUES ('4', 'gg_py', '/img/advert/gg_py.png', '280', '80', null, '2017-10-31 18:11:24', 'index');
+INSERT INTO `advert` VALUES ('5', 'gg_zp', '/img/advert/gg_zp.png', '280', '80', null, '2017-10-31 18:11:52', 'index');
 
 -- ----------------------------
 -- Table structure for `collection`
@@ -88,11 +95,34 @@ DROP TABLE IF EXISTS `cv`;
 CREATE TABLE `cv` (
   `user_id` int(11) DEFAULT NULL,
   `cv_id` int(11) NOT NULL AUTO_INCREMENT,
-  `gra_coll` varchar(50) DEFAULT NULL COMMENT '毕业院校',
+  `gra_coll` varchar(20) DEFAULT NULL COMMENT '毕业院校',
   `born_year` datetime DEFAULT NULL COMMENT '出生年份',
   `dream_work` int(11) DEFAULT NULL COMMENT '梦想职位',
-  `user_gender` char(2) DEFAULT NULL,
+  `gender` char(2) DEFAULT NULL,
   `dream_district` int(11) DEFAULT NULL COMMENT '想去的区',
+  `jiguan` varchar(20) DEFAULT NULL,
+  `minzu` char(10) DEFAULT NULL,
+  `tall` bigint(3) DEFAULT NULL COMMENT '身高',
+  `marital_status` bigint(1) DEFAULT '0' COMMENT '婚姻状况,0未婚1已婚',
+  `max_edu` varchar(8) DEFAULT NULL,
+  `gra_date` datetime DEFAULT NULL COMMENT '毕业时间',
+  `stu_pro` varchar(20) DEFAULT NULL COMMENT '专业',
+  `english` varchar(10) DEFAULT NULL COMMENT '英语水平',
+  `computer` varchar(10) DEFAULT NULL COMMENT '电脑水平',
+  `job_year` varchar(8) DEFAULT NULL COMMENT '工作经验',
+  `job_detail` varchar(200) DEFAULT NULL,
+  `income` varchar(15) DEFAULT NULL COMMENT '期望月薪',
+  `jineng` varchar(20) DEFAULT NULL COMMENT '擅长技能',
+  `zitui` varchar(200) DEFAULT NULL COMMENT '自推简言',
+  `phone` char(11) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `qq` varchar(20) DEFAULT NULL,
+  `real_name` varchar(10) DEFAULT NULL,
+  `weight` bigint(3) DEFAULT NULL,
+  `health` bigint(1) DEFAULT '0' COMMENT '健康状况，0健康，1残疾',
+  `cv_img` varchar(80) DEFAULT NULL COMMENT '个人图片介绍,1张',
+  `other_stu` varchar(200) DEFAULT NULL,
+  `work_time` varchar(10) NOT NULL DEFAULT '可随时到岗' COMMENT '几个月后到岗',
   PRIMARY KEY (`cv_id`),
   KEY `fk_user_cv_id` (`user_id`),
   KEY `fk_district_cv_id` (`dream_district`),
@@ -244,11 +274,11 @@ CREATE TABLE `push_info` (
 -- Records of push_info
 -- ----------------------------
 INSERT INTO `push_info` VALUES ('6', '名下房产转让', '急用钱,现低价转让\r\n                ', '2', '1', '1', '开封市金明区人民路', 'img/pushimg/class2/f679efb8-4924-49ed-bb40-889093fb7754.jpg', '0', '2017-09-29 17:01:20', '0', '否', '赵女士', '18236556108', '1823655610', '2', '0', null);
-INSERT INTO `push_info` VALUES ('9', '餐饮服务员', '岗位职责：\r\n1、按照领班安排认真做好桌椅、餐厅卫生，餐厅铺台，准备好各种用品，确保正常营业使用。\r\n2、接待顾客应主动、热情、礼貌、耐心、周到，使顾客有宾至如归之感；\r\n3、运用礼貌语言，为客人提供最佳服务，\r\n4、善于向顾客介绍和推销本餐厅饮品及特色菜点；\r\n5、配合领班工作，服从领班或以上领导指挥，团结及善于帮助同事工作；\r\n6、积极参加培训，不断提高服务技能。\r\n                ', '1', '1', '1', '开封市鼓楼区大庆路2号西郊商场往南200米长风花园隔壁', 'img/pushimg/class1/48fc7eb2-b2d3-418d-bdfc-898e9ef7a9d5.jpg#img/pushimg/class1/527eb4e4-91b2-4b4f-b568-ff5c00bc7990.jpg', '9', '2017-10-03 22:12:44', '0', '否', '河南金源大酒店', '18236556108', '182356554', '1', '0', null);
+INSERT INTO `push_info` VALUES ('9', '餐饮服务员', '岗位职责：\r\n1、按照领班安排认真做好桌椅、餐厅卫生，餐厅铺台，准备好各种用品，确保正常营业使用。\r\n2、接待顾客应主动、热情、礼貌、耐心、周到，使顾客有宾至如归之感；\r\n3、运用礼貌语言，为客人提供最佳服务，\r\n4、善于向顾客介绍和推销本餐厅饮品及特色菜点；\r\n5、配合领班工作，服从领班或以上领导指挥，团结及善于帮助同事工作；\r\n6、积极参加培训，不断提高服务技能。\r\n                ', '1', '1', '1', '开封市鼓楼区大庆路2号西郊商场往南200米长风花园隔壁', 'img/pushimg/class1/48fc7eb2-b2d3-418d-bdfc-898e9ef7a9d5.jpg#img/pushimg/class1/527eb4e4-91b2-4b4f-b568-ff5c00bc7990.jpg', '29', '2017-10-03 22:12:44', '0', '否', '河南金源大酒店', '18236556108', '182356554', '1', '0', null);
 INSERT INTO `push_info` VALUES ('10', '安联青年城 2室2厅1卫', '房源详情小区详情\r\n房屋亮点普通装修\r\n房源描述房屋亮点 新上 配套齐全 南北通透 *出租 随时看房 出租要求 中介勿扰 禁止养宠物 租户稳定 房源描述带*的，另外详谈。\r\n\r\n                ', '2', '17', '1', '西环和东京大道交叉口北200米', 'img/pushimg/class2/d04335e4-3503-44b9-9f56-fe0d07d8d356.jpg', '0', '2017-10-03 22:20:23', '0', '否', '潘文豪(经纪人)', '13137818876', '', '3', '0', null);
 INSERT INTO `push_info` VALUES ('11', '安联青年城 123123', '房源详情小区详情\r\n房屋亮点普通装修\r\n房源描述房屋亮点 新上 配套齐全 南北通透 *出租 随时看房 出租要求 中介勿扰 禁止养宠物 租户稳定 房源描述带*的，另外详谈。\r\n\r\n                ', '2', '17', '1', '西环和东京大道交叉口北200米', 'img/pushimg/class2/ca92c231-ed57-4f45-a32c-ed1f8fe9c786.jpg', '0', '2017-10-03 22:21:25', '0', '否', '潘文豪(经纪人)', '13137818876', '', '3', '0', null);
 INSERT INTO `push_info` VALUES ('14', 'xss攻击测试', '&lt;script&gt;alert(\'攻击测试\')&lt;/script&gt;', '1', '2', '8', '攻击测试', null, '2', '2017-10-06 23:35:38', '0', '否', '攻击测', '18236556108', '', '1', '1', null);
-INSERT INTO `push_info` VALUES ('18', '请问请问请问请问', '我去饿请问请问请问请问恶趣味请问请问', '4', '40', '8', 'qweqwewwe', null, '0', '2017-10-08 15:36:14', '0', '否', '我去饿', '18236556108', '', '1', '1', null);
+INSERT INTO `push_info` VALUES ('18', '请问请问请问请问', '我去饿请问请问请问请问恶趣味请问请问', '4', '40', '8', 'qweqwewwe', null, '1', '2017-10-08 15:36:14', '0', '否', '我去饿', '18236556108', '', '1', '1', null);
 INSERT INTO `push_info` VALUES ('19', '基础信息修改', '展示孔家你,天禧adas', '1', '1', '8', 'sajdasdasd', 'img/pushimg/eb40f44f-bac8-40bf-8298-36b1db48d604.png#img/pushimg/a7b4c3be-25a1-469d-b2bf-c9c8d5226f5b.png#img/pushimg/aa707c41-5296-46b8-a8cd-58e66d4bf8e0.png#img/pushimg/63551ecc-7d16-415f-a92a-7aa8df68410b.png', '0', '2017-10-12 17:20:38', '0', '否', '王女士', '18236556108', '', '4', '0', null);
 INSERT INTO `push_info` VALUES ('22', '文章测试项', '文章测试项文章测试项文章测试项', '1', '4', '8', '文章测试项', 'img/pushimg/14f78c1a-422c-4fe8-b346-9dbc3faff4c7.png#img/pushimg/c854852d-670a-499c-b41e-0f66097bb412.png#img/pushimg/5a89473c-f5e1-4065-813a-e7be48bccd1d.png#img/pushimg/194f110c-bc0e-436c-ad99-19ded72d10bd.png', '0', '2017-10-20 09:08:22', '0', '否', '文章测试项', '18236556108', '', '1', '0', null);
 INSERT INTO `push_info` VALUES ('23', 'xss测试', 'xss测试文章，即将删除...................', '1', '1', '10', '&lt;script&gt;alert(&#39;xxs测试&#39;)&lt;/script&gt;', 'img/pushimg/65cff5e7-0c07-4532-a02a-1ba38443ed5b.jpg', '1', '2017-10-28 11:46:35', '0', '否', '小王', '18236556108', '', '1', '0', null);
@@ -535,4 +565,4 @@ INSERT INTO `user` VALUES ('6', '赵四', 'UC9nvZTDwEDjKY04wkmfvw==', null, '182
 INSERT INTO `user` VALUES ('7', '小龙', 'DrvRNdqXUVdynOf0L/q78w==', null, '18236556108@163.com', '2017-10-06 14:51:24', null, '1', '', '0', '0', null, '1');
 INSERT INTO `user` VALUES ('8', '赵六', 'M7qNV38i6Rq8DIb389Of9g==', '18236556299', '1724940662@163.com', '2017-10-17 14:51:27', '2017-10-21 10:55:58', '1', '没有', '0', '0', 'img/headImg/d74b6b7e-5551-436c-ab4d-4b567714ca79.jpg', '0');
 INSERT INTO `user` VALUES ('9', 'zhaoliu', 'DrvRNdqXUVdynOf0L/q78w==', null, '1234@qq.com', '2017-10-15 15:15:26', '2017-10-15 15:15:31', '1', null, '0', '0', null, '1');
-INSERT INTO `user` VALUES ('10', 'a18236556108', 'DrvRNdqXUVdynOf0L/q78w==', null, '1724940@qq.com', '2017-10-20 18:21:03', '2017-10-29 14:34:01', '1', null, '0', '0', null, '1');
+INSERT INTO `user` VALUES ('10', 'a18236556108', 'DrvRNdqXUVdynOf0L/q78w==', null, '1724940@qq.com', '2017-10-20 18:21:03', '2017-10-30 15:34:56', '1', null, '0', '0', null, '1');

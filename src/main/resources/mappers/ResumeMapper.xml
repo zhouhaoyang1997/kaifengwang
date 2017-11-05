@@ -13,4 +13,21 @@
        #{weight},#{health},#{cvImg},#{otherStu},#{workTime})
    </insert>
 
+    <select id="selectResumeByUserId" resultType="com.kf.pojo.Resume">
+        SELECT * FROM cv WHERE user_id =#{userId}
+    </select>
+
+
+    <update id="updateResume" parameterType="com.kf.pojo.Resume">
+        UPDATE cv SET user_id=#{userId},gra_coll=#{graColl},born_year=#{bornYear},dream_work=#{dreamWork},gender=#{gender},dream_district=#{dreamDistrict},
+        jiguan=#{jiguan},minzu=#{minzu},tall=#{tall},marital_status=#{maritalStatus},max_edu=#{maxEdu},gra_date=#{graDate},stu_pro=#{stuPro},
+        english=#{english},computer=#{computer},job_year=#{jobYear},
+        job_detail=#{jobDetail},income=#{income},jineng=#{jineng},zitui=#{zitui},phone=#{phone},email=#{email},qq=#{qq},real_name=#{realName},weight=#{weight},health=#{health},
+        cv_img=#{cvImg},other_stu=#{otherStu},work_time=#{workTime}
+    </update>
+
+    <update id="updateResumeCvOpenFlag">
+        UPDATE cv SET open_flag=#{openFlag} WHERE cv_id=#{cvId}
+    </update>
+
 </mapper>
