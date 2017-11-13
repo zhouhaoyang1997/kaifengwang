@@ -20,4 +20,13 @@ public class CompanyService {
         companyMapper.insertCompany(company);
         return company.getCompanyId();
     }
+
+    /**
+     * 查询当前用户的公司认证
+     * @param userId
+     * @return
+     */
+    public Company getCompany(Integer userId){
+        return companyMapper.selectCompanyByUser(userId);
+    }
 }

@@ -25,6 +25,18 @@ public class PushInfoService {
     private BasePage basePage;
 
     /**
+     * 获取推荐信息
+     * @param mcId
+     * @param scId
+     * @return
+     */
+    public List<BaseInfo> getRecommend(Integer mcId,Integer scId){
+        return pushInfoMapper.selectRecommend(mcId,scId);
+    }
+
+
+
+    /**
      * 该方法用于构造信息的tag和pic信息
      * @param pageUtil
      * @param basePush

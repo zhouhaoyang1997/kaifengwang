@@ -16,6 +16,8 @@ public interface PushInfoMapper {
 
     List<PushInfo> selectAllJob(@Param("mcId")Integer mcId, @Param("scId") Integer scId,@Param("districtId")Integer districtId, @Param("tags") List<String> tags,@Param("tagNum")Integer tagNum);
 
+    List<BaseInfo> selectRecommend(@Param("mcId")Integer mcId,@Param("scId")Integer scId);
+
     PushInfo selectInfoByPiId(@Param("piId")Integer piId);
 
     void addPushInfo(PushInfo pushInfo);

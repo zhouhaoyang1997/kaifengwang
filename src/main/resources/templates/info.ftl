@@ -160,15 +160,16 @@
                 ${info.piContent}
                 </div>
             </div>
-
-            <div class="panel panel-self">
-                <div class="panel-heading"><h3>公司介绍</h3></div>
-                <div class="panel-body">
-                    wqeqweqwewq
+            <#if company??>
+                <div class="panel panel-self">
+                    <div class="panel-heading"><h3>公司介绍</h3></div>
+                    <div class="panel-body">
+                        <h3>${company.cpName}</h3>
+                        <p>${company.cpDescription!""}</p>
+                    </div>
                 </div>
-            </div>
+            </#if>
         </div>
-
         <div class="col-md-3" >
             <div style="background: #fff;padding: 30px 0 20px 0;">
                 <div align="center">
@@ -179,34 +180,14 @@
                     </#if>
                 </div>
                 <h4 style="margin-top: 20px;text-align: center">${info.piUser}</h4>
-                <p style="text-align: center;background: url(img/attc.png) no-repeat 80px;padding-left: 24px"> 已公司认证</p>
+                <#if company??>
+                    <p style="text-align: center;background: url(img/attc.png) no-repeat 80px;padding-left: 24px"> 已公司认证</p>
+                <#else>
+                    <p style="text-align: center;background: url(img/attc_none.png) no-repeat 80px;padding-left: 24px"> 未公司认证</p>
+                </#if>
+
                 <h5 style="text-align: center">${infoUser.createTime?string("yyyy-MM-dd")}注册</h5>
             </div>
-            <div class="panel panel-self" style="border: none;">
-                <div class="panel-heading">
-                    <h3 style="border-left: 5px solid #ff552e;padding-left: 10px;">同类信息推荐</h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-unstyled">
-                        <li class="recommend">
-                            <h4>富士康年薪6万入职有奖励</h4>
-                            <p class="re_income">5000-8000元月</p>
-                            <p class="re_district">金明区</p>
-                        </li>
-                        <li class="recommend">
-                            <h4>富士康年薪6万入职有奖励</h4>
-                            <p class="re_income">5000-8000元月</p>
-                            <p class="re_district">金明区</p>
-                        </li>
-                        <li class="recommend">
-                            <h4>富士康年薪6万入职有奖励</h4>
-                            <p class="re_income">5000-8000元月</p>
-                            <p class="re_district">金明区</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
             <div class="panel panel-self" style="border: none;">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
@@ -227,22 +208,17 @@
 
                 </div>
             </div>
-
+            <div class="panel panel-self" style="border: none;">
+                <div class="panel-heading">
+                    <h3 style="border-left: 5px solid #ff552e;padding-left: 10px;">同类信息推荐</h3>
+                </div>
+                <div class="panel-body" style="min-height: 350px;">
+                    <ul class="list-unstyled" id="data">
+                        <div id="loader" style="width: 80px;height: 80px;" ></div>
+                    </ul>
+                </div>
+            </div>
         </div>
-
-
-
-
-    </div>
-    <div class="row">
-        <div class="col-md-10">
-
-        </div>
-    </div>
-
-    <div class="row">
-
-
     </div>
 
     <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
@@ -358,10 +334,34 @@
 <script src="${base}/js/silder.js" type="text/javascript"></script>
 <script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${base}/js/messages_zh.js"></script>
+<script type="text/javascript" src="${base}/js/jquery.shCircleLoader.js"></script>
     <@floating/>
 <script>
     $(function () {
 
+        $.ajax({
+            url:'${base}/info/recommend?mcId=${info.piMc}&scId=${info.piSc}',
+            type:'get',
+            beforeSend:function () {
+                $("#loader").html('<img src="${base}/img/loading.gif" width="50%" style="text-align:center;margin:0 auto;"><p style="color:#999;font-size:14px">加载中，请稍后……</p>')
+
+            },
+            error:function () {
+              alert("错误");
+            },
+            success:function (result) {
+                $('#loading').fadeOut(1000);
+                var html = "";
+                for(var i=0;i<result.length;i++){
+                    var title=result[i].piTitle;
+                    if(title.length>13){
+                        title=result[i].piTitle.substr(0,13);
+                    }
+                    html+='<li class="recommend"><a href="${base}/info?piId='+result[i].piId+'"><h4>'+title+'</h4><p class="re_income">'+result[i].piUser+'</p><p class="re_district">'+result[i].piDistrictName+'</p></a></li>';
+                }
+                $("#data").html(html);
+            }
+        });
 
         $("#collect_a").click(function () {
             $.ajax({

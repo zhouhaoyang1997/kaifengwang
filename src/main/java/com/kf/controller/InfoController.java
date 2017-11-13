@@ -1,9 +1,11 @@
 package com.kf.controller;
 
 import com.kf.exception.PiIdNotFoundException;
+import com.kf.pojo.Company;
 import com.kf.pojo.PushInfo;
 import com.kf.pojo.Tip;
 import com.kf.pojo.User;
+import com.kf.service.CompanyService;
 import com.kf.service.PushInfoService;
 import com.kf.service.TipService;
 import com.kf.service.UserService;
@@ -30,6 +32,10 @@ public class InfoController {
     @Autowired
     private UserService userService;
 
+
+    @Autowired
+    private CompanyService companyService;
+
     @Autowired
     private TipService tipService;
 
@@ -50,6 +56,11 @@ public class InfoController {
                 throw new PiIdNotFoundException("404","对不起,可能您要查看的信息已经被删除");
             }
             User infoUser = userService.getUserByUserId(userId);
+            //如果进行了公司认证
+            if(infoUser.getUserAttc()==0){
+                Company company = companyService.getCompany(infoUser.getUserId());
+                modelAndView.addObject("company",company);
+            }
             modelAndView.addObject("info",pushInfo);
             modelAndView.addObject("infoUser",infoUser);
             //用户是否收藏了该信息

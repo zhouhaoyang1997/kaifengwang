@@ -174,7 +174,9 @@ ul,li{list-style-type:none;}
     color: #ff552e;
     font-size:16px;
 }
-
+.recommend{
+    margin-bottom:30px;
+}
 .panel-self{
     margin-top: 40px;
     border-top:1px dashed #aaaaaa;

@@ -99,6 +99,13 @@
         ORDER BY pi_chujia desc,pi_zhiding desc,pi_push_date desc
     </select>
 
+    <select id="selectRecommend" resultType="com.kf.pojo.BaseInfo">
+        SELECT DISTINCT
+        push_info.pi_id,pi_title,user_name as pi_user,pi_push_date,pi_chujia,pi_zhiding,district_name as pi_district_name
+        from user,push_info,district WHERE push_info.pi_user=user.user_id
+        AND push_info.status=0 AND pi_sc=#{scId} AND push_info.pi_district=district.district_id AND
+        pi_mc=#{mcId} ORDER BY pi_chujia desc,pi_zhiding desc,pi_push_date desc limit 3
+    </select>
 
     <select id="selectAllTagByPiId" resultType="com.kf.vo.TagValue">
         SELECT DISTINCT push_info_tag.tag_id,tag.tag_name,tagcontent.tc_name,tagcontent.tc_id
