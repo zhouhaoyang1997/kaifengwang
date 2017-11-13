@@ -23,7 +23,8 @@
 }
 .user_bar h4 a:hover {text-decoration: none;opacity: .7}
 .push_btn{
-    background: #ff552e;border: 1px solid #fff;margin-top: 20px;
+    background: #ff552e;
+    border: 1px solid #fff;margin-top: 20px;
     color: #FFFFFF;
 }
 

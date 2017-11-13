@@ -178,7 +178,7 @@ public class PushController {
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = "/push/info",method = RequestMethod.POST)
+    @PostMapping(value = "/push/info")
     public ModelAndView pushInfo(@RequestParam("pic") MultipartFile pics[], @Valid @ModelAttribute("pushError") PushInfo pushInfo, BindingResult br, HttpServletRequest request)throws IOException{
         ModelAndView modelAndView = null;
         if(br.hasErrors()){

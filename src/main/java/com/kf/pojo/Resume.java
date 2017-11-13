@@ -65,9 +65,17 @@ public class Resume {
     private String workTime;
     private Integer openFlag;
     private Timestamp updateTime;
-
+    private Integer status;
     private String dreamWorkStr;
     private String districtName;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public String getDreamWorkStr() {
         return dreamWorkStr;

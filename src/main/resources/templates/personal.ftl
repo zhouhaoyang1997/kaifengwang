@@ -32,7 +32,7 @@
                         <li class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">我的发布</a>
                         </li>
                         <li><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">我的收藏</a></li>
-                        <li><a href="${base}/about/help">帮助信息</a></li>
+                        <li><a href="${base}/about/help" target="_blank">帮助信息</a></li>
                     </ul>
                 </li>
                 <li>
@@ -41,12 +41,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${base}/user/extension">
+                    <a href="${base}/user/extension" target="_blank">
                         <div class="link"><i class="fa fa-mobile"></i>推广中心</div>
                     </a>
                 </li>
                 <li>
-                    <a href="${base}/user/attc">
+                    <a href="${base}/user/attc" target="_blank">
                         <div class="link"><i class="fa fa-id-card-o"></i>公司认证</div>
                     </a>
 

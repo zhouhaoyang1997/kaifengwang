@@ -50,12 +50,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${base}/user/extension">
+                    <a href="${base}/user/extension" target="_blank">
                         <div class="link"><i class="fa fa-mobile"></i>推广中心</div>
                     </a>
                 </li>
                 <li>
-                    <a href="${base}/user/attc">
+                    <a href="${base}/user/attc" target="_blank">
                         <div class="link"><i class="fa fa-id-card-o"></i>公司认证</div>
                     </a>
                 </li>
@@ -70,7 +70,7 @@
                     <div class="panel-heading"><h3>我的简历</h3>
                         <div class="alert alert-danger alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <strong>重要提示:</strong> 认真、真实、详细填写您的全职简历，有利于您快速获得职位!
+                            <strong>重要提示:</strong> 带*号的字段为必填字段,认真、真实、详细填写您的全职简历，有利于您快速获得职位!
                         </div>
                         <#if resume??>
                             <div class="well">
@@ -352,7 +352,7 @@
                                             <#if resume??>
                                                 <input type="text" class="form-control" maxlength="2" value="${resume.workTime}" name="workTime">
                                             <#else>
-                                                <input type="text" class="form-control" maxlength="2" value="可随时到岗" name="workTime">
+                                                <input type="text" class="form-control" maxlength="2" value="不限" name="workTime">
                                             </#if>
 
                                             <span  class="input-group-addon">xx月后</span>
@@ -417,8 +417,11 @@
 <script type="text/javascript" src="${base}/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${base}/js/bootstrap-switch.min.js"></script>
-<script type="text/javascript" src="${base}/js/hhshare.js"></script>
 <script>
+
+    <#if picError??>
+        alert("${picError}");
+    </#if>
 
     $(".form_datetime").datetimepicker({minView: "month",format: 'yyyy-mm-dd',language: 'zh-CN'});
     <#if resume??>
@@ -475,14 +478,6 @@
                             $(error).text()).tooltip("show");
                 }
             }
-        });
-        //回到顶部按钮
-        $.goup({
-            trigger: 100,
-            bottomOffset: 150,
-            locationOffset: 100,
-            title: '回到顶部',
-            titleAsText: true
         });
     })
 </script>

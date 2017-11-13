@@ -56,7 +56,7 @@ public class BaseInfo {
     private String piScName;
     private String piIp;
 
-    private String piZhiding;
+    private Integer piZhiding;
     //当前信息状态,0正常,1被删除,2正在审核,
     private Integer status;
 
@@ -225,12 +225,11 @@ public class BaseInfo {
         this.piChujia = piChujia;
     }
 
-    public String getPiZhiding() {
+    public Integer getPiZhiding() {
         return piZhiding;
     }
 
-    public void setPiZhiding(String piZhiding) {
+    public void setPiZhiding(Integer piZhiding) {
         this.piZhiding = piZhiding;
     }
-
 }

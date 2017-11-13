@@ -7,8 +7,8 @@
           select LAST_INSERT_ID()
       </selectKey>
        INSERT into cv(user_id,gra_coll,born_year,dream_work,gender,dream_district,jiguan,minzu,tall,marital_status,max_edu,gra_date,
-       stu_pro,english,computer,job_year,job_detail,income,jineng,zitui,phone,email,qq,real_name,weight,health,cv_img,other_stu,work_time)
-       update_timeVALUES(#{userId},#{graColl},#{bornYear},#{dreamWork},#{gender},#{dreamDistrict},#{jiguan},#{minzu},#{tall},#{maritalStatus},#{maxEdu},
+       stu_pro,english,computer,job_year,job_detail,income,jineng,zitui,phone,email,qq,real_name,weight,health,cv_img,other_stu,work_time,update_time)
+       VALUES(#{userId},#{graColl},#{bornYear},#{dreamWork},#{gender},#{dreamDistrict},#{jiguan},#{minzu},#{tall},#{maritalStatus},#{maxEdu},
        #{graDate},#{stuPro},#{english},#{computer},#{jobYear},#{jobDetail},#{income},#{jineng},#{zitui},#{phone},#{email},#{qq},#{realName},
        #{weight},#{health},#{cvImg},#{otherStu},#{workTime},#{updateTime})
    </insert>
@@ -23,7 +23,7 @@
         jiguan=#{jiguan},minzu=#{minzu},tall=#{tall},marital_status=#{maritalStatus},max_edu=#{maxEdu},gra_date=#{graDate},stu_pro=#{stuPro},
         english=#{english},computer=#{computer},job_year=#{jobYear},
         job_detail=#{jobDetail},income=#{income},jineng=#{jineng},zitui=#{zitui},phone=#{phone},email=#{email},qq=#{qq},real_name=#{realName},weight=#{weight},health=#{health},
-        cv_img=#{cvImg},other_stu=#{otherStu},work_time=#{workTime},update_time=#{updateTime}
+        other_stu=#{otherStu},work_time=#{workTime},update_time=#{updateTime}<if test="cvImg!=null">,cv_img=#{cvImg}</if> WHERE cv_id=#{cvId}
     </update>
 
     <update id="updateResumeCvOpenFlag">
@@ -35,8 +35,10 @@
         <if test="resumeMin.openFlag!=null">AND open_flag=#{resumeMin.openFlag}</if>
         <if test="resumeMin.districtId!=null">AND dream_district=#{resumeMin.districtId}</if>
         <if test="resumeMin.dreamWork!=null">AND dream_work=#{resumeMin.dreamWork}</if>
-        <if test="resumeMin.gender!=null">AND gender=#{resumeMin.gender}</if>
-        <if test="resumeMin.maxEdu!=null">AND max_edu=#{resumeMin.maxEdu}</if>
+    </select>
+
+    <select id="selectResumeByCvId" resultType="com.kf.pojo.Resume">
+        SELECT * FROM cv,secondclass,district WHERE cv.dream_work=secondclass.sc_id AND district.district_id=dream_district AND cv_id=#{cvId} AND open_flag=1
     </select>
 
 </mapper>

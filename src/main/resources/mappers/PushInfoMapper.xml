@@ -56,7 +56,7 @@
         LEFT JOIN tagcontent ON push_info_tag.pi_tag_content=tagcontent.tc_id
         LEFT JOIN tag ON tag.tag_id=tagcontent.tag_id
         LEFT JOIN district ON push_info.pi_district=district.district_id
-        where push_info.pi_user=user.user_id  AND pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id AND push_info.pi_id=#{piId}
+        where push_info.pi_user=user.user_id  AND pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id AND push_info.pi_id=#{piId} AND push_info.status=0
     </select>
 
     <select id="selectInfoByPiIdAndUserId" resultMap="BasePushInfo">
@@ -77,13 +77,13 @@
     <select id="selectAllJob" resultMap="BasePushInfo">
         select DISTINCT
         push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,
-        pi_contact_person,district_name
+        pi_contact_person,district_name,pi_img,pi_content
         from user,push_info LEFT JOIN pic_content ON push_info.pi_id = pic_content.pc_id
         LEFT JOIN push_info_tag ON push_info.pi_id = push_info_tag.pi_id
         LEFT JOIN tagcontent ON push_info_tag.pi_tag_content=tagcontent.tc_id
         LEFT JOIN tag ON tag.tag_id=tagcontent.tag_id
         LEFT JOIN district ON push_info.pi_district=district.district_id
-        where push_info.pi_user=user.user_id
+        where push_info.pi_user=user.user_id AND push_info.status=0
         <if test="scId!=null and scId!=0">and pi_sc=#{scId}</if>
         <if test="mcId!=null and mcId!=0">and pi_mc=#{mcId}</if>
         <if test="districtId!=null and districtId!=0">and district_id=#{districtId}</if>
@@ -96,6 +96,7 @@
             </trim>
             GROUP by pi_id having count(pi_id)=#{tagNum})
         </if>
+        ORDER BY pi_chujia desc,pi_zhiding desc,pi_push_date desc
     </select>
 
 

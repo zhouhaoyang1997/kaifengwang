@@ -32,14 +32,15 @@ public class ResumeService {
      * @param resume
      * @return
      */
-    public Integer insertOrUpdateResume(Resume resume,String basePath){
+    public Integer insertOrUpdateResume(Resume resume,String basePath,boolean deletePicFlag){
         Resume resume1 = getResume(resume.getUserId());
         //如果数据库中已存在,更新
         if(resume1!=null){
             //如果已有图片则删除
-            if(resume1.getCvImg()!=null){
+            if(resume1.getCvImg()!=null&&deletePicFlag){
                 FileUtil.deleteImg(basePath+resume1.getCvImg());
             }
+            resume.setCvId(resume1.getCvId());
             resumeMapper.updateResume(resume);
         }else{
             resumeMapper.insertResume(resume);
@@ -64,4 +65,9 @@ public class ResumeService {
     public void updateResumeOpenFlag(Integer openFlag,Integer cvId){
         resumeMapper.updateResumeCvOpenFlag(cvId,openFlag);
     }
+
+    public Resume getResumeByCvId(Integer cvId){
+        return resumeMapper.selectResumeByCvId(cvId);
+    }
+
 }

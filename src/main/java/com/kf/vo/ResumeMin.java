@@ -7,11 +7,9 @@ package com.kf.vo;
 public class ResumeMin {
     private Integer cvId;
     private Integer dreamWork;
-    private String gender;
     private String dreamWorkStr;
     private Integer districtId;
     private String districtName;
-    private String maxEdu;
     private Integer openFlag;
 
     public Integer getOpenFlag() {
@@ -22,13 +20,6 @@ public class ResumeMin {
         this.openFlag = openFlag;
     }
 
-    public String getMaxEdu() {
-        return maxEdu;
-    }
-
-    public void setMaxEdu(String maxEdu) {
-        this.maxEdu = maxEdu;
-    }
 
     public Integer getCvId() {
         return cvId;
@@ -46,13 +37,6 @@ public class ResumeMin {
         this.dreamWork = dreamWork;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
     public String getDreamWorkStr() {
         return dreamWorkStr;

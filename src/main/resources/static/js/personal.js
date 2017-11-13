@@ -4,7 +4,7 @@ $('#collectionTable').bootstrapTable({
     method: 'get',
     cache: false,
     pageNumber: 1,   //初始化加载第一页，默认第一页
-    pageSize: 5,
+    pageSize: 10,
     columns: [{
         field: 'piTitle',
         title: '信息标题',

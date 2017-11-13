@@ -22,4 +22,7 @@ public interface ResumeMapper {
     void updateResumeCvOpenFlag(@Param("cvId") Integer cvId,@Param("openFlag") Integer openFlag);
 
     List<Resume> selectResumeList(@Param("resumeMin")ResumeMin resumeMin);
+
+
+    Resume selectResumeByCvId(@Param("cvId")Integer cvId);
 }

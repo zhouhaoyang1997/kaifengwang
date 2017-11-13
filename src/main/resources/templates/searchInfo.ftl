@@ -28,17 +28,20 @@
         <i class="fa fa-home"></i><a href="/index">麦芒网</a>
     </div>
     <div class="panel panel_self now_position" >
-        <div class="row" style="border-bottom: 1px #e6e6e6 dashed;">
-            <div class="col-xs-1"><span class="lanmutitle">地点:</span></div>
-            <div class="col-xs-11">
-                <ul class="lanmu_ul2">
-                    <li class="active" id="districtNo"><a href="">不限</a></li>
-                <#list districts as ds>
-                    <li id="district${ds.districtId}"><a href="${base}/search?key=${keyWords}&districtId=${ds.districtId}">${ds.districtName}</a></li>
-                </#list>
-                </ul>
+        <div class="panel-body">
+            <div class="row info_tag">
+                <div class="col-xs-1"><span class="lanmutitle">地点:</span></div>
+                <div class="col-xs-11">
+                    <ul class="lanmu_ul2">
+                        <li class="active" id="districtNo"><a href="${base}/search?key=${keyWords}">不限</a></li>
+                    <#list districts as ds>
+                        <li id="district${ds.districtId}"><a href="${base}/search?key=${keyWords}&districtId=${ds.districtId}">${ds.districtName}</a></li>
+                    </#list>
+                    </ul>
+                </div>
             </div>
         </div>
+
     </div>
     <div class="now_position">
         <div class="panel panel-default">
@@ -85,7 +88,7 @@
                                     <span>${(pushInfo.piDistrictName)!""}</span>
                                 </div>
                                 <div class="col-xs-2 padding_top">
-                                    <span class="info_yuan">${(pushInfo.piPushDate)!""}</span>
+                                    <span class="info_yuan">${pushInfo.piPushDate?string("yyyy-MM-dd")}</span>
                                 </div>
                             </div>
                         </#list>
@@ -142,7 +145,7 @@
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/js/basePath.js"></script>
 <script type="text/javascript" src="${base}/js/quickClick.js"></script>
-<script src="${base}js/hhshare.js"></script>
+<script src="${base}js/floating.js"></script>
 <script type="text/javascript" src="${base}/js/kkpager.min.js"></script>
 <script type="text/javascript">
     function getParameter(name) {

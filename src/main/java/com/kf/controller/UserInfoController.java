@@ -72,7 +72,6 @@ public class UserInfoController {
 
     @GetMapping("/user/info/pwd")
     public ModelAndView pwd(HttpServletRequest request){
-        Integer userId= SessionUtil.getUserId(request);
         return new ModelAndView("user/pwd");
     }
 
@@ -109,7 +108,7 @@ public class UserInfoController {
                 //和用户原密码匹配,如果通过,可以进行修改
                 if(oldPwd!=null&&oldPwd.equals(user.getUserPassword())){
                     //如果原密码新密码不相同,更新数据库
-                    if(newPwd.length()>6&&newPwd.length()<20){
+                    if(newPwd.length()>=6&&newPwd.length()<=20){
                         newPwd=Md5Util.MD5("kf"+newPwd+"cg");
                         userService.updateUserPwd(userId,newPwd);
                         //清除session
@@ -196,7 +195,6 @@ public class UserInfoController {
         if(userId==null){
             throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
         }else{
-            User user = userService.getUserByUserId(userId);
             ModelAndView modelAndView = null;
             if(file==null||file.isEmpty()){
                 modelAndView = pic(request);
@@ -212,7 +210,7 @@ public class UserInfoController {
                 try {
                     file.transferTo(new File(basePath.getPathValue()+filePath));
                     //将图片路径存入数据库
-                    userService.updateUserImg(filePath,userId,basePath.getPathValue()   );
+                    userService.updateUserImg(filePath,userId,basePath.getPathValue());
                     modelAndView = new ModelAndView("redirect:/user/info");
                 } catch (IOException e) {
                     modelAndView = pic(request);

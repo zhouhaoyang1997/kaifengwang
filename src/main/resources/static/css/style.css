@@ -12,9 +12,18 @@
     display: block;
     margin: 0 auto 15px;
 }
-a:hover{
-    text-decoration: none;
+.extra_padding{
+    padding-left: 3px;
+    padding-right: 3px;
+}
 
+a{
+    color: #000;
+    text-decoration: none;
+}
+a:hover{
+    color: #ff552e;
+    text-decoration: none;
 }
 
 img {
@@ -31,10 +40,10 @@ h6 {
     font-weight: 700;
     margin: 0 0 15px;
 }
-body { font-family: 'Titillium Web', sans-serif; }
+body { font-family: 'Titillium Web', sans-serif; background: rgb(248, 248, 248);}
 
 .header-area {
-    background: none repeat scroll 0 0 #f4f4f4;
+    background: none repeat scroll 0 0 #fff;
     border-bottom: solid 1px #e8e8e8;
     height:35px;
     font-size:12px;
@@ -142,6 +151,7 @@ z-index: 999;}
     font-weight: 400;
 }
 .logo h1 {
+    padding-left:10px;
     font-size: 40px;
     margin: 10px 0 14px 0;
     font-weight: 400;
@@ -163,11 +173,15 @@ z-index: 999;}
     position: relative;
 }
 .btn_search{
+    height: 38px;
     background: #ff552e;
     color: #fff;
 }
 .search_box{
-    border:1px solid #ff552e;
+    height: 38px;
+    line-height: 38px;
+    border-radius: 0;
+    border:3px solid #ff552e;
 }
 
 .btn_search:hover{
@@ -245,6 +259,10 @@ z-index: 999;}
 /* 主模块*/
 .mainPage{
     margin-top:10px;
+}
+
+.advert{
+    margin-bottom: 5px;
 }
 
 .panel_self{
@@ -331,6 +349,7 @@ z-index: 999;}
     text-transform: uppercase;
 }
 
+
 .slide-bulletz {
     bottom: 30px;
     left: 0;
@@ -369,28 +388,23 @@ ol.slide-indicators li.active {
 .slider_width{
     margin: 0 auto;
 }
-.lanmu_ul,.lanmu_ul2
+.lanmu_ul2
 {
     list-style: none;
 }
 .lanmu_ul2 li{
-    margin: 0 20px 0 0;
+    margin: 0 20px 6px 0;
 
-    padding: 5px 0;
+    padding: 5px 5px;
     float: left;
 }
-
-.lanmu_ul li{
-    margin: 0;
-    width: 150px;
-    padding: 5px 0;
-    float: left;
+.lanmu_ul2 a{
+    padding:4px 6px;
+    color: #000;
 }
 .lanmu_ul2>.active>a{
-    color: #ff552e;
-}
-.lanmu_ul .active>a{
-    color: #ff552e;
+    border:1px solid #ff552e;
+    border-radius: 5px;
 }
 .lanmutitle{
     font-size:15px;
@@ -398,22 +412,12 @@ ol.slide-indicators li.active {
 }
 
 .now_position{
-    margin-top: 10px;
+    margin-top: 18px;
+    margin-bottom:10px;
 }
 
 
-.hover_info{
-    height:80px;
-    border-bottom: solid 1px #f3f3f3;
-    border-right:solid 1px #f3f3f3;
 
-}
-.hover_info .padding_top{
-    padding-top:28px;
-}
-.hover_info .padding-top1{
-    padding-top:15px;
-}
 .info_title{
     height:24px;
     font-size: 18px;color: #000;font-weight: 600;
@@ -431,6 +435,11 @@ ol.slide-indicators li.active {
 }
 .container_self{
     clear: both;
+    width:1200px;
+    margin:0 auto;
+    padding:0;
+}
+.container_self_advert{
     width:1200px;
     margin:0 auto;
     padding:0;
@@ -467,7 +476,7 @@ ol.slide-indicators li.active {
     background-size: 100%
 }
 .footerPage{
-    background: none repeat scroll 0 0 #f4f4f4;
+    background: none repeat scroll 0 0 #fff;
 }
 
 .loginForm{
@@ -501,4 +510,10 @@ ol.slide-indicators li.active {
 /*}*/
 .foot_logo{
     margin-left:60px;
+}
+.list_title{
+    color: #ff552e;border-left: 5px solid #ff552e;padding-left: 10px
+}
+.tip_second{
+    margin-top: 4px;font-size: 10px;color: #aaa;float: right;
 }

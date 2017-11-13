@@ -39,10 +39,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="${base}/user/extension"><div class="link"><i class="fa fa-mobile"></i>推广中心</div></a>
+                    <a href="${base}/user/extension" target="_blank"><div class="link"><i class="fa fa-mobile"></i>推广中心</div></a>
                 </li>
                 <li>
-                    <a href="${base}/user/attc"><div class="link"><i class="fa fa-id-card-o"></i>公司认证</div></a>
+                    <a href="${base}/user/attc" target="_blank"><div class="link"><i class="fa fa-id-card-o"></i>公司认证</div></a>
                 </li>
                 <li><a href="${base}/user/resume"><div class="link"><i class="fa fa-globe"></i>我的简历</div></a></li>
             </ul>

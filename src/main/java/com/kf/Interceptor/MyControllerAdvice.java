@@ -1,6 +1,7 @@
 package com.kf.Interceptor;
 
 import com.kf.exception.PiIdNotFoundException;
+import com.kf.exception.ServerException;
 import com.kf.exception.UserNotLoginException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +30,15 @@ public class MyControllerAdvice {
 
     @ExceptionHandler(value = UserNotLoginException.class)
     public ModelAndView userNotLoginHandler(UserNotLoginException ex) {
+        ModelAndView modelAndView = new ModelAndView("exception/userNotLogin");
+        modelAndView.addObject("ex",ex);
+        return modelAndView;
+    }
+
+
+
+    @ExceptionHandler(value = ServerException.class)
+    public ModelAndView serverException(ServerException ex) {
         ModelAndView modelAndView = new ModelAndView("exception/userNotLogin");
         modelAndView.addObject("ex",ex);
         return modelAndView;

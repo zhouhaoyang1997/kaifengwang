@@ -16,6 +16,16 @@ public class Advert {
     //广告页面
     private String advertPage;
 
+    private String advertForward;
+
+    public String getAdvertForward() {
+        return advertForward;
+    }
+
+    public void setAdvertForward(String advertForward) {
+        this.advertForward = advertForward;
+    }
+
     public String getAdvertPage() {
         return advertPage;
     }

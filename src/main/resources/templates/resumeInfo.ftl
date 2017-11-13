@@ -2,8 +2,15 @@
 <#assign base="${request.contextPath}"/>
 <@header title="麦芒网">
 <link rel="stylesheet" href="${base}/css/style.css">
-<link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/info.css">
+<style>
+    .resume_title{
+        padding-right:10px ;
+        font-size:16px;
+        color: #aaa;
+    }
+
+</style>
 </@header>
 <@headerArea>
 <li><a href="${base}/index">回首页</a></li>
@@ -14,177 +21,216 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="info_logo">
-                    <h1><img src="/img/kflogo2_rev.png" width="48" height="48" alt="网站logo"><a href="${base}/index">开封<span>${info.mcName!""}</span></a></h1>
+                    <h1><img src="/img/kflogo2_rev.png" width="48" height="48" alt="网站logo"><a href="${base}/index">开封<span>求职简历</span></a></h1>
                 </div>
             </div>
             <div class="col-md-3"><span style="margin-top: 15px;font-size:20px;color: #fff;float: left;">--专业的信息服务平台</span><span style="color: #fff;float: left;">全新升级,新品牌,新服务</span></div>
             <div class="col-md-offset-3 col-md-2">
-                    <a href="${base}/push/choose" class="btn push_btn">发布信息</a>
-                <#if info.mcName="招聘">
-                    <a href="${base}/user/resume" class="btn push_btn">登记简历</a>
-                </#if>
+                <a href="${base}/push/choose" class="btn push_btn">发布信息</a>
+                <a href="${base}/user/resume" class="btn push_btn">登记简历</a>
             </div>
         </div>
     </div>
 </div>
 
-
 <div class="container_self" style="margin-bottom: 30px;">
     <div class="row">
         <div class="now_position">
-            <i class="fa fa-home"></i><a href="/index">开封城市网</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}">${info.mcName}</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}&scId=${info.piSc}">${info.scName}</a>
+            <i class="fa fa-home"></i><a href="/index">开封麦芒网</a>&nbsp;>&nbsp;<a href="/resume/list">求职简历</a>&nbsp;>&nbsp;<a href="/resume/list?dreamWorkStr=${info.scName!""}">${info.scName!""}</a>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-9 self_left">
-            <div class="row">
+        <div class="col-md-9 self_left" style="background: #ffffff">
+            <div class="row" >
                 <div class="col-md-4 push_base_static">
-                    <span>发布时间:${info.piPushDate?string("yyyy-MM-dd")}</span> <span>浏览量:${info.piScan}</span>
+                    <span>发布时间:${info.updateTime?string("yyyy-MM-dd")}</span>
                 </div>
                 <div class="col-md-4"></div>
                 <div class="col-md-4 push_base_static">
-                    <span id="collect">
-<#if Session.user??>
-    <#if collected>
-        <i class="fa fa-calendar"></i> 已收藏
-    <#else>
-        <a href="javascript:;" style="margin-right: 0;" id="collect_a"><i class="fa fa-calendar"></i> 收藏</a>
-    </#if>
-    <#else>
-        <a href="#myModal" style="margin-right: 0;" data-toggle="modal"><i class="fa fa-calendar"></i> 收藏</a>
-</#if>
-
-
-                    </span>
                 <#if Session.user??>
                     <a href="#tipInfo" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
                 <#else>
                     <a href="#myModal" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
-                </#if>   <a href="${base}/about/service" style="color:red;"><i class="fa fa-level-up"></i>推广服务</a>
+                </#if>   <a href="${base}/about/service" target="_blank" style="color:red;"><i class="fa fa-level-up"></i>推广服务</a>
+                    <img class="tuijian" src="${base}/img/tuijian.png" alt="">
                 </div>
             </div>
-            <div class="row push_base_title">
-                <div class="col-md-8">
-                    <h1><#if info.piTitle?length gt 13>${info.piTitle[0..14]}...<#else>${info.piTitle}</#if></h1>
+
+            <div id="header" class="row">
+
+                <div class="col-sm-3">
+                <#if info.cvImg??>
+                    <img class="img-circle img-thumbnail" src="${base}/${info.cvImg}" alt="" width="144px" height="144px">
+                <#else>
+                    <img class="img-circle" src="${base}/img/noimage.png" alt="" width="144px" height="144px">
+                </#if>
+
                 </div>
-            </div>
-            <div class="row push_base_data">
-                <div class="col-md-7">
-                    <div>
-                        <!-- 轮播（Carousel）内容 -->
-                        <div class="carousel-inner">
-                            <div id="wrapper">
-                                <!--滚动看图-->
-                                <div id="picSlideWrap" class="clearfix">
-                                    <div class="imgnav" id="imgnav">
-                                        <div id="img">
-                                        <#if info.piImg??>
-                                            <#list info.piImg?split("#") as piImg>
-                                                    <img src="${base}/${piImg}" class="img-thumbnail" width="522px" height="400px"/>
-                                            </#list>
-                                        <#else>
-                                            <img src="${base}/img/noimage.png" class="img-thumbnail" width="522px" height="400px"/>
-                                        </#if>
-                                            <div id="front" title="上一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
-                                            <div id="next" title="下一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
-                                        </div>
-                                        <div id="cbtn">
-                                            <i class="picSildeLeft"><img src="${base}/img/picSlideLeft.gif"/></i>
-                                            <i class="picSildeRight"><img src="${base}/img/picSlideRight.gif"/></i>
-                                            <div id="cSlideUl">
-                                                <ul>
-                                                <#if info.piImg??>
-                                                    <#list info.piImg?split("#") as piImg>
-                                                        <li><img src="${base}/${piImg}" class="img-thumbnail" /></li>
-                                                    </#list>
-                                                <#else>
-                                                    <li><img src="${base}/img/noimage.png" class="img-thumbnail" /></li>
-                                                </#if>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="col-sm-9">
+                    <div class="cv-title">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <h2>求职人:${info.realName!"未知"}</h2>
                             </div>
+                        </div>
+                        <h3>寻求职位:${info.scName!"未知"} </h3>
+                    </div>
+                    <div class="row resume-base-info">
+
+                        <div class="col-sm-2">
+                            <ul class="list-unstyled resume-base-title">
+                                <li>工作经验: </li>
+                                <li>最高学历: </li>
+                                <li>薪资待遇: </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <ul class="list-unstyled resume-base-content">
+                                <li>${info.jobYear!"未知"} </li>
+                                <li>${info.maxEdu!"未知"} </li>
+                                <li>${info.income!"未知"}</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <ul class="list-unstyled resume-base-title">
+                                <li>手机: </li>
+                                <li>邮箱: </li>
+                                <li>QQ: </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <ul class="list-unstyled resume-base-content">
+                                <li><a class="btn btn-danger" style="margin-top: -10px;" href="#completedNum" data-toggle="modal">点击查看号码</a> </li>
+                                <li>${info.email!"未知"} </li>
+                                <li>${info.qq!"未知"}</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5" >
-                    <ul class="list-unstyled self_ul_1" style="min-height: 420px">
-                        <li>
-                            <span>联系人:&nbsp; </span>
-                            <span>${info.piContactPerson}</span>
-                        </li>
-                        <li>
-                            <span>联系电话:&nbsp; </span>
-                            <span><span class="contact_method">${info.piPhone?replace(info.piPhone?substring(7,11),"****")}</span></span>
-                        </li>
-                        <li>
-                            <span></span>
-                            <span><a class="btn btn-danger" href="#completedNum" data-toggle="modal">点击查看完整号码</a></span>
-                        </li>
-                        <li>
-                            <span>qq:&nbsp; </span>
-                            <span>${info.piQq}</span>
-                        </li>
-                        <li>
-                            <span>详细地址:&nbsp; </span>
-                            <span>${info.piAddress}asdsadsadasdasdas</span>
-                        </li>
-                    </ul>
-                    <div class="alert alert-danger alert-dismissable" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
 
-                        <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+
+            <div class="panel panel-self">
+                <div class="panel-heading"><h3>求职意向</h3></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-title">
+                                <li>希望岗位: </li>
+                                <li>期望月薪: </li>
+                                <li>希望工作区域: </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-content">
+                                <li>${info.scName!"未知"} </li>
+                                <li>${info.income!"未知"} </li>
+                                <li>${info.districtName!"未知"} </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-title">
+                                <li>到岗时间: </li>
+                                <li>擅长技能: </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-content">
+                                <li>${info.workTime!"未知"} </li>
+                                <li>${info.jineng!"未知"}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p><span class="resume_title">自推荐言: </span>${info.zitui!"暂未填写"}</p>
+                </div>
+            </div>
+
+
+            <div class="panel panel-self">
+                <div class="panel-heading"><h3>个人简介</h3></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <ul class="list-unstyled resume-base-title">
+                                <li>婚否: </li>
+                                <li>性别: </li>
+                                <li>生日: </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <ul class="list-unstyled resume-base-content">
+                                <li><#if info.maritalStatus??&&info.maritalStatus==0>未婚<#else>已婚</#if></li>
+                                <li>${info.gender} </li>
+                                <li>${info.bornYear!"未知"} </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-title">
+                                <li>身高: </li>
+                                <li>体重: </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-content">
+                                <li><#if info.tall??>${info.tall}厘米<#else>未知</#if> </li>
+                                <li><#if info.weight??>${info.weight}kg<#else>未知</#if></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="push_base_other row">
-                <div class="col-md-10">
-                    <ul class="list-unstyled self_ul">
-                        <li><span class="s_title">地区:</span ><span class="s_content">${info.piDistrictName}</span></li>
-                        <#list info.tagValues as tv>
-                            <li><span class="s_title">${tv.tagName}:</span><span class="s_content">${tv.tcName}</span></li>
-                        </#list>
-                        <#list info.otherInfos as oi>
-                            <li><span class="s_title">${oi.picName}:</span><span class="s_content">${oi.pcContent}</span></li>
-                        </#list>
-                    </ul>
-                </div>
 
-            </div>
 
             <div class="panel panel-self">
-                <div class="panel-heading"><h3>信息描述</h3></div>
+                <div class="panel-heading"><h3>工作经历</h3></div>
                 <div class="panel-body">
-                ${info.piContent}
+                    <p>1.截至今年我有${info.jobYear!""}工作经验</p>
+                    <p><span class="resume_title">工作经历: </span>${info.jobDetail!""}</p>
                 </div>
             </div>
 
+
             <div class="panel panel-self">
-                <div class="panel-heading"><h3>公司介绍</h3></div>
+                <div class="panel-heading"><h3>教育背景</h3></div>
                 <div class="panel-body">
-                    wqeqweqwewq
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-title">
+                                <li>毕业院校: </li>
+                                <li>毕业时间: </li>
+                                <li>所学专业: </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-content">
+                                <li>${info.graColl!"未知"} </li>
+                                <li>${info.graDate} </li>
+                                <li>${info.stuPro!"未知"} </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-title">
+                                <li>外语水平: </li>
+                                <li>电脑水平: </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-2">
+                            <ul class="list-unstyled resume-base-content">
+                                <li>${info.english!"未知"} </li>
+                                <li>${info.computer!"未知"}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p><span class="resume_title">其他教育: </span>${info.otherStu!""}</p>
                 </div>
             </div>
+
         </div>
-
-        <div class="col-md-3" >
-            <div style="background: #fff;padding: 30px 0 20px 0;">
-                <div align="center">
-                    <#if infoUser.userImg??>
-                        <img src="${base}/${infoUser.userImg}" class="img-circle img-thumbnail" alt="">
-                    <#else>
-                        <img src="${base}/img/noimage.png" class="img-circle img-thumbnail" alt="">
-                    </#if>
-                </div>
-                <h4 style="margin-top: 20px;text-align: center">${info.piUser}</h4>
-                <p style="text-align: center;background: url(img/attc.png) no-repeat 80px;padding-left: 24px"> 已公司认证</p>
-                <h5 style="text-align: center">${infoUser.createTime?string("yyyy-MM-dd")}注册</h5>
-            </div>
-            <div class="panel panel-self" style="border: none;">
+        <div class="col-md-3">
+            <div class="panel panel-self" style="border: none;margin-top: 0;">
                 <div class="panel-heading">
-                    <h3 style="border-left: 5px solid #ff552e;padding-left: 10px;">同类信息推荐</h3>
+                    <h3 style="border-left: 5px solid #ff552e;padding-left: 10px;">求职信息推荐</h3>
                 </div>
                 <div class="panel-body">
                     <ul class="list-unstyled">
@@ -218,10 +264,10 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" style="height: 200px;" role="listbox">
                         <div class="item active">
-                            <img src="${base}/img/123.jpg" width="306px" alt="...">
+                            <img src="${base}/img/123.jpg" width="306px" height="200px" alt="...">
                         </div>
                         <div class="item">
-                            <img src="${base}/img/123.jpg" width="306px" alt="...">
+                            <img src="${base}/img/123.jpg" width="306px" height="200px" alt="...">
                         </div>
                     </div>
 
@@ -229,21 +275,11 @@
             </div>
 
         </div>
-
-
-
-
-    </div>
-    <div class="row">
-        <div class="col-md-10">
-
-        </div>
     </div>
 
-    <div class="row">
 
 
-    </div>
+
 
     <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -260,10 +296,10 @@
                     </div>
                     <div class="container phoneNum">
                         <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
-                        <span>${info.piPhone}</span>
+                        <span>${info.phone!""}</span>
                     </div>
                     <div class="person_contact" style="margin-top: 10px;">
-                        <p style="text-align: center">联系人:${info.piContactPerson}</p>
+                        <p style="text-align: center">联系人:${info.realName!""}</p>
                     </div>
                 </div>
                 <div class="modal-footer"><span>期待您对此信息满意!</span></div>
@@ -326,12 +362,12 @@
                         <form id="tipForm" action="${base}/tipInfo" method="post">
                             <div class="form-group">
                                 <label for="">信息Id:</label>
-                                <input type="text" readonly class="form-control"  name="piId"  value="${info.piId}">
+                                <input type="text" readonly class="form-control"  name="piId"  value="${info.cvId}">
                             </div>
 
                             <div class="form-group">
                                 <label for="">举报信息</label>
-                                <input type="text" disabled class="form-control" name="piTitle"  value="${info.piTitle}">
+                                <input type="text" disabled class="form-control" name="piTitle"  value="${info.realName!""}">
                             </div>
 
                             <div class="form-group">
@@ -354,6 +390,15 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </div>
+
+<div class="advert" style="margin-top: 50px;">
+    <div class="container_self">
+        <div class="row">
+            <img src="${base}/img/advert/footer.jpg" alt="开学那点事">
+        </div>
+    </div>
+</div>
+
 <@footer>
 <script src="${base}/js/silder.js" type="text/javascript"></script>
 <script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
@@ -361,23 +406,6 @@
     <@floating/>
 <script>
     $(function () {
-
-
-        $("#collect_a").click(function () {
-            $.ajax({
-                url:'${base}/collect?piId=${info.piId}',
-                type:'get',
-                success:function (result) {
-                    var res=result.split(":");
-                    if(res[0]==="ok"){
-                        $("#collect").html('<i class="fa fa-calendar"></i> 已收藏');
-                    }else{
-                        alert(res[1]);
-                    }
-                }
-            })
-        });
-
         $("#tipForm").validate({
             submitHandler:function (form) {
                 $.ajax({

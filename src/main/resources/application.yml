@@ -39,6 +39,8 @@ page:
   pageSize: 2
 
 path:
+  WinPathValue: C:/Users/18236/Desktop/
+  LinuxPathValue: /home/kfcg/
   pathValue: C:/Users/18236/Desktop/
 pagehelper:
   helper-dialect: mysql

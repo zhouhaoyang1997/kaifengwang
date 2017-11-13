@@ -5,8 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.kf.mapper.PushInfoMapper;
 import com.kf.pojo.BaseInfo;
 import com.kf.pojo.PushInfo;
-import com.kf.util.BasePage;
-import com.kf.util.PageUtil;
+import com.kf.util.*;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,8 @@ public class PushInfoService {
     @Autowired
     private PushInfoMapper pushInfoMapper;
 
+    @Autowired
+    private BasePath basePath;
 
     @Autowired
     private BasePage basePage;
@@ -113,6 +114,12 @@ public class PushInfoService {
     }
 
     public void deletePushInfo(Integer piId,Integer userId){
+        String imgUrls = getImgUrl(piId,userId);
+        if(imgUrls!=null&&CommonUtil.isNotNullAndNotEmpty(imgUrls)){
+            for(String imgUrl:imgUrls.split("#")){
+                FileUtil.deleteImg(basePath.getPathValue()+imgUrl);
+            }
+        }
         pushInfoMapper.deletePushInfo(piId,userId);
     }
 
