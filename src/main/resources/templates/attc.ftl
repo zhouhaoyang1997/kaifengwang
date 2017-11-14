@@ -37,14 +37,17 @@
                 <li class="active open">
                      <div class="link"><i class="fa fa-id-card-o"></i>公司认证<i class="fa fa-chevron-down"></i></div>
                     <ul class="submenu" style="display: block;">
-                        <#if Session.user??>
-                        <#if user.userAttc??&&user.userAttc!=1>
+                        <#switch status>
+
+                            <#case 1>
+                                <li class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">开始认证</a></li>
+                            <#break>
+                            <#case 0>
                             <li class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">我的认证</a></li>
-                        <#else>
-                            <li class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">开始认证</a></li>
-                        </#if>
-                        </#if>
-                        <li><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">信息修改</a></li>
+                            <li><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">信息修改</a></li>
+                            <#case 2>
+                            <li class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">我的认证</a></li>
+                        </#switch>
                     </ul>
                 </li>
                 <li><div class="link"><i class="fa fa-globe"></i>我的简历</div></li>
@@ -56,7 +59,7 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="home">
                         <div class="panel panel-default">
-                            <#switch user.userAttc>
+                            <#switch status>
                                 <#case 1>
                                     <div class="panel-heading"><h3>开始认证</h3></div>
                                     <div class="panel-body">

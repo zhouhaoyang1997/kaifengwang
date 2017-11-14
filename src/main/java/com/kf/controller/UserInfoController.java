@@ -244,11 +244,7 @@ public class UserInfoController {
 
 
 
-    @GetMapping("/user/attc")
-    public ModelAndView attc(){
-        ModelAndView modelAndView = new ModelAndView("about/attc");
-        return modelAndView;
-    }
+
 
     @GetMapping("/user/extension")
     public ModelAndView extension(){

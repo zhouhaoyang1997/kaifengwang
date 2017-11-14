@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 80
   context-path:
   session:
     cookie:
@@ -41,7 +41,7 @@ page:
 path:
 #  WinPathValue: C:/Users/ch/Desktop/
 #  LinuxPathValue: /home/kfcg/
-  pathValue: C:/Users/ch/Desktop/
+  pathValue: C:/Users/chao19940426/Desktop/
 pagehelper:
   helper-dialect: mysql
 
