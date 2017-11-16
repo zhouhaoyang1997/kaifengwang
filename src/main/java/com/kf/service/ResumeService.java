@@ -58,6 +58,11 @@ public class ResumeService {
         return resumes;
     }
 
+    public List<Resume> getResumeByNum(Integer num){
+        return resumeMapper.selectResumeByNum(num);
+    }
+
+
     public Resume getResume(Integer userId){
         return resumeMapper.selectResumeByUserId(userId);
     }

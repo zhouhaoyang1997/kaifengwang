@@ -14,7 +14,7 @@
     <div class="row" id="login">
         <div class="col-md-6 col-md-push-4">
             <!-- Start Sign In Form -->
-            <form action="${request.contextPath}/login" method="post" id="commentForm" class="fh5co-form animate-box">
+            <form id="commentForm" class="fh5co-form animate-box">
                 <h1 style="text-align: center">欢迎登录麦芒网</h1>
                 <div class="form-box row">
                     <div class="col-sm-offset-1 col-sm-10">
@@ -26,7 +26,7 @@
                         <label for="password" class="sr-only">密码</label>
                         <input type="password" class="form-control" id="password" required name="userPassword" placeholder="密码">
                     </div>
-                    <span style="color:red">${error!""}</span>
+                    <span style="color:red" id="error"></span>
                     <div class="form-group">
                         <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
                     </div>
@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-9">
-                                <input type="submit" value="登录" class="btn btn-primary">
+                                <input type="button" value="登录" id="loginBtn" class="btn btn-primary">
                             </div>
                             <div class="col-sm-3">
                                 <a href="#"><div class="qq_lg"></div><span>QQ登陆</span></a>
@@ -60,8 +60,26 @@
             form.submit();
         }
     });
-    $().ready(function() {
+    $(function() {
         $("#commentForm").validate();
+
+        $("#loginBtn").click(function () {
+            $.ajax({
+                url:'${request.contextPath}/login',
+                type:'post',
+                data:$("#commentForm").serialize(),
+                success:function (result) {
+                    var res=result.split(":");
+
+                    if(res[0]=="ok"){
+
+                        window.location.href=res[1];
+                    }else{
+                        $("#error").text(res[1]);
+                    }
+                }
+            })
+        })
     });
 </script>
 </body>

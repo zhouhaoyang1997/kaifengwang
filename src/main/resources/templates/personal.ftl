@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${base}/user/attc" target="_blank">
+                    <a href="${base}/user/attc">
                         <div class="link"><i class="fa fa-id-card-o"></i>公司认证</div>
                     </a>
 

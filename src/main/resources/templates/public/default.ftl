@@ -162,11 +162,8 @@
 </div>
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${base}/js/floating.js"></script>
 
-<script src="${base}/js/floating.js"></script>
-<!-- 快速点击js-->
-<script type="text/javascript" src="${base}/js/basePath.js"></script>
-<script type="text/javascript" src="${base}/js/quickClick.js"></script>
     <#nested >
 </body>
 </html>

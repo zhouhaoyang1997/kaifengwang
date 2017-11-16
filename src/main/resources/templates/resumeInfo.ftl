@@ -50,7 +50,7 @@
                 <#if Session.user??>
                     <a href="#tipInfo" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
                 <#else>
-                    <a href="#myModal" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
+                    <a href="#loginModal" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
                 </#if>   <a href="${base}/about/service" target="_blank" style="color:red;"><i class="fa fa-level-up"></i>推广服务</a>
                     <img class="tuijian" src="${base}/img/tuijian.png" alt="">
                 </div>
@@ -101,7 +101,13 @@
                         </div>
                         <div class="col-sm-2">
                             <ul class="list-unstyled resume-base-content">
-                                <li><a class="btn btn-danger" style="margin-top: -10px;" href="#completedNum" data-toggle="modal">点击查看号码</a> </li>
+                                <li>
+                                <#if Session.user??>
+                                    <a class="btn btn-danger" style="margin-top: -10px;" href="#completedNum" data-toggle="modal">点击查看号码</a>
+                                <#else>
+                                    <a class="btn btn-danger" style="margin-top: -10px;" href="#loginModal" data-toggle="modal">点击查看号码</a>
+                                </#if>
+                                </li>
                                 <li>${info.email!"未知"} </li>
                                 <li>${info.qq!"未知"}</li>
                             </ul>
@@ -232,23 +238,9 @@
                 <div class="panel-heading">
                     <h3 style="border-left: 5px solid #ff552e;padding-left: 10px;">求职信息推荐</h3>
                 </div>
-                <div class="panel-body">
-                    <ul class="list-unstyled">
-                        <li class="recommend">
-                            <h4>富士康年薪6万入职有奖励</h4>
-                            <p class="re_income">5000-8000元月</p>
-                            <p class="re_district">金明区</p>
-                        </li>
-                        <li class="recommend">
-                            <h4>富士康年薪6万入职有奖励</h4>
-                            <p class="re_income">5000-8000元月</p>
-                            <p class="re_district">金明区</p>
-                        </li>
-                        <li class="recommend">
-                            <h4>富士康年薪6万入职有奖励</h4>
-                            <p class="re_income">5000-8000元月</p>
-                            <p class="re_district">金明区</p>
-                        </li>
+                <div class="panel-body" style="min-height: 350px;">
+                    <ul class="list-unstyled" id="data">
+                        <div id="loader" style="width: 80px;height: 80px;" ></div>
                     </ul>
                 </div>
             </div>
@@ -279,8 +271,7 @@
 
 
 
-
-
+<#if Session.user??>
     <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
 
@@ -306,25 +297,26 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+<#else>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <div class="container logo_login">
-                        <h1>开封<span>城市网</span></h1>
+                        <h1>开封<span>麦芒网</span></h1>
                         <p >欢迎你的登陆</p>
                     </div>
                     <div class="container loginForm">
-                        <form action="${base}/login" method="post">
+                        <form id="loginForm" >
+                            <input type="hidden" name="path" value="/resume/info?cvId=${info.cvId}">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="userName" placeholder="用户名">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="userPassword" placeholder="密码">
                             </div>
-                            <span style="color:red">${error!""}</span>
+                            <span style="color:red" id="error"></span>
                             <div class="form-group">
                                 <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
                             </div>
@@ -334,7 +326,7 @@
                             <div class="row">
                                 <div class="col-xs-9">
                                     <div class="form-group" style="margin-top:20px">
-                                        <input type="submit" value="登录" style="width: 100px" class="btn btn-danger">
+                                        <input type="button" value="登录" id="loginBtn" style="width: 100px" class="btn btn-danger">
                                     </div>
                                 </div>
                                 <div class="col-xs-3">
@@ -343,12 +335,13 @@
                             </div>
                         </form>
                     </div>
-
-
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+</#if>
+
+
 
     <div class="modal fade" id="tipInfo" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
@@ -406,6 +399,30 @@
     <@floating/>
 <script>
     $(function () {
+
+        $.ajax({
+            url:'${base}/resume/recommend',
+            type:'get',
+            beforeSend:function () {
+                $("#loader").html('<img src="${base}/img/loading.gif" width="50%" style="text-align:center;margin:0 auto;"><p style="color:#999;font-size:14px">加载中，请稍后……</p>')
+
+            },
+            error:function () {
+                alert("错误");
+            },
+            success:function (result) {
+                $('#loading').fadeOut(1000);
+                var html = "";
+                for(var i=0;i<result.length;i++){
+                    var title=result[i].realName+"("+result[i].gender+")";
+
+                    html+='<li class="recommend"><a href="${base}/resume/info?cvId='+result[i].cvId+'"><h4>'+title+'</h4><p class="re_income">'+result[i].income+'</p><p class="re_district">'+result[i].districtName+'</p></a></li>';
+                }
+                $("#data").html(html);
+            }
+        });
+
+
         $("#tipForm").validate({
             submitHandler:function (form) {
                 $.ajax({
@@ -425,6 +442,21 @@
                 })
             }
         });
+        $("#loginBtn").click(function () {
+            $.ajax({
+                url:'/login',
+                type:'post',
+                data:$("#loginForm").serialize(),
+                success:function (result) {
+                    var res=result.split(":");
+                    if(res[0]=="ok"){
+                        window.location.href=res[1];
+                    }else{
+                        $("error").text(res[1]);
+                    }
+                }
+            })
+        })
     });
 
 

@@ -25,4 +25,6 @@ public interface ResumeMapper {
 
 
     Resume selectResumeByCvId(@Param("cvId")Integer cvId);
+
+    List<Resume> selectResumeByNum(@Param("num")Integer num);
 }

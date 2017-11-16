@@ -41,9 +41,10 @@ public class UserController{
     private SecondClassService secondClassService;
 
     @PostMapping("/login")
-    public ModelAndView login(@Valid @ModelAttribute("user")User user,BindingResult br, String remember, HttpServletRequest request, HttpServletResponse response){
+    @ResponseBody
+    public String login(@Valid @ModelAttribute("user")User user,BindingResult br, String remember, String path,HttpServletRequest request, HttpServletResponse response){
         //用户名密码正确,当前用户存入session
-        ModelAndView modelAndView = new ModelAndView("login");
+        String name="";
         //如果用户输入了信息
         if(!br.hasErrors()){
             user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
@@ -61,14 +62,19 @@ public class UserController{
                     CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
                 }
                 //默认登陆后返回首页,如果session中有值,则返回用户点击登陆的页面
-                modelAndView.setViewName("redirect:/index");
+                if(path!=null){
+                    name="ok:"+path;
+                }else{
+                    name="ok:/index";
+                }
+
             }else{
-                modelAndView.addObject("error","用户名或密码错误!");
+                name="error:你输入的用户名或密码错误";
             }
         }else{
-            modelAndView.addObject("error","请输入合法的信息!");
+            name="error:请输入合法的信息";
         }
-        return modelAndView;
+        return name;
     }
 
 

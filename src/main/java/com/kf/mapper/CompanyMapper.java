@@ -9,4 +9,6 @@ public interface CompanyMapper {
     void insertCompany(Company company);
 
     Company selectCompanyByUser(@Param("userId")Integer userId);
+
+    void deleteCompany(@Param("userId") Integer userId);
 }

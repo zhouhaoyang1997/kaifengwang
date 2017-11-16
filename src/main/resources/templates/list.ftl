@@ -284,6 +284,9 @@
 
 <script src="${base}/js/owl.carousel.min.js"></script>
 <script type="text/javascript" src="${base}/js/kkpager.min.js"></script>
+<!-- 快速点击js-->
+<script type="text/javascript" src="${base}/js/basePath.js"></script>
+<script type="text/javascript" src="${base}/js/quickClick.js"></script>
     <@floating/>
 <script type="text/javascript">
 

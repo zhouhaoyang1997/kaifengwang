@@ -270,5 +270,8 @@
 <script type="text/javascript" src="${base}/js/menu.js"></script>
 <script src="${base}/js/owl.carousel.min.js"></script>
 <script src="${base}/js/main.js"></script>
+<!-- 快速点击js-->
+<script type="text/javascript" src="${base}/js/basePath.js"></script>
+<script type="text/javascript" src="${base}/js/quickClick.js"></script>
     <@floating/>
 </@footer>

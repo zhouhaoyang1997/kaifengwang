@@ -14,7 +14,6 @@
 <li ><a href="${base}/about/contact">联系方式</a></li>
 <li><a href="${base}/about/service">推广服务</a></li>
 <li><a href="${base}/about/charge">收费标准</a></li>
-<li><a href="${base}/about/attc">企业认证</a></li>
 <li class="active"><a href="${base}/about/help">使用帮助</a></li>
 <li><a href="${base}/about/law">网站申明</a></li>
 <li><a href="${base}/about/friend">友情链接</a></li>

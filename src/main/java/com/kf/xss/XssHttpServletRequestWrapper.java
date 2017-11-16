@@ -25,6 +25,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper{
     @Override
     public String getParameter(String name) {
         String value = super.getParameter(name);
+
         return HtmlUtils.htmlEscape(value);
     }
 
@@ -32,7 +33,9 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper{
     public String[] getParameterValues(String name) {
 
         String[] values = super.getParameterValues(name);
-
+        if(name.equals("path")){
+            return values;
+        }
         if(values!=null){
             int length = values.length;
             String[] escapeValues = new String[length];

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${base}/css/fileupload.css">
 <link rel="stylesheet" href="${base}/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="${base}/css/bootstrap-switch.min.css">
+<link rel="stylesheet" href="${base}/BeAlert/BeAlert.css">
 <style>
     .error {
         color: red;
@@ -55,7 +56,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${base}/user/attc" target="_blank">
+                    <a href="${base}/user/attc">
                         <div class="link"><i class="fa fa-id-card-o"></i>公司认证</div>
                     </a>
                 </li>
@@ -76,7 +77,12 @@
                             <div class="well">
                                 <div class="switch" >
                                     将此简历在网站上公布?
-                                    <input type="checkbox" id="mySwitch" name="my-checkbox" value="1" checked>
+                                    <#if resume.openFlag==1>
+                                        <input type="checkbox" id="mySwitch" name="my-checkbox" checked>
+                                    <#else>
+                                        <input type="checkbox" id="mySwitch" name="my-checkbox">
+                                    </#if>
+
                                 </div>
                             </div>
                         </#if>
@@ -417,6 +423,7 @@
 <script type="text/javascript" src="${base}/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${base}/js/bootstrap-switch.min.js"></script>
+<script type="text/javascript" src="${base}/BeAlert/BeAlert.js"></script>
 <script>
 
     <#if picError??>

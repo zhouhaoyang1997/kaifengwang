@@ -1,14 +1,23 @@
 package com.kf.pojo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Company {
 
     private Integer companyId;
     private Integer cpUser;
+
     private Integer cpSc;
+    @NotBlank(message = "企业名称不可为空!")
     private String cpName;
+    @NotBlank(message = "企业联系人不可为空!")
     private String cpContactPerson;
     private String cpAddress;
     private String cpNet;
+
+    @NotBlank
+    private String cpContact;
+
     private String cpDescription;
     /**
      * 公司介绍图片
@@ -17,11 +26,20 @@ public class Company {
     /**
      * 公司注册号
      */
+    @NotBlank(message = "企业注册号不可为空")
     private String cpNum;
     /**
      * 公司营业执照图片
      */
     private String cpPzImg;
+
+    public String getCpContact() {
+        return cpContact;
+    }
+
+    public void setCpContact(String cpContact) {
+        this.cpContact = cpContact;
+    }
 
     public Integer getCompanyId() {
         return companyId;

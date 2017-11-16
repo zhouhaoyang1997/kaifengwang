@@ -59,7 +59,7 @@
                 <#if Session.user??>
                     <a href="#tipInfo" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
                 <#else>
-                    <a href="#myModal" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
+                    <a href="#loginModal" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
                 </#if>   <a href="${base}/about/service" style="color:red;"><i class="fa fa-level-up"></i>推广服务</a>
                 </div>
             </div>
@@ -121,7 +121,15 @@
                         </li>
                         <li>
                             <span></span>
+                        <#if info.piMc==1>
+                            <#if Session.user??>
+                                <span><a class="btn btn-danger" href="#completedNum" data-toggle="modal">点击查看完整号码</a></span>
+                            <#else>
+                                <span><a class="btn btn-danger" href="#loginModal" data-toggle="modal">点击查看完整号码</a></span>
+                            </#if>
+                        <#else>
                             <span><a class="btn btn-danger" href="#completedNum" data-toggle="modal">点击查看完整号码</a></span>
+                        </#if>
                         </li>
                         <li>
                             <span>qq:&nbsp; </span>
@@ -157,15 +165,30 @@
             <div class="panel panel-self">
                 <div class="panel-heading"><h3>信息描述</h3></div>
                 <div class="panel-body">
-                ${info.piContent}
+                    <div style="min-height: 250px;">
+                    ${info.piContent}
+                    </div>
+                    <div class="alert alert-info alert-dismissable" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                        <span style="font-size: 16px">联系时,</span>就说是在开封城市网看到的。谢谢!
+                    </div>
+
                 </div>
             </div>
             <#if company??>
                 <div class="panel panel-self">
                     <div class="panel-heading"><h3>公司介绍</h3></div>
                     <div class="panel-body">
-                        <h3>${company.cpName}</h3>
-                        <p>${company.cpDescription!""}</p>
+                        <h4>公司名称:${company.cpName}</h4>
+                        <#if company.cpDescription??>
+                            <div style="min-height: 250px;">
+                                <p><span style="color: #aaa;">公司描述</span>${company.cpDescription!""}</p>
+                            </div>
+                        <#else>
+                            该公司暂未更新公司描述!
+                        </#if>
+
                     </div>
                 </div>
             </#if>
@@ -220,51 +243,83 @@
             </div>
         </div>
     </div>
+<#if info.piMc==1>
+    <#if Session.user??>
+        <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
 
-    <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="container logo_login">
+                            <p >查看联系方式</p>
+                        </div>
 
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <div class="container logo_login">
-                        <p >查看联系方式</p>
+                        <div class="container alterInfo">
+                            <span>联系时,就说是在开封城市网看到的。谢谢!</span>
+                        </div>
+                        <div class="container phoneNum">
+                            <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
+                            <span>${info.piPhone}</span>
+                        </div>
+                        <div class="person_contact" style="margin-top: 10px;">
+                            <p style="text-align: center">联系人:${info.piContactPerson}</p>
+                        </div>
                     </div>
-
-                    <div class="container alterInfo">
-                        <span>联系时,就说是在开封城市网看到的。谢谢!</span>
-                    </div>
-                    <div class="container phoneNum">
-                        <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
-                        <span>${info.piPhone}</span>
-                    </div>
-                    <div class="person_contact" style="margin-top: 10px;">
-                        <p style="text-align: center">联系人:${info.piContactPerson}</p>
-                    </div>
+                    <div class="modal-footer"><span>期待您对此信息满意!</span></div>
                 </div>
-                <div class="modal-footer"><span>期待您对此信息满意!</span></div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    </#if>
+    <#else>
+        <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="container logo_login">
+                            <p >查看联系方式</p>
+                        </div>
+
+                        <div class="container alterInfo">
+                            <span>联系时,就说是在开封城市网看到的。谢谢!</span>
+                        </div>
+                        <div class="container phoneNum">
+                            <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
+                            <span>${info.piPhone}</span>
+                        </div>
+                        <div class="person_contact" style="margin-top: 10px;">
+                            <p style="text-align: center">联系人:${info.piContactPerson}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer"><span>期待您对此信息满意!</span></div>
+                </div>
+            </div>
+        </div>
+</#if>
+
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <div class="container logo_login">
-                        <h1>开封<span>城市网</span></h1>
+                        <h1>开封<span>麦芒网</span></h1>
                         <p >欢迎你的登陆</p>
                     </div>
                     <div class="container loginForm">
-                        <form action="${base}/login" method="post">
+                        <form id="loginForm" >
+                            <input type="hidden" name="path" value="/info?piId=${info.piId}">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="userName" placeholder="用户名">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="userPassword" placeholder="密码">
                             </div>
-                            <span style="color:red">${error!""}</span>
+                            <span style="color:red" id="error"></span>
                             <div class="form-group">
                                 <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
                             </div>
@@ -274,7 +329,7 @@
                             <div class="row">
                                 <div class="col-xs-9">
                                     <div class="form-group" style="margin-top:20px">
-                                        <input type="submit" value="登录" style="width: 100px" class="btn btn-danger">
+                                        <input type="button" value="登录" id="loginBtn" style="width: 100px" class="btn btn-danger">
                                     </div>
                                 </div>
                                 <div class="col-xs-3">
@@ -283,8 +338,6 @@
                             </div>
                         </form>
                     </div>
-
-
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -397,6 +450,21 @@
                 })
             }
         });
+        $("#loginBtn").click(function () {
+            $.ajax({
+                url:'/login',
+                type:'post',
+                data:$("#loginForm").serialize(),
+                success:function (result) {
+                    var res=result.split(":");
+                    if(res[0]=="ok"){
+                        window.location.href=res[1];
+                    }else{
+                        $("error").text(res[1]);
+                    }
+                }
+            })
+        })
     });
 
 

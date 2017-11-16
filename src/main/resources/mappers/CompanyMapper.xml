@@ -7,11 +7,15 @@
         <selectKey keyProperty="companyId" resultType="java.lang.Integer">
             select LAST_INSERT_ID()
         </selectKey>
-        insert into company(cp_name,cp_contactPerson,cp_num,cp_pz_img,cp_user) VALUES (#{cpName},#{cpContactPerson},#{cpNum},#{cpPzImg},#{cpUser})
+        insert into company(cp_name,cp_contactPerson,cp_num,cp_pz_img,cp_user,cp_contact) VALUES (#{cpName},#{cpContactPerson},#{cpNum},#{cpPzImg},#{cpUser},${cpContact})
     </insert>
 
     <select id="selectCompanyByUser" resultType="com.kf.pojo.Company">
         SELECT * FROM company WHERE cp_user=${userId}
     </select>
+
+    <delete id="deleteCompany">
+        DELETE FROM company WHERE cp_user=#{userId}
+    </delete>
 
 </mapper>

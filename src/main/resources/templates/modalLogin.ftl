@@ -51,16 +51,15 @@
                                     <p >欢迎你的登陆</p>
                                 </div>
                             <div class="container loginForm">
-                                <form action="${base}/modalLogin" method="post">
-                                    <input type="hidden" name="scId" value="${choose.scId}">
-                                    <input type="hidden" name="mcId" value="${choose.mcId}">
+                                <form id="loginForm" >
+                                    <input type="hidden" name="path" value="/push/fill?mcId=${choose.mcId}&scId=${choose.scId}">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="userName" placeholder="用户名">
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control" name="userPassword" placeholder="密码">
                                     </div>
-                                    <span style="color:red">${error!""}</span>
+                                    <span style="color:red" id="error"></span>
                                     <div class="form-group">
                                         <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
                                     </div>
@@ -70,7 +69,7 @@
                                     <div class="row">
                                         <div class="col-xs-9">
                                             <div class="form-group" style="margin-top:20px">
-                                                <input type="submit" value="登录" style="width: 100px" class="btn btn-danger">
+                                                <input type="button" value="登录" id="loginBtn" style="width: 100px" class="btn btn-danger">
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
@@ -93,6 +92,26 @@
     function openModal() {
         $("#myModal").modal("show");
     }
+
+    $(function () {
+       $("#loginBtn").click(function () {
+           $.ajax({
+               url:'${base}/login',
+               type:'post',
+               data:$("#loginForm").serialize(),
+               success:function (result) {
+                   var res=result.split(":");
+
+                   if(res[0]=="ok"){
+
+                       window.location.href=res[1];
+                   }else{
+                       $("#error").text(res[1]);
+                   }
+               }
+           })
+       })
+    });
 
     $(function () {
         $("#myModal").modal("show");

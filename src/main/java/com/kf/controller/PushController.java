@@ -16,10 +16,12 @@ import com.kf.util.CookieUtil;
 import com.kf.util.FileUtil;
 import com.kf.util.Md5Util;
 import com.kf.vo.Choose;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -94,38 +96,6 @@ public class PushController {
 
 
 
-    @PostMapping("/modalLogin")
-    public ModelAndView modalLogin(@Valid @ModelAttribute("user")User user,BindingResult br, Choose choose, String remember, String backPath, HttpServletRequest request, HttpServletResponse response){
-        ModelAndView modelAndView=pushLogin(choose);
-        //如果用户没有选择或条件缺失,返回选择页面
-
-        //如果用户输入了信息
-        if(!br.hasErrors()){
-            String url = "/push/fill?mcId="+choose.getMcId()+"&scId="+choose.getScId();
-            user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
-            User user1 = userService.getUser(user);
-            if(user1!=null){
-                //修改最后登陆日期
-                Timestamp time = new Timestamp(new Date().getTime());
-                userService.updateUserLastLoginTime(user1.getUserId(),time);
-                //session记住当前用户
-                HttpSession session = request.getSession();
-                session.setAttribute("user",user1);
-                //用户点击了记住我
-                if(remember!=null&&!remember.isEmpty()){
-                    CookieUtil.addCookie(response,"userName",user.getUserName());
-                    CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
-                }
-                //默认登陆后返回首页,如果session中有值,则返回用户点击登陆的页面
-                modelAndView.setViewName("redirect:"+url);
-            }else{
-                modelAndView.addObject("error","用户名或密码错误!");
-            }
-        }else{
-            modelAndView.addObject("error","请输入合法的信息!");
-        }
-        return modelAndView;
-    }
 
     /**
      * 组装用户的选择
