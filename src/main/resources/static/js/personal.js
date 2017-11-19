@@ -33,7 +33,7 @@ $('#collectionTable').bootstrapTable({
         field:'option',
         title:'操作',
         formatter:function (value,row,index) {
-            return '<a class = "remove" href="javascript:void(0)">删除</a>';
+            return '<a onclick="removeCollect('+row.piId+')"  href="javascript:;">删除</a>';
         }
     }]
 });
@@ -91,12 +91,32 @@ $('#table').bootstrapTable({
         title:'操作',
         formatter:function (value,row,index) {
             var s = '<a href="/user/alterInfo?piId='+row.piId+'">修改</a>';
-            var d = '<a id="remove" data-toggle="modal" href="javascript:void(0)" onclick="removeModal('+row.piId+')">删除</a>';
+            var d = '<a id="remove" data-toggle="modal" href="javascript:void(0)" onclick="removePushInfo('+row.piId+')">删除</a>';
             return s+' '+d;
         }
     }]
 });
 
+function removeCollect(piId) {
+    confirm("删除该条收藏记录","您确认删除该条收藏吗?该操作不可回退!",function (flag) {
+        if(flag){
+            $.ajax({
+                url:'/user/deleteCollect?piId='+piId,
+                type:'get',
+                success:function (result) {
+                  if(result){
+                      alert("删除成功!");
+                      $("#collectionTable").bootstrapTable("refresh",{
+                          url:'/user/collectionPush'
+                      });
+                  }else{
+                      alert("服务器段发生了错误,请稍后再试!");
+                  }
+                }
+            })
+        }
+    })
+}
 
 
 $("#removeBtn").click(function () {
@@ -119,7 +139,24 @@ $("#removeBtn").click(function () {
     })
 });
 
-function removeModal(piId) {
-    $("#piIdHidden").val(piId);
-    $("#deleteModal").modal("show");
+function removePushInfo(piId) {
+    confirm("删除该条收藏记录","您确认删除该条收藏吗?该操作不可回退!",function (flag) {
+        if(flag){
+            $.ajax({
+                url:'/user/deleteInfo?piId='+piId,
+                type:'get',
+                success:function (result) {
+                    var res=result.split(":");
+                    if(res[0]==="ok"){
+                        //刷新bootstrap-table
+                        $("#table").bootstrapTable("refresh",{
+                            url:'/user/allPush'
+                        });
+                    }else{
+                        alert(res[1]);
+                    }
+                }
+            })
+        }
+})
 }

@@ -1,15 +1,13 @@
 package com.kf.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.kf.pojo.District;
-import com.kf.pojo.PushInfo;
-import com.kf.pojo.SecondClass;
-import com.kf.pojo.Tag;
+import com.kf.pojo.*;
 import com.kf.service.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kf.util.AdvertUtil;
 import com.kf.util.BasePage;
 import com.kf.util.PageUtil;
 import com.kf.vo.CurrMain;
@@ -39,10 +37,14 @@ public class ListController {
     @Autowired
     private TagService tagService;
 
+    @Autowired
+    private AdvertService advertService;
 
     @Autowired
     private PushInfoService pushInfoService;
 
+    @Autowired
+    private BannerService bannerService;
     /**
      * @param mcId
      * @param scId
@@ -63,6 +65,11 @@ public class ListController {
         List<PushInfo> pushInfos = pushInfoService.getAllJob(mcId,scId,districtId,tagValue,tagValue.size(),
                 pno,pageUtil);
         //查询二级类别
+        List<Banner> banners = bannerService.getBannerByMcId(mcId);
+
+        List<Advert> adverts = advertService.getAdvertByPage("list");
+        modelAndView.addObject("advertMap", AdvertUtil.conversionMap(adverts));
+        modelAndView.addObject("banners",banners);
         modelAndView.addObject("secondClass",secondClass);
         //查询所有行政区域
         modelAndView.addObject("districts",districts);
@@ -78,12 +85,17 @@ public class ListController {
         modelAndView.addObject("currScId",scId);
 
         //当前tag类
-        modelAndView.addObject("currTags",newTagId);
+        if(newTagId.size()!=0){
+            modelAndView.addObject("currTags",newTagId);
+        }
+
         //当前所选地区
         modelAndView.addObject("currDistrictId",districtId);
 
         //page对象返回页面
         modelAndView.addObject("pageUtil",pageUtil);
+
+
         return modelAndView;
     }
 

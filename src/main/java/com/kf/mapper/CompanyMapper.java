@@ -11,4 +11,8 @@ public interface CompanyMapper {
     Company selectCompanyByUser(@Param("userId")Integer userId);
 
     void deleteCompany(@Param("userId") Integer userId);
+
+    void updateCompanyImg(@Param("userId")Integer userId,@Param("imgUrl")String imgUrl);
+
+    void updateCompany(Company company);
 }

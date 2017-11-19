@@ -188,7 +188,15 @@
                         <#else>
                             该公司暂未更新公司描述!
                         </#if>
-
+                        <div class="row">
+                            <#if company.cpImg??>
+                                <#list company.cpImg?split("#") as imgUrl>
+                                    <div class="col-xs-3">
+                                        <img src="${base}/${imgUrl}" alt="">
+                                    </div>
+                                </#list>
+                            </#if>
+                        </div>
                     </div>
                 </div>
             </#if>
@@ -222,10 +230,10 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" style="height: 200px;" role="listbox">
                         <div class="item active">
-                            <img src="${base}/img/123.jpg" width="306px" alt="...">
+                            <img src="${base}${advertMap["content_gg_1"].advertUrl}" width="306px" alt="...">
                         </div>
                         <div class="item">
-                            <img src="${base}/img/123.jpg" width="306px" alt="...">
+                            <img src="${base}${advertMap["content_gg_2"].advertUrl}" width="306px" alt="...">
                         </div>
                     </div>
 
@@ -382,6 +390,17 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+</div>
+
+<div class="advert">
+    <div class="container_self">
+        <div class="row">
+            <a href="${advertMap["content_gg_bottom"].advertForward}" target="_blank">
+                <img src="${base}${advertMap["content_gg_bottom"].advertUrl}" alt="开学那点事">
+            </a>
+
+        </div>
+    </div>
 </div>
 <@footer>
 <script src="${base}/js/silder.js" type="text/javascript"></script>

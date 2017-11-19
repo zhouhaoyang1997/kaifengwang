@@ -316,9 +316,7 @@ z-index: 999;}
     top: 0;
     width: 100%;
 }
-.slide-one {background-image: url(../img/zhaopin/zp_silder_3.jpg)}
-.slide-two {background-image: url(../img/zhaopin/zp_silder_2.jpg)}
-.slide-three {background-image: url(../img/zhaopin/zp_silder_3.jpg)}
+
 .slide-text {color: #fff;font-size: 18px;font-weight: 200}
 .slide-text h2 {
     font-size: 45px;font-weight: 200

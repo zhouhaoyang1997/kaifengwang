@@ -7,15 +7,13 @@ import com.kf.service.UserService;
 import com.kf.util.BasePath;
 import com.kf.util.FileUtil;
 import com.kf.util.SessionUtil;
+import com.kf.vo.Flag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,6 +47,11 @@ public class AttcController {
             throw new UserNotLoginException("500","对不起,你还未登录,您的访问不合法");
         }
         Integer status = userService.getUserByUserId(userId).getUserAttc();
+        //如果用户已经认证
+        if(status==0){
+            Company company = companyService.getCompany(userId);
+            modelMap.addAttribute("company",company);
+        }
         modelMap.addAttribute("status",status);
         return "attc";
     }
@@ -91,7 +94,7 @@ public class AttcController {
     @GetMapping("/user/reAttc")
     @ResponseBody
     @Transactional
-    public String reAttc(ModelMap modelMap,HttpServletRequest request){
+    public String reAttc(HttpServletRequest request){
         Integer userId = SessionUtil.getUserId(request);
         if(userId==null){
             throw new UserNotLoginException("500","对不起,你还未登录,请您先登录");
@@ -103,6 +106,53 @@ public class AttcController {
             companyService.deleteCompany(userId);
             return "ok";
         }
+    }
+
+    @GetMapping("/user/initCompanyPic")
+    @ResponseBody
+    public String initPic(HttpServletRequest request){
+        Integer userId=SessionUtil.getUserId(request);
+        return companyService.getCompany(userId).getCpImg();
+    }
+
+    @PostMapping("/user/uploadCompanyPic")
+    @ResponseBody
+    public Flag uploadCompanyPic(@RequestParam("pic")MultipartFile[] pic,HttpServletRequest request){
+        Integer userId = SessionUtil.getUserId(request);
+        String baseImgStr = companyService.getCompany(userId).getCpImg();
+        String otherImgUrl = "";
+        try{
+            otherImgUrl = FileUtil.addPic(pic,"img/company/",basePath.getPathValue());
+        }catch(IOException e){
+            return new Flag("false");
+        }
+        if(baseImgStr!=null){
+            otherImgUrl = baseImgStr+"#"+otherImgUrl;
+        }
+        if(!otherImgUrl.isEmpty()){
+            //更新数据库
+            companyService.updateCompanyCpImg(userId,otherImgUrl.substring(0,otherImgUrl.length()-1));
+        }
+        return new Flag("true");
+    }
+
+    @PostMapping("/user/picCompanyDelete")
+    @ResponseBody
+    public Flag deleteCompanyPic(Integer key,HttpServletRequest request){
+
+        Integer userId=SessionUtil.getUserId(request);
+        String baseImgStr = companyService.getCompany(userId).getCpImg();
+        String imgUrl = FileUtil.getDeleteImg(baseImgStr,key,basePath);
+        companyService.updateCompanyCpImg(userId,imgUrl);
+        return new Flag("true");
+    }
+
+    @PostMapping("/user/alterCompanyInfo")
+    @ResponseBody
+    public String alterCompanyInfo(Company company,HttpServletRequest request){
+        Integer userId = SessionUtil.getUserId(request);
+        companyService.updateCompany(userId,company);
+        return "修改成功!";
     }
 
 }

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${base}/css/userInfo.css">
 <link rel="stylesheet" href="${base}/css/fileupload.css">
 <link rel="stylesheet" href="${base}/css/default.css">
+<link rel="stylesheet" href="${base}/css/fileinput.min.css">
 <link rel="stylesheet" href="${base}/BeAlert/BeAlert.css">
 </@header>
 <@headerArea>
@@ -182,15 +183,15 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="profile">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><h3>信息修改</h3></div>
+                            <div class="panel-heading"><h3>基础信息</h3></div>
                             <div class="panel-body">
-                                <form action="">
+                                <form id="companyForm">
                                     <div class="form-group row">
                                         <div class="col-xs-2">
                                             <label><span style="color:red">*</span>企业名称:</label>
                                         </div>
                                         <div class="col-xs-5">
-                                            <input type="text" class="form-control" disabled>
+                                            <input type="text" value="${company.cpName!""}" class="form-control" disabled>
                                         </div>
                                         <div class="col-xs-5">
                                             <span>修改企业名称,企业营业执照,企业法人,企业注册号,恳请您重新认证企业!</span>
@@ -198,39 +199,51 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-xs-2">
-                                            <label><span style="color:red">*</span>企业地址:</label>
+                                            <label>企业地址:</label>
 
                                         </div>
                                         <div class="col-xs-5">
-                                            <input type="text" class="form-control">
+                                            <input type="text" name="cpAddress" value="${company.cpAddress!""}" class="form-control">
                                         </div>
                                         <div class="col-xs-5"></div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-xs-2">
-                                            <label><span style="color:red">*</span>企业网址:</label>
+                                            <label>企业网址:</label>
 
                                         </div>
                                         <div class="col-xs-5">
-                                            <input type="text" class="form-control">
+                                            <input type="text" name="cpNet" value="${company.cpNet!""}" class="form-control">
                                         </div>
                                         <div class="col-xs-5"></div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-xs-2">
-                                            <label><span style="color:red">*</span>企业简介:</label>
+                                            <label>企业简介:</label>
 
                                         </div>
                                         <div class="col-xs-8">
-                                            <textarea name="piContent"
-                                                      style="width:600px;height:400px;visibility:hidden;"></textarea>
+                                            <textarea name="cpDescription"
+                                                      style="width:600px;height:400px;">${company.cpDescription!""}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-offset-4 col-sm-4">
-                                            <button type="submit" class="btn btn-danger">确认提交</button>
+                                            <button type="button" id="CompanyBtn" class="btn btn-danger">确认提交</button>
                                         </div>
                                     </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h3>公司图片</h3></div>
+                            <div class="panel-body">
+                                <form enctype="multipart/form-data" >
+                                    <label for="">您最多只能上传4张图片,且所有图片大小不能大于4M</label>
+                                    <div class="form-group">
+                                        <input id="picUpload" type="file" name="pic" multiple  class="file-loading">
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
@@ -249,24 +262,25 @@
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/js/fileupload.js"></script>
-<script type="text/javascript" src="${base}/js/kindeditor-min.js"></script>
 <script type="text/javascript" src="${base}/js/zh-CN.js"></script>
+<script type="text/javascript" src="${base}/js/fileinput.min.js"></script>
+<script type="text/javascript" src="${base}/js/zh.js"></script>
 <script type="text/javascript" src="${base}/BeAlert/BeAlert.js"></script>
 <script type="text/javascript">
-    var editor;
-    KindEditor.ready(function (K) {
-        editor = K.create('textarea[name="piContent"]', {
-            resizeType: 1,
-            allowPreviewEmoticons: false,
-            allowImageUpload: false,
-            items: [
-                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-                'insertunorderedlist']
-        });
-    });
+
 
     $(function () {
+        $("#CompanyBtn").click(function () {
+            $.ajax({
+                url:'${base}/user/alterCompanyInfo',
+                type:'post',
+                data:$("#companyForm").serialize(),
+                success:function (result) {
+                    alert(result);
+                }
+            })
+        });
+
         $("#reAttc").click(function () {
             confirm("您确认重新认证码?", "这将导致您的原有认证信息被删除,因此将产生的问题本网站概不负责!", function (isConfirm) {
                 if (isConfirm) {
@@ -287,8 +301,86 @@
                     })
                 }
             });
-        })
+        });
+
+        <#if status==0>
+        $.ajax({
+            url:'${base}/user/initCompanyPic',
+            type:'get',
+            success:function (result) {
+                initUpload(result);
+            }
+        });
+//http://blog.csdn.net/github_36086968/article/details/72830855;;;;http://plugins.krajee.com/file-input#ajax-uploads
+        function initUpload(result) {
+            $("#picUpload").fileinput({
+                uploadUrl:'${base}/user/uploadCompanyPic',
+                uploadAsync:false,
+                showUpload: true,//是否显示上传按钮
+                showRemove: false,//是否显示删除按钮
+                showCaption: true,//是否显示输入框
+                showPreview:true,
+                showCancel:false,
+                showClose:false,
+                layoutTemplates:{
+                    actionUpload:''
+                },
+                dropZoneEnabled: false,
+                maxFileSize:1024*4,
+                language:'zh',
+                maxFileCount: 4,
+                overwriteInitial: false,
+                initialPreviewFileType: 'image',
+                initialPreviewShowDelete:true,
+                validateInitialCount:true,
+                msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
+                initialPreview: initPhoto(result),
+                previewFileIcon: '<i class="fa fa-file"></i>',
+                initialPreviewConfig: initConfig(result)
+            }).on('filebatchuploadsuccess',function (event,data) {
+                //同步上传上传成功后执行此事件
+                if(data.response.flag==="true"){
+                    alert("图片已上传!");
+                }else{
+                    alert("图片上传失败,服务器出错了!")
+                }
+            }).on('filepredelete',function (jqXHR) {
+                var abort=true;
+                if (confirm("你确定要删除该文件吗?删除后不可恢复")) {
+                    abort = false;
+                }
+                return abort;
+            })
+        }
+
+        function initPhoto(result) {
+            if(result===""){
+                return "";
+            }
+            var imgUrl = result.split("#");
+            for(var i=0;i<imgUrl.length;i++){
+                imgUrl[i]='<img src="${base}/'+imgUrl[i]+'" class="file-preview-image" style="width:200px;height:100px;"/>';
+            }
+            return imgUrl;
+        }
+        function initConfig(result){
+            if(result===""){
+                return "";
+            }
+            var config=new Array();
+            var imgUrl = result.split("#");
+            for(var i=0;i<imgUrl.length;i++){
+                config[i]= {
+                    caption: imgUrl[i].substring(imgUrl[i].lastIndexOf("/")+1),
+                    width: '120px',
+                    url: '${base}/user/picCompanyDelete',
+                    key: i
+                };
+            }
+            return config;
+        }
     });
+        </#if>
 
         <#if picError??>
         $(function () {

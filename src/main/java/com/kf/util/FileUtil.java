@@ -45,4 +45,31 @@ public class FileUtil {
 //        System.out.println("删除图片"+fileName);
         return file.exists()&&file.isFile()&&file.delete();
     }
+
+    public static String getDeleteImg(String baseImgUrl,Integer key,BasePath basePath){
+        StringBuffer stringBuffer = new StringBuffer();
+        if(baseImgUrl!=null){
+            String[] imgUrl = baseImgUrl.split("#");
+            for(int i=0;i<imgUrl.length;i++){
+                if(i!=key){
+                    stringBuffer.append(imgUrl[i]);
+                    stringBuffer.append("#");
+                }else{
+                    FileUtil.deleteImg(basePath.getPathValue()+imgUrl[i]);
+                }
+            }
+            //更改图片url
+            return getUrl(stringBuffer);
+        }
+        return null;
+    }
+
+    private static String getUrl(StringBuffer stringBuffer){
+        if(stringBuffer.length()>0){
+            String sb = stringBuffer.toString();
+            return sb.substring(0,sb.length()-1);
+        }else{
+            return null;
+        }
+    }
 }

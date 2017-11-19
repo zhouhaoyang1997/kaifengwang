@@ -54,6 +54,8 @@ public interface PushInfoMapper {
     //用于收藏信息
     void addCollection(@Param("piId") Integer piId,@Param("userId") Integer userId);
 
+    void deleteCollection(@Param("piId") Integer piId,@Param("userId") Integer userId);
+
     /**
      * 用来判断信息是否已经被收藏
      * @param piId

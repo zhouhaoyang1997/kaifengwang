@@ -54,4 +54,13 @@ public class CompanyService {
         }
         companyMapper.deleteCompany(userId);
     }
+
+    public void updateCompanyCpImg(Integer userId,String imgUrl){
+        companyMapper.updateCompanyImg(userId,imgUrl);
+    }
+
+    public void updateCompany(Integer userId,Company company){
+        company.setCpUser(userId);
+        companyMapper.updateCompany(company);
+    }
 }

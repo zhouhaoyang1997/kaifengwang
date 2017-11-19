@@ -3,6 +3,8 @@ package com.kf.pojo;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.sql.Timestamp;
+
 /**
  * 该表用于用户举报信息
  * Created by 18236 on 2017/10/14.
@@ -13,6 +15,15 @@ public class Tip {
     private String tipContent;
     private Integer tipId;
     private Integer tipStatus;
+    private Timestamp tipCreatetime;
+
+    public Timestamp getTipCreatetime() {
+        return tipCreatetime;
+    }
+
+    public void setTipCreatetime(Timestamp tipCreatetime) {
+        this.tipCreatetime = tipCreatetime;
+    }
 
     public Integer getPiId() {
         return piId;

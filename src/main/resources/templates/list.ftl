@@ -15,7 +15,7 @@
 <#-- 广告-->
 <div class="advert">
     <div class="container_self_advert">
-        <div class="gg_box" style="background:url(${request.contextPath}/img/advert.jpg) no-repeat">
+        <div class="gg_box" style="background:url(${request.contextPath}${advertMap["list_gg_header"].advertUrl}) no-repeat;background-size: 100%">
         </div>
     </div>
 </div>
@@ -25,7 +25,11 @@
 <h1><img src="/img/kflogo2.png" width="48" height="48" alt="网站logo"><a href="${base}/index">开封<span>${currMc.mcName}</span></a></h1>
 </@searchArea>
 
+<#if currScId??||currDistrictId??||currTags??>
+<#else>
 <!--轮播图 -->
+<#if banners??>
+
 <div class="slider_width">
     <div class="slider-area">
         <div id="slide-list" class="carousel carousel-fade slide" data-ride="carousel">
@@ -43,41 +47,26 @@
                 </div>
             </div>
 
-            <div class="carousel-inner" role="listbox">
+                <div class="carousel-inner" role="listbox">
+            <#list banners as banner>
+                <#if banner_index==0>
                 <div class="item active">
-                    <div class="single-slide">
-                        <div class="slide-bg slide-one"></div>
-                        <div class="slide-text-wrapper">
-                            <div class="slide-text">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-8">
-                                            <div class="slide-content">
-                                                <h2>XXXXX公司</h2>
-                                                <p>中国最具有影响力的游戏公司</p>
-                                                <p>世界第一.</p>
-                                                <a href="#" class="readmore">加入我们</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <#else>
                 <div class="item">
-                    <div class="single-slide">
-                        <div class="slide-bg slide-two"></div>
-                        <div class="slide-text-wrapper">
-                            <div class="slide-text">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-8">
-                                            <div class="slide-content">
-                                                <h2>XXXXX公司</h2>
-                                                <p>中国最具有影响力的游戏公司</p>
-                                                <p>世界第一.</p>
-                                                <a href="#" class="readmore">加入我们</a>
+                </#if>
+
+                        <div class="single-slide">
+                            <div class="slide-bg" style="background-image: url('${banner.advertUrl}')"></div>
+                            <div class="slide-text-wrapper">
+                                <div class="slide-text">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-4 col-md-offset-8">
+                                                <div class="slide-content">
+                                                    <h2>${banner.bannerTitle}</h2>
+                                                    <p>${banner.bannerContent}</p>
+                                                    <a href="#" class="readmore">加入我们</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -85,34 +74,17 @@
                             </div>
                         </div>
                     </div>
+            </#list>
                 </div>
-                <div class="item">
-                    <div class="single-slide">
-                        <div class="slide-bg slide-three"></div>
-                        <div class="slide-text-wrapper">
-                            <div class="slide-text">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-8">
-                                            <div class="slide-content">
-                                                <h2>XXXXX公司</h2>
-                                                <p>中国最具有影响力的游戏公司</p>
-                                                <p>世界第一.</p>
-                                                <a href="#" class="readmore">加入我们</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>
 
 </div>
+</#if>
+
+</#if>
+
 
 <!-- 下方显示职位类别及搜索-->
 <div class="container_self">
@@ -261,7 +233,9 @@
                         </div>
                         <!-- 广告位-->
                         <div class="col-xs-2">
-                            <img src="${base}/img/advert/gg_fz.jpg" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
+                            <img src="${base}${advertMap["list_gg_1"].advertUrl}" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
+                            <img src="${base}${advertMap["list_gg_2"].advertUrl}" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
+                            <img src="${base}${advertMap["list_gg_3"].advertUrl}" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
                         </div>
                     </div>
 

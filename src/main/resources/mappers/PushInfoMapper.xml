@@ -167,6 +167,10 @@
         insert INTO collection(user_id,pi_id) values(#{userId},#{piId})
     </insert>
 
+    <delete id="deleteCollection">
+        DELETE FROM collection WHERE user_id=#{userId} AND pi_id=#{piId}
+    </delete>
+
     <select id="collectionIsExists" resultType="java.lang.Integer">
         SELECT user_id from collection where pi_id=#{piId} and user_id=#{userId}
     </select>

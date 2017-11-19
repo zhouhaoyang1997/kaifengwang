@@ -18,4 +18,15 @@
         DELETE FROM company WHERE cp_user=#{userId}
     </delete>
 
+    <update id="updateCompanyImg">
+        UPDATE company SET cp_img=#{imgUrl} WHERE cp_user=#{userId}
+    </update>
+
+    <update id="updateCompany" parameterType="com.kf.pojo.Company">
+        UPDATE company SET
+        <if test="cpAddress!=null">cp_address=#{cpAddress},</if>
+        <if test="cpNet!=null">cp_net=#{cpNet},</if>
+        <if test="cpDescription!=null">cp_description=#{cpDescription}</if> WHERE cp_user=#{cpUser}
+    </update>
+
 </mapper>

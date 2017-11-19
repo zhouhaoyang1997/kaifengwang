@@ -1,14 +1,9 @@
 package com.kf.controller;
 
 import com.kf.exception.PiIdNotFoundException;
-import com.kf.pojo.Company;
-import com.kf.pojo.PushInfo;
-import com.kf.pojo.Tip;
-import com.kf.pojo.User;
-import com.kf.service.CompanyService;
-import com.kf.service.PushInfoService;
-import com.kf.service.TipService;
-import com.kf.service.UserService;
+import com.kf.pojo.*;
+import com.kf.service.*;
+import com.kf.util.AdvertUtil;
 import com.kf.util.CommonUtil;
 import com.kf.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by 18236 on 2017/10/2.
@@ -32,6 +28,8 @@ public class InfoController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AdvertService advertService;
 
     @Autowired
     private CompanyService companyService;
@@ -61,6 +59,8 @@ public class InfoController {
                 Company company = companyService.getCompany(infoUser.getUserId());
                 modelAndView.addObject("company",company);
             }
+            List<Advert> adverts = advertService.getAdvertByPage("content");
+            modelAndView.addObject("advertMap", AdvertUtil.conversionMap(adverts));
             modelAndView.addObject("info",pushInfo);
             modelAndView.addObject("infoUser",infoUser);
             //用户是否收藏了该信息

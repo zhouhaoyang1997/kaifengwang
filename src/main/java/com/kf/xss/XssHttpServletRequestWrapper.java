@@ -33,7 +33,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper{
     public String[] getParameterValues(String name) {
 
         String[] values = super.getParameterValues(name);
-        if(name.equals("path")){
+        if(name.equals("path")||name.equals("piContent")){
             return values;
         }
         if(values!=null){

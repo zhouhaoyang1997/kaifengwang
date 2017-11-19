@@ -100,6 +100,9 @@ public class PushInfoService {
         pushInfoMapper.updatePushInfoStatus(piId,userId,status);
     }
 
+    public void deleteCollection(Integer userId,Integer piId){
+        pushInfoMapper.deleteCollection(piId,userId);
+    }
 
     public void addCollection(Integer userId,Integer piId){
         pushInfoMapper.addCollection(piId, userId);

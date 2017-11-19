@@ -64,4 +64,14 @@ public class PicController {
         }
     }
 
+    @GetMapping("/img/company/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<?> getcompanyImg(@PathVariable String filename) {
+        try {
+            return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(basePath.getPathValue()+"/img/company/",filename).toString()));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
