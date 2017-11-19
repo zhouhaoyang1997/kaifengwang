@@ -42,7 +42,7 @@ public class PushInfoService {
      * @param basePush
      */
     private void initPushInfo(PageUtil pageUtil,List<PushInfo> basePush){
-        PageInfo<PushInfo> pageInfo=new PageInfo<>(basePush);
+        PageInfo<PushInfo> pageInfo=new PageInfo<PushInfo>(basePush);
         pageUtil.setPageNums(pageInfo.getPages());
         pageUtil.setTotal(pageInfo.getTotal());
         for(PushInfo pushInfo:basePush){

@@ -13,7 +13,7 @@
                 <#if Session.user??>
                     <#-- ?url=${springMacroRequestContext.getRequestUri()request.queryString，实际调用的是request.getQueryString方法。
 request有哪些方法，可以参考 org.springframework.web.servlet.support.RequestContext的源码。-->
-                <p><a href="${base}/user/info">${user.userName}</a> &nbsp;|&nbsp; <a href="${base}/logout">注销</a></p>
+                <p><a href="${base}/user/info"><i class="fa fa-user"></i>${user.userName}</a> &nbsp;|&nbsp;  <a href="javascript:;" id="logout"><i class="fa fa-window-close"></i> 注销</a></p>
             <#else>
                 <p><a href="${base}/login">登录</a> &nbsp;|&nbsp; <a href="${base}/register">注册</a></p>
             </#if>
@@ -33,6 +33,24 @@ request有哪些方法，可以参考 org.springframework.web.servlet.support.Re
     </div>
 </div>
 <#nested >
+
+<script>
+    $(function () {
+        $("#logout").click(function () {
+            $.ajax({
+                url:'${base}/logout',
+                type:'get',
+                success:function (result) {
+                    if(result){
+                        window.location.reload();
+                    }else{
+                        alert("服务器出错了!");
+                    }
+                }
+            })
+        })
+    });
+</script>
 </body>
 </html>
 </#macro>

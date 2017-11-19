@@ -52,7 +52,7 @@ public class ResumeService {
     public List<Resume> getResumeList(ResumeMin resumeMin, Integer pageNum, PageUtil pageUtil){
         PageHelper.startPage(pageNum,basePage.getPageSize());
         List<Resume> resumes = resumeMapper.selectResumeList(resumeMin);
-        PageInfo<Resume> pageInfo=new PageInfo<>(resumes);
+        PageInfo<Resume> pageInfo=new PageInfo<Resume>(resumes);
         pageUtil.setPageNums(pageInfo.getPages());
         pageUtil.setTotal(pageInfo.getTotal());
         return resumes;

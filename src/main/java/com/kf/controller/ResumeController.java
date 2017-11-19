@@ -3,16 +3,15 @@ package com.kf.controller;
 import com.kf.exception.PiIdNotFoundException;
 import com.kf.exception.ServerException;
 import com.kf.exception.UserNotLoginException;
+import com.kf.pojo.Advert;
 import com.kf.pojo.District;
 import com.kf.pojo.Resume;
 import com.kf.pojo.SecondClass;
+import com.kf.service.AdvertService;
 import com.kf.service.DistrictService;
 import com.kf.service.ResumeService;
 import com.kf.service.SecondClassService;
-import com.kf.util.BasePath;
-import com.kf.util.FileUtil;
-import com.kf.util.PageUtil;
-import com.kf.util.SessionUtil;
+import com.kf.util.*;
 import com.kf.vo.ResumeMin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +46,8 @@ public class ResumeController {
     @Autowired
     private ResumeService resumeService;
 
+    @Autowired
+    private AdvertService advertService;
 
     @Autowired
     private BasePath basePath;
@@ -57,20 +58,20 @@ public class ResumeController {
         List<SecondClass> secondClass = secondClassService.getAllSecondClass(1);
         List<District> districts = districtService.getAllDistrict();
         if(resumeMin!=null){
-
             resumeMin.setOpenFlag(1);
         }else{
-
             resumeMin = new ResumeMin();
             resumeMin.setOpenFlag(1);
         }
         PageUtil pageUtil = new PageUtil();
         List<Resume> resumes = resumeService.getResumeList(resumeMin,pno,pageUtil);
+        List<Advert> adverts = advertService.getAdvertByPage("list");
         modelAndView.addObject("resumes",resumes);
         modelAndView.addObject("districts",districts);
         modelAndView.addObject("secondClass",secondClass);
         modelAndView.addObject("pageUtil",pageUtil);
         modelAndView.addObject("resumeMin",resumeMin);
+        modelAndView.addObject("advertMap", AdvertUtil.conversionMap(adverts));
         return modelAndView;
     }
 
@@ -154,10 +155,12 @@ public class ResumeController {
     @GetMapping("/resume/info")
     public String infoResume(Integer cvId,ModelMap modelMap){
         Resume resume = resumeService.getResumeByCvId(cvId);
+        List<Advert> adverts = advertService.getAdvertByPage("content");
         if(resume!=null){
             if(resume.getStatus()!=1){
                 throw new PiIdNotFoundException("404","您查看的信息违反了网站的规约,现在已经被管理员拿下了!Sorry");
             }else{
+                modelMap.addAttribute("advertMap",AdvertUtil.conversionMap(adverts));
                 modelMap.addAttribute("info",resume);
                 return "resumeInfo";
             }

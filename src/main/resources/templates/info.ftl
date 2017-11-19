@@ -202,7 +202,7 @@
             </#if>
         </div>
         <div class="col-md-3" >
-            <div style="background: #fff;padding: 30px 0 20px 0;">
+            <div class="person_box">
                 <div align="center">
                     <#if infoUser.userImg??>
                         <img src="${base}/${infoUser.userImg}" class="img-circle img-thumbnail" alt="">
@@ -264,7 +264,11 @@
                         </div>
 
                         <div class="container alterInfo">
-                            <span>联系时,就说是在开封城市网看到的。谢谢!</span>
+                            <div class="alert alert-danger alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+                            </div>
                         </div>
                         <div class="container phoneNum">
                             <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
@@ -292,7 +296,11 @@
                         </div>
 
                         <div class="container alterInfo">
-                            <span>联系时,就说是在开封城市网看到的。谢谢!</span>
+                            <div class="alert alert-danger alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+                            </div>
                         </div>
                         <div class="container phoneNum">
                             <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
@@ -404,9 +412,6 @@
 </div>
 <@footer>
 <script src="${base}/js/silder.js" type="text/javascript"></script>
-<script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="${base}/js/messages_zh.js"></script>
-<script type="text/javascript" src="${base}/js/jquery.shCircleLoader.js"></script>
     <@floating/>
 <script>
     $(function () {

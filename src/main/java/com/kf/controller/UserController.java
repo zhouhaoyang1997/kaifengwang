@@ -85,13 +85,14 @@ public class UserController{
      * @return
      */
     @GetMapping("logout")
-    public ModelAndView logout(HttpServletRequest request,HttpServletResponse response){
+    @ResponseBody
+    public boolean logout(HttpServletRequest request,HttpServletResponse response){
         HttpSession session = request.getSession();
         //返回注销前的页面,默认返回index
-        String url="/index";
-        if(session.getAttribute("lastedUrl")!=null){
-            url=(String)session.getAttribute("lastedUrl");
-        }
+//        String url="/index";
+//        if(session.getAttribute("lastedUrl")!=null){
+//            url=(String)session.getAttribute("lastedUrl");
+//        }
         //移除session
         if(session.getAttribute("user")!=null){
             session.removeAttribute("user");
@@ -99,8 +100,9 @@ public class UserController{
         //移除cookie
         CookieUtil.removeCookie(response,request,"userName");
         CookieUtil.removeCookie(response,request,"userPassword");
-        ModelAndView modelAndView = new ModelAndView("redirect:"+url);
-        return modelAndView;
+//        ModelAndView modelAndView = new ModelAndView("redirect:"+url);
+//        return modelAndView;
+        return true;
     }
 
     /**

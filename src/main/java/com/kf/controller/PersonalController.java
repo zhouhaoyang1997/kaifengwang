@@ -99,7 +99,7 @@ public class PersonalController {
         if(userId!=null&&piId!=null){
             //使用userID和piId查询信息
             PushInfo pushInfo = pushInfoService.getInfoByPiIdAndUserId(userId,piId);
-            Map<String,String> tagMap = new HashMap<>();
+            Map<String,String> tagMap = new HashMap<String,String>();
             for(TagValue tagValue:pushInfo.getTagValues()){
                 tagMap.put(tagValue.getTagName(),tagValue.getTcName());
             }

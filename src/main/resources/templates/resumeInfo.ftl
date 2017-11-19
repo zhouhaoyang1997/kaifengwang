@@ -256,10 +256,10 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" style="height: 200px;" role="listbox">
                         <div class="item active">
-                            <img src="${base}/img/123.jpg" width="306px" height="200px" alt="...">
+                            <img src="${base}${advertMap["content_gg_1"].advertUrl}" width="306px" alt="...">
                         </div>
                         <div class="item">
-                            <img src="${base}/img/123.jpg" width="306px" height="200px" alt="...">
+                            <img src="${base}${advertMap["content_gg_2"].advertUrl}" width="306px" alt="...">
                         </div>
                     </div>
 
@@ -283,7 +283,11 @@
                     </div>
 
                     <div class="container alterInfo">
-                        <span>联系时,就说是在开封城市网看到的。谢谢!</span>
+                        <div class="alert alert-danger alert-dismissable" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                            <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+                        </div>
                     </div>
                     <div class="container phoneNum">
                         <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
@@ -387,7 +391,9 @@
 <div class="advert" style="margin-top: 50px;">
     <div class="container_self">
         <div class="row">
-            <img src="${base}/img/advert/footer.jpg" alt="开学那点事">
+            <a href="${advertMap["content_gg_bottom"].advertForward}" target="_blank">
+                <img src="${base}${advertMap["content_gg_bottom"].advertUrl}" alt="开学那点事">
+            </a>
         </div>
     </div>
 </div>

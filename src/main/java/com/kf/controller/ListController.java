@@ -58,7 +58,7 @@ public class ListController {
         List<Tag> tags = tagService.getAllTag(mcId);
         List<SecondClass> secondClass = secondClassService.getAllSecondClass(mcId);
         List<District> districts = districtService.getAllDistrict();
-        List<TagValue> newTagId = new ArrayList<>();
+        List<TagValue> newTagId = new ArrayList<TagValue>();
         List<String> tagValue = getTagValue(tagId,newTagId);
         //默认每页显示
         PageUtil pageUtil = new PageUtil();
@@ -116,7 +116,7 @@ public class ListController {
 
     //对前台发来的url去重
     private List<String>  getTagValue(String[] tagId,List<TagValue> newTagId){
-        List<String> tagValue = new ArrayList<>();
+        List<String> tagValue = new ArrayList<String>();
         if(tagId!=null&&tagId.length>0){
             List<String> tagName=new ArrayList<String>();
             for(String str:tagId){

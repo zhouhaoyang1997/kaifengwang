@@ -13,7 +13,7 @@
 <#-- 广告-->
 <div class="advert">
     <div class="container_self">
-        <div class="gg_box" style="background:url(${request.contextPath}/img/advert.jpg) no-repeat">
+        <div class="gg_box" style="background:url(${request.contextPath}${advertMap["list_gg_header"].advertUrl}) no-repeat;-webkit-background-size: 100%;background-size: 100%;">
         </div>
     </div>
 </div>
@@ -127,7 +127,9 @@
 
                     <!-- 广告位-->
                     <div class="col-xs-2">
-                        <img src="${base}/img/advert/gg_fz.jpg" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
+                        <img src="${base}${advertMap["list_gg_1"].advertUrl}" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
+                        <img src="${base}${advertMap["list_gg_2"].advertUrl}" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
+                        <img src="${base}${advertMap["list_gg_3"].advertUrl}" class="img-thumbnail" style="width: 170px;height: 600px" alt="">
                     </div>
                 </div>
 

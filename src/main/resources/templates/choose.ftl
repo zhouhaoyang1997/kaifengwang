@@ -30,4 +30,6 @@
         </div>
     </div>
 </div>
-<@push_footer></@push_footer>
+<@push_footer>
+<script type="text/javascript" src="${base}/js/jquery.min.js"></script>
+</@push_footer>

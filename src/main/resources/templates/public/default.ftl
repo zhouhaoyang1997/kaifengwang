@@ -97,7 +97,7 @@
                         </li>
                         <#--该方法返回当前页面uri -->
                         <li>
-                            <a href="${base}/logout"><i class="fa fa-window-close"></i> 注销</a>
+                            <a href="javascript:;" id="logout"><i class="fa fa-window-close"></i> 注销</a>
                         </li>
                         <#else>
                             <li><a href="${base}/login">登录</a></li>
@@ -163,7 +163,23 @@
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/js/floating.js"></script>
-
+<script>
+    $(function () {
+       $("#logout").click(function () {
+           $.ajax({
+               url:'${base}/logout',
+               type:'get',
+               success:function (result) {
+                   if(result){
+                       window.location.reload();
+                   }else{
+                       alert("服务器出错了!");
+                   }
+               }
+           })
+       })
+    });
+</script>
     <#nested >
 </body>
 </html>
