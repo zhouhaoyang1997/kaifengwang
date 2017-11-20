@@ -2,11 +2,12 @@
 <#include "public/pushdefault.ftl">
 <#include "public/userdefault.ftl">
 <#assign base="${request.contextPath}"/>
-<@header title="开封网招聘">
+<@header title="麦芒网招聘">
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/userInfo.css">
+<link rel="stylesheet" href="${base}/BeAlert/BeAlert.css">
 </@header>
 <@headerArea>
 <li><a href="${base}/index">回首页</a></li>
@@ -32,7 +33,7 @@
                         <li class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">我的发布</a>
                         </li>
                         <li><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">我的收藏</a></li>
-                        <li><a href="${base}/about/help">帮助信息</a></li>
+                        <li><a href="${base}/about/help" target="_blank">帮助信息</a></li>
                     </ul>
                 </li>
                 <li>
@@ -41,7 +42,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${base}/user/extension">
+                    <a href="${base}/user/extension" target="_blank">
                         <div class="link"><i class="fa fa-mobile"></i>推广中心</div>
                     </a>
                 </li>
@@ -86,21 +87,6 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                您确认删除该条信息吗?删除后不可恢复!
-                <input type="hidden" id="piIdHidden" value="">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" id="removeBtn" class="btn btn-primary">确认</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <@push_footer>
@@ -108,6 +94,7 @@
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="${base}/BeAlert/BeAlert.js"></script>
 <script type="text/javascript" src="${base}/js/personal.js"></script>
 </@push_footer>
 

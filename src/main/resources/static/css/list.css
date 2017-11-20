@@ -120,5 +120,459 @@
 .con_sj {
     color: white;
     margin: -14px -2px 0 0;
-    margin: -28px 0 0 -2px;
+}
+
+#kkpager{
+    clear:both;
+    color:#999;
+    padding:5px 0px 5px 0px;
+    font-size:13px;
+}
+#kkpager a{
+    float: left;
+    border: 1px solid #ccc;
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+    background: #fff;
+    text-decoration:none;
+    color:#999;
+}
+
+#kkpager span.disabled{
+    float: left;
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border:1px solid #DFDFDF;
+    background-color:#FFF;
+    color:#DFDFDF;
+}
+#kkpager span.curr{
+    float: left;
+    border: 1px solid #FF6600;
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: #FFEEE5;
+    color: #FF6600;
+}
+#kkpager a:hover{
+    border:1px solid #FF6600;
+    background-color:#FF6600;
+    color:#fff;
+}
+#kkpager span.normalsize{
+}
+#kkpager_gopage_wrap{
+    position:relative;
+    left:0px;
+    top:0px;
+}
+#kkpager_btn_go {
+    width:44px;
+    height:18px;
+    border:0px;
+    overflow:hidden;
+    line-height:140%;
+    padding:0px;
+    margin:0px;
+    text-align:center;
+    cursor:pointer;
+    background-color:#FF6600;
+    color:#FFF;
+    position:absolute;
+    left:0px;
+    top:-2px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    display:none;
+}
+#kkpager_btn_go_input{
+    width:36px;
+    height:14px;
+    color:#999;
+    text-align:center;
+    margin-left:1px;
+    margin-right:1px;
+    border:1px solid #DFDFDF;
+    position:relative;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    left:0px;
+    top:0px;
+    outline:none;
+}
+
+#kkpager_btn_go_input.focus{
+    border-color:#FF6600;
+}
+
+#kkpager .pageBtnWrap{
+    float:left;
+}
+#kkpager .infoTextAndGoPageBtnWrap{
+    float:right;
+}
+#kkpager .spanDot{
+    float:left;
+    margin-right:5px;
+}
+
+#kkpager .currPageNum{
+    color:#FD7F4D;
+}
+
+#kkpager .infoTextAndGoPageBtnWrap{
+    padding-top:5px;
+}
+
+
+.hover_info{
+    position: relative;
+    height:100px;
+    border-bottom: solid 1px #f3f3f3;
+    border-right:solid 1px #f3f3f3;
+}
+.hover_info .padding_top{
+    padding-top:34px;
+}
+.hover_info .padding-top1{
+    padding-left: 30px;
+    padding-top:10px;
+}
+.hover_info .padding-top1:hover .inforbox{
+    display:block;
+}
+.hover_info .padding-top1:hover .info_title{
+    color: #ff552e;
+}
+
+.list_tag span{
+    display: inline;
+    padding: .1em .4em .2em;
+    font-size: 50%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.self_label{
+    margin-left: 6px;
+    display: inline;
+    padding: .1em .4em .2em;
+    font-size: 50%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.inforbox {
+    position: absolute;
+    display: none;
+    margin-top: -40px;
+    margin-left: 230px
+}
+
+.inforbox .arrow {
+    position: absolute;
+    left: -5px;
+    top: 15px;
+    z-index: 5
+}
+
+.inforbox .arrow em, .inforbox .arrow span, .zhaopin-xx .xx-mingqi .mingqi01 .inforbox .arrow span {
+    display: block;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden;
+    position: relative;
+}
+
+.inforbox .arrow span {
+    border-color: transparent #fff transparent transparent;
+    border-style: dashed solid dashed dashed;
+    border-width: 10px;
+    top: -20px;
+    left: 3px
+}
+
+.inforbox .tipsbox {
+    border-radius: 5px;
+    width: 650px;
+    position: absolute;
+    top: -18px;
+    left: 14px;
+    background: #fff;
+    z-index: 4;
+    color: #282828;
+    padding: 12px 25px 15px 25px
+}
+
+.inforbox .tipsbox .ib-btn {
+    background: #fd8000;
+    color: #fff;
+    padding: 8px 15px;
+    float: right;
+    line-height: normal;
+    margin-top: 5px
+}
+
+.inforbox .tipsbox h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    line-height: normal;
+    margin-bottom: 15px;
+    margin-top: 10px
+}
+
+.inforbox .tipsbox h3 span {
+    width: auto;
+    display: inline;
+    float: none
+}
+
+.inforbox .tipsbox h3 span {
+    vertical-align: middle;
+    margin-left: 5px
+}
+
+.inforbox .tipsbox span.tip {
+    color: #999;
+    font-size: 16px;
+    line-height: normal;
+    padding-bottom: 5px;
+    display: block;
+    width: auto;
+    height: auto;
+    float: none
+}
+.inforbox .tipsbox span.tip img {
+    margin-top: -3px;
+    margin-right: 10px
+}
+
+.inforbox .tipsbox span.tip a {
+    color: #999;
+    text-decoration: underline;
+    font-size: 16px
+}
+
+.inforbox .tipsbox span.tip a:hover {
+    text-decoration: none
+}
+
+.inforbox .tipsbox .lists {
+    width: 650px;
+    font-size: 16px;
+    height: auto;
+    overflow: auto;
+    border-top: 1px dashed #d6d6d6;
+    border-bottom: 1px dashed #d6d6d6;
+    padding: 10px 0
+}
+
+.inforbox .tipsbox .lists li {
+    width: 315px;
+    margin-right: 10px;
+    float: left;
+    border: none;
+    height: 34px;
+    line-height: 34px;
+    overflow: hidden
+}
+
+.inforbox .tipsbox .lists li.long {
+    width: 600px
+}
+
+.inforbox .tipsbox .lists li span {
+    color: #888;
+    width: auto;
+    height: auto
+}
+
+.inforbox .tipsbox .lists li a {
+    color: #999;
+    text-decoration: underline
+}
+
+.inforbox .tipsbox .lists li a:hover {
+    text-decoration: none
+}
+
+.inforbox .tipsbox dl.content {
+    font-size: 14px;
+    line-height: 24px;
+    padding: 10px 0;
+    display: block;
+    float: none;
+    clear: left;
+    border-bottom: 1px dashed #d6d6d6
+}
+
+.inforbox .tipsbox dl.warning {
+    border: none;
+    font-size: 14px;
+    background: url(../img/warning.png) 5px center no-repeat #F7F7F7;
+    line-height: 20px;
+    padding: 10px 15px 10px 55px
+}
+
+.inforbox .tipsbox dl.noborder {
+    border: none
+}
+
+.inforbox .tipsbox dl dt {
+    display: block;
+    float: none;
+    line-height: 28px
+}
+
+.inforbox .tipsbox dl dd {
+    display: block;
+    float: none
+}
+
+.inforbox .tipsbox dl dd em {
+    font-style: normal;
+    border: 1px solid #f93;
+    padding: 0 4px;
+    margin: 5px 0 0 5px;
+    float: left;
+    color: #f60
+}
+
+.inforbox .tipsbox dl dd em {
+    font-style: normal;
+    border: 1px solid #f93;
+    padding: 0 4px;
+    margin: 5px 0 0 5px;
+    float: left;
+    color: #f60
+}
+
+.inforbox .arrow em {
+    border-style: dashed solid dashed dashed;
+    border-width: 10px
+}
+.inforbox .arrow em {
+    border-color: transparent #f78015 transparent transparent
+}
+
+.inforbox .tipsbox {
+    border: 2px solid #f78015
+}
+.inforbox .arrow span {
+    border-color: transparent #fff transparent transparent;
+    border-style: dashed solid dashed dashed;
+    border-width: 10px;
+    top: -20px;
+    left: 3px
+}
+.inforbox .tipsbox h3 span {
+    width: auto;
+    display: inline;
+    float: none
+}
+
+.inforbox .tipsbox h3 span {
+    vertical-align: middle;
+    margin-left: 5px
+}
+
+.inforbox .tipsbox span.tip {
+    color: #999;
+    font-size: 16px;
+    line-height: normal;
+    padding-bottom: 5px;
+    display: block;
+    width: auto;
+    height: auto;
+    float: none
+}
+
+.inforbox .tipsbox span.tip span {
+    width: auto;
+    height: auto;
+    line-height: 24px
+}
+
+.inforbox .tipsbox span.tip img {
+    margin-top: -3px;
+    margin-right: 10px
+}
+
+.inforbox .tipsbox span.tip a {
+    color: #999;
+    text-decoration: underline;
+    font-size: 16px
+}
+
+.inforbox .tipsbox span.tip a:hover {
+    text-decoration: none
+}
+
+.inforbox .tipsbox .lists li span {
+    color: #888;
+    width: auto;
+    height: auto
+}
+.infoDesc{
+    color: #888;
+    font-size: 16px;
+}
+.info_tag{
+    padding-bottom: 6px;
+    padding-top: 6px;
+    border-bottom: 1px dashed #e6e6e6;
+}
+.jiaji{
+    margin-left: 10px;
+    border: 1px solid #ff552e;
+    padding:10px 10px;
+    color: #ff552e;
+    font-size: 16px;
+}
+.urgent{
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    background: url("../img/zhiding.png");
+}
+.urgent_jingjia{
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    background: url("../img/jingjia.png");
+}
+.readmore:hover{
+    background: #ff3300;
 }

@@ -30,10 +30,11 @@ public class LoginConfig extends WebMvcConfigurerAdapter {
         return new PushInterceptor();
     }
 
-    @Bean
-    public HandlerInterceptor getRememberUserUrl(){
-        return new RememberUserUrl();
-    }
+
+//    @Bean
+//    public HandlerInterceptor getRememberUserUrl(){
+//        return new RememberUserUrl();
+//    }
 
     @Bean
     public HandlerInterceptor getUserInterceptor(){
@@ -43,7 +44,7 @@ public class LoginConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getLoginInterceptor()).addPathPatterns("/**");
-        registry.addInterceptor(getRememberUserUrl()).addPathPatterns("/**");
+        //registry.addInterceptor(getRememberUserUrl()).addPathPatterns("/**");
         registry.addInterceptor(getPushInterceptor()).addPathPatterns("/push/**");
         registry.addInterceptor(getUserInterceptor()).addPathPatterns("/user/**");
         super.addInterceptors(registry);

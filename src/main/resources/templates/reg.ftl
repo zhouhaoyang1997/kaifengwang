@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head lang="zh">
-    <title>欢迎注册</title>
+    <title>欢迎注册麦芒网</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css" >
     <link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
@@ -91,9 +91,6 @@
                             userName:function () {
                                 return $("#name").val();
                             }
-                        },
-                        dataFilter:function (data,type) {
-                            return data==="true";
                         }
                     }
                 },
@@ -107,9 +104,6 @@
                             userEmail:function () {
                                 return $("#email").val();
                             }
-                        },
-                        dataFilter:function (data,type) {
-                            return data==="true";
                         }
                     }
                 }

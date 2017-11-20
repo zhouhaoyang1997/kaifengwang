@@ -1,42 +1,42 @@
 <#include "public/default.ftl">
 <#assign base="${request.contextPath}"/>
-<@header title="开封网招聘">
+<@header title="麦芒网">
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/info.css">
-
 </@header>
 <@headerArea>
 <li><a href="${base}/index">回首页</a></li>
 </@headerArea>
 
-<div class="container_self">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="logo">
-                <h1><a href="${base}/index">开封<span>${info.mcName!""}</span></a></h1>
+<div style="background: #ff552e">
+    <div class="container_self">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="info_logo">
+                    <h1><img src="/img/kflogo2_rev.png" width="48" height="48" alt="网站logo"><a href="${base}/index">开封<span>${info.mcName!""}</span></a></h1>
+                </div>
             </div>
-        </div>
-        <div class="col-md-7"></div>
-        <div class="col-md-2">
-            <div style="margin-top:15px">
-                <button onclick="" class="btn btn-info">发布信息</button>
+            <div class="col-md-3"><span style="margin-top: 15px;font-size:20px;color: #fff;float: left;">--专业的信息服务平台</span><span style="color: #fff;float: left;">全新升级,新品牌,新服务</span></div>
+            <div class="col-md-offset-3 col-md-2">
+                    <a href="${base}/push/choose" class="btn push_btn">发布信息</a>
                 <#if info.mcName="招聘">
-                    <button onclick="" class="btn btn-info">登记简历</button>
+                    <a href="${base}/user/resume" class="btn push_btn">登记简历</a>
                 </#if>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container_self">
+
+<div class="container_self" style="margin-bottom: 30px;">
     <div class="row">
         <div class="now_position">
             <i class="fa fa-home"></i><a href="/index">开封城市网</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}">${info.mcName}</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}&scId=${info.piSc}">${info.scName}</a>
         </div>
     </div>
     <div class="row">
-        <div class="info_box">
+        <div class="col-md-9 self_left">
             <div class="row">
                 <div class="col-md-4 push_base_static">
                     <span>发布时间:${info.piPushDate?string("yyyy-MM-dd")}</span> <span>浏览量:${info.piScan}</span>
@@ -59,13 +59,13 @@
                 <#if Session.user??>
                     <a href="#tipInfo" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
                 <#else>
-                    <a href="#myModal" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
+                    <a href="#loginModal" data-toggle="modal"><i class="fa fa-hand-paper-o"></i> 举报</a>
                 </#if>   <a href="${base}/about/service" style="color:red;"><i class="fa fa-level-up"></i>推广服务</a>
                 </div>
             </div>
             <div class="row push_base_title">
                 <div class="col-md-8">
-                    <h1>${info.piTitle}</h1>
+                    <h1><#if info.piTitle?length gt 13>${info.piTitle[0..14]}...<#else>${info.piTitle}</#if></h1>
                 </div>
             </div>
             <div class="row push_base_data">
@@ -80,10 +80,10 @@
                                         <div id="img">
                                         <#if info.piImg??>
                                             <#list info.piImg?split("#") as piImg>
-                                                    <img src="${base}/${piImg}" class="img-thumbnail" width="100%" height="400"/>
+                                                    <img src="${base}/${piImg}" class="img-thumbnail" width="522px" height="400px"/>
                                             </#list>
                                         <#else>
-                                            <img src="${base}/img/noimage.png" class="img-thumbnail" width="100%" height="400"/>
+                                            <img src="${base}/img/noimage.png" class="img-thumbnail" width="522px" height="400px"/>
                                         </#if>
                                             <div id="front" title="上一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
                                             <div id="next" title="下一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
@@ -109,117 +109,233 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <table class="push_base_list">
-                    <#list info.tagValues as tv>
-                        <tr>
-                            <td class="tag_name">${tv.tagName}&nbsp;</td><td class="tag_content">:&nbsp;${tv.tcName}</td>
-                        </tr>
-                    </#list>
-                        <#list info.otherInfos as oi>
-                        <tr>
-                            <td class="tag_name">${oi.picName}&nbsp;</td><td class="tag_content">:&nbsp;${oi.pcContent}</td>
-                        </tr>
-                        </#list>
-                        <tr><td class="tag_name">地区&nbsp;</td><td class="tag_content">:&nbsp;${info.piDistrictName}</td></tr>
-                    </table>
+                <div class="col-md-5" >
+                    <ul class="list-unstyled self_ul_1" style="min-height: 420px">
+                        <li>
+                            <span>联系人:&nbsp; </span>
+                            <span>${info.piContactPerson}</span>
+                        </li>
+                        <li>
+                            <span>联系电话:&nbsp; </span>
+                            <span><span class="contact_method">${info.piPhone?replace(info.piPhone?substring(7,11),"****")}</span></span>
+                        </li>
+                        <li>
+                            <span></span>
+                        <#if info.piMc==1>
+                            <#if Session.user??>
+                                <span><a class="btn btn-danger" href="#completedNum" data-toggle="modal">点击查看完整号码</a></span>
+                            <#else>
+                                <span><a class="btn btn-danger" href="#loginModal" data-toggle="modal">点击查看完整号码</a></span>
+                            </#if>
+                        <#else>
+                            <span><a class="btn btn-danger" href="#completedNum" data-toggle="modal">点击查看完整号码</a></span>
+                        </#if>
+                        </li>
+                        <li>
+                            <span>qq:&nbsp; </span>
+                            <span>${info.piQq}</span>
+                        </li>
+                        <li>
+                            <span>详细地址:&nbsp; </span>
+                            <span>${info.piAddress}asdsadsadasdasdas</span>
+                        </li>
+                    </ul>
+                    <div class="alert alert-danger alert-dismissable" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                        <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+                    </div>
                 </div>
             </div>
             <div class="push_base_other row">
-                <div class="col-md-8">
-                    <table class="push_base_list">
-                        <tr>
-                            <td>联系人:&nbsp; </td>
-                            <td>${info.piContactPerson}</td>
-                        </tr>
-                        <tr>
-                            <td>联系电话:&nbsp; </td>
-                            <td><span class="contact_method">${info.piPhone?replace(info.piPhone?substring(7,11),"****")}</span></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><a class="btn btn-danger" href="#completedNum" data-toggle="modal">点击查看完整号码</a></td>
-                        </tr>
-                        <tr>
-                            <td>详细地址:&nbsp; </td>
-                            <td>${info.piAddress}</td>
-                        </tr>
-                        <tr>
-                            <td>qq:&nbsp; </td>
-                            <td>${info.piQq}</td>
-                        </tr>
-                    </table>
+                <div class="col-md-10">
+                    <ul class="list-unstyled self_ul">
+                        <li><span class="s_title">地区:</span ><span class="s_content">${info.piDistrictName}</span></li>
+                        <#list info.tagValues as tv>
+                            <li><span class="s_title">${tv.tagName}:</span><span class="s_content">${tv.tcName}</span></li>
+                        </#list>
+                        <#list info.otherInfos as oi>
+                            <li><span class="s_title">${oi.picName}:</span><span class="s_content">${oi.pcContent}</span></li>
+                        </#list>
+                    </ul>
                 </div>
-                <div class="col-md-4 jinggao">
-                    <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+
+            </div>
+
+            <div class="panel panel-self">
+                <div class="panel-heading"><h3>信息描述</h3></div>
+                <div class="panel-body">
+                    <div style="min-height: 250px;">
+                    ${info.piContent}
+                    </div>
+                    <div class="alert alert-info alert-dismissable" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                        <span style="font-size: 16px">联系时,</span>就说是在开封城市网看到的。谢谢!
+                    </div>
+
+                </div>
+            </div>
+            <#if company??>
+                <div class="panel panel-self">
+                    <div class="panel-heading"><h3>公司介绍</h3></div>
+                    <div class="panel-body">
+                        <h4>公司名称:${company.cpName}</h4>
+                        <#if company.cpDescription??>
+                            <div style="min-height: 250px;">
+                                <p><span style="color: #aaa;">公司描述</span>${company.cpDescription!""}</p>
+                            </div>
+                        <#else>
+                            该公司暂未更新公司描述!
+                        </#if>
+                        <div class="row">
+                            <#if company.cpImg??>
+                                <#list company.cpImg?split("#") as imgUrl>
+                                    <div class="col-xs-3">
+                                        <img src="${base}/${imgUrl}" alt="">
+                                    </div>
+                                </#list>
+                            </#if>
+                        </div>
+                    </div>
+                </div>
+            </#if>
+        </div>
+        <div class="col-md-3" >
+            <div class="person_box">
+                <div align="center">
+                    <#if infoUser.userImg??>
+                        <img src="${base}/${infoUser.userImg}" class="img-circle img-thumbnail" alt="">
+                    <#else>
+                        <img src="${base}/img/noimage.png" class="img-circle img-thumbnail" alt="">
+                    </#if>
+                </div>
+                <h4 style="margin-top: 20px;text-align: center">${info.piUser}</h4>
+                <#if company??>
+                    <p style="text-align: center;background: url(img/attc.png) no-repeat 80px;padding-left: 24px"> 已公司认证</p>
+                <#else>
+                    <p style="text-align: center;background: url(img/attc_none.png) no-repeat 80px;padding-left: 24px"> 未公司认证</p>
+                </#if>
+
+                <h5 style="text-align: center">${infoUser.createTime?string("yyyy-MM-dd")}注册</h5>
+            </div>
+            <div class="panel panel-self" style="border: none;">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" style="height: 200px;" role="listbox">
+                        <div class="item active">
+                            <img src="${base}${advertMap["content_gg_1"].advertUrl}" width="306px" alt="...">
+                        </div>
+                        <div class="item">
+                            <img src="${base}${advertMap["content_gg_2"].advertUrl}" width="306px" alt="...">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel panel-self" style="border: none;">
+                <div class="panel-heading">
+                    <h3 style="border-left: 5px solid #ff552e;padding-left: 10px;">同类信息推荐</h3>
+                </div>
+                <div class="panel-body" style="min-height: 350px;">
+                    <ul class="list-unstyled" id="data">
+                        <div id="loader" style="width: 80px;height: 80px;" ></div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<#if info.piMc==1>
+    <#if Session.user??>
+        <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="container logo_login">
+                            <p >查看联系方式</p>
+                        </div>
+
+                        <div class="container alterInfo">
+                            <div class="alert alert-danger alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+                            </div>
+                        </div>
+                        <div class="container phoneNum">
+                            <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
+                            <span>${info.piPhone}</span>
+                        </div>
+                        <div class="person_contact" style="margin-top: 10px;">
+                            <p style="text-align: center">联系人:${info.piContactPerson}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer"><span>期待您对此信息满意!</span></div>
                 </div>
             </div>
         </div>
 
-        <div class="person_box">
+    </#if>
+    <#else>
+        <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
 
-        <#if infoUser.userImg??>
-            <img src="${base}/${infoUser.userImg}" class="img-circle touxiang" alt="">
-        <#else>
-            <img src="${base}/img/noimage.png" class="img-circle touxiang" alt="">
-        </#if>
-            <h4 style="text-align: center">${info.piUser}</h4>
-            <h5 style="text-align: center">${infoUser.createTime?datetime}注册</h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="panel info_box">
-            <div class="panel-heading"><h3>信息描述</h3></div>
-            <div class="panel-body">
-                ${info.piContent}
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="container logo_login">
+                            <p >查看联系方式</p>
+                        </div>
+
+                        <div class="container alterInfo">
+                            <div class="alert alert-danger alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+                            </div>
+                        </div>
+                        <div class="container phoneNum">
+                            <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
+                            <span>${info.piPhone}</span>
+                        </div>
+                        <div class="person_contact" style="margin-top: 10px;">
+                            <p style="text-align: center">联系人:${info.piContactPerson}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer"><span>期待您对此信息满意!</span></div>
+                </div>
             </div>
         </div>
-    </div>
+</#if>
 
-    <div class="modal fade" id="completedNum" tabindex="-1" role="dialog">
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
-
             <div class="modal-content">
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <div class="container logo_login">
-                        <p >查看联系方式</p>
-                    </div>
-
-                    <div class="container alterInfo">
-                        <span>联系时,就说是在开封城市网看到的。谢谢!</span>
-                    </div>
-                    <div class="container phoneNum">
-                        <img src="${base}/img/phone.png" alt="手机图标" width="60px" height="60px">
-                        <span>${info.piPhone}</span>
-                    </div>
-                    <div class="person_contact" style="margin-top: 10px;">
-                        <p style="text-align: center">联系人:${info.piContactPerson}</p>
-                    </div>
-                </div>
-                <div class="modal-footer"><span>期待您对此信息满意!</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <div class="container logo_login">
-                        <h1>开封<span>城市网</span></h1>
+                        <h1>开封<span>麦芒网</span></h1>
                         <p >欢迎你的登陆</p>
                     </div>
                     <div class="container loginForm">
-                        <form action="${base}/login" method="post">
+                        <form id="loginForm" >
+                            <input type="hidden" name="path" value="/info?piId=${info.piId}">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="userName" placeholder="用户名">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="userPassword" placeholder="密码">
                             </div>
-                            <span style="color:red">${error!""}</span>
+                            <span style="color:red" id="error"></span>
                             <div class="form-group">
                                 <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
                             </div>
@@ -229,7 +345,7 @@
                             <div class="row">
                                 <div class="col-xs-9">
                                     <div class="form-group" style="margin-top:20px">
-                                        <input type="submit" value="登录" style="width: 100px" class="btn btn-danger">
+                                        <input type="button" value="登录" id="loginBtn" style="width: 100px" class="btn btn-danger">
                                     </div>
                                 </div>
                                 <div class="col-xs-3">
@@ -238,8 +354,6 @@
                             </div>
                         </form>
                     </div>
-
-
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -285,12 +399,47 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </div>
+
+<div class="advert">
+    <div class="container_self">
+        <div class="row">
+            <a href="${advertMap["content_gg_bottom"].advertForward}" target="_blank">
+                <img src="${base}${advertMap["content_gg_bottom"].advertUrl}" alt="开学那点事">
+            </a>
+
+        </div>
+    </div>
+</div>
 <@footer>
 <script src="${base}/js/silder.js" type="text/javascript"></script>
-<script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="${base}/js/messages_zh.js"></script>
+    <@floating/>
 <script>
     $(function () {
+
+        $.ajax({
+            url:'${base}/info/recommend?mcId=${info.piMc}&scId=${info.piSc}',
+            type:'get',
+            beforeSend:function () {
+                $("#loader").html('<img src="${base}/img/loading.gif" width="50%" style="text-align:center;margin:0 auto;"><p style="color:#999;font-size:14px">加载中，请稍后……</p>')
+
+            },
+            error:function () {
+              alert("错误");
+            },
+            success:function (result) {
+                $('#loading').fadeOut(1000);
+                var html = "";
+                for(var i=0;i<result.length;i++){
+                    var title=result[i].piTitle;
+                    if(title.length>13){
+                        title=result[i].piTitle.substr(0,13);
+                    }
+                    html+='<li class="recommend"><a href="${base}/info?piId='+result[i].piId+'"><h4>'+title+'</h4><p class="re_income">'+result[i].piUser+'</p><p class="re_district">'+result[i].piDistrictName+'</p></a></li>';
+                }
+                $("#data").html(html);
+            }
+        });
+
         $("#collect_a").click(function () {
             $.ajax({
                 url:'${base}/collect?piId=${info.piId}',
@@ -325,6 +474,21 @@
                 })
             }
         });
+        $("#loginBtn").click(function () {
+            $.ajax({
+                url:'/login',
+                type:'post',
+                data:$("#loginForm").serialize(),
+                success:function (result) {
+                    var res=result.split(":");
+                    if(res[0]=="ok"){
+                        window.location.href=res[1];
+                    }else{
+                        $("error").text(res[1]);
+                    }
+                }
+            })
+        })
     });
 
 

@@ -12,18 +12,24 @@ import java.util.UUID;
 import java.io.File;
 
 import com.kf.util.BasePath;
+import com.kf.util.CookieUtil;
 import com.kf.util.FileUtil;
+import com.kf.util.Md5Util;
 import com.kf.vo.Choose;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -32,8 +38,6 @@ import javax.validation.Valid;
 @Controller
 public class PushController {
 
-    @Autowired
-    private ResourceLoader resourceLoader;
 
     @Autowired
     public MainClassService mainClassService;
@@ -45,6 +49,8 @@ public class PushController {
     @Autowired
     private DistrictService districtService;
 
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private TagService tagService;
@@ -69,7 +75,7 @@ public class PushController {
      * 选择主类及副类
      * @return
      */
-    @RequestMapping("/push/choose")
+    @GetMapping("/push/choose")
     public ModelAndView chooseMainClass(){
         ModelAndView modelAndView = new ModelAndView("choose");
         List<MainClass> mainClass= mainClassService.getMainClass();
@@ -88,22 +94,28 @@ public class PushController {
         return toChoose(choose,"modalLogin");
     }
 
+
+
+
     /**
      * 组装用户的选择
      * @param choose
      */
     private ModelAndView toChoose(Choose choose,String toPage){
         ModelAndView modelAndView=null;
-        //如果用户没有选择或条件缺失,返回选择页面
-        if(choose==null||choose.getMcId()==null||choose.getScId()==null){
-            modelAndView=new ModelAndView("redirect:/push/choose");
-        }else{
+        //如果用户没有选择或条件缺失或条件有误,返回选择页面
+        if(choose!=null){
             String mcName = mainClassService.getMcName(choose.getMcId());
             String scName = secondClassService.getScName(choose.getScId());
-            choose.setMcName(mcName);
-            choose.setScName(scName);
-            modelAndView = new ModelAndView(toPage);
-            modelAndView.addObject("choose",choose);
+            if(mcName!=null&&scName!=null){
+                choose.setMcName(mcName);
+                choose.setScName(scName);
+                modelAndView = new ModelAndView(toPage);
+            }else{
+                modelAndView = new ModelAndView("redirect:/push/choose");
+            }
+        }else{
+            modelAndView = new ModelAndView("redirect:/push/choose");
         }
         return modelAndView;
     }
@@ -115,7 +127,7 @@ public class PushController {
     @RequestMapping("/push/fill")
     public ModelAndView chooseSecondClass(Choose choose){
         ModelAndView modelAndView = toChoose(choose,"pushInfo");
-        if(modelAndView.getViewName().equals("pushInfo")){
+        if(modelAndView!=null&&modelAndView.getViewName().equals("pushInfo")){
             List<District> districts = districtService.getAllDistrict();
             List<Tag> tags = tagService.getAllTag(choose.getMcId());
             List<PushInfoClass> pushInfoClasses = pushInfoClassService.getAllPush(choose.getMcId());
@@ -136,7 +148,7 @@ public class PushController {
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = "/push/info",method = RequestMethod.POST)
+    @PostMapping(value = "/push/info")
     public ModelAndView pushInfo(@RequestParam("pic") MultipartFile pics[], @Valid @ModelAttribute("pushError") PushInfo pushInfo, BindingResult br, HttpServletRequest request)throws IOException{
         ModelAndView modelAndView = null;
         if(br.hasErrors()){
@@ -165,6 +177,10 @@ public class PushController {
             Timestamp ts = new Timestamp(new Date().getTime());
             pushInfo.setPiPushDate(ts);
             //返回自增长的id
+            // http://www.cnblogs.com/icerainsoft/p/3584532.html
+
+            pushInfo.setPiIp(request.getRemoteAddr());
+
             Integer piId = pushInfoService.addPushInfo(pushInfo);
             //通过mcId获取搜有的tagId,并将所有的tag和他的之存储到数据库表push_info_tag中
             List<Integer> tagsId = tagService.getAllTagId(mcId);
@@ -187,13 +203,4 @@ public class PushController {
         return modelAndView;
     }
 
-    @GetMapping("/img/pushimg/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<?> getFile(@PathVariable String filename) {
-        try {
-            return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(basePath.getPathValue()+"/img/pushimg/",filename).toString()));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }

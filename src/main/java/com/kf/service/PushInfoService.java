@@ -1,8 +1,11 @@
 package com.kf.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.kf.mapper.PushInfoMapper;
 import com.kf.pojo.BaseInfo;
 import com.kf.pojo.PushInfo;
+import com.kf.util.*;
 import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +18,47 @@ public class PushInfoService {
     @Autowired
     private PushInfoMapper pushInfoMapper;
 
-    public List<PushInfo> getAllJob(Integer mcId, Integer scId,Integer districtId,List<String> tagValues,Integer tagNum){
-        return pushInfoMapper.selectAllJob(mcId,scId,districtId,tagValues,tagNum);
+    @Autowired
+    private BasePath basePath;
+
+    @Autowired
+    private BasePage basePage;
+
+    /**
+     * 获取推荐信息
+     * @param mcId
+     * @param scId
+     * @return
+     */
+    public List<BaseInfo> getRecommend(Integer mcId,Integer scId){
+        return pushInfoMapper.selectRecommend(mcId,scId);
+    }
+
+
+
+    /**
+     * 该方法用于构造信息的tag和pic信息
+     * @param pageUtil
+     * @param basePush
+     */
+    private void initPushInfo(PageUtil pageUtil,List<PushInfo> basePush){
+        PageInfo<PushInfo> pageInfo=new PageInfo<PushInfo>(basePush);
+        pageUtil.setPageNums(pageInfo.getPages());
+        pageUtil.setTotal(pageInfo.getTotal());
+        for(PushInfo pushInfo:basePush){
+            pushInfo.setTagValues(pushInfoMapper.selectAllTagByPiId(pushInfo.getPiId()));
+            pushInfo.setOtherInfos(pushInfoMapper.selectAllPicByPiId(pushInfo.getPiId()));
+        }
+    }
+
+
+    //进行分页查询
+    public List<PushInfo> getAllJob(Integer mcId, Integer scId, Integer districtId,
+                                    List<String> tagValues, Integer tagNum, Integer pageNum, PageUtil pageUtil){
+        PageHelper.startPage(pageNum,basePage.getPageSize());
+        List<PushInfo> basePush = pushInfoMapper.selectAllJob(mcId,scId,districtId,tagValues,tagNum);
+        initPushInfo(pageUtil,basePush);
+        return basePush;
     }
 
     public boolean getPushIsExists(Integer piId){
@@ -58,6 +100,9 @@ public class PushInfoService {
         pushInfoMapper.updatePushInfoStatus(piId,userId,status);
     }
 
+    public void deleteCollection(Integer userId,Integer piId){
+        pushInfoMapper.deleteCollection(piId,userId);
+    }
 
     public void addCollection(Integer userId,Integer piId){
         pushInfoMapper.addCollection(piId, userId);
@@ -84,6 +129,36 @@ public class PushInfoService {
     }
 
     public void deletePushInfo(Integer piId,Integer userId){
+        String imgUrls = getImgUrl(piId,userId);
+        if(imgUrls!=null&&CommonUtil.isNotNullAndNotEmpty(imgUrls)){
+            for(String imgUrl:imgUrls.split("#")){
+                FileUtil.deleteImg(basePath.getPathValue()+imgUrl);
+            }
+        }
         pushInfoMapper.deletePushInfo(piId,userId);
     }
+
+
+    /**
+     * 修改当前信息的阅读量
+     * @param piId
+     */
+    public void updateInfoScan(Integer piId){
+        pushInfoMapper.updateInfoReadNum(piId);
+    }
+
+
+    /**
+     * 搜索
+     *
+     */
+    public List<PushInfo> getAllInfoByKeyWords(String keyWords,Integer district,Integer pageNum,PageUtil pageUtil){
+        PageHelper.startPage(pageNum,basePage.getPageSize());
+        keyWords = "%"+keyWords+"%";
+        List<PushInfo> basePush = pushInfoMapper.selectByKeyAndDistrict(keyWords,district);
+        initPushInfo(pageUtil,basePush);
+        return basePush;
+    }
+
+
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kf.mapper.ResumeMapper" >
+
+
+    <select id="selectResumeByNum" resultType="com.kf.pojo.Resume">
+        SELECT * FROM cv,secondclass,district WHERE cv.dream_work=secondclass.sc_id AND district.district_id=dream_district AND open_flag=1<if test="num!=0">limit #{num}</if>
+    </select>
+
+   <insert id="insertResume" parameterType="com.kf.pojo.Resume">
+      <selectKey resultType="java.lang.Integer" keyProperty="cvId">
+          select LAST_INSERT_ID()
+      </selectKey>
+       INSERT into cv(user_id,gra_coll,born_year,dream_work,gender,dream_district,jiguan,minzu,tall,marital_status,max_edu,gra_date,
+       stu_pro,english,computer,job_year,job_detail,income,jineng,zitui,phone,email,qq,real_name,weight,health,cv_img,other_stu,work_time,update_time)
+       VALUES(#{userId},#{graColl},#{bornYear},#{dreamWork},#{gender},#{dreamDistrict},#{jiguan},#{minzu},#{tall},#{maritalStatus},#{maxEdu},
+       #{graDate},#{stuPro},#{english},#{computer},#{jobYear},#{jobDetail},#{income},#{jineng},#{zitui},#{phone},#{email},#{qq},#{realName},
+       #{weight},#{health},#{cvImg},#{otherStu},#{workTime},#{updateTime})
+   </insert>
+
+    <select id="selectResumeByUserId" resultType="com.kf.pojo.Resume">
+        SELECT * FROM cv WHERE user_id =#{userId}
+    </select>
+
+
+    <update id="updateResume" parameterType="com.kf.pojo.Resume">
+        UPDATE cv SET user_id=#{userId},gra_coll=#{graColl},born_year=#{bornYear},dream_work=#{dreamWork},gender=#{gender},dream_district=#{dreamDistrict},
+        jiguan=#{jiguan},minzu=#{minzu},tall=#{tall},marital_status=#{maritalStatus},max_edu=#{maxEdu},gra_date=#{graDate},stu_pro=#{stuPro},
+        english=#{english},computer=#{computer},job_year=#{jobYear},
+        job_detail=#{jobDetail},income=#{income},jineng=#{jineng},zitui=#{zitui},phone=#{phone},email=#{email},qq=#{qq},real_name=#{realName},weight=#{weight},health=#{health},
+        other_stu=#{otherStu},work_time=#{workTime},update_time=#{updateTime}<if test="cvImg!=null">,cv_img=#{cvImg}</if> WHERE cv_id=#{cvId}
+    </update>
+
+    <update id="updateResumeCvOpenFlag">
+        UPDATE cv SET open_flag=#{openFlag} WHERE cv_id=#{cvId}
+    </update>
+
+    <select id="selectResumeList" parameterType="com.kf.vo.ResumeMin" resultType="com.kf.pojo.Resume">
+        SELECT * FROM cv,secondclass,district WHERE cv.dream_work=secondclass.sc_id AND district.district_id=dream_district
+        <if test="resumeMin.openFlag!=null">AND open_flag=#{resumeMin.openFlag}</if>
+        <if test="resumeMin.districtId!=null">AND dream_district=#{resumeMin.districtId}</if>
+        <if test="resumeMin.dreamWork!=null">AND dream_work=#{resumeMin.dreamWork}</if>
+    </select>
+
+    <select id="selectResumeByCvId" resultType="com.kf.pojo.Resume">
+        SELECT * FROM cv,secondclass,district WHERE cv.dream_work=secondclass.sc_id AND district.district_id=dream_district AND cv_id=#{cvId} AND open_flag=1
+    </select>
+
+</mapper>

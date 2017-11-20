@@ -1,7 +1,7 @@
 <#include "../public/default.ftl">
 <#include "../public/baseabout.ftl">
 <#assign base="${request.contextPath}"/>
-<@header title="开封网招聘">
+<@header title="麦芒网招聘">
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/about.css">

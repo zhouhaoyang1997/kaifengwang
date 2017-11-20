@@ -23,6 +23,7 @@
         <result property="piDistrictName" column="district_name"/>
         <result property="piAddress" column="pi_address"/>
         <result property="piDistrict" column="pi_district"/>
+        <result property="piIp" column="pi_ip"/>
         <collection property="tagValues" ofType="com.kf.vo.TagValue">
             <result property="tagId" column="tag_id"/>
             <result property="tagName" column="tag_name"/>
@@ -55,7 +56,7 @@
         LEFT JOIN tagcontent ON push_info_tag.pi_tag_content=tagcontent.tc_id
         LEFT JOIN tag ON tag.tag_id=tagcontent.tag_id
         LEFT JOIN district ON push_info.pi_district=district.district_id
-        where push_info.pi_user=user.user_id  AND pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id AND push_info.pi_id=#{piId}
+        where push_info.pi_user=user.user_id  AND pi_sc=secondclass.sc_id AND pi_mc=mainclass.mc_id AND push_info.pi_id=#{piId} AND push_info.status=0
     </select>
 
     <select id="selectInfoByPiIdAndUserId" resultMap="BasePushInfo">
@@ -75,16 +76,14 @@
 
     <select id="selectAllJob" resultMap="BasePushInfo">
         select DISTINCT
-        push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,pi_contact_person,district_name,
-        pc_content,pic_content.pic_id,pic_name,pic_content.pc_id,
-        tc_name,tagcontent.tc_id,tag.tag_name,tc_name
+        push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,
+        pi_contact_person,district_name,pi_img,pi_content
         from user,push_info LEFT JOIN pic_content ON push_info.pi_id = pic_content.pc_id
-        LEFT JOIN push_info_class ON pic_content.pic_id=push_info_class.pic_id
         LEFT JOIN push_info_tag ON push_info.pi_id = push_info_tag.pi_id
         LEFT JOIN tagcontent ON push_info_tag.pi_tag_content=tagcontent.tc_id
         LEFT JOIN tag ON tag.tag_id=tagcontent.tag_id
         LEFT JOIN district ON push_info.pi_district=district.district_id
-        where push_info.pi_user=user.user_id
+        where push_info.pi_user=user.user_id AND push_info.status=0
         <if test="scId!=null and scId!=0">and pi_sc=#{scId}</if>
         <if test="mcId!=null and mcId!=0">and pi_mc=#{mcId}</if>
         <if test="districtId!=null and districtId!=0">and district_id=#{districtId}</if>
@@ -97,7 +96,32 @@
             </trim>
             GROUP by pi_id having count(pi_id)=#{tagNum})
         </if>
+        ORDER BY pi_chujia desc,pi_zhiding desc,pi_push_date desc
     </select>
+
+    <select id="selectRecommend" resultType="com.kf.pojo.BaseInfo">
+        SELECT DISTINCT
+        push_info.pi_id,pi_title,user_name as pi_user,pi_push_date,pi_chujia,pi_zhiding,district_name as pi_district_name
+        from user,push_info,district WHERE push_info.pi_user=user.user_id
+        AND push_info.status=0 AND pi_sc=#{scId} AND push_info.pi_district=district.district_id AND
+        pi_mc=#{mcId} ORDER BY pi_chujia desc,pi_zhiding desc,pi_push_date desc limit 3
+    </select>
+
+    <select id="selectAllTagByPiId" resultType="com.kf.vo.TagValue">
+        SELECT DISTINCT push_info_tag.tag_id,tag.tag_name,tagcontent.tc_name,tagcontent.tc_id
+        FROM push_info_tag,tag,tagcontent WHERE pi_id=#{piId} and push_info_tag.tag_id=tag.tag_id AND tagcontent.tc_id=pi_tag_content
+    </select>
+
+    <select id="selectAllPicByPiId" resultType="com.kf.vo.OtherInfo">
+        SELECT DISTINCT pic_content.pc_id,pic_name,pic_content.pic_id,pic_content.pc_content FROM push_info_class,pic_content
+        WHERE pc_id=#{piId} AND push_info_class.pic_id=pic_content.pic_id
+    </select>
+
+    <!--修改阅读量 -->
+
+    <update id="updateInfoReadNum">
+        UPDATE push_info SET pi_scan=pi_scan+1 where pi_id=#{piId}
+    </update>
 
 
     <insert id="addPushInfo" parameterType="com.kf.pojo.PushInfo">
@@ -105,9 +129,9 @@
             select LAST_INSERT_ID()
         </selectKey>
         insert into push_info(pi_title,pi_content,pi_mc,pi_sc,pi_user,pi_address,
-        pi_img,pi_scan,pi_push_date,pi_chujia,pi_contact_person,pi_phone,pi_qq,pi_district) VALUES
+        pi_img,pi_scan,pi_push_date,pi_chujia,pi_contact_person,pi_phone,pi_qq,pi_district,pi_ip) VALUES
         (#{piTitle},#{piContent},#{piMc},#{piSc},#{userId},#{piAddress},#{piImg},#{piScan},#{piPushDate},#{piChujia},#{piContactPerson},
-        #{piPhone},#{piQq},#{piDistrict})
+        #{piPhone},#{piQq},#{piDistrict},#{piIp})
     </insert>
 
 
@@ -143,6 +167,10 @@
         insert INTO collection(user_id,pi_id) values(#{userId},#{piId})
     </insert>
 
+    <delete id="deleteCollection">
+        DELETE FROM collection WHERE user_id=#{userId} AND pi_id=#{piId}
+    </delete>
+
     <select id="collectionIsExists" resultType="java.lang.Integer">
         SELECT user_id from collection where pi_id=#{piId} and user_id=#{userId}
     </select>
@@ -160,5 +188,19 @@
     <delete id="deletePushInfo">
         DELETE FROM push_info where pi_id=#{piId} and pi_user=#{userId}
     </delete>
+
+
+    <select id="selectByKeyAndDistrict" resultMap="BasePushInfo">
+        select DISTINCT
+        push_info.pi_id,pi_title,pi_mc,pi_sc,user_name,pi_scan,pi_push_date,pi_chujia,pi_zhiding,
+        pi_contact_person,district_name
+        from user,push_info LEFT JOIN pic_content ON push_info.pi_id = pic_content.pc_id
+        LEFT JOIN push_info_tag ON push_info.pi_id = push_info_tag.pi_id
+        LEFT JOIN tagcontent ON push_info_tag.pi_tag_content=tagcontent.tc_id
+        LEFT JOIN tag ON tag.tag_id=tagcontent.tag_id
+        LEFT JOIN district ON push_info.pi_district=district.district_id
+        where push_info.pi_user=user.user_id and pi_title LIKE #{keyWords}
+        <if test="districtId!=null and districtId!=0">and district_id=#{districtId}</if>
+    </select>
 
 </mapper>

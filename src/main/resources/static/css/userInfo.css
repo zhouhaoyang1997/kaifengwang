@@ -23,7 +23,8 @@
 }
 .user_bar h4 a:hover {text-decoration: none;opacity: .7}
 .push_btn{
-    background: #ff552e;border: 1px solid #fff;margin-top: 20px;
+    background: #ff552e;
+    border: 1px solid #fff;margin-top: 20px;
     color: #FFFFFF;
 }
 
@@ -165,6 +166,10 @@ h1 {
     background: url(../img/profile-bg.png) no-repeat;
     background-size: cover;
 }
+.profile-header .profile-main img{
+    width:100px;
+    height:100px;
+}
 .profile-header .overlay {
     display: block;
     content: "";
@@ -204,4 +209,9 @@ ul.list-justify > li span {
 }
 .personal_tab a{
     color: #428bca;
+}
+.pt_title{
+    height: 39px;
+    line-height: 39px;
+    font-size: 16px;
 }

@@ -99,7 +99,7 @@ public class PersonalController {
         if(userId!=null&&piId!=null){
             //使用userID和piId查询信息
             PushInfo pushInfo = pushInfoService.getInfoByPiIdAndUserId(userId,piId);
-            Map<String,String> tagMap = new HashMap<>();
+            Map<String,String> tagMap = new HashMap<String,String>();
             for(TagValue tagValue:pushInfo.getTagValues()){
                 tagMap.put(tagValue.getTagName(),tagValue.getTcName());
             }
@@ -183,10 +183,7 @@ public class PersonalController {
     public String getPicInfo(Integer piId,HttpServletRequest request){
         Integer userId=SessionUtil.getUserId(request);
         String imgStr = pushInfoService.getImgUrl(piId,userId);
-        if(imgStr!=null){
-            return pushInfoService.getImgUrl(piId,userId);
-        }
-        return "";
+        return imgStr==null?"":imgStr;
     }
 
     @PostMapping("/user/picDelete")
@@ -194,34 +191,22 @@ public class PersonalController {
     public Flag deletePic(Integer key,Integer urlId,HttpServletRequest request){
         Integer userId=SessionUtil.getUserId(request);
         String imgStr = pushInfoService.getImgUrl(key,userId);
-
-        StringBuffer stringBuffer = new StringBuffer();
-        if(imgStr!=null){
-            String[] imgUrl = imgStr.split("#");
-            for(int i=0;i<imgUrl.length;i++){
-                if(i!=urlId){
-                    stringBuffer.append(imgUrl[i]);
-                    stringBuffer.append("#");
-                }else{
-                    //删除该图片
-                    FileUtil.deleteImg(basePath.getPathValue()+imgUrl[i]);
-                }
-            }
-            //更改图片url
-
-            pushInfoService.updatePicUrl(getUrl(stringBuffer),key,userId);
-        }
-        Flag flag = new Flag();
-        flag.setFlag("true");
-        return flag;
+        String imgUrl = FileUtil.getDeleteImg(imgStr,urlId,basePath);
+        pushInfoService.updatePicUrl(imgUrl,key,userId);
+        return new Flag("true");
     }
 
-    private String getUrl(StringBuffer stringBuffer){
-        if(stringBuffer.length()>0){
-            String sb = stringBuffer.toString();
-            return sb.substring(0,sb.length()-1);
+
+    @GetMapping("/user/deleteCollect")
+    @ResponseBody
+    public boolean deleteCollection(Integer piId,HttpServletRequest request){
+        Integer userId = SessionUtil.getUserId(request);
+        if(piId!=null){
+            pushInfoService.deleteCollection(userId,piId);
+            return true;
         }else{
-            return null;
+            return false;
         }
     }
+
 }

@@ -9,7 +9,7 @@
             <div class="col-xs-8">
                 <div class="user-menu">
                     <ul>
-                        <li><p>欢迎来到开封城市网!</p></li>
+                        <li><p>欢迎来到开封麦芒网!</p></li>
                         <li><a href="${base}/push/choose"><i class="fa fa-heart"></i> 快速发布信息</a></li>
                         <li><a href="#"><i class="fa fa-user"></i> 修改/删除信息</a></li>
                         <li><a href="#"><i class="fa fa-phone"></i> 手机浏览</a></li>
@@ -47,18 +47,19 @@
                         <div class="modal-body">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <div class="container logo_login">
-                                    <h1>开封<span>城市网</span></h1>
+                                    <h1>开封<span>麦芒网</span></h1>
                                     <p >欢迎你的登陆</p>
                                 </div>
                             <div class="container loginForm">
-                                <form action="${base}/login" method="post">
+                                <form id="loginForm" >
+                                    <input type="hidden" name="path" value="/push/fill?mcId=${choose.mcId}&scId=${choose.scId}">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="userName" placeholder="用户名">
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control" name="userPassword" placeholder="密码">
                                     </div>
-                                    <span style="color:red">${error!""}</span>
+                                    <span style="color:red" id="error"></span>
                                     <div class="form-group">
                                         <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
                                     </div>
@@ -68,7 +69,7 @@
                                     <div class="row">
                                         <div class="col-xs-9">
                                             <div class="form-group" style="margin-top:20px">
-                                                <input type="submit" value="登录" style="width: 100px" class="btn btn-danger">
+                                                <input type="button" value="登录" id="loginBtn" style="width: 100px" class="btn btn-danger">
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
@@ -91,6 +92,26 @@
     function openModal() {
         $("#myModal").modal("show");
     }
+
+    $(function () {
+       $("#loginBtn").click(function () {
+           $.ajax({
+               url:'${base}/login',
+               type:'post',
+               data:$("#loginForm").serialize(),
+               success:function (result) {
+                   var res=result.split(":");
+
+                   if(res[0]=="ok"){
+
+                       window.location.href=res[1];
+                   }else{
+                       $("#error").text(res[1]);
+                   }
+               }
+           })
+       })
+    });
 
     $(function () {
         $("#myModal").modal("show");

@@ -1,10 +1,53 @@
-.info_box{
-    padding:10px 20px;
-    width: 78%;
-    border:1px #ddd solid;
-    margin-top: 30px;
-    float: left;
+
+/*.info_box{*/
+    /*padding:10px 20px;*/
+    /*width: 78%;*/
+    /*border:1px #ddd solid;*/
+    /*margin-top: 30px;*/
+    /*float: left;*/
+/*}*/
+
+.person_box{
+    background: #fff;
+    padding: 30px 0 20px 0;
 }
+.person_box img{
+    width:190px;
+    height:190px;
+}
+
+.self_left{
+    background: #fff;
+    padding:30px 30px;
+}
+.self_ul{
+    width:100%;
+}
+.self_ul li{
+    margin: 0 20px 6px 0;
+    padding: 5px 5px;
+    float: left;
+    width:30%;
+}
+.self_ul li .s_title{
+    color: #aaa;
+    font-size:16px;
+}
+.self_ul li .s_content{
+    margin-left:10px;
+    font-size:14px;
+}
+
+.self_ul_1{
+    width:100%;
+}
+.self_ul_1 li{
+    margin: 0 20px 6px 0;
+    padding: 5px 5px;
+    float: left;
+    width:100%;
+}
+
 .push_base_static{
     font-size: 12px;
     color: #979a9e;
@@ -20,15 +63,7 @@
     margin-top:20px;
 }
 .push_base_data{
-    margin-top:30px;
-}
-.push_base_list{
-    font-size: 16px;
-    width:100%;
-    list-style: none;
-}
-.push_base_list tr{
-    height:35px;
+    margin-top:10px;
 }
 .tag_name{
     width:30%;
@@ -54,7 +89,6 @@
 .alterInfo{
     margin-top:20px;
     width:80%;
-    height:40px;
     font-size: 20px;
     background: #F7F7F7;
 }
@@ -65,18 +99,23 @@
     font-size: 25px;
     color: #000;
 }
-.person_box{
-    width: 18%;
-    margin-left:10px;
-    margin-top: 30px;
-    padding:30px 20px;
-    border:1px #ddd solid;
-    float: left;
-}
+/*.person_box{*/
+    /*width: 100%;*/
+    /*float: left;*/
+    /*border:1px solid #ddd;*/
+    /*padding:30px 20px;*/
+/*}*/
+/*.right_box{*/
+    /*width: 18%;*/
+    /*margin-left:10px;*/
+    /*margin-top: 30px;*/
+    /*float: left;*/
+
+/*}*/
 .touxiang{
     width:120px;
     height:120px;
-    margin-left:28px;
+    margin-bottom: 20px;
 }
 
 ul, ol{list-style: none;
@@ -88,8 +127,6 @@ li{margin:0;
 input,select,textarea,img{vertical-align:middle;}
 img{ border:0;}
 ul,li{list-style-type:none;}
-a:link,a:visited{text-decoration:none; color:#343434;}
-a:hover{text-decoration:underline; color:#0F6BD0;}
 .overhide{overflow:hidden;text-indent:-100em;}
 /*位置属性*/
 .marTop10{margin-top:10px;}
@@ -115,3 +152,60 @@ a:hover{text-decoration:underline; color:#0F6BD0;}
 .picSildeLeft{cursor:pointer; position:absolute; top:32px; left:10px; z-index:9;}
 .picSildeRight{cursor:pointer; position:absolute; top:32px; right:10px; z-index:9;}
 
+
+.resume-base-info li{
+    padding: 7px 0;
+}
+.resume-base-title li{
+    font-size: 16px;
+    font-weight: 500;
+    color: #aaa;
+}
+.resume-base-content li{
+    margin-top: 2px;
+}
+
+.tuijian{
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 83px;
+    height: 103px;
+}
+.recommend:hover{
+    background: rgb(248,248,248);
+}
+.recommend .re_district{
+    color: #aaa;
+    font-size:14px;
+}
+.recommend .re_income{
+    color: #ff552e;
+    font-size:16px;
+}
+.recommend{
+    margin-bottom:30px;
+}
+.panel-self{
+    margin-top: 40px;
+    border-top:1px dashed #aaaaaa;
+    border-bottom: 1px dashed #aaaaaa;
+}
+.info_logo h1 {
+    font-size: 40px;
+    margin: 10px 0 14px 0;
+    font-weight: 400;
+
+}
+.info_logo h1 a {
+    color: #fff;
+}
+.info_logo h1 a:hover {text-decoration: none;opacity: .7}
+.info_logo h1 a span {
+    color: #fff;
+}
+.push_btn{
+    background: #ff552e;
+    border: 1px solid #fff;margin-top: 20px;
+    color: #FFFFFF;
+}

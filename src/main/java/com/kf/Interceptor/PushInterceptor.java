@@ -27,7 +27,12 @@ public class PushInterceptor implements HandlerInterceptor {
         HttpSession session = httpServletRequest.getSession();
         //如果用户未登录,跳转到选择登陆界面,并附带上用户的选择信息,从request中转发到login控制器去
         if(session.getAttribute("user")==null){
-            httpServletRequest.getRequestDispatcher("/push/login").forward(httpServletRequest,httpServletResponse);
+            if(url.contains("info")){
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/login");
+            }else{
+                httpServletRequest.getRequestDispatcher("/push/login").forward(httpServletRequest,httpServletResponse);
+            }
+
             return false;
         }
         return true;

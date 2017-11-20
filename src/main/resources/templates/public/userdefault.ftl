@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="user_logo">
-                            <h2><a href="${base}/index">开封<span>城市网</span></a></h2>
+                            <h2><a href="${base}/index"><span>麦芒网</span></a></h2>
                         </div>
                     </div>
                     <#nested >

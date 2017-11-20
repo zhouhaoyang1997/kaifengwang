@@ -26,12 +26,15 @@ $.fn.megamenu = function (e) {
 };
 
 
+
+
+
 (function($) {
     var defaults = {
             topSpacing: 0,
             bottomSpacing: 0,
             className: 'is-sticky',
-            wrapperClassName: 'sticky-wrapper',
+            wrapperClassName: 'sticky-xss',
             center: false,
             getWidthFrom: '',
             responsiveWidth: false
@@ -102,7 +105,7 @@ $.fn.megamenu = function (e) {
                     var stickyId = stickyElement.attr('id');
                     var wrapperId = stickyId ? stickyId + '-' + defaults.wrapperClassName : defaults.wrapperClassName
                     var wrapper = $('<div></div>')
-                        .attr('id', stickyId + '-sticky-wrapper')
+                        .attr('id', stickyId + '-sticky-xss')
                         .addClass(o.wrapperClassName);
                     stickyElement.wrapAll(wrapper);
 

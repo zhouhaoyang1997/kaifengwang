@@ -16,4 +16,10 @@
         <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
     <!--分页插件-->
+
+    <!--<plugins>-->
+    <!-- https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/en/HowToUse.md-->
+        <!--<plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+        <!--</plugin>-->
+    <!--</plugins>-->
 </configuration>

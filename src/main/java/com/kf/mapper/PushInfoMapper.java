@@ -2,6 +2,7 @@ package com.kf.mapper;
 
 import com.kf.pojo.BaseInfo;
 import com.kf.pojo.PushInfo;
+import com.kf.vo.OtherInfo;
 import com.kf.vo.TagValue;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -14,6 +15,8 @@ import java.util.List;
 public interface PushInfoMapper {
 
     List<PushInfo> selectAllJob(@Param("mcId")Integer mcId, @Param("scId") Integer scId,@Param("districtId")Integer districtId, @Param("tags") List<String> tags,@Param("tagNum")Integer tagNum);
+
+    List<BaseInfo> selectRecommend(@Param("mcId")Integer mcId,@Param("scId")Integer scId);
 
     PushInfo selectInfoByPiId(@Param("piId")Integer piId);
 
@@ -51,6 +54,8 @@ public interface PushInfoMapper {
     //用于收藏信息
     void addCollection(@Param("piId") Integer piId,@Param("userId") Integer userId);
 
+    void deleteCollection(@Param("piId") Integer piId,@Param("userId") Integer userId);
+
     /**
      * 用来判断信息是否已经被收藏
      * @param piId
@@ -66,4 +71,15 @@ public interface PushInfoMapper {
     String selectPicUrl(@Param("piId")Integer piId,@Param("userId")Integer userId);
 
     void updatePicUrl(@Param("piImg")String piImg,@Param("piId")Integer piId,@Param("userId")Integer userId);
+
+
+    void updateInfoReadNum(@Param("piId")Integer piId);
+
+
+    List<TagValue> selectAllTagByPiId(@Param("piId")Integer piId);
+
+    List<OtherInfo> selectAllPicByPiId(@Param("piId")Integer piId);
+
+
+    List<PushInfo> selectByKeyAndDistrict(@Param("keyWords")String keyWords,@Param("districtId") Integer district);
 }

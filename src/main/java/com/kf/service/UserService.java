@@ -5,6 +5,8 @@ import com.kf.pojo.User;
 
 import java.sql.Timestamp;
 import java.util.List;
+
+import com.kf.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +63,7 @@ public class UserService {
      * @param userPwd
      */
     public void updateUserPwd(Integer userId,String userPwd){
+
         userMapper.updateUserPwd(userId,userPwd);
     }
 
@@ -118,7 +121,13 @@ public class UserService {
      * @param userImg
      * @param userId
      */
-    public void updateUserImg(String userImg,Integer userId){
+    public void updateUserImg(String userImg,Integer userId,String basePath){
+        //删除原有图片
+        User user = getUserByUserId(userId);
+        if(user!=null&&user.getUserImg()!=null){
+            FileUtil.deleteImg(basePath+user.getUserImg());
+        }
+
         userMapper.updateUserImg(userId,userImg);
     }
 
