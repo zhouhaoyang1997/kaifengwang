@@ -60,29 +60,15 @@
                                 <div class="overlay"></div>
                                 <div class="profile-main">
                                     <#if userInfo.userImg??>
-                                        <img src="${base}/${userInfo.userImg}" width="100px" height="100px" class="img-circle" alt="Avatar">
+                                        <img src="${base}/${userInfo.userImg}"  class="img-circle" alt="Avatar">
                                     <#else>
-                                        <img src="${base}/img/noimage.png" width="100px" height="100px" class="img-circle" alt="Avatar">
+                                        <img src="${base}/img/noimage.png"  class="img-circle" alt="Avatar">
                                     </#if>
 
                                     <h3 class="name">${userInfo.userName}</h3>
                                     <span>麦芒网欢迎你</span>
                                 </div>
-                                <div class="profile-stat">
-                                    <div class="row">
-                                        <div class="col-md-4 stat-item">
-                                            ${userInfo.userPush} <span>发布</span>
-                                        </div>
-                                        <div class="col-md-4 stat-item">
-                                            ${userInfo.userCollection} <span>收藏</span>
-                                        </div>
-                                        <div class="col-md-4 stat-item">
-                                            <#if userInfo.lastedTime??>
-                                            ${userInfo.lastedTime?string("yyyy-MM-dd")} <span>最后登陆时间</span>
-                                            </#if>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <!-- END PROFILE HEADER -->
                             <!-- PROFILE DETAIL -->

@@ -166,6 +166,10 @@ h1 {
     background: url(../img/profile-bg.png) no-repeat;
     background-size: cover;
 }
+.profile-header .profile-main img{
+    width:100px;
+    height:100px;
+}
 .profile-header .overlay {
     display: block;
     content: "";

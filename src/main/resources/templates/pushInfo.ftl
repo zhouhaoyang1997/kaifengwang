@@ -79,7 +79,7 @@
                     <div class="col-xs-5"></div>
                 </div>
             </#list>
-                <label><span style="color:red">*</span>内容:你知道吗?描述的清除的信息的成功率会高30%!(请输入至少10个字符)</label>
+                <label><span style="color:red">*</span>内容: <span style="color:red">你知道吗?描述的清除的信息的成功率会高30%!(请输入至少10个字符)</span></label>
             <div class="form-group row">
                 <div class="col-xs-8">
                     <textarea name="piContent" minlength="10" maxlength="2000" style="width:800px;height:400px;visibility:hidden;"></textarea>
@@ -259,10 +259,6 @@
     });
 
     $(function () {
-
-
-
-
         jQuery.validator.addMethod("regex",
                 function(value, element, params) {
                     var exp = new RegExp(params);
