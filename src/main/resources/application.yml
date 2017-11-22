@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 80
   context-path:
   session:
     cookie:
@@ -10,8 +10,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/kfcg?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
-#    password: xdjr1230-KFCG
-    password: 123
+    password: xdjr1230-KFCG
+#    password: 123
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   mvc:
@@ -33,6 +33,7 @@ mybatis:
 logging:
     level:
        com.kf.mapper: debug
+       com.kf.controller: debug
 
 
 page:
@@ -41,7 +42,7 @@ page:
 path:
 #  WinPathValue: C:/Users/ch/Desktop/
 #  LinuxPathValue: /home/kfcg/
-  pathValue: C:/Users/ch/Desktop/
+  pathValue: C:/Users/18236/Desktop/
 pagehelper:
   helper-dialect: mysql
 
