@@ -16,6 +16,10 @@ body.style-3 {
   background-size:100%
 }
 
+.back-login{
+  background: #ffffff;
+}
+
 .menu {
   padding: 0;
   margin: 30px 0 0 0;

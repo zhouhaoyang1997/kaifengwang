@@ -7,15 +7,17 @@ import com.kf.service.UserService;
 import com.kf.util.CommonUtil;
 import com.kf.util.CookieUtil;
 import com.kf.util.Md5Util;
-import com.kf.vo.Choose;
+import com.kf.util.SessionUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,6 +31,7 @@ import java.sql.Timestamp;
 @Controller
 public class UserController{
 
+    protected  static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     public UserService userService;
@@ -42,11 +45,29 @@ public class UserController{
 
     @PostMapping("/login")
     @ResponseBody
-    public String login(@Valid @ModelAttribute("user")User user,BindingResult br, String remember, String path,HttpServletRequest request, HttpServletResponse response){
+    public String login(User user, String verifyCode,String remember, String path,HttpServletRequest request, HttpServletResponse response){
         //用户名密码正确,当前用户存入session
         String name="";
+        boolean access = false;
+        HttpSession session = request.getSession();
+        Integer ipCount = SessionUtil.getIpCount(request);
+        String verCode = (String)session.getAttribute("verCode");
+        if(ipCount!=null&&ipCount>3){
+            if(StringUtils.isNotBlank(verifyCode)){
+                if(verifyCode.equals(verCode)){
+                    access = true;
+                }else{
+                    return "error:验证码输入有误:-1";
+                }
+            }else{
+                return "error:请输入验证码:-1";
+            }
+        }else{
+            access = true;
+        }
+
         //如果用户输入了信息
-        if(!br.hasErrors()){
+        if(user!=null&&StringUtils.isNotBlank(user.getUserName())&&StringUtils.isNotBlank(user.getUserPassword())&&access){
             user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
             User user1 = userService.getUser(user);
             if(user1!=null){
@@ -54,7 +75,7 @@ public class UserController{
                 Timestamp time = new Timestamp(new Date().getTime());
                 userService.updateUserLastLoginTime(user1.getUserId(),time);
                 //session记住当前用户
-                HttpSession session = request.getSession();
+
                 session.setAttribute("user",user1);
                 //用户点击了记住我
                 if(remember!=null&&!remember.isEmpty()){
@@ -62,21 +83,39 @@ public class UserController{
                     CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
                 }
                 //默认登陆后返回首页,如果session中有值,则返回用户点击登陆的页面
-                if(path!=null){
+                //清除用户的ip登录次数
+                String ip = request.getRemoteAddr();
+                session.removeAttribute(ip);
+                if(path!=null&& StringUtils.isNotBlank(path)){
                     name="ok:"+path;
                 }else{
                     name="ok:/index";
                 }
 
             }else{
-                name="error:你输入的用户名或密码错误";
+                Integer ipTempCount = updateCount(request);
+                name="error:你输入的用户名或密码错误:"+ipTempCount;
             }
         }else{
-            name="error:请输入合法的信息";
+            Integer ipTempCount = updateCount(request);
+            name="error:请输入合法的信息:"+ipTempCount;
         }
         return name;
     }
 
+    private Integer updateCount(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer countIp = SessionUtil.getIpCount(request);
+        String ip = request.getRemoteAddr();
+        if(countIp!=null){
+            session.setAttribute(ip,countIp+1);
+            return countIp+1;
+        }else{
+            session.setAttribute(ip,1);
+            return 1;
+        }
+
+    }
 
     /**
      * 注销
@@ -137,9 +176,13 @@ public class UserController{
     }
 
     @GetMapping("/login")
-    public ModelAndView loginFtl(){
-        ModelAndView modelAndView = new ModelAndView("login");
-        return modelAndView;
+    public String loginFtl(ModelMap modelMap,HttpServletRequest request){
+        Integer ipCount = SessionUtil.getIpCount(request);
+        logger.debug("ip数值:"+ipCount);
+        if(ipCount!=null&&ipCount>3){
+            modelMap.addAttribute("verify","true");
+        }
+        return "login";
     }
     @GetMapping("/register")
     public ModelAndView regFtl(){
