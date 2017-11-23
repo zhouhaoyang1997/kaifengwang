@@ -41,16 +41,21 @@
                                 <form id="commentForm" >
                                     <div class="form-group">
                                         <label for="username" class="sr-only">用户名</label>
-                                        <input type="text" class="form-control" id="username" required name="userName" placeholder="用户名">
+                                        <input type="text" class="form-control" id="username" minlength="2" maxlength="16" required name="userName" placeholder="用户名">
                                     </div>
                                     <div class="form-group">
                                         <label for="password" class="sr-only">密码</label>
-                                        <input type="password" class="form-control" id="password" required name="userPassword" placeholder="密码">
+                                        <input type="password" class="form-control" id="password" minlength="6" required name="userPassword" placeholder="密码">
                                     </div>
                                     <span style="color:red" id="error"></span>
 
                                     <div class="form-group row" id="verifyDiv">
-
+                                        <label for="verifyCode" class="sr-only">验证码</label>
+                                        <input type="text" class="col-xs-5" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
+                                        <div class="col-xs-6">
+                                            <img src="${request.contextPath}/verify/code" id="verify" alt="验证码">
+                                            <a href="javascript:;" id="changImg">看不清？</a>
+                                        </div>
                                     </div>
 
                                     <div class="form-group row">
@@ -78,7 +83,7 @@
                                 <form action="" >
                                     <div class="form-group input-group">
                                         <label for="phone" class="sr-only">手机号</label>
-                                        <input type="text" class="form-control" id="phone" required name="phone" placeholder="手机号">
+                                        <input type="text" class="form-control" id="phone" maxlength="11" minlength="11" required name="phone" placeholder="手机号">
                                         <span class="input-group-addon"><a href="javascript:;">获取动态码</a></span>
                                     </div>
                                     <div class="form-group">
@@ -89,7 +94,12 @@
                                     <span style="color:red" id="error"></span>
 
                                     <div class="form-group row" id="verifyDiv">
-
+                                        <label for="verifyCode" class="sr-only">验证码</label>
+                                        <input type="text" class="col-xs-5" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
+                                        <div class="col-xs-6">
+                                            <img src="${request.contextPath}/verify/code" id="verify" alt="验证码">
+                                            <a href="javascript:;" id="changImg">看不清？</a>
+                                        </div>
                                     </div>
 
                                     <div class="form-group row">
@@ -130,24 +140,10 @@
 <script type="text/javascript" src="${request.contextPath}/js/messages_zh.js"></script>
 <script type="text/javascript" src="${request.contextPath}/js/bootstrap.min.js"></script>
 <script>
-    $.validator.setDefaults({
-        submitHandler: function(form) {
-            form.submit();
-        }
-    });
 
 
     $(function() {
-        var verifyHtml = '<label for="verifyCode" class="sr-only">验证码</label>' +
-                '<input type="text" class="col-xs-5" style="margin-left: 20px" id="verifyCode"' +
-                ' required name="verifyCode" placeholder="验证码"> <div class="col-xs-6"> ' +
-                '<img src="${request.contextPath}/verify/code" id="verify" alt="验证码"> ' +
-                '<a href="javascript:;" id="changImg">看不清？</a></div>';
-        <#if verify??>
-                $("#verifyDiv").html(verifyHtml);
-            <#else>
-                $("#verifyDiv").html("");
-        </#if>
+
 
 
         $("#changImg").click(function () {
@@ -161,30 +157,31 @@
             verify.src = "${request.contextPath}/verify/code?date=" + new Date();
         }
 
-        $("#commentForm").validate();
+        function valForm() {
+            return $("#commentForm").validate().form();
+        }
+
+
 
         $("#loginBtn").click(function () {
-            //下面的请求发多了,开始需要用户验证。
-            $.ajax({
-                url:'${request.contextPath}/login',
-                type:'post',
-                data:$("#commentForm").serialize(),
-                success:function (result) {
-                    var res=result.split(":");
-                    if(res[0]=="ok"){
-                        window.location.href=res[1];
-                    }else{
-                        if(res[2]>3){
-                            $("#verifyDiv").html(verifyHtml);
+            if(valForm()){
+                //下面的请求发多了,开始需要用户验证。
+                $.ajax({
+                    url:'${request.contextPath}/login',
+                    type:'post',
+                    data:$("#commentForm").serialize(),
+                    success:function (result) {
+                        var res=result.split(":");
+                        if(res[0]=="ok"){
+                            window.location.href=res[1];
+                        }else{
                             updateVerifyHtml();
+                            $("#error").text(res[1]);
                         }
-                        if(res[2]<0){
-                            updateVerifyHtml();
-                        }
-                        $("#error").text(res[1]);
                     }
-                }
-            })
+                })
+            }
+
         })
     });
 </script>

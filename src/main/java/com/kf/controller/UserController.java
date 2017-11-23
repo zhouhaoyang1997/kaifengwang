@@ -50,21 +50,21 @@ public class UserController{
         String name="";
         boolean access = false;
         HttpSession session = request.getSession();
-        Integer ipCount = SessionUtil.getIpCount(request);
+//        Integer ipCount = SessionUtil.getIpCount(request);
         String verCode = (String)session.getAttribute("verCode");
-        if(ipCount!=null&&ipCount>3){
-            if(StringUtils.isNotBlank(verifyCode)){
-                if(verifyCode.equals(verCode)){
-                    access = true;
-                }else{
-                    return "error:验证码输入有误:-1";
-                }
+//        if(ipCount!=null&&ipCount>3){
+        if(StringUtils.isNotBlank(verifyCode)){
+            if(verifyCode.equals(verCode)){
+                access = true;
             }else{
-                return "error:请输入验证码:-1";
+                return "error:验证码输入有误";
             }
         }else{
-            access = true;
+            return "error:请输入验证码";
         }
+//        }else{
+//            access = true;
+//        }
 
         //如果用户输入了信息
         if(user!=null&&StringUtils.isNotBlank(user.getUserName())&&StringUtils.isNotBlank(user.getUserPassword())&&access){
@@ -84,8 +84,8 @@ public class UserController{
                 }
                 //默认登陆后返回首页,如果session中有值,则返回用户点击登陆的页面
                 //清除用户的ip登录次数
-                String ip = request.getRemoteAddr();
-                session.removeAttribute(ip);
+//                String ip = request.getRemoteAddr();
+//                session.removeAttribute(ip);
                 if(path!=null&& StringUtils.isNotBlank(path)){
                     name="ok:"+path;
                 }else{
@@ -93,12 +93,12 @@ public class UserController{
                 }
 
             }else{
-                Integer ipTempCount = updateCount(request);
-                name="error:你输入的用户名或密码错误:"+ipTempCount;
+//                Integer ipTempCount = updateCount(request);
+                name="error:你输入的用户名或密码错误:";
             }
         }else{
-            Integer ipTempCount = updateCount(request);
-            name="error:请输入合法的信息:"+ipTempCount;
+//            Integer ipTempCount = updateCount(request);
+            name="error:请输入合法的信息:";
         }
         return name;
     }

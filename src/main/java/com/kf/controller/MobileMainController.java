@@ -30,7 +30,7 @@ import java.util.UUID;
  * @author zhy
  * @create 2017-09-25 21:04
  **/
-@RestController
+
 @RequestMapping(value = "/m")
 public class MobileMainController {
     @Autowired
@@ -61,17 +61,18 @@ public class MobileMainController {
     private ResourceLoader resourceLoader;
 
 
-    @GetMapping("/index")
-    public ModelAndView phoneIndex() {
-        ModelAndView modelAndView = new ModelAndView("phone/index");
-
-        return modelAndView;
-    } @GetMapping("/index1")
-    public ModelAndView phoneIndex1() {
-        ModelAndView modelAndView = new ModelAndView("phone/_index");
-
-        return modelAndView;
-    }
+//    @GetMapping("/index")
+//    public ModelAndView phoneIndex() {
+//        ModelAndView modelAndView = new ModelAndView("phone/index");
+//
+//        return modelAndView;
+//    }
+//    @GetMapping("/index1")
+//    public ModelAndView phoneIndex1() {
+//        ModelAndView modelAndView = new ModelAndView("phone/_index");
+//
+//        return modelAndView;
+//    }
 
     @GetMapping("/push")
     public ModelAndView infoTable(String mcId, String scId) {
@@ -128,37 +129,37 @@ public class MobileMainController {
 
 
 
-    @RequestMapping("/infolist")
-    public ModelAndView quanzhizhaopin(Integer mcId, @RequestParam(required = false) Integer scId, @RequestParam(required = false) Integer districtId,
-                                       @RequestParam(required = false) String[] tagId) {
-        ModelAndView modelAndView = new ModelAndView("phone/_infolist");
-        List<Tag> tags = tagService.getAllTag(mcId);
-        List<SecondClass> secondClass = secondClassService.getAllSecondClass(mcId);
-        List<District> districts = districtService.getAllDistrict();
-        List<TagValue> newTagId = new ArrayList<>();
-        List<String> tagValue = getTagValue(tagId, newTagId);
-        List<PushInfo> pushInfos = pushInfoService.getAllJob(mcId, scId, districtId, tagValue, tagValue.size());
-        //查询二级类别
-        modelAndView.addObject("secondClass", secondClass);
-        //查询所有行政区域
-        modelAndView.addObject("districts", districts);
-        //查询所有标签
-        modelAndView.addObject("tags", tags);
-        modelAndView.addObject("pushInfos", pushInfos);
-        //设置当前的大类
-        CurrMain currMain = new CurrMain();
-        currMain.setMcId(mcId);
-        currMain.setMcName(mainClassService.getMcName(mcId));
-        modelAndView.addObject("currMc", currMain);
-        //设置当前栏目
-        modelAndView.addObject("currScId", scId);
-
-        //当前tag类
-        modelAndView.addObject("currTags", newTagId);
-        //当前所选地区
-        modelAndView.addObject("currDistrictId", districtId);
-        return modelAndView;
-    }
+//    @RequestMapping("/infolist")
+//    public ModelAndView quanzhizhaopin(Integer mcId, @RequestParam(required = false) Integer scId, @RequestParam(required = false) Integer districtId,
+//                                       @RequestParam(required = false) String[] tagId) {
+//        ModelAndView modelAndView = new ModelAndView("phone/_infolist");
+//        List<Tag> tags = tagService.getAllTag(mcId);
+//        List<SecondClass> secondClass = secondClassService.getAllSecondClass(mcId);
+//        List<District> districts = districtService.getAllDistrict();
+//        List<TagValue> newTagId = new ArrayList<>();
+//        List<String> tagValue = getTagValue(tagId, newTagId);
+//        List<PushInfo> pushInfos = pushInfoService.getAllJob(mcId, scId, districtId, tagValue, tagValue.size());
+//        //查询二级类别
+//        modelAndView.addObject("secondClass", secondClass);
+//        //查询所有行政区域
+//        modelAndView.addObject("districts", districts);
+//        //查询所有标签
+//        modelAndView.addObject("tags", tags);
+//        modelAndView.addObject("pushInfos", pushInfos);
+//        //设置当前的大类
+//        CurrMain currMain = new CurrMain();
+//        currMain.setMcId(mcId);
+//        currMain.setMcName(mainClassService.getMcName(mcId));
+//        modelAndView.addObject("currMc", currMain);
+//        //设置当前栏目
+//        modelAndView.addObject("currScId", scId);
+//
+//        //当前tag类
+//        modelAndView.addObject("currTags", newTagId);
+//        //当前所选地区
+//        modelAndView.addObject("currDistrictId", districtId);
+//        return modelAndView;
+//    }
 
     //对前台发来的url去重
     private List<String> getTagValue(String[] tagId, List<TagValue> newTagId) {
@@ -186,30 +187,28 @@ public class MobileMainController {
         return new ModelAndView("phone/_infomation");
     }
 
-    @RequestMapping("/menulist")
-    public ModelAndView menulist(String methon) {
-        ModelAndView modelAndView = null;
-        if ("view".equals(methon)) {
-            modelAndView = new ModelAndView("phone/_menulist");
-        }
-        if ("push".equals(methon)) {
-            modelAndView = new ModelAndView("phone/push");
-        }
-
-        List<SecondClass> zhaopin = secondClassService.getAllSecondClass(1);
-        List<SecondClass> fangchan = secondClassService.getAllSecondClass(2);
-        List<SecondClass> ershou = secondClassService.getAllSecondClass(3);
-        List<SecondClass> shenghuo = secondClassService.getAllSecondClass(4);
-        List<SecondClass> chongwu = secondClassService.getAllSecondClass(5);
-        List<SecondClass> mingqi = secondClassService.getAllSecondClass(6);
-        modelAndView.addObject("zhaopin", zhaopin);
-        modelAndView.addObject("fangchan", fangchan);
-        modelAndView.addObject("ershou", ershou);
-        modelAndView.addObject("shenghuo", shenghuo);
-        modelAndView.addObject("chongwu", chongwu);
-        modelAndView.addObject("mingqi", mingqi);
-        return modelAndView;
-    }
+//    @RequestMapping("/menulist")
+//    public ModelAndView menulist(String methon) {
+//        ModelAndView modelAndView = new ModelAndView("phone/_menulist");
+//
+//        if ("push".equals(methon)) {
+//            modelAndView = new ModelAndView("phone/push");
+//        }
+//
+//        List<SecondClass> zhaopin = secondClassService.getAllSecondClass(1);
+//        List<SecondClass> fangchan = secondClassService.getAllSecondClass(2);
+//        List<SecondClass> ershou = secondClassService.getAllSecondClass(3);
+//        List<SecondClass> shenghuo = secondClassService.getAllSecondClass(4);
+//        List<SecondClass> chongwu = secondClassService.getAllSecondClass(5);
+//        List<SecondClass> mingqi = secondClassService.getAllSecondClass(6);
+//        modelAndView.addObject("zhaopin", zhaopin);
+//        modelAndView.addObject("fangchan", fangchan);
+//        modelAndView.addObject("ershou", ershou);
+//        modelAndView.addObject("shenghuo", shenghuo);
+//        modelAndView.addObject("chongwu", chongwu);
+//        modelAndView.addObject("mingqi", mingqi);
+//        return modelAndView;
+//    }
 
     @PostMapping("/push3")
     public String picUpload(@RequestParam(value = "pic", required = true) MultipartFile pics[]) throws IOException {
