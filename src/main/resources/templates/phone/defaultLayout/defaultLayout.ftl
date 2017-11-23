@@ -90,6 +90,8 @@
             <a href="javascript:void(0);" onClick="return window.history.go(-1);" class="back left8">返回</a>
         </#if>
         <div id="ipageTitle">${title}</div>
+        <div class="search left8" id="search_ico" onClick="showNewPage('搜索',searchHtml,newPageSearch);">搜索</div>
+
     </div>
     <div id="contactbar">
         <a href="#" class="bottom_index_on">首页</a>

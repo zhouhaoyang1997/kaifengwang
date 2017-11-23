@@ -1,31 +1,11 @@
 <#include "defaultLayout/defaultLayout.ftl">
 <#assign baseUrl = "${request.contextPath}"/>
-<@base siteName="开封麦芒网" base_js=["jq_min.211_1","common_1","iscroll-probe","slider","index"] base_css=["global","style","index"] base_keywords="开封麦芒网" title="首页">
-<div class="select_01" id="wrapper2">
-<#--<ul class="tab-hd" id="scroller2"  >-->
-    <ul class="tab-hd">
-        <li class="item current">
-            <a style="color:;" target="_self" href="#">首页</a>
-        </li>
-        <li class="item ">
-            <a style="color:;" target="_self" href="menulist">信息分类</a>
-        </li>
-    </ul>
-</div>
-<script>
-    (function ($) {
-        var w_w = $(window).width();
-        $('#scroller2').css('width', (90 * $('#scroller2').find('li').length) + 40 + 'px');
-        window['myScroll2'] = new IScroll('#wrapper2', {
-            scrollX: true,
-            scrollY: false,
-            click: true,
-            keyBindings: true
-        });
-    })(jQuery);
-</script>
-<div class="clearfix"></div>
-<div class="clear"></div>
+<@header siteName="开封麦芒网" base_css=["global","style","index","all"] base_keywords="开封麦芒网">
+
+</@header>
+
+
+<@body title="首页">
 <!--广告页-->
 <section>
     <div id="slide" style="display:none;">
@@ -53,6 +33,58 @@
         </ul>
     </div>
 </div>
+<div class="index-category">
+    <div class="index_slider">
+        <div class="index_slider-wrap">
+            <div class="page">
+                <a href="infolist?mcId=1" class="item food">
+                    <div class="icon"><img src="${baseUrl}/img/zp_icon.png" width="55px" height="55px" alt=""></div>
+                    招聘</a>
+                <a href="" class="item food">
+                    <div class="icon"><img src="${baseUrl}/img/kf_ershou.png" width="55px" height="55px" alt=""></div>
+                    二手市场</a>
+                <a href="" class="item food">
+                    <div class="icon"><img src="${baseUrl}/img/kf_fangchan.png" width="55px" height="55px" alt=""></div>
+                    房产</a>
+                <a href="" class="item food">
+                    <div class="icon"><img src="${baseUrl}/img/kf_shenghuo.png" width="55px" height="55px" alt=""></div>
+                    生活服务</a>
+                <a href="" class="item food">
+                    <div class="icon"><img src="${baseUrl}/img/kf_mingshi.png" width="55px" height="55px" alt=""></div>
+                    名师培优</a>
+                <a href="" class="item food">
+                    <div class="icon"><img src="${baseUrl}/img/jz.png" width="55px" height="55px" alt=""></div>
+                    名企招聘</a>
+                <a href="" class="item food">
+                    <div class="icon"><img src="${baseUrl}/img/jz.png" width="55px" height="55px" alt=""></div>
+                    求职简历</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <#list mainClass as mc>
+
+    <div class="navv">
+        <div class="nav_tt nav_ttbg1">
+            <img src="${baseUrl}/${mc.mcImg}" align="center" valign="middle"
+                 class="icon">&nbsp;
+            <a href="index.php?mod=category&catid=2&cityid=1">${mc.mcName}</a>
+        </div>
+        <div class="big_dl sale">
+            <ul>
+                <#list mc.secondClasses as sc>
+                    <li class="one_third"><a href="${request.contextPath}/push/fill?mcId=${mc.mcId}&scId=${sc.scId}">${sc.scName}</a></li>
+                </#list>
+            </ul>
+        </div>
+    </div>
+
+    </#list>
+</@body>
+
+<@footer base_js=["jq_min.211_1","common_1","iscroll-probe","slider","index"]>
+
 <script>
     (function ($) {
         var list = $('#content').find('.cell');
@@ -83,30 +115,4 @@
         }
     })(jQuery);
 </script>
-<div class="index-category">
-    <div class="index_slider">
-        <div class="index_slider-wrap">
-            <div class="page">
-                <a href="infolist?mcId=1" class="item food">
-                    <div class="icon"><img src="${baseUrl}/img/zp_icon.png" width="55px" height="55px" alt=""></div>
-                    招聘</a>
-                <a href="" class="item food">
-                    <div class="icon"><img src="${baseUrl}/img/kf_ershou.png" width="55px" height="55px" alt=""></div>
-                    二手市场</a>
-                <a href="" class="item food">
-                    <div class="icon"><img src="${baseUrl}/img/kf_fangchan.png" width="55px" height="55px" alt=""></div>
-                    房产</a>
-                <a href="" class="item food">
-                    <div class="icon"><img src="${baseUrl}/img/kf_shenghuo.png" width="55px" height="55px" alt=""></div>
-                    生活服务</a>
-                <a href="" class="item food">
-                    <div class="icon"><img src="${baseUrl}/img/kf_mingshi.png" width="55px" height="55px" alt=""></div>
-                    名师培优</a>
-                <a href="" class="item food">
-                    <div class="icon"><img src="${baseUrl}/img/jz.png" width="55px" height="55px" alt=""></div>
-                    名企招聘</a>
-            </div>
-        </div>
-    </div>
-</div>
-</@base>
+</@footer>
