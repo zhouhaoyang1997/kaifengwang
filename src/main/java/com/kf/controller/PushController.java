@@ -4,32 +4,23 @@ import com.kf.pojo.*;
 import com.kf.service.*;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
-import java.io.File;
 
 import com.kf.util.BasePath;
-import com.kf.util.CookieUtil;
 import com.kf.util.FileUtil;
-import com.kf.util.Md5Util;
 import com.kf.vo.Choose;
-import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -71,6 +62,8 @@ public class PushController {
 
     @Autowired
     private SecondClassService secondClassService;
+
+    protected Logger logger = LoggerFactory.getLogger(PushController.class);
     /**
      * 选择主类及副类
      * @return
@@ -149,11 +142,11 @@ public class PushController {
      * @throws IOException
      */
     @PostMapping(value = "/push/info")
-    public ModelAndView pushInfo(@RequestParam("pic") MultipartFile pics[], @Valid @ModelAttribute("pushError") PushInfo pushInfo, BindingResult br, HttpServletRequest request)throws IOException{
+    public ModelAndView pushInfo(@RequestParam("pic") MultipartFile pics[], @Valid @ModelAttribute("pushError") PushInfo pushInfo,
+                                 BindingResult br, @RequestParam(value = "method",defaultValue = "pc") String method,HttpServletRequest request)throws IOException{
         ModelAndView modelAndView = null;
         if(br.hasErrors()){
             if(pushInfo.getPiMc()==null||pushInfo.getPiSc()==null||pushInfo.getPiDistrict()==null||pushInfo.getUserId()==null){
-
                 modelAndView = new ModelAndView("redirect:/push/choose");
             }else{
                 Choose choose = new Choose();

@@ -1,13 +1,14 @@
 <#include "defaultLayout/defaultLayout.ftl">
-<#assign baseUrl = "${request.contextPath}"/>
+<#assign base = "${request.contextPath}"/>
 
-<#macro url>${base}/list?mcId=${currMc.mcId}<#nested ><#if currTags??><#list currTags as tagStr>&tagId=${tagStr.tagId}-${tagStr.tcId}</#list></#if></#macro>
-<@header siteName="开封麦芒网" base_css=base_css=["global","style","list","filter"] base_keywords="开封麦芒网">
-
+<#macro url>${base}/m/list?mcId=${currMc.mcId}<#nested ><#if currTags??><#list currTags as tagStr>&tagId=${tagStr.tagId}-${tagStr.tcId}</#list></#if></#macro>
+<@header siteName="开封麦芒网" base_css=["global","style","list","filter"] base_keywords="开封麦芒网">
+<link rel="stylesheet" href="${base}/css/kkpager.css">
 </@header>
 
 
-<@body title="首页"><div class="filter2" id="filter2">
+<@body title="首页" back=true>
+<div class="filter2" id="filter2">
 
     <ul class="tab cfix">
         <li class="item"><a href="javascript:void(0);"><span id="str_a_node">分类</span><em></em></a></li>
@@ -60,33 +61,32 @@
 <div class="infolst_w">
     <ul class="list-info">
     <#--结果集合-->
-        <div class="clear1"></div>
-        <li class="">
-            <a href="index.php?mod=information&id=1229554">
-                <img class="thumbnail" src="picture/pre_1506069120z0frn.png" alt="大型夜场男模团队领队招聘男模-绝对真实</strong>">
-                <dl>
-                    <dt class="tit" style="">大型夜场男模团队领队招聘男模-绝对真实&nbsp;<span
-                            style="background:#339966; color:#FFFFFF; font-size:14px; padding:0 2px;text-align:center;">1图</span>
-                    </dt>
-                    <dd class="attr"><span>应聘加Q/Q8655.81.231领队宇哥直招微/信：134.3075.5000</span></dd>
-                    <dd class="attr pr5">
-                        <span class="lvzi">3天前</span>
-                    </dd>
-                </dl>
-            </a>
-        </li>
-
         <#if pushInfos??&&(pushInfos?size>0)>
             <#list pushInfos as pushInfo>
                 <li class="">
-                    <a href="">
+                    <a href="${base}/m/info?piId=${pushInfo.piId}">
                         <dl>
-                            <dt class="tit" style="">${pushInfo.piTitle!""}&nbsp;<span
-                                    style="background:#339966; color:#FFFFFF; font-size:14px; padding:0 2px;text-align:center;">1图</span>
+                            <dt class="tit" style=""> <strong> ${pushInfo.piTitle!""}</strong>&nbsp;
+                                <#if pushInfo.piImg??>
+                                    <span style="background:#339966; color:#FFFFFF; font-size:14px; padding:0 2px;text-align:center;">有图</span>
+                                </#if>
                             </dt>
-                            <dd class="attr" style="height:40px;line-height:20px;overflow:hidden;">水电费空间十分的合法的空间阿凡达哈付款就好打飞机快点发货的健康防护等级分活动经费和接受对方获得积分活动经费和大家思考</dd>
-                            <dd class="attr" style="margin-left: 80%">
-                                <span class="lvzi">${pushInfo.piPushDate}</span>
+                            <dd class="attr" style="height:40px;line-height:20px;overflow:hidden;">
+                                <#if pushInfo.piContent??>
+                                    <#if pushInfo.piContent?length gt 100>
+                                    ${pushInfo.piContent[0..100]}
+                                    <#else>
+                                    ${pushInfo.piContent}
+                                    </#if>
+                                <#else>
+                                    欢迎您联系我!
+                                </#if>
+                            </dd>
+                            <dd class="attr" style="border-top: 1px dashed #cacaca;padding-top: 3px">
+                <#list pushInfo.tagValues as tagValue>
+                     <span class="info_left">${tagValue.tcName}</span>
+                </#list>
+                                <span class="lvzi" style="float: right;">${(pushInfo.piPushDate)?string("yyyy-MM-dd")}</span>
                             </dd>
                         </dl>
                     </a>

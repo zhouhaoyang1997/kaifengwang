@@ -10,10 +10,10 @@
     <div id="logRegTabCon">
         <div class="log_reg_item">
             <form id="commentForm">
-                <input type="hidden" name="returnurl" value="">
+                <input type="hidden" name="path" value="${path!""}">
                 <ul id="pptul" class="passport-login-input-ul">
                     <li style="display:none" class="passport-login-input-li">
-                        <span id="loginTip" class="passport-login-tip"></span>
+                        <span id="error" class="passport-login-tip"></span>
                     </li>
 
                     <li id="loginUserNameLi" class="passport-login-input-li">
@@ -37,7 +37,7 @@
 
 
                     <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
-                    <span style="color:red" id="error"></span>
+
 
                     <li id="loginButtonLi" class="passport-login-input-li">
                         <span class="passport-login-input-span" jqmoldstyle="block" style="display: none;">&nbsp;</span>

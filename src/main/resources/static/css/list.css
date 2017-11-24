@@ -31,11 +31,6 @@
     z-index: 890;
 }
 
-* html #asid_share {
-    position: absolute;
-    top: expression(documentElement.scrollTop + "px");
-    margin: 300px 0 0 0;
-}
 
 .asid_share .asid_share_box {
     width: 100%;

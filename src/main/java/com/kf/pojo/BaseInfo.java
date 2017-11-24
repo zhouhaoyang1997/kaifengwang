@@ -1,6 +1,7 @@
 package com.kf.pojo;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -38,6 +39,7 @@ public class BaseInfo {
 
     private Integer piSc;
     private String piUser;
+    @NotNull(message = "错误的提交")
     private Integer userId;
     @Length(min = 2,max=150,message = "请输入2-150个字符之间的文字")
     private String piAddress;

@@ -74,7 +74,7 @@
         <div class="big_dl sale">
             <ul>
                 <#list mc.secondClasses as sc>
-                    <li class="one_third"><a href="${request.contextPath}/push/fill?mcId=${mc.mcId}&scId=${sc.scId}">${sc.scName}</a></li>
+                    <li class="one_third"><a href="${request.contextPath}/m/list?mcId=${mc.mcId}&scId=${sc.scId}">${sc.scName}</a></li>
                 </#list>
             </ul>
         </div>

@@ -74,13 +74,19 @@ public class InfoController {
     public String collect(Integer piId, HttpServletRequest request){
         if(piId!=null){
             Integer userId = SessionUtil.getUserId(request);
-            if(userId!=null&&pushInfoService.getPushIsExists(piId)){
-                //信息Id存在,且用户处于登录状态,将该条信息存入收藏表//且收藏表中不存在
-                if(pushInfoService.collectionIsExists(userId,piId)){
-                    return "no:该信息已经在您的收藏列表里了,请勿重复点击";
+            if(userId!=null){
+                if(pushInfoService.getPushIsExists(piId)){
+                    //信息Id存在,且用户处于登录状态,将该条信息存入收藏表//且收藏表中不存在
+                    if(pushInfoService.collectionIsExists(userId,piId)){
+                        return "no:该信息已经在您的收藏列表里了,请勿重复点击";
+                    }
+                    pushInfoService.addCollection(userId,piId);
+                    return "ok:收藏成功";
+                }else{
+                    return "no:该信息不存在";
                 }
-                pushInfoService.addCollection(userId,piId);
-                return "ok:收藏成功";
+            }else{
+                return "nol:请您登陆";
             }
         }
         return "no:错误的请求";

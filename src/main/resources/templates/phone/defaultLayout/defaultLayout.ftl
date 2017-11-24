@@ -1,7 +1,8 @@
 <#--在基本宏里定义#compress 压缩页面指令-->
 <#--<#compress>-->
+<#assign baseUrl = "${request.contextPath}"/>
 <#macro base siteName title base_keywords="" base_js=[] base_css=[] cssPath="../css/phone/" jsPath="../js/phone/">
-    <#assign base = "${request.contextPath}"/>
+
 
 <!DOCTYPE html>
 <html lang="zh-CN" class="index_page">
@@ -53,7 +54,7 @@
 </#macro>
 <#--</#compress>-->
 
-<#macro header siteName base_keywords="" base_css=[] cssPath="../css/phone/">
+<#macro header siteName base_keywords="" base_css=[]>
 
 <!DOCTYPE html>
 <html lang="zh-CN" class="index_page">
@@ -74,7 +75,7 @@
     <title>${siteName}</title>
 <#--//遍历扩展页css-->
     <#list base_css as c>
-        <link rel="stylesheet" href="${cssPath}${c}.css">
+        <link rel="stylesheet" href="${baseUrl}/css/phone/${c}.css">
     </#list>
     <#nested/>
 </head>
@@ -97,7 +98,7 @@
         <a href="#" class="bottom_index_on">首页</a>
         <a href="#" class="bottom_member">我的</a>
         <a href="#" class="bottom_history">历史</a>
-        <a href="#" class="bottom_post">发布</a>
+        <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
     </div>
     <#nested/>
 </div>
@@ -105,9 +106,9 @@
 
 </#macro>
 
-<#macro footer base_js=[] jsPath="../js/phone/">
+<#macro footer base_js=[]>
     <#list base_js as j>
-    <script src="${jsPath}${j}.js"></script>
+    <script src="${baseUrl}/js/phone/${j}.js"></script>
     </#list>
 <#nested />
 </body>

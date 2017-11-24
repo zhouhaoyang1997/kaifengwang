@@ -37,7 +37,7 @@ logging:
 
 
 page:
-  pageSize: 2
+  pageSize: 10
 
 path:
 #  WinPathValue: C:/Users/ch/Desktop/

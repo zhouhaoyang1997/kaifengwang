@@ -133,11 +133,11 @@
                         </li>
                         <li>
                             <span>qq:&nbsp; </span>
-                            <span>${info.piQq}</span>
+                            <span>${info.piQq!""}</span>
                         </li>
                         <li>
                             <span>详细地址:&nbsp; </span>
-                            <span>${info.piAddress}asdsadsadasdasdas</span>
+                            <span>${info.piAddress!""}</span>
                         </li>
                     </ul>
                     <div class="alert alert-danger alert-dismissable" role="alert">
