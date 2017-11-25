@@ -5,6 +5,12 @@
 </@header>
 
 <@body title="详细信息" back=true>
+<div id="contactbar">
+    <a href="/m/index" class="bottom_index_on">首页</a>
+    <a href="/m/user/index" class="bottom_member">我的</a>
+    <a href="#" class="bottom_history">推送</a>
+    <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
+</div>
 <div class="tit_area">
     <h1 class="tit"><#if info.piTitle?length gt 13>${info.piTitle[0..10]}...<#else>${info.piTitle}</#if>
         <span class="date-title">更新:${info.piPushDate?string("yyyy-MM-dd")}</span></h1>

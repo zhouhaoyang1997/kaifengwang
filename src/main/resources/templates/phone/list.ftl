@@ -8,6 +8,12 @@
 
 
 <@body title="首页" back=true>
+<div id="contactbar">
+    <a href="/m/index" class="bottom_index_on">首页</a>
+    <a href="/m/user/index" class="bottom_member">我的</a>
+    <a href="#" class="bottom_history">推送</a>
+    <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
+</div>
 <div class="filter2" id="filter2">
 
     <ul class="tab cfix">
@@ -66,7 +72,7 @@
                 <li class="">
                     <a href="${base}/m/info?piId=${pushInfo.piId}">
                         <dl>
-                            <dt class="tit" style=""> <strong> ${pushInfo.piTitle!""}</strong>&nbsp;
+                            <dt class="tit" style="margin-left: 18px;"> <strong> <#if pushInfo.piTitle?length gt 13>${pushInfo.piTitle[0..14]}...<#else>${pushInfo.piTitle}</#if></strong>&nbsp;
                                 <#if pushInfo.piImg??>
                                     <span style="background:#339966; color:#FFFFFF; font-size:14px; padding:0 2px;text-align:center;">有图</span>
                                 </#if>
@@ -89,6 +95,13 @@
                                 <span class="lvzi" style="float: right;">${(pushInfo.piPushDate)?string("yyyy-MM-dd")}</span>
                             </dd>
                         </dl>
+                        <#if pushInfo.piChujia gt 0>
+                            <i class="urgent_jingjia"></i>
+                        <#else>
+                            <#if pushInfo.piZhiding==1>
+                                <i class="urgent"></i>
+                            </#if>
+                        </#if>
                     </a>
                 </li>
             </#list>
@@ -177,16 +190,7 @@
         showFilter({ibox: 'filter2', content1: 'parent_container', content2: 'inner_container', fullbg: 'fullbg'});
     }, false);
 </script>
-</body>
-</html>
-    <#if currScId??||currDistrictId??||(currTags?size>0)>
-    <script type="text/javascript">
-        $(function () {
-            $("#lunbotu").css("display", "none");
-        });
-    </script>
 
-    </#if>
     <#if currScId??>
     <script type="text/javascript">
         $(function () {
@@ -204,11 +208,17 @@
     </script>
     </#if>
 <script type="text/javascript">
-        <#list currTags as ct>
-        $(function () {
-            $("#tag${ct.tagId}").removeClass("active");
-            $("#tagValue${ct.tcId}").addClass("active");
-        });
-        </#list>
+        <#if currTags??>
+            <#list currTags as ct>
+            $(function () {
+                $("#tag${ct.tagId}").removeClass("active");
+                $("#tagValue${ct.tcId}").addClass("active");
+            });
+            </#list>
+        </#if>
+
 </script>
+</body>
+</html>
+
 </@footer>

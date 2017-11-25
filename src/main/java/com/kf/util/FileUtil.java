@@ -11,6 +11,23 @@ import java.util.UUID;
  */
 public class FileUtil {
 
+    public static boolean picIsError(MultipartFile[] pics){
+        boolean access = true;
+        //监测是否有图片大小超过1m
+        if(null != pics && pics.length > 0){
+            for(MultipartFile pic:pics){
+                if(null != pic){
+                    if(pic.getSize()>1024*1024){
+                        access = false;
+                    }
+                }
+            }
+        }
+        return access;
+    }
+
+
+
     public static String addPic(MultipartFile[] pics,String filePathPri,String savePath) throws IOException{
         String sb="";
         for (MultipartFile pic : pics) {

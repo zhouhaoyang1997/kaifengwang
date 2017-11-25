@@ -59,6 +59,15 @@
                                     <div class="form-group">
                                         <input type="password" class="form-control" name="userPassword" placeholder="密码">
                                     </div>
+                                    <div class="form-group row" id="verifyDiv">
+                                        <label for="verifyCode" class="sr-only">验证码</label>
+                                        <input type="text" class="col-xs-5" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
+                                        <div class="col-xs-6">
+                                            <img src="${request.contextPath}/verify/code" id="verify" alt="验证码">
+                                            <a href="javascript:;" id="changImg">看不清？</a>
+                                        </div>
+                                    </div>
+
                                     <span style="color:red" id="error"></span>
                                     <div class="form-group">
                                         <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
@@ -88,29 +97,50 @@
 
 
 <@footer>
+<script type="text/javascript" src="${request.contextPath}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/messages_zh.js"></script>
 <script type="text/javascript">
     function openModal() {
         $("#myModal").modal("show");
     }
 
-    $(function () {
-       $("#loginBtn").click(function () {
-           $.ajax({
-               url:'${base}/login',
-               type:'post',
-               data:$("#loginForm").serialize(),
-               success:function (result) {
-                   var res=result.split(":");
 
-                   if(res[0]=="ok"){
+    $("#changImg").click(function () {
+        var verify = document.getElementById("verify");
+        verify.src = "${request.contextPath}/verify/code?date=" + new Date();
+    });
 
-                       window.location.href=res[1];
-                   }else{
-                       $("#error").text(res[1]);
-                   }
-               }
-           })
-       })
+    function updateVerifyHtml() {
+        $("#verifyCode").val("");
+        var verify = document.getElementById("verify");
+        verify.src = "${request.contextPath}/verify/code?date=" + new Date();
+    }
+
+    function valForm() {
+        return $("#loginForm").validate().form();
+    }
+
+
+
+    $("#loginBtn").click(function () {
+        if(valForm()){
+            //下面的请求发多了,开始需要用户验证。
+            $.ajax({
+                url:'${request.contextPath}/login',
+                type:'post',
+                data:$("#loginForm").serialize(),
+                success:function (result) {
+                    var res=result.split(":");
+                    if(res[0]=="ok"){
+                        window.location.href=res[1];
+                    }else{
+                        updateVerifyHtml();
+                        $("#error").text(res[1]);
+                    }
+                }
+            })
+        }
+
     });
 
     $(function () {

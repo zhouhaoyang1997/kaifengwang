@@ -1,4 +1,5 @@
 <#include "defaultLayout/defaultLayout.ftl">
+<#import "/spring.ftl" as spring />
 <#assign base="${request.contextPath}"/>
 <@header siteName="开封麦芒网" base_css=["global","style","all","bootstrap.min1"] base_keywords="开封麦芒网">
 <link rel="stylesheet" href="${base}/css/fileupload.css">
@@ -6,9 +7,15 @@
 </@header>
 
 <@body title="发布信息" back=true>
+<div id="contactbar">
+    <a href="/m/index" class="bottom_index">首页</a>
+    <a href="/m/user/index" class="bottom_member">我的</a>
+    <a href="#" class="bottom_history">推送</a>
+    <a href="${baseUrl}/m/push/choose" class="bottom_post_on">发布</a>
+</div>
 <div class="panel">
     <div class="panel-body">
-        <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post" action="/push/info">
+        <form class="form-horizontal" id="pushForm" role="form" enctype="multipart/form-data" method="post" action="/push/info">
             <input type="hidden" value="mobile" name="method">
             <#if Session.user??>
                 <input type="hidden" name="userId" value="${user.userId!""}">
@@ -57,7 +64,7 @@
                         <label><span style="color:red">*</span>${pic.picName}:</label>
                     </div>
                     <div class="col-xs-9">
-                        <input type="text" name="pic${pic.picId}" class="form-control">
+                        <input type="text" required name="pic${pic.picId}" class="form-control">
                     </div>
                     <div class="col-xs-5"></div>
                 </div>
@@ -86,6 +93,20 @@
                 <div class="col-xs-12">
                     <#if pushError??>
                     <@spring.bind "pushError.piPhone" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-3">
+                    <label><span style="color:red">*</span>详细地址:</label>
+                </div>
+                <div class="col-xs-9">
+                    <input type="text" name="piAddress" minlength="2" maxlength="150" class="form-control">
+                </div>
+                <div class="col-xs-12">
+                    <#if pushError??>
+                    <@spring.bind "pushError.piAddress" />
                     <@spring.showErrors "<br>"/>
                     </#if>
                 </div>
@@ -190,11 +211,17 @@
 
         <#--此处后期检查字数-->
             <div class="form-group">
-                <div class="col-xs-3">
-                    <label for="name">详细信息</label>
+                <div class="col-xs-12">
+                    <label for="name">详细信息<span style="color:red">你知道吗?描述的清除的信息的成功率会高30%!(请输入至少10个字符)</span></label>
                 </div>
                 <div class="col-xs-12">
                     <textarea class="form-control" name="piContent" style="width: 330px;height: 160px;"></textarea>
+                </div>
+                <div class="col-xs-12">
+                    <#if pushError??>
+                    <@spring.bind "pushError.piContent" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
                 </div>
             </div>
             <div class="form-group text-center">
@@ -225,6 +252,45 @@
                 'insertunorderedlist' ]
         });
     });
+    $(function () {
+
+        <#if picError??>
+            alert("${picError}");
+        </#if>
+
+        jQuery.validator.addMethod("regex",
+                function(value, element, params) {
+                    var exp = new RegExp(params);
+                    return exp.test(value);
+                }, "格式错误");
+        $("#pushForm").validate({
+            rules:{
+                piTitle:{
+                    required:true,
+                    regex:/^[a-zA-Z0-9\u4e00-\u9fa5]+$/
+                },
+                piContactPerson:{
+                    required:true,
+                    regex:/^[\u4e00-\u9fa5]+$/
+                },
+                piPhone:{
+                    required:true,
+                    regex:/^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\d{8}$/
+                }
+            },
+            messages:{
+                piTitle:{
+                    regex:'标题仅可以使用数字,中文,英文'
+                },
+                piContactPerson:{
+                    regex:'请输入合适的联系人,如王女士'
+                },
+                piPhone:{
+                    regex:'请输入合法的手机号'
+                }
+            }
+        })
+    })
 </script>
 </@footer>
 

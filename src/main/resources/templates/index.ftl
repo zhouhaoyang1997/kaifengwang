@@ -273,5 +273,6 @@
 <!-- 快速点击js-->
 <script type="text/javascript" src="${base}/js/basePath.js"></script>
 <script type="text/javascript" src="${base}/js/quickClick.js"></script>
+
     <@floating/>
 </@footer>

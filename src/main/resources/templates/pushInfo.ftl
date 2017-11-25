@@ -1,7 +1,8 @@
 <#include "public/default.ftl">
-<#import "spring.ftl" as spring />
+
 <#assign base="${request.contextPath}"/>
 <#include "public/pushdefault.ftl">
+<#import "spring.ftl" as spring />
 <@header title="填写发布信息">
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
@@ -74,7 +75,7 @@
                         <label><span style="color:red">*</span>${pic.picName}:</label>
                     </div>
                     <div class="col-xs-5">
-                        <input type="text" name="pic${pic.picId}" class="form-control">
+                        <input type="text" required name="pic${pic.picId}" class="form-control">
                     </div>
                     <div class="col-xs-5"></div>
                 </div>
@@ -259,6 +260,11 @@
     });
 
     $(function () {
+
+        <#if picError??>
+            alert("${picError}");
+        </#if>
+
         jQuery.validator.addMethod("regex",
                 function(value, element, params) {
                     var exp = new RegExp(params);

@@ -30,7 +30,7 @@
         <script src="${jsPath}${j}.js"></script>
     </#list>
 </head>
-<body class="orange">
+<body class="orange" >
 
 <div class="wrapper">
     <div class="header">
@@ -83,7 +83,7 @@
 
 <#macro body title back=false>
 
-<body class="orange">
+<body class="orange" style="background: #F2F2F2">
 
 <div class="wrapper">
     <div class="header">
@@ -94,12 +94,7 @@
         <div class="search left8" id="search_ico" onClick="showNewPage('搜索',searchHtml,newPageSearch);">搜索</div>
 
     </div>
-    <div id="contactbar">
-        <a href="#" class="bottom_index_on">首页</a>
-        <a href="#" class="bottom_member">我的</a>
-        <a href="#" class="bottom_history">历史</a>
-        <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
-    </div>
+
     <#nested/>
 </div>
 <div class="footer_02">&copy;copyright开封麦芒网版权所有. </div>
@@ -107,9 +102,30 @@
 </#macro>
 
 <#macro footer base_js=[]>
+
+
     <#list base_js as j>
     <script src="${baseUrl}/js/phone/${j}.js"></script>
     </#list>
+<script type="text/javascript">
+    //判断是否移动端访问
+    browserRedirect();
+    function browserRedirect() {
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+        var pageUrl = "${springMacroRequestContext.getRequestUri()}".substr(2);
+        if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM)) {
+            window.location.href = "${baseUrl}"+pageUrl+"<#if request.queryString??>?${request.queryString}</#if>";
+        }
+    }
+</script>
 <#nested />
 </body>
 </html>
