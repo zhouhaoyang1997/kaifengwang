@@ -2,12 +2,22 @@
 <#assign base="${request.contextPath}"/>
 <@header siteName="开封麦芒网" base_css=["global","style","info","bxSlider"] base_keywords="开封麦芒网">
 <link rel="stylesheet" href="${base}/css/font-awesome.min.css">
+<style>
+    .p_content{
+        width: 100%;
+        height: auto;
+        word-wrap:break-word;
+        word-break:break-all;
+        overflow: hidden;
+    }
+
+</style>
 </@header>
 
 <@body title="详细信息" back=true>
 <div id="contactbar">
     <a href="/m/index" class="bottom_index_on">首页</a>
-    <a href="/m/user/index" class="bottom_member">我的</a>
+    <a href="/m/user/info" class="bottom_member">我的</a>
     <a href="#" class="bottom_history">推送</a>
     <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
 </div>
@@ -80,11 +90,7 @@
 
 <div class="detail-tit">详细描述</div>
 <div class="detail_txt_che">
-    <p align="left">
-        <span style="font-size:15.0pt;font-family:宋体;color:#333333;background:white;">
-        ${info.piContent}
-        </span>
-    </p><br/>联系我时，请说是在五网看到的。
+    <p class="p_content" style="font-size:15.0pt;font-family:宋体;color:#333333;background:white;">${info.piContent}</p><br/>联系我时，请说是在五网看到的。
 </div>
 
     <#if company??>
