@@ -159,6 +159,18 @@ public class PushInfoService {
         initPushInfo(pageUtil,basePush);
         return basePush;
     }
+    /**
+     * 获取用户收藏数
+     */
+    public Integer getCollectionCountByUserId(Integer userId){
 
+        return pushInfoMapper.getCollectionCountByUserId(userId);
+    }
+   /**
+     * 获取用户发布数
+     */
+    public Integer getPushCountByUserId(Integer userId){
+        return pushInfoMapper.getPushCountByUserId(userId);
+    }
 
 }

@@ -123,3 +123,9 @@ a {
     visibility: hidden;
     overflow: hidden;
 }
+.bgWhite{
+    background-color: white!important;
+}
+.bgWhite a{
+    color:#428bca;
+}

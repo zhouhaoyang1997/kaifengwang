@@ -2,10 +2,10 @@
 <@header siteName="开封麦芒网"  base_css=["global","style","bootstrap-table.min"] base_keywords="开封麦芒网" >
 
 </@header>
-<@body title="我的收藏" back=true>
+<@body title="我的发布" back=true>
 <div class="panel panel-default bgWhite">
     <div class="panel-body">
-        <table class="table" id="collectionTable"></table>
+        <table class="table" id="table"></table>
     </div>
 </div>
 

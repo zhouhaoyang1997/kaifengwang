@@ -202,5 +202,10 @@
         where push_info.pi_user=user.user_id and pi_title LIKE #{keyWords}
         <if test="districtId!=null and districtId!=0">and district_id=#{districtId}</if>
     </select>
-
+    <select id="getPushCountByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT COUNT(*) FROM push_info WHERE pi_user = #{userId}
+    </select>
+    <select id="getCollectionCountByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT  COUNT(*) FROM collection WHERE user_id = #{userId}
+    </select>
 </mapper>
