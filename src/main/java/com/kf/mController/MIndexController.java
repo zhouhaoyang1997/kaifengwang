@@ -20,6 +20,7 @@ import java.util.List;
 /**
  * Created by 18236 on 2017/11/23.
  */
+@RequestMapping("/m")
 @Controller
 public class MIndexController {
 
@@ -27,7 +28,7 @@ public class MIndexController {
     public MainClassService mainClassService;
 
 
-    @GetMapping("/m/index")
+    @GetMapping("/index")
     public String index(ModelMap modelMap){
         List<MainClass> mainClass= mainClassService.getMainClass();
         modelMap.addAttribute("mainClass",mainClass);
@@ -36,7 +37,7 @@ public class MIndexController {
     }
 
 
-    @GetMapping("/m/menulist")
+    @GetMapping("/menulist")
     public String menulist(ModelMap modelMap) {
         List<MainClass> mainClass= mainClassService.getMainClass();
         modelMap.addAttribute("mainClass",mainClass);
