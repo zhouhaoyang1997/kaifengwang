@@ -790,7 +790,7 @@ body {
 
 .header .back, .header .my, .header .search, .header .type {
     position: absolute;
-    width: 36px;
+    width: 50px;
     height: 45px;
     top: 0;
     font-size: 16px;
@@ -844,7 +844,7 @@ body {
 
 .header .back {
     background-position: -54px -37px;
-    padding-left: 10px;
+
     text-align: right;
     line-height: 45px;
     display: block;

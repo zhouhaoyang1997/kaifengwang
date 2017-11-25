@@ -45,8 +45,8 @@ public class LoginConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getLoginInterceptor()).addPathPatterns("/**");
         //registry.addInterceptor(getRememberUserUrl()).addPathPatterns("/**");
-        registry.addInterceptor(getPushInterceptor()).addPathPatterns("/push/**");
-        registry.addInterceptor(getUserInterceptor()).addPathPatterns("/user/**");
+        registry.addInterceptor(getPushInterceptor()).addPathPatterns("/m/push/**").addPathPatterns("/push/**");
+        registry.addInterceptor(getUserInterceptor()).addPathPatterns("m/user/**").addPathPatterns("/user/**");
         super.addInterceptors(registry);
     }
 }

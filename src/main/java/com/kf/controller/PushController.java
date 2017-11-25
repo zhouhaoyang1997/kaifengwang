@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -69,11 +70,10 @@ public class PushController {
      * @return
      */
     @GetMapping("/push/choose")
-    public ModelAndView chooseMainClass(){
-        ModelAndView modelAndView = new ModelAndView("choose");
+    public String chooseMainClass(ModelMap modelMap){
         List<MainClass> mainClass= mainClassService.getMainClass();
-        modelAndView.addObject("mainClass",mainClass);
-        return modelAndView;
+        modelMap.addAttribute("mainClass",mainClass);
+        return "choose";
     }
 
 
@@ -83,54 +83,62 @@ public class PushController {
      * @return
      */
     @GetMapping("/push/login")
-    public ModelAndView pushLogin(Choose choose){
-        return toChoose(choose,"modalLogin");
+    public String pushLogin(Choose choose,ModelMap modelMap){
+        choose = toChoose(choose);
+        if(choose!=null){
+            modelMap.addAttribute("choose",choose);
+        }else{
+            return "redirect:/push/choose";
+        }
+        return "modalLogin";
     }
 
 
 
 
-    /**
-     * 组装用户的选择
-     * @param choose
-     */
-    private ModelAndView toChoose(Choose choose,String toPage){
-        ModelAndView modelAndView=null;
-        //如果用户没有选择或条件缺失或条件有误,返回选择页面
+    private Choose toChoose(Choose choose){
         if(choose!=null){
             String mcName = mainClassService.getMcName(choose.getMcId());
             String scName = secondClassService.getScName(choose.getScId());
             if(mcName!=null&&scName!=null){
                 choose.setMcName(mcName);
                 choose.setScName(scName);
-                modelAndView = new ModelAndView(toPage);
-            }else{
-                modelAndView = new ModelAndView("redirect:/push/choose");
+                return choose;
             }
-        }else{
-            modelAndView = new ModelAndView("redirect:/push/choose");
         }
-        return modelAndView;
+        return null;
     }
+
+
 
     /**
      * 填写信息,
      * @return
      */
-    @RequestMapping("/push/fill")
-    public ModelAndView chooseSecondClass(Choose choose){
-        ModelAndView modelAndView = toChoose(choose,"pushInfo");
-        if(modelAndView!=null&&modelAndView.getViewName().equals("pushInfo")){
-            List<District> districts = districtService.getAllDistrict();
-            List<Tag> tags = tagService.getAllTag(choose.getMcId());
-            List<PushInfoClass> pushInfoClasses = pushInfoClassService.getAllPush(choose.getMcId());
-            modelAndView.addObject("choose",choose);
-            modelAndView.addObject("districts",districts);
-            modelAndView.addObject("tags",tags);
-            modelAndView.addObject("pushInfoClasses",pushInfoClasses);
+    @GetMapping("/push/fill")
+    public String chooseSecondClass(Choose choose,ModelMap modelMap){
+        logger.debug(choose.getMcId()+":::"+choose.getScId());
+        choose = toChoose(choose);
+        if(choose!=null){
+            assembly(modelMap,choose);
+            return "pushInfo";
+        }else{
+            return "redirect:/push/choose";
         }
-        return modelAndView;
+
     }
+
+    private void assembly(ModelMap modelMap,Choose choose){
+        choose = toChoose(choose);
+        List<District> districts = districtService.getAllDistrict();
+        List<Tag> tags = tagService.getAllTag(choose.getMcId());
+        List<PushInfoClass> pushInfoClasses = pushInfoClassService.getAllPush(choose.getMcId());
+        modelMap.addAttribute("choose",choose);
+        modelMap.addAttribute("districts",districts);
+        modelMap.addAttribute("tags",tags);
+        modelMap.addAttribute("pushInfoClasses",pushInfoClasses);
+    }
+
 
 
     /**
@@ -142,30 +150,41 @@ public class PushController {
      * @throws IOException
      */
     @PostMapping(value = "/push/info")
-    public ModelAndView pushInfo(@RequestParam("pic") MultipartFile pics[], @Valid @ModelAttribute("pushError") PushInfo pushInfo,
-                                 BindingResult br, @RequestParam(value = "method",defaultValue = "pc") String method,HttpServletRequest request)throws IOException{
-        ModelAndView modelAndView = null;
-        if(br.hasErrors()){
+    public String pushInfo(@RequestParam("pic") MultipartFile pics[], @Valid @ModelAttribute("pushError") PushInfo pushInfo,
+                                 BindingResult br, @RequestParam(value = "method",defaultValue = "pc") String method,ModelMap modelMap,
+                           HttpServletRequest request)throws IOException{
+        boolean access = FileUtil.picIsError(pics);
+        if(br.hasErrors()||!access){
             if(pushInfo.getPiMc()==null||pushInfo.getPiSc()==null||pushInfo.getPiDistrict()==null||pushInfo.getUserId()==null){
-                modelAndView = new ModelAndView("redirect:/push/choose");
+               return "redirect:/push/choose";
             }else{
                 Choose choose = new Choose();
                 choose.setScId(pushInfo.getPiSc());
                 choose.setMcId(pushInfo.getPiMc());
-                modelAndView = chooseSecondClass(choose);
+                assembly(modelMap,choose);
+                if(!access){
+                    modelMap.addAttribute("picError","对不起,您上传的图片有的大小超过了1M,请检查后重试!");
+                }
+                if(method.equals("mobile")){
+                    return "phone/pushInfo";
+                }else{
+                    return "pushInfo";
+                }
+
             }
         }else{
+
             Integer mcId = pushInfo.getPiMc();
-            if(null != pics && pics.length > 0) {
-                //配置获去图片存放路径        暂未规定图片大小
-                String savePath = basePath.getPathValue();
-                String sb = FileUtil.addPic(pics,"img/pushimg/",savePath);
-                //如果上传了图片,把图片路径存入数据库
-                if(!sb.isEmpty()){
-                    sb=sb.substring(0,sb.length()-1);
-                    pushInfo.setPiImg(sb);
-                }
+
+            //配置获去图片存放路径
+            String savePath = basePath.getPathValue();
+            String sb = FileUtil.addPic(pics,"img/pushimg/",savePath);
+            //如果上传了图片,把图片路径存入数据库
+            if(!sb.isEmpty()){
+                sb=sb.substring(0,sb.length()-1);
+                pushInfo.setPiImg(sb);
             }
+
             //设置当前时间
             Timestamp ts = new Timestamp(new Date().getTime());
             pushInfo.setPiPushDate(ts);
@@ -191,9 +210,10 @@ public class PushController {
                     picContentService.addPicContent(picId,piId,value);
                 }
             }
-            modelAndView=new ModelAndView("redirect:/info?piId="+piId);
+            return "redirect:/info?piId="+piId;
+
+
         }
-        return modelAndView;
     }
 
 }

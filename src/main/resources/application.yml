@@ -34,6 +34,7 @@ logging:
     level:
        com.kf.mapper: debug
        com.kf.controller: debug
+       com.kf.Interceptor: debug
 
 
 page:
