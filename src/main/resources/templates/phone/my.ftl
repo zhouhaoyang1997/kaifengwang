@@ -1,5 +1,16 @@
 <#include "defaultLayout/defaultLayout.ftl">
-<@base siteName="开封麦芒网" base_js=["jq_min.211_1","bootstrap.min"] base_css=["global","style","usercenter","bootstrap.min"] base_keywords="开封麦芒网" title="首页">
+<#assign base="${request.contextPath}"/>
+<@header siteName="开封麦芒网"  base_css=["global","style","usercenter","bootstrap.min"] base_keywords="开封麦芒网" >
+
+</@header>
+<#--js-->
+<@body title="首页" back=true>
+<div id="contactbar">
+    <a href="/m/index" class="bottom_index">首页</a>
+    <a href="/m/user/info" class="bottom_member_on">我的</a>
+    <a href="#" class="bottom_history">推送</a>
+    <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
+</div>
 <div class="heading">
     <div>
         <img src="${baseUrl}/img/headimg/d74b6b7e-5551-436c-ab4d-4b567714ca79.jpg" class="img-circle" width="80px">
@@ -25,5 +36,8 @@
 </ul>
 <div class="text-center"><button class="btn-lg btn-danger" >退出登录</button></div>
 
-</@base>
-<#--js-->
+</@body>
+
+<@footer base_js=["jq_min.211_1","bootstrap.min"]>
+
+</@footer>
