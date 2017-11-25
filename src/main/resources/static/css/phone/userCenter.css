@@ -1,0 +1,32 @@
+body{
+    background-color: #f2f2f2!important;
+    font-size: 18px !important;
+}
+.heading{
+    padding: 5px;
+    width: 100%;
+    height: 100px;
+    clear:both;
+    background-image: url(../../img/phone/images/2.jpg);
+}
+.heading div{
+    margin: 10px;
+    float:left;
+    color: white;
+}
+
+.icon{
+    width: 33px;
+}
+.NumPanel{
+    clear: both;
+    width: 100%!important;
+}
+.left{
+    border:0!important;
+    margin: 1px!important;
+    width: 49%!important;
+    display: block!important;
+    float: left!important;
+}
+

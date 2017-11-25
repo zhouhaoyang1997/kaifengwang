@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * Created by 18236 on 2017/11/23.
  */
+@RequestMapping("/m")
 @Controller
 public class MPushInfoController {
 
@@ -56,7 +57,7 @@ public class MPushInfoController {
     @Autowired
     private SecondClassService secondClassService;
 
-    @GetMapping("/m/push/choose")
+    @GetMapping("/push/choose")
     public String choose(ModelMap modelMap){
         List<MainClass> mainClass= mainClassService.getMainClass();
         modelMap.addAttribute("mainClass",mainClass);
@@ -83,7 +84,7 @@ public class MPushInfoController {
         return modelAndView;
     }
 
-    @GetMapping("/m/push/fill")
+    @GetMapping("/push/fill")
     public ModelAndView chooseSecondClass(Choose choose){
         ModelAndView modelAndView = toChoose(choose,"phone/pushInfo");
         if(modelAndView!=null&&modelAndView.getViewName().equals("phone/pushInfo")){
