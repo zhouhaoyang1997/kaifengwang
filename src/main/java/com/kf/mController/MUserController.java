@@ -17,15 +17,15 @@ public class MUserController {
         }
         return "phone/login";
     }
-    @GetMapping("/my")
+    @GetMapping("/user/info")
     public String My(){
         return "phone/my";
     }
-    @GetMapping("/myCollections")
+    @GetMapping("/user/personal")
     public String myCollections(){
         return "phone/myCollections";
     }
-    @GetMapping("/myCv")
+    @GetMapping("/user/attc")
     public String myCv(){
         return "phone/myCv";
     }
