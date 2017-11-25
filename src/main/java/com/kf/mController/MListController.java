@@ -9,6 +9,7 @@ import com.kf.vo.TagValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +19,7 @@ import java.util.List;
 /**
  * Created by 18236 on 2017/11/23.
  */
+@RequestMapping("/m")
 @Controller
 public class MListController {
 
@@ -43,7 +45,7 @@ public class MListController {
     private BannerService bannerService;
 
 
-    @GetMapping("/m/list")
+    @GetMapping("/list")
     public ModelAndView jobPage(Integer mcId, @RequestParam(required = false) Integer scId, @RequestParam(required = false) Integer districtId,
                                 @RequestParam(required = false)String[] tagId, @RequestParam(defaultValue = "0") Integer pno){
         ModelAndView modelAndView=new ModelAndView("phone/list");

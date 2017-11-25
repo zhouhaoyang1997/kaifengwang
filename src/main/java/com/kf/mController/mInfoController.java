@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import java.util.List;
 /**
  * Created by 18236 on 2017/11/23.
  */
+@RequestMapping("/m")
 @Controller
 public class mInfoController {
 
@@ -39,7 +41,7 @@ public class mInfoController {
     @Autowired
     private TipService tipService;
 
-    @GetMapping("/m/info")
+    @GetMapping("/info")
     public String Info(Integer piId, ModelMap modelMap, HttpServletRequest request)throws Exception{
         //下面这行的user是userId
         Integer user= SessionUtil.getUserId(request);
