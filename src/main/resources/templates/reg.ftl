@@ -75,6 +75,11 @@
         }
     });
     $().ready(function() {
+
+        <#if userOrEmailError??>
+            alert("${userOrEmailError}");
+        </#if>
+
         jQuery.validator.addMethod("regex",
                 function(value, element, params) {
                     var exp = new RegExp(params);
