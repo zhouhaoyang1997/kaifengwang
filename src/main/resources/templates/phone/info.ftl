@@ -39,6 +39,7 @@
             </span>
     </div>
 </div>
+    <#if info.piMc==2 || info.piMc==3>
 <div class="image_area_w">
     <div class="image_area">
         <ul class="slider7">
@@ -53,6 +54,7 @@
         <div class="panel_num"></div>
     </div>
 </div>
+    </#if>
 <#--此处写属性-->
 <ul class="attr_info" style="margin-top:0;min-height: 100px">
         <li><span class="attrName2">地区:</span ><span class="attrVal">${info.piDistrictName}</span></li>

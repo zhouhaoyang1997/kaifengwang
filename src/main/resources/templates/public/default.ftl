@@ -175,7 +175,8 @@
             </div>
         </div>
         <div class="row">
-            <p style="text-align: center">Copyright © 河南开封 ｜河南省麦芒网络科技有限公司所有</p>
+            <p style="text-align: center">Copyright © 麦芒网 ｜河南省麦芒网络科技有限公司所有</p>
+            <p style="text-align: center"><a href="http://www.miibeian.gov.cn">豫ICP备17047159</a></p>
         </div>
     </div>
 </div>

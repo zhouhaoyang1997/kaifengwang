@@ -64,10 +64,10 @@
                     <div class="icon"><img src="${baseUrl}/img/kf_mingshi.png" class="img-thumbnail"  alt=""></div>
                     名师培优</a>
                 <a href="${baseUrl}/m/list?mcId=6" class="item food">
-                    <div class="icon"><img src="${baseUrl}/img/jz.png" class="img-thumbnail"  alt=""></div>
+                    <div class="icon"><img src="${baseUrl}/img/timg.jpg" class="img-thumbnail"  alt=""></div>
                     名企招聘</a>
                 <a href="${baseUrl}/m/resume/list" class="item food">
-                    <div class="icon"><img src="${baseUrl}/img/jz.png" class="img-thumbnail" alt=""></div>
+                    <div class="icon"><img src="${baseUrl}/img/resume.png" class="img-thumbnail" alt=""></div>
                     求职简历</a>
             </div>
         </div>

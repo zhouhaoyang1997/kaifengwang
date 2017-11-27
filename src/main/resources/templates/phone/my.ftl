@@ -24,9 +24,9 @@
     <li class="list-group-item left">发布：${pushCounts!''}</li>
     <li class="list-group-item left">收藏：${clCounts!''}</li>
 </ul>
-<ul class="list-group">
+<ul class="list-group myIco">
     <li class="clear"></li>
-    <li class="list-group-item" onclick="location='${baseUrl}/m/user/personal'"><i class="fa fa-user-o" style="color: #ff552e;"></i>&nbsp;&nbsp;&nbsp;我的收藏<span class="badge">></span></li>
+    <li class="list-group-item" onclick="location='${baseUrl}/m/user/personal'"><i class="fa fa-user-o"></i>&nbsp;&nbsp;&nbsp;我的收藏<span class="badge">></span></li>
     <li class="list-group-item" onclick="location='${baseUrl}/m/user/pushing'"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;&nbsp;我的发布<span class="badge">></span></li>
     <li class="list-group-item"><i class="fa fa-id-card"></i>&nbsp;&nbsp;&nbsp;我的简历<span class="badge">></span></li>
     <li class="list-group-item"><i class="fa fa-address-card"></i>&nbsp;&nbsp;&nbsp;公司认证<span class="badge">></span></li>
@@ -35,7 +35,7 @@
     <li class="list-group-item"><i class="fa fa-star"></i>&nbsp;&nbsp;&nbsp;关于<span class="badge">></span></li>
 </ul>
 
-<div class="text-center"><button class="btn-lg btn-danger" id="logout">退出登录</button></div>
+<div class="text-center"><button class="btn-lg btn-danger" id="logout">安全退出</button></div>
 
 </@body>
 

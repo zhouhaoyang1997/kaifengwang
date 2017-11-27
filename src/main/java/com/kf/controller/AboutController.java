@@ -29,10 +29,7 @@ public class AboutController {
     public String contact(){
         return "about/contact";
     }
-    @GetMapping("/about/attc")
-    public String attc(){
-        return "about/attc";
-    }
+
     @GetMapping("/about/help")
     public String help(){
         return "about/help";

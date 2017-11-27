@@ -69,6 +69,125 @@
                     <div class="col-xs-5"></div>
                 </div>
             </#list>
+
+        <#--<div class="form-group">-->
+        <#--<label for="" class="col-xs-12 control-label">要上传的图片</label>-->
+        <#--<div class="col-xs-12 tl th">-->
+        <#--<form enctype="multipart/form-data" >-->
+        <#--<input type="file" name="image[]" id="picUpload" multiple/>-->
+        <#--<p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2.0M</p>-->
+        <#--</form>-->
+        <#--</div>-->
+        <#--</div>-->
+            <#if choose.mcId==2||choose.mcId==3>
+
+
+            <div class="form-group row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                                <div class="fileinput-new thumbnail" style="width: 130px;height: auto;max-height:150px;">
+                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
+                                         src="${base}/img/noimage.png" alt=""/>
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"
+                                     style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                        </span>
+                                    <a href="javascript:;" class="btn btn-warning fileinput-exists"
+                                       data-dismiss="fileinput">移除</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                                <div class="fileinput-new thumbnail" style="width: 130px;height: auto;max-height:150px;">
+                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
+                                         src="${base}/img/noimage.png" alt=""/>
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"
+                                     style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                        </span>
+                                    <a href="javascript:;" class="btn btn-warning fileinput-exists"
+                                       data-dismiss="fileinput">移除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                                <div class="fileinput-new thumbnail" style="width: 130px;height: auto;max-height:150px;">
+                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
+                                         src="${base}/img/noimage.png" alt=""/>
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"
+                                     style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                        </span>
+                                    <a href="javascript:;" class="btn btn-warning fileinput-exists"
+                                       data-dismiss="fileinput">移除</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                                <div class="fileinput-new thumbnail" style="width: 130px;height: auto;max-height:150px;">
+                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
+                                         src="${base}/img/noimage.png" alt=""/>
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"
+                                     style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                        </span>
+                                    <a href="javascript:;" class="btn btn-warning fileinput-exists"
+                                       data-dismiss="fileinput">移除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </#if>
+
+        <#--此处后期检查字数-->
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <label for="name">详细信息<span style="color:red">你知道吗?描述的清除的信息的成功率会高30%!(请输入至少10个字符)</span></label>
+                </div>
+                <div class="col-xs-12">
+                    <textarea class="form-control" name="piContent" style="width: 100%;height: 160px;"></textarea>
+                </div>
+                <div class="col-xs-12">
+                    <#if pushError??>
+                    <@spring.bind "pushError.piContent" />
+                    <@spring.showErrors "<br>"/>
+                    </#if>
+                </div>
+            </div>
+
             <div class="form-group ">
                 <div class="col-xs-3">
                     <label><span style="color:red">*</span>联系人:</label>
@@ -111,119 +230,15 @@
                     </#if>
                 </div>
             </div>
-        <#--<div class="form-group">-->
-        <#--<label for="" class="col-xs-12 control-label">要上传的图片</label>-->
-        <#--<div class="col-xs-12 tl th">-->
-        <#--<form enctype="multipart/form-data" >-->
-        <#--<input type="file" name="image[]" id="picUpload" multiple/>-->
-        <#--<p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2.0M</p>-->
-        <#--</form>-->
-        <#--</div>-->
-        <#--</div>-->
-            <div class="form-group row">
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
-                                <div class="fileinput-new thumbnail" style="width: 130px;height: auto;max-height:150px;">
-                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
-                                         src="${base}/img/noimage.png" alt=""/>
-                                </div>
-                                <div class="fileinput-preview fileinput-exists thumbnail"
-                                     style="max-width: 200px; max-height: 150px;"></div>
-                                <div>
-                        <span class="btn btn-primary btn-file">
-                            <span class="fileinput-new">选择文件</span>
-                            <span class="fileinput-exists">换一张</span>
-                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
-                        </span>
-                                    <a href="javascript:;" class="btn btn-warning fileinput-exists"
-                                       data-dismiss="fileinput">移除</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
-                                <div class="fileinput-new thumbnail" style="width: 130px;height: auto;max-height:150px;">
-                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
-                                         src="${base}/img/noimage.png" alt=""/>
-                                </div>
-                                <div class="fileinput-preview fileinput-exists thumbnail"
-                                     style="max-width: 200px; max-height: 150px;"></div>
-                                <div>
-                        <span class="btn btn-primary btn-file">
-                            <span class="fileinput-new">选择文件</span>
-                            <span class="fileinput-exists">换一张</span>
-                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
-                        </span>
-                                    <a href="javascript:;" class="btn btn-warning fileinput-exists"
-                                       data-dismiss="fileinput">移除</a>
-                                </div>
-                            </div>
-                        </div>
+                <div class="container alterInfo">
+                    <div class="alert alert-danger alert-dismissable" role="alert">
+                        <p>马上使用麦芒网 <a href="${base}/about/service" style="font-size: 18px;color: blue;">
+                            置顶推广</a> 使用置顶推广您的信息帖子效果可提升约 3~5倍！效果预览:
+                        </p>
+                        <img src="${base}/img/push_effect.png" style="width: 80%;" alt="推广效果">
                     </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
-                                <div class="fileinput-new thumbnail" style="width: 130px;height: auto;max-height:150px;">
-                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
-                                         src="${base}/img/noimage.png" alt=""/>
-                                </div>
-                                <div class="fileinput-preview fileinput-exists thumbnail"
-                                     style="max-width: 200px; max-height: 150px;"></div>
-                                <div>
-                        <span class="btn btn-primary btn-file">
-                            <span class="fileinput-new">选择文件</span>
-                            <span class="fileinput-exists">换一张</span>
-                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
-                        </span>
-                                    <a href="javascript:;" class="btn btn-warning fileinput-exists"
-                                       data-dismiss="fileinput">移除</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
-                                <div class="fileinput-new thumbnail" style="width: 130px;height: auto;max-height:150px;">
-                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
-                                         src="${base}/img/noimage.png" alt=""/>
-                                </div>
-                                <div class="fileinput-preview fileinput-exists thumbnail"
-                                     style="max-width: 200px; max-height: 150px;"></div>
-                                <div>
-                        <span class="btn btn-primary btn-file">
-                            <span class="fileinput-new">选择文件</span>
-                            <span class="fileinput-exists">换一张</span>
-                            <input type="file" name="pic" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
-                        </span>
-                                    <a href="javascript:;" class="btn btn-warning fileinput-exists"
-                                       data-dismiss="fileinput">移除</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-        <#--此处后期检查字数-->
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <label for="name">详细信息<span style="color:red">你知道吗?描述的清除的信息的成功率会高30%!(请输入至少10个字符)</span></label>
-                </div>
-                <div class="col-xs-12">
-                    <textarea class="form-control" name="piContent" style="width: 330px;height: 160px;"></textarea>
-                </div>
-                <div class="col-xs-12">
-                    <#if pushError??>
-                    <@spring.bind "pushError.piContent" />
-                    <@spring.showErrors "<br>"/>
-                    </#if>
-                </div>
-            </div>
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-info">确认提交</button>
             </div>

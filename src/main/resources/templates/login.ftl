@@ -70,8 +70,8 @@
 
                                     <div class="form-group row" id="verifyDiv">
                                         <label for="verifyCode" class="sr-only">验证码</label>
-                                        <input type="text" class="col-xs-5" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
-                                        <div class="col-xs-6">
+                                        <input type="text" class="col-xs-5 verifyInput" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
+                                        <div class="col-xs-6" style="padding-top: 20px">
                                             <img src="${request.contextPath}/verify/code" id="verify" alt="验证码">
                                             <a href="javascript:;" id="changImg">看不清？</a>
                                         </div>
@@ -112,14 +112,6 @@
 
                                     <span style="color:red" id="error"></span>
 
-                                    <div class="form-group row" id="verifyDiv">
-                                        <label for="verifyCode" class="sr-only">验证码</label>
-                                        <input type="text" class="col-xs-5" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
-                                        <div class="col-xs-6">
-                                            <img src="${request.contextPath}/verify/code" id="verify" alt="验证码">
-                                            <a href="javascript:;" id="changImg">看不清？</a>
-                                        </div>
-                                    </div>
 
                                     <div class="form-group row">
                                         <div class="col-xs-6">

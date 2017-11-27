@@ -14,11 +14,16 @@ import javax.servlet.http.HttpSession;
 public class UserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        //String url = httpServletRequest.getRequestURI();
+        String url = httpServletRequest.getRequestURI();
         HttpSession session = httpServletRequest.getSession();
         //如果用户未登录,跳转到选择登陆界面,并附带上用户的选择信息,从request中转发到login控制器去
         if(session.getAttribute("user")==null){
-            httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/login");
+            if(url.contains("/m/user")){
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/m/login");
+            }else{
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/login");
+            }
+
             return false;
         }
         return true;

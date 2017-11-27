@@ -8,17 +8,18 @@
 <link rel="stylesheet" href="${base}/css/menu.css">
 <link rel="stylesheet" href="${base}/css/fileupload.css">
 <link rel="stylesheet" href="${base}/css/default.css">
+<link rel="stylesheet" href="${base}/css/lightbox.min.css">
 </@header>
 <@push_header>
 </@push_header>
 <div class="mainPage">
-    <div class="container_self2">
+    <div class="container_self" >
         <div class="row step2">
             <div class="col-xs-4"><span>1 ${choose.scName}</span><a href="${base}/push/choose" style="color:blue">重新选择</a></div>
             <div class="col-xs-4"><span class="span_1">2 填写信息内容</span></div>
             <div class="col-xs-4"><span>3 发布成功</span></div>
         </div>
-        <div class="row" style="margin-top: 30px;">
+        <div class="row" style="margin-top: 30px;padding-left: 100px;background: #fff;">
             <form action="/push/info" method="post" id="pushForm" enctype="multipart/form-data">
                 <#if Session.user??>
                     <input type="hidden" name="userId" value="${user.userId!""}">
@@ -92,6 +93,9 @@
                     </#if>
                 </div>
             </div>
+                <#if choose.mcId==2||choose.mcId==3>
+
+
                 <div class="form-group row">
                     <div class="col-xs-12">
                         <div class="row">
@@ -178,6 +182,7 @@
                         </div>
                     </div>
                 </div>
+                    </#if>
                 <div class="form-group row">
                     <div class="col-xs-2">
                         <label><span style="color:red">*</span>联系人:</label>
@@ -229,14 +234,30 @@
                     </div>
                     <div class="col-xs-5"></div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-info">确认提交</button>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="container alterInfo">
+                                <div class="alert alert-danger alert-dismissable" role="alert">
+                                    <p>马上使用麦芒网 <a href="${base}/about/service" style="font-size: 18px;color: blue;">
+                                        置顶推广</a> 使用置顶推广您的信息帖子效果可提升约 3~5倍！效果预览:<a data-lightbox="image-1" style="font-size: 18px;color: blue;" href="/img/push_effect.png">查看大图</a>
+                                    </p>
+                                    <img src="${base}/img/push_effect.png" style="width: 80%;" alt="推广效果">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                <div class="form-group" >
+                    <button type="submit" class="btn btn-info" style="margin-left: 200px;">确认提交</button>
                 </div>
 
             </form>
         </div>
     </div>
 </div>
+
 <@push_footer>
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
@@ -245,6 +266,8 @@
 <script type="text/javascript" src="${base}/js/zh-CN.js"></script>
 <script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${base}/js/messages_zh.js"></script>
+<script type="text/javascript" src="${base}/js/lightbox.min.js"></script>
+
 <script type="text/javascript">
     var editor;
     KindEditor.ready(function(K) {
