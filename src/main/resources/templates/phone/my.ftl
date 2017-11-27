@@ -17,7 +17,7 @@
     </div>
     <div >
         <h3 >${user.userName!''}</h3>
-        <h5 >修改资料|修改密码</h5>
+        <h5 ><a href="${baseUrl}/m/user/alterInfo">修改资料</a> |<a href="${baseUrl}/m/user/pwd" >修改密码</a></h5>
     </div>
 </div>
 <ul class="list-group NumPanel" style="background: orangered">
@@ -28,7 +28,7 @@
     <li class="clear"></li>
     <li class="list-group-item" onclick="location='${baseUrl}/m/user/personal'"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;我的收藏<span class="badge">></span></li>
     <li class="list-group-item" onclick="location='${baseUrl}/m/user/pushing'"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;我的发布<span class="badge">></span></li>
-    <li class="list-group-item"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;我的简历<span class="badge">></span></li>
+    <li class="list-group-item" onclick="location='${baseUrl}/m/user/resume'"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;我的简历<span class="badge">></span></li>
     <li class="list-group-item"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;公司认证<span class="badge">></span></li>
     <li class="clear"></li>
     <li class="list-group-item"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;帮助信息<span class="badge">></span></li>

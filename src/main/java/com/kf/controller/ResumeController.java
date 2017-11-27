@@ -14,6 +14,7 @@ import com.kf.service.SecondClassService;
 import com.kf.util.*;
 import com.kf.vo.ResumeMin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -101,7 +102,7 @@ public class ResumeController {
 
 
     @PostMapping("/user/addResume")
-    public String addResume(@Valid @ModelAttribute("resume") Resume resume, BindingResult br, MultipartFile file, ModelMap model, HttpServletRequest request){
+    public String addResume(@Valid @ModelAttribute("resume") Resume resume, BindingResult br, MultipartFile file, ModelMap model, HttpServletRequest request, Device device){
         Integer userId= SessionUtil.getUserId(request);
         if(userId==null){
             throw new UserNotLoginException("500","对不起,你的登录已经过期!");
@@ -109,7 +110,12 @@ public class ResumeController {
         resume.setUserId(userId);
         if(br.hasErrors()){
             base(model,request);
-            return "resume";
+            //判断是否移动端
+            if (device.isMobile()||device.isTablet()) {
+                return ViewUtil.toStringView("/user/resume");
+            }else {
+                return "/user/resume";
+            }
         }else{
             //如果用户上传了图片
             String savePath = basePath.getPathValue();
@@ -132,14 +138,24 @@ public class ResumeController {
                 }else{
                     base(model,request);
                     model.addAttribute("picError","对不起,您上传的图片过大,换一张试试?");
-                    return "resume";
+                    //判断是否移动端
+                    if (device.isMobile()||device.isTablet()) {
+                       return ViewUtil.toStringView("/user/resume");
+                    }else {
+                        return "/user/resume";
+                    }
                 }
             }
             //更新用户的操作
             resume.setUpdateTime(new Timestamp(new Date().getTime()));
             resumeService.insertOrUpdateResume(resume,savePath,deletePicFlag);
         }
-        return "redirect:/user/resume";
+        //判断是否移动端
+        if (device.isMobile()||device.isTablet()) {
+            return ViewUtil.toStringView("redirect:/user/resume");
+        }else {
+            return "redirect:/user/resume";
+        }
     }
 
     @GetMapping("/user/resume/open")
