@@ -14,6 +14,7 @@
     <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
 </div>
 <div class="text-center">
+<form action="${baseUrl}/user/addResume" enctype="multipart/form-data" method="post" id="resumeForm">
     <div class="panel panel-default">
         <div class="panel-heading"><img src="${baseUrl}/img/btn/ico_01.jpg" alt=""><span class="pt_title"> 基本资料</span></div>
         <div class="panel-body">
@@ -346,6 +347,7 @@
     <div class="row">
         <input type="submit" class="col-md-offset-4 col-md-3 btn btn-success" value="确认无误,提交">
     </div>
+</form>
 </@body>
 <#--js-->
 <@footer base_js=["jquery.min","bootstrap.min"]></@footer>
