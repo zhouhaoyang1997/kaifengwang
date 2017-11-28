@@ -9,7 +9,7 @@
 <div id="contactbar">
     <a href="/m/index" class="bottom_index">首页</a>
     <a href="/m/user/info" class="bottom_member_on">我的</a>
-    <a href="#" class="bottom_history">推送</a>
+    <a href="${baseUrl}/m/about/cpdesc" class="bottom_history">推送</a>
     <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
 </div>
 <div class="m311 log_reg_box">

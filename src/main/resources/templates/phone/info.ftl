@@ -18,8 +18,8 @@
 <div id="contactbar">
     <a href="/m/index" class="bottom_index_on">首页</a>
     <a href="/m/user/info" class="bottom_member">我的</a>
-    <a href="#" class="bottom_history">推送</a>
-    <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
+    <a href="${base}/m/about/cpdesc" class="bottom_history">推送</a>
+    <a href="${base}/m/push/choose" class="bottom_post">发布</a>
 </div>
 <div class="tit_area">
     <h1 class="tit"><#if info.piTitle?length gt 13>${info.piTitle[0..10]}...<#else>${info.piTitle}</#if>

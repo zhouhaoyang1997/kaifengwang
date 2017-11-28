@@ -4,6 +4,12 @@
 <link rel="stylesheet" href="${base}/css/font-awesome.min.css"></@header>
 
 <@body title="使用帮助" back=true>
+<div id="contactbar">
+    <a href="${base}/m/index" class="bottom_index">首页</a>
+    <a href="${base}/m/user/info" class="bottom_member">我的</a>
+    <a href="${base}/m/about/cpdesc" class="bottom_history_on">推送</a>
+    <a href="${base}/m/push/choose" class="bottom_post">发布</a>
+</div>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
