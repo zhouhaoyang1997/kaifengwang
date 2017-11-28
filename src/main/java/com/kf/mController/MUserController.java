@@ -1,8 +1,8 @@
 package com.kf.mController;
 
-import com.kf.pojo.BaseInfo;
-import com.kf.pojo.User;
+import com.kf.pojo.*;
 import com.kf.service.PushInfoService;
+import com.kf.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,16 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @RequestMapping("/m")
 @Controller
 public class MUserController {
     @Autowired
     PushInfoService pushInfoService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/login")
     public String index(@RequestParam(value = "path",required = false) String path, ModelMap modelMap){
@@ -62,9 +61,23 @@ public class MUserController {
         ModelAndView modelAndView = new ModelAndView("phone/myPushing");
         return  modelAndView;
     }
-    @GetMapping("/user/attc")
-    public String myCv(){
-        return "phone/myCv";
+    @GetMapping("/user/alterInfo")
+    public ModelAndView alertInfo(HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("phone/alterInfo");
+        User user = (User) session.getAttribute("user");
+        if(user!=null){
+            Integer userId = user.getUserId();
+            User user1 = userService.getUserByUserId(userId);
+            modelAndView.addObject("userInfo",user1);
+        }
+        return  modelAndView;
     }
+    @GetMapping("/user/pwd")
+    public String alterPwd(){
+        return "phone/alterPwd";
+    }
+
+
+
 
 }

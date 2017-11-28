@@ -1,7 +1,7 @@
 <#include "defaultLayout/defaultLayout.ftl">
 <#assign base="${request.contextPath}"/>
 <@header siteName="开封麦芒网"  base_css=["global","style","usercenter","bootstrap.min"] base_keywords="开封麦芒网" >
-<link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
+
 </@header>
 <#--js-->
 <@body title="首页" back=true>
@@ -24,37 +24,20 @@
     <li class="list-group-item left">发布：${pushCounts!''}</li>
     <li class="list-group-item left">收藏：${clCounts!''}</li>
 </ul>
-<ul class="list-group myIco">
+<ul class="list-group">
     <li class="clear"></li>
-    <li class="list-group-item" onclick="location='${baseUrl}/m/user/personal'"><i class="fa fa-user-o"></i>&nbsp;&nbsp;&nbsp;我的收藏<span class="badge">></span></li>
-    <li class="list-group-item" onclick="location='${baseUrl}/m/user/pushing'"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;&nbsp;我的发布<span class="badge">></span></li>
-    <li class="list-group-item"><i class="fa fa-id-card"></i>&nbsp;&nbsp;&nbsp;我的简历<span class="badge">></span></li>
-    <li class="list-group-item"><i class="fa fa-address-card"></i>&nbsp;&nbsp;&nbsp;公司认证<span class="badge">></span></li>
+    <li class="list-group-item" onclick="location='${baseUrl}/m/user/personal'"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;我的收藏<span class="badge">></span></li>
+    <li class="list-group-item" onclick="location='${baseUrl}/m/user/pushing'"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;我的发布<span class="badge">></span></li>
+    <li class="list-group-item"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;我的简历<span class="badge">></span></li>
+    <li class="list-group-item"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;公司认证<span class="badge">></span></li>
     <li class="clear"></li>
-    <li class="list-group-item"><i class="fa fa-hand-rock-o"></i>&nbsp;&nbsp;&nbsp;帮助信息<span class="badge">></span></li>
-    <li class="list-group-item"><i class="fa fa-star"></i>&nbsp;&nbsp;&nbsp;关于<span class="badge">></span></li>
+    <li class="list-group-item"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;帮助信息<span class="badge">></span></li>
+    <li class="list-group-item"><img src="${baseUrl}/img/jz.png" align="center" valign="middle" class="icon">&nbsp;&nbsp;&nbsp;关于<span class="badge">></span></li>
 </ul>
-
-<div class="text-center"><button class="btn-lg btn-danger" id="logout">安全退出</button></div>
+<div class="text-center"><button class="btn-lg btn-danger" >退出登录</button></div>
 
 </@body>
 
 <@footer base_js=["jq_min.211_1","bootstrap.min"]>
-<script>
-    $(function () {
-        $("#logout").click(function () {
-            $.ajax({
-                url:'${base}/logout',
-                type:'get',
-                success:function (result) {
-                    if(result){
-                        window.location.reload();
-                    }else{
-                        alert("服务器出错了!");
-                    }
-                }
-            })
-        })
-    });
-</script>
+
 </@footer>
