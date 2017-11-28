@@ -82,4 +82,13 @@ public interface PushInfoMapper {
 
 
     List<PushInfo> selectByKeyAndDistrict(@Param("keyWords")String keyWords,@Param("districtId") Integer district);
+    /**
+     * 获取用户收藏数
+     */
+    Integer getCollectionCountByUserId(@Param("userId")Integer userId);   /**
+     * 获取用户发布数
+     */
+    Integer getPushCountByUserId(@Param("userId")Integer userId);
+
+
 }

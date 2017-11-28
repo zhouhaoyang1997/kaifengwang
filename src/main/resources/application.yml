@@ -10,6 +10,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/kfcg?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
+#    password: 123456
     password: xdjr1230-KFCG
 #    password: 123
     driver-class-name: com.mysql.jdbc.Driver
@@ -44,7 +45,7 @@ path:
 #  WinPathValue: C:/Users/ch/Desktop/
 #  LinuxPathValue: /home/kfcg/
 #  MacPath:/Users/zhy/Downloads
-  pathValue: c:/Users/18236/desktop
+  pathValue: /home/kfcg/
 pagehelper:
   helper-dialect: mysql
 

@@ -28,7 +28,8 @@ request有哪些方法，可以参考 org.springframework.web.servlet.support.Re
 <div class="footerPage" style="margin-top: 30px;background: none repeat scroll 0 0 #f4f4f4;">
     <div class="container_self">
         <div class="row">
-            <p style="text-align: center">Copyright © 河南开封 ｜河南省麦芒网络科技有限公司所有</p>
+            <p style="text-align: center">Copyright © 麦芒网 ｜河南省麦芒网络科技有限公司所有</p>
+            <p style="text-align: center"><a href="http://www.miibeian.gov.cn">豫ICP备17047159</a></p>
         </div>
     </div>
 </div>

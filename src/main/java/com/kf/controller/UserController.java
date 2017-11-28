@@ -153,26 +153,43 @@ public class UserController{
      * @return
      */
     @PostMapping("/register")
-    public ModelAndView register(@Valid @ModelAttribute("userDetail") User user,BindingResult br, String remember, HttpServletRequest request, HttpServletResponse response){
-        ModelAndView modelAndView = null;
+    public String register(@Valid @ModelAttribute("userDetail") User user,BindingResult br,
+                                 @RequestParam(value = "method",defaultValue = "pc") String method,String remember,ModelMap modelMap,
+                                 HttpServletRequest request, HttpServletResponse response){
+
         //如果数据有误,返回注册
-        if(br.hasErrors()){
-            modelAndView = new ModelAndView("reg");
-        }else{
-            //对用户的密码进行md5加密,同时对密码自动加上前缀和后缀
-            user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
-            user.setCreateTime(new Timestamp(new Date().getTime()));//当前时间作为用户创建时间
-            user.setLastedTime(new Timestamp(new Date().getTime()));//当前时间作为用户最后登陆时间
-            userService.addUser(user);
-            HttpSession session = request.getSession();
-            session.setAttribute("user",user);
-            if(remember!=null&&!remember.isEmpty()){
-                CookieUtil.addCookie(response,"userName",user.getUserName());
-                CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
+        if(!br.hasErrors()){
+            //再次判断用户名和密码是否被占用
+            boolean access = userService.userNameIsNotExists(user.getUserName())&&userService.userEmailIsNotExists(user.getUserEmail());
+            if(access){
+                //对用户的密码进行md5加密,同时对密码自动加上前缀和后缀
+                user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
+                user.setCreateTime(new Timestamp(new Date().getTime()));//当前时间作为用户创建时间
+                user.setLastedTime(new Timestamp(new Date().getTime()));//当前时间作为用户最后登陆时间
+                userService.addUser(user);
+                HttpSession session = request.getSession();
+                session.setAttribute("user",user);
+                if(remember!=null&&!remember.isEmpty()){
+                    CookieUtil.addCookie(response,"userName",user.getUserName());
+                    CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
+                }
+                if(method.equals("mobile")){
+                    return "redirect:/m/index";
+                }else{
+                    return "redirect:/index";
+                }
             }
-            modelAndView = new ModelAndView("redirect:/index");
+            else{
+                modelMap.addAttribute("userOrEmailError","用户名或者邮箱已经存在,请检查后重试!");
+            }
+
         }
-        return modelAndView;
+
+        if(method.equals("mobile")){
+            return "phone/reg";
+        }else{
+            return "reg";
+        }
     }
 
     @GetMapping("/login")

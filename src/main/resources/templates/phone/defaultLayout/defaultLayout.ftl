@@ -91,13 +91,18 @@
             <a href="javascript:void(0);" onClick="return window.history.go(-1);" class="back left8">返回</a>
         </#if>
         <div id="ipageTitle">${title}</div>
-        <div class="search left8" id="search_ico" onClick="showNewPage('搜索',searchHtml,newPageSearch);">搜索</div>
+        <a class="search left8" id="search_ico" href="${baseUrl}/m/searchPage">搜索</a>
 
     </div>
 
     <#nested/>
 </div>
-<div class="footer_02">&copy;copyright开封麦芒网版权所有. </div>
+<div class="footer_02">
+    <p style="text-align: center">Copyright © 麦芒网 ｜河南省麦芒网络科技有限公司所有</p>
+    <p style="text-align: center">
+        <a href="http://www.miibeian.gov.cn">豫ICP备17047159</a>
+    </p>
+</div>
 
 </#macro>
 

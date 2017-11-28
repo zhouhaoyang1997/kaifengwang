@@ -15,6 +15,7 @@ import java.util.UUID;
 
 import com.kf.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -95,7 +96,7 @@ public class UserInfoController {
      * @return
      */
     @PostMapping("/user/alterPwd")
-    public ModelAndView alterPwd(HttpServletRequest request, String oldPwd, String newPwd){
+    public ModelAndView alterPwd(HttpServletRequest request, String oldPwd, String newPwd,Device device){
         ModelAndView modelAndView=new ModelAndView("user/pwd");
         Integer userId=SessionUtil.getUserId(request);
         if(userId==null){
@@ -124,9 +125,12 @@ public class UserInfoController {
                 modelAndView.addObject("alterPwdError","输入不合法");
             }
         }
+        //判断是否移动端
+        if (device.isMobile()||device.isTablet()) {
+            modelAndView.setViewName("phone/alterPwd");
+        }
         return modelAndView;
     }
-
     /**
      * 用户修改手机号
      * @return

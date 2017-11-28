@@ -95,11 +95,6 @@
 <script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${base}/js/messages_zh.js"></script>
 <script>
-    $.validator.setDefaults({
-        submitHandler: function(form) {
-            form.submit();
-        }
-    });
 
     $().ready(function() {
         $("#alterPwdForm").validate();

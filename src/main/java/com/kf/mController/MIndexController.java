@@ -1,7 +1,9 @@
 package com.kf.mController;
 
 import com.kf.pojo.*;
+import com.kf.service.DistrictService;
 import com.kf.service.MainClassService;
+import com.kf.service.PushInfoService;
 import com.kf.util.AdvertUtil;
 import com.kf.util.PageUtil;
 import com.kf.vo.CurrMain;
@@ -27,6 +29,11 @@ public class MIndexController {
     @Autowired
     public MainClassService mainClassService;
 
+    @Autowired
+    private PushInfoService pushInfoService;
+
+    @Autowired
+    private DistrictService districtService;
 
     @GetMapping("/index")
     public String index(ModelMap modelMap){
@@ -46,5 +53,23 @@ public class MIndexController {
     }
 
 
+    @GetMapping("/searchPage")
+    public String search(){
+        return "phone/search";
+    }
+
+    @GetMapping("/search")
+    public String searchPage(String key,@RequestParam(required = false) Integer districtId,ModelMap modelMap,@RequestParam(defaultValue = "0") Integer pno){
+
+        PageUtil pageUtil = new PageUtil();
+        List<PushInfo> pushInfos = pushInfoService.getAllInfoByKeyWords(key,districtId,pno,pageUtil);
+        List<District> districts = districtService.getAllDistrict();
+        modelMap.addAttribute("districts",districts);
+        modelMap.addAttribute("pageUtil",pageUtil);
+        modelMap.addAttribute("pushInfos",pushInfos);
+        modelMap.addAttribute("currDistrictId",districtId);
+        modelMap.addAttribute("keyWords",key);
+        return "phone/searchResult";
+    }
 
 }

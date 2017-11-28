@@ -5,11 +5,11 @@
 
 </@header>
 
-<@body title="麦芒网">
+<@body title="麦芒网" back=true>
 <div id="contactbar">
     <a href="/m/index" class="bottom_index">首页</a>
     <a href="/m/user/info" class="bottom_member_on">我的</a>
-    <a href="#" class="bottom_history">推送</a>
+    <a href="${baseUrl}/m/about/cpdesc" class="bottom_history">推送</a>
     <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
 </div>
 <div class="m311 log_reg_box">
@@ -18,9 +18,7 @@
             <form id="commentForm">
                 <input type="hidden" name="path" value="${path!""}">
                 <ul id="pptul" class="passport-login-input-ul">
-                    <li style="display:none" class="passport-login-input-li">
-                        <span id="error" class="passport-login-tip"></span>
-                    </li>
+
 
                     <li id="loginUserNameLi" class="passport-login-input-li">
                         <span class="passport-login-input-span">用&nbsp;户&nbsp;名</span>
@@ -35,7 +33,7 @@
 
                     <li id="loginCheckcodeLi" class="passport-login-input-li">
                         <span class="passport-login-input-span">验证码</span>
-                        <input type="text" class="passport-login-input passport-login-input-username" style="margin-left: 20px" id="verifyCode" required name="verifyCode" placeholder="验证码">
+                        <input type="text" class="passport-login-input passport-login-input-username" id="verifyCode" required name="verifyCode" placeholder="验证码">
                     </li>
                     <div style="margin-top:10px; text-align:center">
                         <img src="${request.contextPath}/verify/code" id="verify" alt="验证码" style="cursor:pointer; border:1px #ddd solid;" onClick="this.src=this.src+'?'">
@@ -43,11 +41,11 @@
 
 
                     <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
-
+                    <span id="error" style="color:red"></span>
 
                     <li id="loginButtonLi" class="passport-login-input-li">
                         <span class="passport-login-input-span" jqmoldstyle="block" style="display: none;">&nbsp;</span>
-                        <label><input type="button" name="button" id="loginBtn" value="登录" class="passport-login-button btn_log"></label>
+                        <label><input type="button" id="loginBtn" value="登录" class="passport-login-button btn_log"></label>
                     </li>
                 </ul>
             </form>
@@ -92,7 +90,7 @@
                     success:function (result) {
                         var res=result.split(":");
                         if(res[0]=="ok"){
-                            window.location.href=res[1];
+                            window.location.href="${request.contextPath}/m"+res[1];
                         }else{
                             updateVerifyHtml();
                             $("#error").text(res[1]);

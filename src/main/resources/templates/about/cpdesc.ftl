@@ -28,7 +28,7 @@
             <div class="panel-body">
                 <div class="desc" style="min-height: 500px">
                     <h3>公司简介:</h3>
-                    <h2 style="text-align: center">河南麦芒网路科技有限公司</h2>
+                    <h2 style="text-align: center">河南麦芒网络科技有限公司</h2>
                     <p>内容</p>
                 </div>
                 <div class="imgbox row">

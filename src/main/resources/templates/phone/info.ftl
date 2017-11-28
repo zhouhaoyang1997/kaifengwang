@@ -18,8 +18,8 @@
 <div id="contactbar">
     <a href="/m/index" class="bottom_index_on">首页</a>
     <a href="/m/user/info" class="bottom_member">我的</a>
-    <a href="#" class="bottom_history">推送</a>
-    <a href="${baseUrl}/m/push/choose" class="bottom_post">发布</a>
+    <a href="${base}/m/about/cpdesc" class="bottom_history">推送</a>
+    <a href="${base}/m/push/choose" class="bottom_post">发布</a>
 </div>
 <div class="tit_area">
     <h1 class="tit"><#if info.piTitle?length gt 13>${info.piTitle[0..10]}...<#else>${info.piTitle}</#if>
@@ -39,6 +39,7 @@
             </span>
     </div>
 </div>
+    <#if info.piMc==2 || info.piMc==3>
 <div class="image_area_w">
     <div class="image_area">
         <ul class="slider7">
@@ -53,6 +54,7 @@
         <div class="panel_num"></div>
     </div>
 </div>
+    </#if>
 <#--此处写属性-->
 <ul class="attr_info" style="margin-top:0;min-height: 100px">
         <li><span class="attrName2">地区:</span ><span class="attrVal">${info.piDistrictName}</span></li>
