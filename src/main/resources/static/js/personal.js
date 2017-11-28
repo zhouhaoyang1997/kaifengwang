@@ -91,7 +91,7 @@ $('#table').bootstrapTable({
         title:'操作',
         formatter:function (value,row,index) {
             var s = '<a href="/user/alterInfo?piId='+row.piId+'">修改</a>';
-            var d = '<a id="remove" data-toggle="modal" href="javascript:void(0)" onclick="removePushInfo('+row.piId+')">删除</a>';
+            var d = '<a  href="javascript:;" onclick="removePushInfo('+row.piId+')">删除</a>';
             return s+' '+d;
         }
     }]
@@ -119,28 +119,8 @@ function removeCollect(piId) {
 }
 
 
-$("#removeBtn").click(function () {
-    $.ajax({
-        url:'/user/deleteInfo?piId='+$("#piIdHidden").val(),
-        type:'get',
-        success:function (result) {
-            var res=result.split(":");
-            if(res[0]==="ok"){
-                //刷新bootstrap-table
-                $("#table").bootstrapTable("refresh",{
-                    url:'/user/allPush'
-                });
-                $("#deleteModal").modal("hide");
-            }else{
-                $("#deleteModal").modal("hide");
-                alert(res[1]);
-            }
-        }
-    })
-});
-
 function removePushInfo(piId) {
-    confirm("删除该条收藏记录","您确认删除该条收藏吗?该操作不可回退!",function (flag) {
+    confirm("删除该条信息记录","您确认删除该条信息吗?该操作不可回退!",function (flag) {
         if(flag){
             $.ajax({
                 url:'/user/deleteInfo?piId='+piId,

@@ -97,7 +97,7 @@ public class UserInfoController {
      */
     @PostMapping("/user/alterPwd")
     public ModelAndView alterPwd(HttpServletRequest request, String oldPwd, String newPwd,Device device){
-        ModelAndView modelAndView=new ModelAndView("/user/pwd");
+        ModelAndView modelAndView=new ModelAndView("user/pwd");
         Integer userId=SessionUtil.getUserId(request);
         if(userId==null){
             throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
@@ -127,7 +127,7 @@ public class UserInfoController {
         }
         //判断是否移动端
         if (device.isMobile()||device.isTablet()) {
-            return ViewUtil.toMobileView(modelAndView);
+            modelAndView.setViewName("phone/alterPwd");
         }
         return modelAndView;
     }

@@ -11,4 +11,4 @@
 
 </@body>
 <#--js-->
-<@footer base_js=["jquery.min","bootstrap.min","bootstrap-table.min","bootstrap-table-zh-CN.min","personal"]></@footer>
+<@footer base_js=["jq_min.211","bootstrap.min","bootstrap-table.min","bootstrap-table-zh-CN.min","personal"]></@footer>

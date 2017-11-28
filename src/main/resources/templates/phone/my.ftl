@@ -1,7 +1,7 @@
 <#include "defaultLayout/defaultLayout.ftl">
 <#assign base="${request.contextPath}"/>
 <@header siteName="开封麦芒网"  base_css=["global","style","userCenter","bootstrap.min"] base_keywords="开封麦芒网" >
-
+<link rel="stylesheet" href="${base}/css/font-awesome.min.css">
 </@header>
 <#--js-->
 <@body title="首页" back=true>
@@ -13,7 +13,12 @@
 </div>
 <div class="heading">
     <div>
-        <img src="${baseUrl}/${user.userImg!''}" class="img-circle" style="max-width: 60px">
+        <#if user.userImg??>
+            <img src="${baseUrl}/${user.userImg}" class="img-circle" style="max-width: 60px">
+            <#else>
+                <img src="${baseUrl}/img/noimage.png" class="img-circle" style="max-width: 60px">
+        </#if>
+
     </div>
     <div >
         <h3 >${user.userName!''}</h3>
@@ -34,7 +39,7 @@
     <li class="list-group-item" onclick="location='${baseUrl}/m/about/help'"><i class="fa fa-hand-rock-o"></i>&nbsp;&nbsp;&nbsp;帮助信息<span class="badge">></span></li>
     <li class="list-group-item" onclick="location='${baseUrl}/m/about/cpdesc'"><i class="fa fa-star"></i>&nbsp;&nbsp;&nbsp;关于<span class="badge">></span></li>
 </ul>
-<div class="text-center"><button class="btn-lg btn-danger" >退出登录</button></div>
+<div class="text-center"><button id="logout" class="btn-lg btn-danger" >退出登录</button></div>
 
 </@body>
 
