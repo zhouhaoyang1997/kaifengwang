@@ -32,8 +32,6 @@ public class IndexController {
     @Autowired
     private SecondClassService secondClassService;
 
-    @Autowired
-    private BasePath basePath;
 
     @Autowired
     private AdvertService advertService;

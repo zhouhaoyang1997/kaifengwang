@@ -37,16 +37,11 @@
 </div>
 </@body>
 
-<@footer base_js=["jq_min.211_1","bootstrap.min"]>
+<@footer base_js=["jquery.min","bootstrap.min"]>
 <script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${base}/js/messages_zh.js"></script>
 </@footer>
 <script>
-    $.validator.setDefaults({
-        submitHandler: function(form) {
-            form.submit();
-        }
-    });
 
     $().ready(function() {
         $("#alterPwdForm").validate();

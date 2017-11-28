@@ -32,7 +32,7 @@
 <div class="container_self" style="margin-bottom: 30px;">
     <div class="row">
         <div class="now_position">
-            <i class="fa fa-home"></i><a href="/index">开封城市网</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}">${info.mcName}</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}&scId=${info.piSc}">${info.scName}</a>
+            <i class="fa fa-home"></i><a href="/index">开封麦芒网</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}">${info.mcName}</a>&nbsp;>&nbsp;<a href="/list?mcId=${info.piMc}&scId=${info.piSc}">${info.scName}</a>
         </div>
     </div>
     <div class="row">
@@ -63,12 +63,11 @@
                 </#if>   <a href="${base}/about/service" style="color:red;"><i class="fa fa-level-up"></i>推广服务</a>
                 </div>
             </div>
-            <div class="row push_base_title">
-                <div class="col-md-8">
-                    <h1><#if info.piTitle?length gt 13>${info.piTitle[0..14]}...<#else>${info.piTitle}</#if></h1>
-                </div>
+            <div class="push_base_title">
+                    <h1><#if info.piTitle?length gt 13>${info.piTitle[0..16]}...<#else>${info.piTitle}</#if></h1>
             </div>
             <div class="row push_base_data">
+                <#if info.piMc==2 || info.piMc==3>
                 <div class="col-md-7">
                     <div>
                         <!-- 轮播（Carousel）内容 -->
@@ -109,8 +108,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5" >
-                    <ul class="list-unstyled self_ul_1" style="min-height: 420px">
+                </#if>
+                <div <#if info.piMc==2 || info.piMc==3>class="col-md-5"<#else>class="col-md-12"</#if> >
+                    <ul class="list-unstyled self_ul_1" <#if info.piMc==2 || info.piMc==3>style="min-height: 420px"<#else>style="min-height: 240px"</#if> >
                         <li>
                             <span>联系人:&nbsp; </span>
                             <span>${info.piContactPerson}</span>
@@ -143,7 +143,7 @@
                     <div class="alert alert-danger alert-dismissable" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                        <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+                        <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封麦芒网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
                     </div>
                 </div>
             </div>
@@ -171,7 +171,7 @@
                     <div class="alert alert-info alert-dismissable" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                        <span style="font-size: 16px">联系时,</span>就说是在开封城市网看到的。谢谢!
+                        <span style="font-size: 16px">联系时,</span>就说是在开封麦芒网看到的。谢谢!
                     </div>
 
                 </div>
@@ -267,7 +267,7 @@
                             <div class="alert alert-danger alert-dismissable" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                                <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+                                <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封麦芒网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
                             </div>
                         </div>
                         <div class="container phoneNum">
@@ -278,7 +278,10 @@
                             <p style="text-align: center">联系人:${info.piContactPerson}</p>
                         </div>
                     </div>
-                    <div class="modal-footer"><span>期待您对此信息满意!</span></div>
+                    <div class="modal-footer">
+                        <p><span style="font-size: 16px">联系时,</span>就说是在开封麦芒网看到的。谢谢!</p>
+                        <span>期待您对此信息满意!</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -299,7 +302,7 @@
                             <div class="alert alert-danger alert-dismissable" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                                <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封城市网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
+                                <img src="${base}/img/warning.png" width="30px" height="30px"><span style="font-size: 16px">开封麦芒网提醒你：</span>让你提前汇款，或者价格明显低于市价，均有骗子嫌疑，不要轻易相信。
                             </div>
                         </div>
                         <div class="container phoneNum">
@@ -310,7 +313,10 @@
                             <p style="text-align: center">联系人:${info.piContactPerson}</p>
                         </div>
                     </div>
-                    <div class="modal-footer"><span>期待您对此信息满意!</span></div>
+                    <div class="modal-footer">
+                    <p><span style="font-size: 16px">联系时,</span>就说是在开封麦芒网看到的。谢谢!</p>
+                        <span>期待您对此信息满意!</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -412,6 +418,8 @@
 </div>
 <@footer>
 <script src="${base}/js/silder.js" type="text/javascript"></script>
+<script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${base}/js/messages_zh.js"></script>
     <@floating/>
 <script>
     $(function () {

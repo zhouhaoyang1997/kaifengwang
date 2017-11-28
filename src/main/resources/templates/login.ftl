@@ -17,6 +17,25 @@
             color: #ff552e;
         }
     </style>
+    <script type="text/javascript">
+        //判断是否移动端访问
+        browserRedirect();
+        function browserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+            if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+                window.location.href = "${request.contextPath}/m${springMacroRequestContext.getRequestUri()}<#if request.queryString??>?${request.queryString}</#if>";
+            }
+        }
+    </script>
 </head>
 <body class="style-3">
 
@@ -51,8 +70,8 @@
 
                                     <div class="form-group row" id="verifyDiv">
                                         <label for="verifyCode" class="sr-only">验证码</label>
-                                        <input type="text" class="col-xs-5" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
-                                        <div class="col-xs-6">
+                                        <input type="text" class="col-xs-5 verifyInput" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
+                                        <div class="col-xs-6" style="padding-top: 20px">
                                             <img src="${request.contextPath}/verify/code" id="verify" alt="验证码">
                                             <a href="javascript:;" id="changImg">看不清？</a>
                                         </div>
@@ -93,14 +112,6 @@
 
                                     <span style="color:red" id="error"></span>
 
-                                    <div class="form-group row" id="verifyDiv">
-                                        <label for="verifyCode" class="sr-only">验证码</label>
-                                        <input type="text" class="col-xs-5" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
-                                        <div class="col-xs-6">
-                                            <img src="${request.contextPath}/verify/code" id="verify" alt="验证码">
-                                            <a href="javascript:;" id="changImg">看不清？</a>
-                                        </div>
-                                    </div>
 
                                     <div class="form-group row">
                                         <div class="col-xs-6">
@@ -139,13 +150,11 @@
 <script type="text/javascript" src="${request.contextPath}/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${request.contextPath}/js/messages_zh.js"></script>
 <script type="text/javascript" src="${request.contextPath}/js/bootstrap.min.js"></script>
+
 <script>
 
 
     $(function() {
-
-
-
         $("#changImg").click(function () {
             var verify = document.getElementById("verify");
             verify.src = "${request.contextPath}/verify/code?date=" + new Date();

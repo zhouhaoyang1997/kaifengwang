@@ -161,6 +161,7 @@
 
                                 </div>
                                 <#break>
+
                             <#case 2>
                                 <div class="panel-heading">
                                     <h3>我的认证</h3>
@@ -181,6 +182,8 @@
 
                         </div>
                     </div>
+
+                    <#if company??>
                     <div role="tabpanel" class="tab-pane" id="profile">
                         <div class="panel panel-default">
                             <div class="panel-heading"><h3>基础信息</h3></div>
@@ -235,6 +238,7 @@
                                 </form>
                             </div>
                         </div>
+
                         <div class="panel panel-default">
                             <div class="panel-heading"><h3>公司图片</h3></div>
                             <div class="panel-body">
@@ -247,8 +251,9 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
+                    </#if>
                 </div>
 
             </div>

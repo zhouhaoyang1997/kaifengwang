@@ -28,6 +28,13 @@ public class MUserController {
         }
         return "phone/login";
     }
+
+    @GetMapping("/reg")
+    public String reg(){
+        return "phone/reg";
+    }
+
+
     @GetMapping("/user/info")
     public ModelAndView My(HttpSession session){
         ModelAndView modelAndView = new ModelAndView( "phone/my");

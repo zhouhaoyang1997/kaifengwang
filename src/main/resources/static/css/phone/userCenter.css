@@ -14,7 +14,9 @@ body{
     float:left;
     color: white;
 }
-
+.heading a{
+    color: #fff;
+}
 .icon{
     width: 33px;
 }

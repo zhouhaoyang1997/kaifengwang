@@ -89,7 +89,7 @@
 <!-- 下方显示职位类别及搜索-->
 <div class="container_self">
         <div class="now_position">
-            <i class="fa fa-home"></i><a href="/index">开封城市网</a>&nbsp;>&nbsp;<span>${currMc.mcName}</span>
+            <i class="fa fa-home"></i><a href="/index">开封麦芒网</a>&nbsp;>&nbsp;<span>${currMc.mcName}</span>
         </div>
         <div class="panel panel_self now_position" >
             <div class="panel-body">
