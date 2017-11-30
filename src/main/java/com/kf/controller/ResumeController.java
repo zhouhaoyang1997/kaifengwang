@@ -112,9 +112,9 @@ public class ResumeController {
             base(model,request);
             //判断是否移动端
             if (device.isMobile()||device.isTablet()) {
-                return ViewUtil.toStringView("/user/resume");
+                return "phone/myCv";
             }else {
-                return "/user/resume";
+                return "resume";
             }
         }else{
             //如果用户上传了图片
@@ -140,9 +140,9 @@ public class ResumeController {
                     model.addAttribute("picError","对不起,您上传的图片过大,换一张试试?");
                     //判断是否移动端
                     if (device.isMobile()||device.isTablet()) {
-                       return ViewUtil.toStringView("/user/resume");
+                       return "phone/myCv";
                     }else {
-                        return "/user/resume";
+                        return "resume";
                     }
                 }
             }
@@ -152,7 +152,7 @@ public class ResumeController {
         }
         //判断是否移动端
         if (device.isMobile()||device.isTablet()) {
-            return ViewUtil.toStringView("redirect:/user/resume");
+            return "phone/myCv";
         }else {
             return "redirect:/user/resume";
         }

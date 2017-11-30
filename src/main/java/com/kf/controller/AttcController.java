@@ -9,6 +9,7 @@ import com.kf.util.FileUtil;
 import com.kf.util.SessionUtil;
 import com.kf.vo.Flag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -58,7 +59,7 @@ public class AttcController {
 
 
     @PostMapping("/user/attc")
-    public String attc(ModelMap modelMap, @Valid @ModelAttribute("company") Company company,MultipartFile pic, BindingResult br, HttpServletRequest request){
+    public String attc(ModelMap modelMap, @Valid @ModelAttribute("company") Company company, MultipartFile pic, BindingResult br, HttpServletRequest request, Device device){
         Integer userId= SessionUtil.getUserId(request);
         if(userId==null){
             throw new UserNotLoginException("500","对不起,你还未登录,请您先登录");
@@ -79,7 +80,11 @@ public class AttcController {
                     }catch(IOException e){
                         modelMap.addAttribute("picError","上传图片时服务器发生了异常,请稍后再试!");
                         modelMap.addAttribute("status",1);
-                        return "attc";
+                        if(device.isMobile()||device.isTablet()){
+                            return "phone/attc";
+                        }else {
+                            return "attc";
+                        }
                     }
                     //设置状态为待审核状态
                     company.setCpPzImg(filePath);
@@ -88,7 +93,11 @@ public class AttcController {
                     modelMap.addAttribute("status",2);
                 }
             }
-            return "attc";
+            if(device.isMobile()||device.isTablet()){
+                return "phone/attc";
+            }else {
+                return "attc";
+            }
         }
     }
 
