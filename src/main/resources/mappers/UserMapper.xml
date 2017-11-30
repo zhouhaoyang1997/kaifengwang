@@ -19,6 +19,9 @@
         UPDATE user SET lasted_time =#{time} WHERE user_id = #{userId}
     </update>
 
+    <select id="selectUserInfoByPhone" resultType="com.kf.pojo.User">
+        SELECT * FROM user WHERE user_phone = #{phone}
+    </select>
 
     <select id="selectUserInfoByUserId" resultType="com.kf.pojo.User">
         SELECT * FROM user where user_id=#{userId}

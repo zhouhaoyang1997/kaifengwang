@@ -15,6 +15,7 @@ import com.kf.util.BasePath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +43,17 @@ public class IndexController {
     @Autowired
     private HotSearchService hotSearchService;
 
-    @RequestMapping("/index")
+
+    @GetMapping("/index")
+    public String lastIndex(Device device){
+        if (device.isMobile()||device.isTablet()) {
+            return "redirect:/m/index";
+        }
+        return "redirect:/";
+    }
+
+
+    @RequestMapping("/")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
         List<SecondClass> zhaoPin = secondClassService.getAllSecondClass(1);
@@ -63,11 +74,6 @@ public class IndexController {
         return modelAndView;
     }
 
-    @RequestMapping("/phone/index")
-    public ModelAndView phoneIndex(){
-        ModelAndView modelAndView = new ModelAndView("phone/index");
-        return modelAndView;
-    }
 
     @GetMapping("/hotSearch")
     @ResponseBody

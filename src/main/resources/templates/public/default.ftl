@@ -5,6 +5,7 @@
 <head lang="zh">
     <title>${title}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="D4dytMaUJs" />
     <link rel="stylesheet" href="${base}/css/bootstrap.min.css" >
     <link rel="stylesheet" href="${base}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${base}/css/floating.css">
@@ -158,7 +159,6 @@
                     <li><h4>服务支持</h4></li>
                     <li><p><a href="${base}/about/service"  target="_blank">推广服务</a></p></li>
                     <li><p><a href="${base}/about/charge"  target="_blank">收费标准</a></p></li>
-                    <li><p><a href="${base}/about/attc"  target="_blank">企业认证</a></p></li>
                 </ul>
             </div>
             <div class="col-xs-2 footer_ul">

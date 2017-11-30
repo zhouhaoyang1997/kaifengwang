@@ -23,6 +23,11 @@ public class UserService {
        userMapper.addUser(user);
     }
 
+
+    public User getUser(String phone){
+        return userMapper.selectUserInfoByPhone(phone);
+    }
+
     /**
      * 修改用户的最后登陆时间
      */

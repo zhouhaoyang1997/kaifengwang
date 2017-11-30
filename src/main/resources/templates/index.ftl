@@ -1,5 +1,6 @@
 <#include "public/default.ftl">
 <@header title="首页">
+
 <link rel="stylesheet" href="${base}/css/style.css">
 <link rel="stylesheet" href="${base}/css/menu.css">
 </@header>
@@ -141,9 +142,11 @@
                                 style="color: #ff552e;">10</span> 倍以上</span></div>
                     </div>
                     <div class="panel-body">
-                        <span class="label label-info"><a href="${base}/about/attc">公司认证</a></span>
+
                         <span class="label label-success"><a href="${base}/about/service">大类置顶</a></span>
                         <span class="label label-warning"><a href="${base}/about/service">竞价排行</a></span>
+                        <span class="label label-info"><a href="${base}/about/help">使用帮助</a></span>
+
                     </div>
                 </div>
             </div>
