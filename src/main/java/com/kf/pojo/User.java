@@ -16,7 +16,7 @@ public class User {
     private String userPassword;
     @Length(min=11,max=11,message = "请输入正确的手机号!")
     private String userPhone;
-    @Email(message = "请输入正确的邮箱!")
+
     private String userEmail;
     private Integer userId;
     private Timestamp createTime;

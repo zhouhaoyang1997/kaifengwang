@@ -43,5 +43,15 @@ public class CommonUtil {
         //进行正则匹配
         return m.matches();
     }
+
+
+    public static String createRandomNum(int num) {
+        String randomNumStr = "";
+        for(int i = 0; i < num;i ++){
+            int randomNum = (int)(Math.random() * 10);
+            randomNumStr += randomNum;
+        }
+        return randomNumStr;
+    }
 }
 

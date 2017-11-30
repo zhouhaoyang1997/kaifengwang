@@ -64,6 +64,7 @@ public class AttcController {
             throw new UserNotLoginException("500","对不起,你还未登录,请您先登录");
         }else{
             if(br.hasErrors()||pic==null||pic.isEmpty()){
+                modelMap.addAttribute("picError","请您上传您的企业凭证");
                 modelMap.addAttribute("status",1);
             }else{
                 if(pic.getSize()>1024*1024*2){

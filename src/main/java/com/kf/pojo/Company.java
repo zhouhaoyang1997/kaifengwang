@@ -15,7 +15,7 @@ public class Company {
     private String cpAddress;
     private String cpNet;
 
-    @NotBlank
+    @NotBlank(message = "企业联系方式不可为空!")
     private String cpContact;
 
     private String cpDescription;

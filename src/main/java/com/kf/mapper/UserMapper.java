@@ -26,6 +26,8 @@ public interface UserMapper {
 
     User selectUserInfoByUserId(@Param("userId") Integer userId);
 
+    User selectUserInfoByPhone(@Param("phone")String phone);
+
     /**
      * 查询当前用户收藏的信息的id
      * @param userId
