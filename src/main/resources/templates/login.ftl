@@ -64,17 +64,17 @@
                                         <label for="password" class="sr-only">密码</label>
                                         <input type="password" class="form-control" id="password" minlength="6" required name="userPassword" placeholder="密码">
                                     </div>
-                                    <span style="color:red" id="error"></span>
+
 
                                     <div class="form-group input-group" id="verifyDiv">
                                         <label for="verifyCode" class="sr-only">验证码</label>
-                                        <input type="text" class="form-control" id="verifyCode"required name="verifyCode" placeholder="验证码">
+                                        <input type="text" class="form-control" id="verifyCode" required name="verifyCode" placeholder="验证码">
                                         <span class="input-group-addon" style="background: none;border: none;">
-                                            <img src="${request.contextPath}/verify/code" id="verify" alt="验证码">
-                                            <a href="javascript:;" id="changImg">看不清？</a>
+                                            <a href="javascript:;" title="看不清?点击更换验证码" id="changeImg"><img src="${request.contextPath}/verify/code" class="verify" alt="验证码"></a>
+
                                         </span>
                                     </div>
-
+                                    <span style="color:red" id="error"></span>
                                     <div class="form-group row">
                                         <div class="col-xs-6">
                                             <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
@@ -93,16 +93,16 @@
                                 <form action="" id="phoneLoginForm">
                                     <div class="form-group input-group">
                                         <label for="phone" class="sr-only">手机号</label>
-                                        <input type="text" class="form-control" id="phone" maxlength="11" minlength="11" required name="phone" placeholder="手机号">
-                                        <span class="input-group-addon" style="background: none;border: none;"><input class="btn btn-success"  id="verify_refresh" type="button" onclick="getMsgNum(this)" value="获取动态码"></span>
+                                        <input type="text" class="form-control" id="phone" maxlength="11" minlength="11" name="phone" placeholder="手机号">
+                                        <span class="input-group-addon" style="background: none;border: none;"><input class="btn btn-success"  id="verify_refresh" type="button" onclick="getMsgNum(this)" value="免费获取验证码"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="phoneCode" class="sr-only">动态码</label>
                                         <input type="text" class="form-control" id="phoneCode" name="phoneCode" placeholder="动态码">
                                     </div>
 
-                                    <span style="color:red" id="phoneError"></span>
 
+                                    <span style="color:red" id="phoneError"></span>
 
                                     <div class="form-group row">
                                         <div class="col-xs-6">
@@ -130,6 +130,34 @@
     </div>
 </div>
 
+<div class="modal fade" id="verifyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 10% 16% 10% 16%">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="container logo_login">
+                    <p >请填写图片验证码</p>
+                </div>
+                <form action="">
+                    <div class="form-group input-group" id="verifyDiv">
+                        <label for="verifyCode" class="sr-only">验证码</label>
+                        <input type="text" class="form-control" id="phoneVerifyCode" name="verifyCode" placeholder="验证码">
+                        <span class="input-group-addon" style="background: none;border: none;">
+                             <a href="javascript:;" title="看不清?点击更换验证码" id="phoneChangeImg"><img src="${request.contextPath}/verify/code" class="verify" alt="验证码"></a>
+                        </span>
+                    </div>
+                    <span id="verifyError"></span>
+                    <div class="form-group">
+                        <input type="button" onclick="verifyNum()" class="btn btn-danger" style="width: 100%" value="确定">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script type="text/javascript" src="${request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${request.contextPath}/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${request.contextPath}/js/messages_zh.js"></script>
@@ -140,15 +168,19 @@
 
 
     $(function() {
-        $("#changImg").click(function () {
-            var verify = document.getElementById("verify");
-            verify.src = "${request.contextPath}/verify/code?date=" + new Date();
+        $("#changeImg").click(function () {
+            <#--var verify = document.getElementById("verify");-->
+            <#--verify.src = "${request.contextPath}/verify/code?date=" + new Date();-->
+            $(".verify").attr("src","${request.contextPath}/verify/code?date=" + new Date().getTime());
+        });
+
+        $("#phoneChangeImg").click(function () {
+            $(".verify").attr("src","${request.contextPath}/verify/code?date=" + new Date().getTime());
         });
 
         function updateVerifyHtml() {
             $("#verifyCode").val("");
-            var verify = document.getElementById("verify");
-            verify.src = "${request.contextPath}/verify/code?date=" + new Date();
+            $(".verify").attr("src","${request.contextPath}/verify/code?date=" + new Date().getTime());
         }
 
         function valForm() {

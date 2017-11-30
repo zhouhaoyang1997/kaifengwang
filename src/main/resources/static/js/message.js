@@ -19,6 +19,7 @@ function regPhone() {
             },
             messages:{
                 phone:{
+                    required:"请输入手机号",
                     regex:'请输入合法的手机号'
                 }
             }
@@ -59,48 +60,84 @@ function regPhone2() {
  * @param that
  */
 function getMsgNum(that) {
-    // if(regPhone()){
-        var phoneNumber = $('#phone').val();
-        setButtonStatus(that); // 设置按钮倒计时
-        var obj = {
-            phoneNumber: phoneNumber
-        };
-        $.ajax({
-            url: '/sendMsg', // 后台短信发送接口
-            type: 'POST',
-            dataType: 'json',
-            contentType: "application/json",
-            async: false, //false 同步
-            data: JSON.stringify(obj),
-            xhrFields: {
-                withCredentials: true
-            },
-            success: function (result) {
-                if(result.code == '200') {
-                    messageData = result;
-                }else {
-                    alert("错误码:" + result.code + " 错误信息:" + result.message);
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(XMLHttpRequest.status);
-                console.log(XMLHttpRequest.readyState);
-                console.log(textStatus);
-            }
-        });
-    // }
+
+    if(regPhone()){
+        $("#verifyModal").modal("show");
+        // var phoneNumber = $('#phone').val();
+        // setButtonStatus(that); // 设置按钮倒计时
+        // var obj = {
+        //     phoneNumber: phoneNumber
+        // };
+        // $.ajax({
+        //     url: '/sendMsg', // 后台短信发送接口
+        //     type: 'POST',
+        //     dataType: 'json',
+        //     contentType: "application/json",
+        //     async: false, //false 同步
+        //     data: JSON.stringify(obj),
+        //     xhrFields: {
+        //         withCredentials: true
+        //     },
+        //     success: function (result) {
+        //         if(result.code == '200') {
+        //             messageData = result;
+        //         }else {
+        //             alert("错误码:" + result.code + " 错误信息:" + result.message);
+        //         }
+        //     },
+        //     error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //         console.log(XMLHttpRequest.status);
+        //         console.log(XMLHttpRequest.readyState);
+        //         console.log(textStatus);
+        //     }
+        // });
+    }
 }
+
+function verifyNum() {
+    var data={
+        phoneNumber:$('#phone').val(),
+        verify:$("#phoneVerifyCode").val()
+    };
+    $.ajax({
+        url:'/sendMsg',
+        type:'post',
+        dataType: 'json',
+        contentType: "application/json",
+        async: false, //false 同步
+        data: JSON.stringify(data),
+        xhrFields: {
+            withCredentials: true
+        },
+        success:function (result) {
+
+
+            if(result.code=='200'){
+                setButtonStatus($("#verify_refresh"));
+                messageData = result;
+                $("#verifyModal").modal("hide");
+            }else
+            if(result.code=='300'){
+                $("#verifyError").text(result.message);
+            }
+            else {
+                alert("错误码:" + result.code + " 错误信息:" + result.message);
+            }
+        }
+    })
+}
+
 /**
  * 设置按钮状态
  */
 function setButtonStatus(that) {
     if (wait == 0) {
-        that.removeAttribute("disabled");
-        that.value="免费获取验证码";
+        that.removeAttr("disabled");
+        that.val("免费获取验证码");
         wait = 60;
     } else {
-        that.setAttribute("disabled", true);
-        that.value=wait+"秒后可以重新发送";
+        that.attr("disabled",true);
+        that.val(wait+"秒后可以重新发送");
         wait--;
         setTimeout(function() {
             setButtonStatus(that)

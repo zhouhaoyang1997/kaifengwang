@@ -42,29 +42,52 @@ public class MessageController {
 
     @PostMapping(value = "/sendMsg", headers = "Accept=application/json")
     @ResponseBody
-    public Map<String, Object> sendMsg(@RequestBody Map<String,Object> requestMap) {
-        String phoneNumber = requestMap.get("phoneNumber").toString();
-        String randomNum = createRandomNum(6);// 生成随机数
-        SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.MINUTE, 5);
-        String currentTime = sf.format(c.getTime());// 生成5分钟后时间，用户校验是否过期
+    public Map<String, Object> sendMsg(@RequestBody Map<String,String> requestMap,HttpServletRequest request) {
+        //验证用户输入的验证码是否正确
+
+        String verifyCode = requestMap.get("verify");
+        HttpSession session = request.getSession();
+        Object obj = session.getAttribute("verCode");
         Map<String, Object> resultMap = new HashMap<>();
-        try{
-            logger.debug("发送验证码!!");
-            sendMsg(phoneNumber,randomNum); //此处执行发送短信验证码方法
-        }catch (ClientException e){
-            e.printStackTrace();
-        }catch (PhoneErrorException e){
-            resultMap.put("code","300");
-            resultMap.put("message",e.getMsg());
+        if(obj==null){
+            resultMap.put("code","404");
+            resultMap.put("message","请求出错!");
+        }else{
+            String verCode = (String)obj;
+            if(StringUtils.isNotBlank(verifyCode)){
+                if(verifyCode.equals(verCode)){
+                    String phoneNumber = requestMap.get("phoneNumber");
+                    String randomNum = createRandomNum(6);// 生成随机数
+                    SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+                    Calendar c = Calendar.getInstance();
+                    c.add(Calendar.MINUTE, 5);
+                    String currentTime = sf.format(c.getTime());// 生成5分钟后时间，用户校验是否过期
+
+                    try{
+                        logger.debug("发送验证码!!");
+                        sendMsg(phoneNumber,randomNum); //此处执行发送短信验证码方法
+                    }catch (ClientException e){
+                        e.printStackTrace();
+                    }catch (PhoneErrorException e){
+                        resultMap.put("code","300");
+                        resultMap.put("message",e.getMsg());
+                    }
+
+                    String hash = Md5Util.MD5(KEY + "@" + currentTime + "@" + randomNum);//生成MD5值
+                    resultMap.put("code","200");
+                    resultMap.put("hash", hash);
+                    resultMap.put("tamp", currentTime);
+                }else{
+                    resultMap.put("code","300");
+                    resultMap.put("message","验证码输入错误!");
+                }
+            }else{
+                resultMap.put("code","300");
+                resultMap.put("message","请输入验证码!");
+            }
+
         }
 
-        String hash = Md5Util.MD5(KEY + "@" + currentTime + "@" + randomNum);//生成MD5值
-
-        resultMap.put("hash", hash);
-        resultMap.put("tamp", currentTime);
-        resultMap.put("code","200");
         return resultMap; //将hash值和tamp时间返回给前端
     }
 
@@ -77,17 +100,18 @@ public class MessageController {
         paramMap.put("msgSign", "麦芒网络科技");
         paramMap.put("templateCode", "SMS_114385489");
         paramMap.put("jsonContent", jsonContent);
-        logger.debug("发送虚假验证码!!"+randomNum);
-//        SendSmsResponse sendSmsResponse = AliyunMessageUtil.sendSms(paramMap);
-//        if(!(sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK"))) {
-//            if(sendSmsResponse.getCode().equals("isv.MOBILE_NUMBER_ILLEGAL")) {
-//                logger.debug("手机号错误!");
-//                throw new PhoneErrorException("300","手机号错误!");
-//            }
-//            if(sendSmsResponse.getCode().equals("isv.MOBILE_COUNT_OVER_LIMIT")) {
-//                throw new PhoneErrorException("300","手机号短信发送数量超过了限制!");
-//            }
-//        }
+        //logger.debug("发送虚假验证码!!"+randomNum);
+        //如果想测试的话打开上方注释，注释下方代码。。
+        SendSmsResponse sendSmsResponse = AliyunMessageUtil.sendSms(paramMap);
+        if(!(sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK"))) {
+            if(sendSmsResponse.getCode().equals("isv.MOBILE_NUMBER_ILLEGAL")) {
+                logger.debug("手机号错误!");
+                throw new PhoneErrorException("300","手机号错误!");
+            }
+            if(sendSmsResponse.getCode().equals("isv.MOBILE_COUNT_OVER_LIMIT")) {
+                throw new PhoneErrorException("300","手机号短信发送数量超过了限制!");
+            }
+        }
     }
 
 
