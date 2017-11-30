@@ -1,3 +1,4 @@
+<#assign base = "${request.contextPath}"/>
 <!doctype html>
 <html>
 <head>
@@ -20,9 +21,9 @@
     <div class="wavegohome waveinput">
         <a href="/index">回到本站首页</a>
     </div>
-    <div class="waveqcz">
-        <a href="${base}/login">登录</a>
-    </div>
+    <#--<div class="waveqcz">-->
+        <#--<a href="${base}/login">登录</a>-->
+    <#--</div>-->
     <div class="waveqczfd">
     </div>
 </div>

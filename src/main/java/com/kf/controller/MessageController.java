@@ -1,11 +1,9 @@
 package com.kf.controller;
 
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.kf.exception.PhoneErrorException;
 import com.kf.pojo.User;
 import com.kf.service.UserService;
-import com.kf.util.AliyunMessageUtil;
 import com.kf.util.CookieUtil;
 import com.kf.util.Md5Util;
 import org.apache.commons.lang3.StringUtils;

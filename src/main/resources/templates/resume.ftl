@@ -259,7 +259,7 @@
                                         </div>
                                         <div class="col-xs-4 input-group">
                                             <span  class="input-group-addon">电脑水平:</span>
-                                            <input type="text" maxlength="10" <#if resume??>value="${resume.computer}"</#if>  class="form-control" name="computer">
+                                            <input type="text" maxlength="10" <#if resume??>value="${resume.computer!""}"</#if>  class="form-control" name="computer">
                                         </div>
                                     </div>
                                     <div class="form-group row">
