@@ -13,9 +13,10 @@
         a:hover{
             text-decoration: none;
         }
-        .nav a{
+        .error{
             color: #ff552e;
         }
+
     </style>
     <script type="text/javascript">
         //判断是否移动端访问
@@ -38,7 +39,7 @@
     </script>
 </head>
 <body class="style-3">
-
+<img src="${request.contextPath}/img/login_bg.jpg" alt="" width="100%" height="100%" class="bg_img">
 <div class="container">
 
     <div class="row" id="login">
@@ -47,9 +48,6 @@
 
                 <h1 style="text-align: center">欢迎登录麦芒网</h1>
                 <div class="form-box row">
-
-
-
                     <div class="col-sm-offset-1 col-sm-10">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" style="width: 50%;text-align: center" class="active" ><a href="#userLogin" aria-controls="userLogin" role="tab" data-toggle="tab">用户名密码登录</a></li>
@@ -68,13 +66,13 @@
                                     </div>
                                     <span style="color:red" id="error"></span>
 
-                                    <div class="form-group row" id="verifyDiv">
+                                    <div class="form-group input-group" id="verifyDiv">
                                         <label for="verifyCode" class="sr-only">验证码</label>
-                                        <input type="text" class="col-xs-5 verifyInput" style="margin-left: 20px" id="verifyCode"required name="verifyCode" placeholder="验证码">
-                                        <div class="col-xs-6" style="padding-top: 20px">
+                                        <input type="text" class="form-control" id="verifyCode"required name="verifyCode" placeholder="验证码">
+                                        <span class="input-group-addon" style="background: none;border: none;">
                                             <img src="${request.contextPath}/verify/code" id="verify" alt="验证码">
                                             <a href="javascript:;" id="changImg">看不清？</a>
-                                        </div>
+                                        </span>
                                     </div>
 
                                     <div class="form-group row">
@@ -87,35 +85,28 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-9">
-                                                <input type="button" value="登录" id="loginBtn" class="btn btn-primary">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <a href="#"><div class="qq_lg"></div><span>QQ登陆</span></a>
-                                            </div>
-                                        </div>
+                                        <input type="button" value="登录" style="width: 100%;" id="loginBtn" class="btn btn-primary">
                                     </div>
                                 </form>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="phoneLogin">
-                                <form action="" >
+                                <form action="" id="phoneLoginForm">
                                     <div class="form-group input-group">
                                         <label for="phone" class="sr-only">手机号</label>
                                         <input type="text" class="form-control" id="phone" maxlength="11" minlength="11" required name="phone" placeholder="手机号">
-                                        <span class="input-group-addon"><a href="javascript:;">获取动态码</a></span>
+                                        <span class="input-group-addon" style="background: none;border: none;"><input class="btn btn-success"  id="verify_refresh" type="button" onclick="getMsgNum(this)" value="获取动态码"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="phoneCode" class="sr-only">动态码</label>
-                                        <input type="text" class="form-control" id="phoneCode" required name="phoneCode" placeholder="动态码">
+                                        <input type="text" class="form-control" id="phoneCode" name="phoneCode" placeholder="动态码">
                                     </div>
 
-                                    <span style="color:red" id="error"></span>
+                                    <span style="color:red" id="phoneError"></span>
 
 
                                     <div class="form-group row">
                                         <div class="col-xs-6">
-                                            <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
+                                            <label for="remember"><input type="checkbox" name="remember" value="true" id="phoneRemember">记住我?</label>
                                         </div>
                                         <div class="col-xs-6">
                                             <p>没有账号? <a href="${request.contextPath}/register">注册</a> | <a href="javascript:;">忘记密码?</a></p>
@@ -123,14 +114,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-9">
-                                                <input type="button" value="登录" id="phoneLoginBtn" class="btn btn-primary">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <a href="#"><div class="qq_lg"></div><span>QQ登陆</span></a>
-                                            </div>
-                                        </div>
+                                        <input type="button" value="登录" style="width: 100%;" onclick="validateNum()" class="btn btn-primary">
                                     </div>
                                 </form>
                             </div>
@@ -150,6 +134,7 @@
 <script type="text/javascript" src="${request.contextPath}/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${request.contextPath}/js/messages_zh.js"></script>
 <script type="text/javascript" src="${request.contextPath}/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/message.js"></script>
 
 <script>
 
@@ -169,6 +154,7 @@
         function valForm() {
             return $("#commentForm").validate().form();
         }
+
 
 
 

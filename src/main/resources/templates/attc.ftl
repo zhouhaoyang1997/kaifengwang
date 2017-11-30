@@ -183,7 +183,7 @@
                         </div>
                     </div>
 
-                    <#if company??>
+                    <#if status==0>
                     <div role="tabpanel" class="tab-pane" id="profile">
                         <div class="panel panel-default">
                             <div class="panel-heading"><h3>基础信息</h3></div>
@@ -268,7 +268,10 @@
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/js/fileupload.js"></script>
 <script type="text/javascript" src="${base}/js/zh-CN.js"></script>
+<#if status==0>
 <script type="text/javascript" src="${base}/js/fileinput.min.js"></script>
+</#if>
+
 <script type="text/javascript" src="${base}/js/zh.js"></script>
 <script type="text/javascript" src="${base}/BeAlert/BeAlert.js"></script>
 <script type="text/javascript">
