@@ -44,8 +44,8 @@ page:
 path:
 #  WinPathValue: C:/Users/ch/Desktop/
 #  LinuxPathValue: /home/kfcg/
-  MacPath:/Users/zhy/Downloads/
-#  pathValue: /home/kfcg/
+#  MacPath:/Users/zhy/Downloads/
+  pathValue: /Users/zhy/Downloads/
 pagehelper:
   helper-dialect: mysql
 

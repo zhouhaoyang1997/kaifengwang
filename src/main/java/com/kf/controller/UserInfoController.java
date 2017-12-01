@@ -211,10 +211,17 @@ public class UserInfoController {
                 }
                 String filePath = FileUtil.getFilePath(file,"img/headimg/");
                 try {
+                    System.out.println(basePath.getPathValue()+filePath);
                     file.transferTo(new File(basePath.getPathValue()+filePath));
                     //将图片路径存入数据库
                     userService.updateUserImg(filePath,userId,basePath.getPathValue());
-                    modelAndView = new ModelAndView("redirect:/user/info");
+                    if (device.isMobile()||device.isTablet()) {
+                        modelAndView=new ModelAndView("redirect:/m/user/alterInfo");
+                    }else {
+                        modelAndView = new ModelAndView("redirect:/user/info");
+
+                    }
+
                 } catch (IOException e) {
                     modelAndView = pic(request);
                     modelAndView.addObject("headInfo","修改头像失败,上传图片发生异常，请稍后再试");
@@ -225,10 +232,7 @@ public class UserInfoController {
                     return modelAndView;
                 }
             }
-            //判断是否移动端
-            if (device.isMobile()||device.isTablet()) {
-                modelAndView.setViewName("phone/alterInfo");
-            }
+
             return modelAndView;
         }
     }
