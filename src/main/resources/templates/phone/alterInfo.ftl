@@ -1,23 +1,57 @@
 <#include "defaultLayout/defaultLayout.ftl">
-<#assign base="${request.contextPath}"/>
 <@header siteName="开封麦芒网"  base_css=["global","style","usercenter","bootstrap.min"] base_keywords="开封麦芒网" >
+<link rel="stylesheet" href="${baseUrl}/css/fileupload.css">
 
 </@header>
 <#--js-->
 <@body title="修改资料" back=true>
 <div class="panel-body">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-horizontal" enctype="multipart/form-data" action="${baseUrl}/user/alterHead" method="post" role="form">
+                <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                    <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                        <#if user.userImg??>
+                            <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
+                                 src="${baseUrl}/${user.userImg}"/>
+                        <#else>
+                            <img id='picImg' style="width: 100%;height: auto;max-height: 140px;"
+                                 src="${baseUrl}/img/noImage.png"/>
+                        </#if>
+
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail"
+                         style="max-width: 200px; max-height: 150px;"></div>
+                    <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="file" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                        </span>
+                        <a href="javascript:;" class="btn btn-warning fileinput-exists"
+                           data-dismiss="fileinput">移除</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-6">
+                        <button type="submit" class="btn btn-primary">保存修改</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <form class="form-horizontal" role="form" id="alterInfo">
         <div class="form-group">
             <label for="name" class="col-sm-2">用户名</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="name" disabled value="${userInfo.userName}">
+                <input type="text" class="form-control" id="name" disabled value="${user.userName}">
             </div>
 
         </div>
         <div class="form-group">
             <label for="Phone" class="col-sm-2">手机号</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="Phone" disabled value="${userInfo.userPhone!""}" minlength="11" maxlength="11">
+                <input type="text" class="form-control" id="Phone" disabled value="${user.userPhone!""}" minlength="11" maxlength="11">
             </div>
             <div class="col-sm-1">
                 <button type="button" class="btn btn-primary" id="alterPhoneBtn">修改</button>
@@ -31,7 +65,7 @@
         <div class="form-group">
             <label for="Email" class="col-sm-2">邮箱</label>
             <div class="col-sm-4">
-                <input type="email" class="form-control" id="Email" disabled value="${userInfo.userEmail!""}" name="email" >
+                <input type="email" class="form-control" id="Email" disabled value="${user.userEmail!""}" name="email" >
             </div>
             <div class="col-sm-1">
                 <button type="button" class="btn btn-primary"  id="alterEmailBtn">修改</button>
@@ -45,7 +79,7 @@
         <div class="form-group">
             <label for="ProfileInfo" class="col-sm-2">个人简介</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="ProfileInfo" disabled value="${userInfo.userDescription!""}" minlength="2" maxlength="100" name="profileInfo" >
+                <input type="text" class="form-control" id="ProfileInfo" disabled value="${user.userDescription!""}" minlength="2" maxlength="100" name="profileInfo" >
             </div>
             <div class="col-sm-1">
                 <button type="button" class="btn btn-primary" id="alterProfileInfoBtn">修改</button>
@@ -62,8 +96,10 @@
 
 <@footer base_js=["jq_min.211_1","bootstrap.min"]>
 
-<script type="text/javascript" src="${base}/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="${base}/js/messages_zh.js"></script>
+<script type="text/javascript" src="${baseUrl}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${baseUrl}/js/messages_zh.js"></script>
+<script type="text/javascript" src="${baseUrl}/js/fileupload.js"></script>
+
 </@footer>
 <script>
     $.validator.setDefaults({
@@ -73,6 +109,7 @@
     });
 
     $().ready(function() {
+
 
         $("#alterInfo").validate();
 
@@ -88,7 +125,7 @@
             $("#enter"+p1+"Btn").click(function () {
                 $.ajax({
                     type:'get',
-                    url:'${base}/user/alter'+p1+'?user'+p1+'='+$("#"+p1).val(),
+                    url:'${baseUrl}/user/alter'+p1+'?user'+p1+'='+$("#"+p1).val(),
                     success:function (result) {
                         var res = result.split(":");
                         if(res[0]==="ok"){
@@ -106,3 +143,8 @@
         });
     });
 </script>
+<#if headInfo??>
+<script type="text/javascript">
+    alert("${headInfo}");
+</script>
+</#if>

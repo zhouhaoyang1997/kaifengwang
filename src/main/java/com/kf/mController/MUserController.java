@@ -68,9 +68,13 @@ public class MUserController {
         if(user!=null){
             Integer userId = user.getUserId();
             User user1 = userService.getUserByUserId(userId);
-            modelAndView.addObject("userInfo",user1);
+            session.setAttribute("user",user1);
+            return modelAndView;
+
+        }else {
+            modelAndView.setViewName("phone/login");
+            return modelAndView;
         }
-        return  modelAndView;
     }
     @GetMapping("/user/pwd")
     public String alterPwd(){
