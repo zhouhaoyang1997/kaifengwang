@@ -7,7 +7,7 @@
         <selectKey keyProperty="userId" resultType="java.lang.Integer">
             select LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO user (user_name,user_password,user_email,create_time,lasted_time) VALUES (#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR},#{userEmail},#{createTime},#{lastedTime})
+        INSERT INTO user (user_name,user_password,user_phone,create_time,lasted_time) VALUES (#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR},#{userPhone},#{createTime},#{lastedTime})
     </insert>
 
 
@@ -49,6 +49,10 @@
         SELECT count(user_id) from user WHERE user_email=#{userEmail} and user_id!=#{userId}
     </select>
 
+    <select id="selectUserByUserPhone" resultType="java.lang.Integer">
+        SELECT count(user_id) from user WHERE user_phone=#{userPhone}
+    </select>
+
     <select id="selectUserByUserName" resultType="java.lang.Integer">
         SELECT count(user_id) from user where user_name=#{userName}
     </select>
@@ -57,6 +61,9 @@
         UPDATE user SET user_phone=#{userPhone} where user_id=#{userId}
     </update>
 
+    <update id="updateUserPassByUserPhone">
+        UPDATE user set user_password = #{userPassword} WHERE user_phone = #{phoneNum}
+    </update>
 
     <update id="updateUserEmail">
         UPDATE user SET user_email=#{userEmail} where user_id=#{userId}

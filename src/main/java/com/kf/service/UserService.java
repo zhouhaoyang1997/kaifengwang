@@ -99,6 +99,9 @@ public class UserService {
         return userMapper.selectUserByUserEmail(userEmail)==0;
     }
 
+    public boolean userPhoneIsNotExists(String userPhone){
+        return userMapper.selectUserByUserPhone(userPhone)==0;
+    }
     /**
      * 修改手机号
      * @param userId
@@ -143,5 +146,9 @@ public class UserService {
      */
     public void updateUserAttc(Integer userId,Integer attc){
         userMapper.updateUserAttc(userId,attc);
+    }
+
+    public void updateUserPassByUserPhone(String userPassword, String phoneNum) {
+        userMapper.updateUserPassByUserPhone(userPassword,phoneNum);
     }
 }

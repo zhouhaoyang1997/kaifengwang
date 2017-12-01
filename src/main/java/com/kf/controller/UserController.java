@@ -8,6 +8,7 @@ import com.kf.util.CommonUtil;
 import com.kf.util.CookieUtil;
 import com.kf.util.Md5Util;
 import com.kf.util.SessionUtil;
+import com.kf.vo.MsgCode;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by 18236 on 2017/9/24.
@@ -31,7 +36,9 @@ import java.sql.Timestamp;
 @Controller
 public class UserController{
 
-    protected  static Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final String KEY = "kfmm1230"; // KEY为自定义秘钥
+
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     public UserService userService;
@@ -153,43 +160,62 @@ public class UserController{
      * @return
      */
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("userDetail") User user,BindingResult br,
-                                 @RequestParam(value = "method",defaultValue = "pc") String method,String remember,ModelMap modelMap,
-                                 HttpServletRequest request, HttpServletResponse response){
+    @ResponseBody
+    public Map<String,String> register(@Valid @ModelAttribute("userDetail") User user, BindingResult br, MsgCode msgCode,
+                                       @RequestParam(value = "method",defaultValue = "pc") String method, String remember,
+                                       HttpServletRequest request, HttpServletResponse response){
 
-        //如果数据有误,返回注册
-        if(!br.hasErrors()){
-            //再次判断用户名和密码是否被占用
-            boolean access = userService.userNameIsNotExists(user.getUserName())&&userService.userEmailIsNotExists(user.getUserEmail());
-            if(access){
-                //对用户的密码进行md5加密,同时对密码自动加上前缀和后缀
-                user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
-                user.setCreateTime(new Timestamp(new Date().getTime()));//当前时间作为用户创建时间
-                user.setLastedTime(new Timestamp(new Date().getTime()));//当前时间作为用户最后登陆时间
-                userService.addUser(user);
-                HttpSession session = request.getSession();
-                session.setAttribute("user",user);
-                if(remember!=null&&!remember.isEmpty()){
-                    CookieUtil.addCookie(response,"userName",user.getUserName());
-                    CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
-                }
-                if(method.equals("mobile")){
-                    return "redirect:/m/index";
+        Map<String,String> map = new HashMap<String,String>();
+        if(CommonUtil.isLawMsgCode(msgCode)){
+            String hash = Md5Util.MD5(KEY + "@" + msgCode.getTamp() + "@" + msgCode.getCode());
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String currentTime = sf.format(c.getTime());
+            //手机验证码是否过期
+
+            if (msgCode.getTamp().compareTo(currentTime) > 0) {
+                //验证码是否正确
+                if (hash != null && hash.equalsIgnoreCase(msgCode.getHash())) {
+                    //如果数据有误,返回注册
+                    if(!br.hasErrors()){
+                        //再次判断用户名和密码是否被占用
+                        boolean access = userService.userNameIsNotExists(user.getUserName())&&userService.userPhoneIsNotExists(user.getUserPhone());
+                        if(access){
+                            //对用户的密码进行md5加密,同时对密码自动加上前缀和后缀
+                            user.setUserPassword(Md5Util.MD5("kf"+user.getUserPassword()+"cg"));
+                            user.setCreateTime(new Timestamp(new Date().getTime()));//当前时间作为用户创建时间
+                            user.setLastedTime(new Timestamp(new Date().getTime()));//当前时间作为用户最后登陆时间
+                            userService.addUser(user);
+                            HttpSession session = request.getSession();
+                            session.setAttribute("user",user);
+                            if(remember!=null&&!remember.isEmpty()){
+                                CookieUtil.addCookie(response,"userName",user.getUserName());
+                                CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
+                            }
+                            map.put("msg","ok");
+                            if(method.equals("mobile")){
+                                map.put("url","/m/index");
+                            }else{
+                                map.put("url","/index");
+                            }
+                        }
+                        else{
+                            map.put("msg","用户名或者手机号已经存在,请检查后重试!");
+                        }
+
+                    }else{
+                        map.put("msg","您输入的信息有误,请检查后重试!");
+                    }
                 }else{
-                    return "redirect:/index";
+                    map.put("msg","您输入的手机动态码不正确,请检查后重试!");
                 }
+            }else{
+                map.put("msg","你的手机动态码已过期,请检查后重试!");
             }
-            else{
-                modelMap.addAttribute("userOrEmailError","用户名或者邮箱已经存在,请检查后重试!");
-            }
-
-        }
-
-        if(method.equals("mobile")){
-            return "phone/reg";
         }else{
-            return "reg";
+            map.put("msg","请输入您的手机动态码!");
         }
+        return map;
     }
 
     @GetMapping("/login")
@@ -217,14 +243,104 @@ public class UserController{
     @ResponseBody
     public boolean unIsEx(String userName){
 
-        return CommonUtil.isNotNullAndNotEmpty(userName)&&userService.userNameIsNotExists(userName);
+        return StringUtils.isNotBlank(userName)&&userService.userNameIsNotExists(userName);
     }
 
-    @PostMapping("/ueIsEx")
+    @PostMapping("/upIsEx")
     @ResponseBody
-    public boolean ueIsEx(String userEmail){
+    public boolean ueIsEx(String userPhone){
 
-        return CommonUtil.isNotNullAndNotEmpty(userEmail)&&userService.userEmailIsNotExists(userEmail);
+        return StringUtils.isNotBlank(userPhone)&&userService.userPhoneIsNotExists(userPhone);
+    }
+
+    @GetMapping("/verifyAccount")
+    public String verify(){
+        return "alterPass/phone";
+    }
+
+    @PostMapping("/verifyAccount")
+    public String verifyAccount(String phoneNum,ModelMap modelMap){
+        if(StringUtils.isNotBlank(phoneNum)&&CommonUtil.isPhoneNum(phoneNum)){
+            //确定该用户存在
+            if(!userService.userPhoneIsNotExists(phoneNum)){
+                modelMap.addAttribute("phone",phoneNum);
+                return "alterPass/forget";
+            }else{
+                modelMap.addAttribute("error","您还不是本站会员,请注册!");
+            }
+        }else{
+            modelMap.addAttribute("error","请输入合法的手机号!");
+        }
+        return "alterPass/phone";
+    }
+
+
+    @PostMapping("/resetPass")
+    public String resetPass(MsgCode msgCode,ModelMap modelMap){
+        //考虑该用户未注册进入这里的情况...
+        if(CommonUtil.isLawMsgCode(msgCode)) {
+            String hash = Md5Util.MD5(KEY + "@" + msgCode.getTamp() + "@" + msgCode.getCode());
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String currentTime = sf.format(c.getTime());
+            if (msgCode.getTamp().compareTo(currentTime) > 0) {
+                //验证码是否正确
+                if (hash != null && hash.equalsIgnoreCase(msgCode.getHash())) {
+                    //重新hash值,设置将次hash值中带入手机号,以免非法输入其他的手机号
+                    msgCode.setHash(Md5Util.MD5(KEY+"@"+msgCode.getTamp()+"@"+msgCode.getCode()+"@"+msgCode.getPhoneNum()));
+                    modelMap.addAttribute("msgCode",msgCode);
+                    return "alterPass/resetPass";
+                }else {
+                    modelMap.addAttribute("phone",msgCode.getPhoneNum());
+                    modelMap.addAttribute("error","验证码输入不正确");
+                }
+            }else{
+                modelMap.addAttribute("phone",msgCode.getPhoneNum());
+                modelMap.addAttribute("error","验证码已经过期");
+            }
+        }else{
+            modelMap.addAttribute("error","请输入合法的信息");
+        }
+        return "alterPass/forget";
+    }
+
+    @PostMapping("/alterPassword")
+    public String resetPass(String userPassword,MsgCode msgCode,ModelMap modelMap){
+        if(StringUtils.isNotBlank(userPassword)&&userPassword.length()>6&&userPassword.length()<16){
+            if(CommonUtil.isLawMsgCode(msgCode)) {
+                //对重新hash的数值进行比较
+                String hash = Md5Util.MD5(KEY + "@" + msgCode.getTamp() + "@" + msgCode.getCode()+"@"+msgCode.getPhoneNum());
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+                String currentTime = sf.format(c.getTime());
+                if (msgCode.getTamp().compareTo(currentTime) > 0) {
+                    //验证是否正确,全部验证完毕,进行修改数据库
+                    if (hash != null && hash.equalsIgnoreCase(msgCode.getHash())) {
+                        modelMap.addAttribute("hash",msgCode.getHash());
+                        modelMap.addAttribute("tamp",msgCode.getTamp());
+                        //对密码进行加密
+                        userPassword = Md5Util.MD5("kf"+userPassword+"cg");
+                        userService.updateUserPassByUserPhone(userPassword,msgCode.getPhoneNum());
+                        return "alterPass/resetPassOk";
+                    }else {
+                        modelMap.addAttribute("phone",msgCode.getPhoneNum());
+                        modelMap.addAttribute("error","错误的请求");
+                        return "alterPass/verifyAccount";
+                    }
+                }else{
+                    modelMap.addAttribute("phone",msgCode.getPhoneNum());
+                    modelMap.addAttribute("error","您的请求已过期");
+                    return "alterPass/verifyAccount";
+                }
+            }else{
+                modelMap.addAttribute("error","错误的请求");
+                return "alterPass/verifyAccount";
+            }
+
+        }else{
+            modelMap.addAttribute("error","对不起,您输入的密码不合法!");
+            return "alterPass/resetPass";
+        }
     }
 
 }

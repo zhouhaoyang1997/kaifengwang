@@ -267,9 +267,9 @@
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/js/fileupload.js"></script>
-<script type="text/javascript" src="${base}/js/zh-CN.js"></script>
 <#if status==0>
 <script type="text/javascript" src="${base}/js/fileinput.min.js"></script>
+<script type="text/javascript" src="${baseUrl}/js/zh.js"></script>
 </#if>
 
 <script type="text/javascript" src="${base}/js/zh.js"></script>

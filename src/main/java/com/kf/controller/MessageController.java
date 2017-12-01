@@ -1,11 +1,15 @@
 package com.kf.controller;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.kf.exception.PhoneErrorException;
 import com.kf.pojo.User;
 import com.kf.service.UserService;
+import com.kf.util.AliyunMessageUtil;
 import com.kf.util.CookieUtil;
 import com.kf.util.Md5Util;
+import com.kf.vo.MsgCode;
+import com.kf.vo.StateMsg;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +46,6 @@ public class MessageController {
     @ResponseBody
     public Map<String, Object> sendMsg(@RequestBody Map<String,String> requestMap,HttpServletRequest request) {
         //验证用户输入的验证码是否正确
-
         String verifyCode = requestMap.get("verify");
         HttpSession session = request.getSession();
         Object obj = session.getAttribute("verCode");
@@ -98,78 +101,77 @@ public class MessageController {
         paramMap.put("msgSign", "麦芒网络科技");
         paramMap.put("templateCode", "SMS_114385489");
         paramMap.put("jsonContent", jsonContent);
-        //logger.debug("发送虚假验证码!!"+randomNum);
+        logger.debug("发送虚假验证码!!"+randomNum);
         //如果想测试的话打开上方注释，注释下方代码。。
-        SendSmsResponse sendSmsResponse = AliyunMessageUtil.sendSms(paramMap);
-        if(!(sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK"))) {
-            if(sendSmsResponse.getCode().equals("isv.MOBILE_NUMBER_ILLEGAL")) {
-                logger.debug("手机号错误!");
-                throw new PhoneErrorException("300","手机号错误!");
-            }
-            if(sendSmsResponse.getCode().equals("isv.MOBILE_COUNT_OVER_LIMIT")) {
-                throw new PhoneErrorException("300","手机号短信发送数量超过了限制!");
-            }
-        }
+//        SendSmsResponse sendSmsResponse = AliyunMessageUtil.sendSms(paramMap);
+//        if(!(sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK"))) {
+//            if(sendSmsResponse.getCode().equals("isv.MOBILE_NUMBER_ILLEGAL")) {
+//                logger.debug("手机号错误!");
+//                throw new PhoneErrorException("300","手机号错误!");
+//            }
+//            if(sendSmsResponse.getCode().equals("isv.MOBILE_COUNT_OVER_LIMIT")) {
+//                throw new PhoneErrorException("300","手机号短信发送数量超过了限制!");
+//            }
+//        }
     }
 
 
-    @PostMapping(value = "/validateNum",  headers = "Accept=application/json")
+    @PostMapping(value = "/validateNum")
     @ResponseBody
-    public Map<String, Object> validateNum(@RequestBody Map<String,String> requestMap, HttpServletRequest request, HttpServletResponse response)throws IOException {
-        String requestHash = requestMap.get("hash");
-        String tamp = requestMap.get("tamp");
-        String msgNum = requestMap.get("msgNum");
-        String remember = requestMap.get("remember");
-        Map<String,Object> map = new HashMap<>();
-        if(requestMap.get("phoneNum")==null){
-            map.put("error","手机号不能为空");
-        }else{
-            String userPhone = requestMap.get("phoneNum");
+    public String validateNum(MsgCode msgCode, HttpServletRequest request, HttpServletResponse response) {
 
-            String hash = Md5Util.MD5(KEY + "@" + tamp + "@" + msgNum);
-            Calendar c = Calendar.getInstance();
-            SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+        if(msgCode!=null){
+            if(msgCode.getPhoneNum()==null){
+                return "error:请输入手机号!";
+            }else{
+                String userPhone = msgCode.getPhoneNum();
 
-            String currentTime = sf.format(c.getTime());
+                String hash = Md5Util.MD5(KEY + "@" + msgCode.getTamp() + "@" + msgCode.getCode());
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
 
-            if (tamp.compareTo(currentTime) > 0) {
-                if (hash!=null&&hash.equalsIgnoreCase(requestHash)){
-                    //校验成功
-                    map.put("code","200");
-                    User user = userService.getUser(userPhone);
-                    if(user==null){
-                        //说明不是本站会员
-                        user = new User();
-                        user.setUserName(randomName(userPhone));
-                        user.setUserPassword(Md5Util.MD5("kf123456cg"));
-                        Timestamp timestamp = new Timestamp(new Date().getTime());
-                        user.setCreateTime(timestamp);//当前时间作为用户创建时间
-                        user.setLastedTime(timestamp);//当前时间作为用户最后登陆时间
-                    }else{
-                        Timestamp time = new Timestamp(new Date().getTime());
-                        userService.updateUserLastLoginTime(user.getUserId(),time);
+                String currentTime = sf.format(c.getTime());
+
+                if (msgCode.getTamp()!=null&&msgCode.getTamp().compareTo(currentTime) > 0) {
+                    if (hash!=null&&hash.equalsIgnoreCase(msgCode.getHash())){
+                        //校验成功
+                        User user = userService.getUser(userPhone);
+                        if(user==null){
+                            //说明不是本站会员
+                            user = new User();
+                            user.setUserName(randomName(userPhone));
+                            user.setUserPassword(Md5Util.MD5("kf"+createRandomNum(8)+"cg"));
+                            Timestamp timestamp = new Timestamp(new Date().getTime());
+                            user.setCreateTime(timestamp);//当前时间作为用户创建时间
+                            user.setLastedTime(timestamp);//当前时间作为用户最后登陆时间
+                            userService.addUser(user);
+                        }else{
+                            Timestamp time = new Timestamp(new Date().getTime());
+                            userService.updateUserLastLoginTime(user.getUserId(),time);
+                        }
+                        HttpSession session = request.getSession();
+                        session.setAttribute("user",user);
+                        if(StringUtils.isNotBlank(msgCode.getRemember())){
+                            CookieUtil.addCookie(response,"userName",user.getUserName());
+                            CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
+                        }
+                        if(StringUtils.isNotBlank(msgCode.getPath())){
+                            return "200:"+msgCode.getPath();
+                        }else{
+                            return "200:/index";
+                        }
+
+                    }else {
+                        //验证码不正确，校验失败
+                        return "error:您输入的验证码不正确!";
                     }
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user",user);
-                    if(StringUtils.isNotBlank(remember)){
-                        CookieUtil.addCookie(response,"userName",user.getUserName());
-                        CookieUtil.addCookie(response,"userPassword",user.getUserPassword());
-                    }
-
-
-                }else {
-                    //验证码不正确，校验失败
-                    map.put("error","您输入的验证码不正确!");
+                } else {
+                    // 超时
+                    return "error:您的验证码已过期,请重新再试!";
                 }
-            } else {
-                // 超时
-
-                map.put("error","您的验证码已过期,请重新再试!");
-
             }
         }
-
-        return map;
+        return "error:您的请求出了些问题,请稍后再试!";
     }
 
     private String randomName(String phone){

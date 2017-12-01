@@ -120,12 +120,12 @@
 <script type="text/javascript" src="${baseUrl}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${baseUrl}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${baseUrl}/js/fileupload.js"></script>
-<script type="text/javascript" src="${baseUrl}/js/zh-CN.js"></script>
 <#if status==0>
 <script type="text/javascript" src="${baseUrl}/js/fileinput.min.js"></script>
+<script type="text/javascript" src="${baseUrl}/js/zh.js"></script>
 </#if>
 
-<script type="text/javascript" src="${baseUrl}/js/zh.js"></script>
+
 <script type="text/javascript" src="${baseUrl}/BeAlert/BeAlert.js"></script>
 <script type="text/javascript">
 
@@ -161,7 +161,7 @@
                         }
                     })
                 }
-            });
+            })
         });
 
     <#if status==0>
@@ -240,9 +240,9 @@
             }
             return config;
         }
-    });
-    </#if>
 
+    </#if>
+    });
     <#if picError??>
     $(function () {
         alert("${picError}")

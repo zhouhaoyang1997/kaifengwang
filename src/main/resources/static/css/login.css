@@ -23,6 +23,21 @@ body {
   bottom: 0;
   top: 0;
 }
+.logo_login{
+  width: 230px;
+  color:#999;
+}
+.logo_login p{
+  text-align: center;
+  color:#000;
+  font-size:18px;
+  margin-bottom: 30px;
+}
+.verify{
+  width:100px;
+  max-width: 100px;
+  height: 30px;
+}
 .verifyInput{
   font-size: 16px;
   font-weight: 300;

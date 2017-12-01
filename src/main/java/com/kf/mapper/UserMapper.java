@@ -48,6 +48,8 @@ public interface UserMapper {
 
     Integer selectUserByUserName(@Param("userName")String userName);
 
+    Integer selectUserByUserPhone(@Param("userPhone")String userPhone);
+
     void updateUserPhone(@Param("userId")Integer userId,@Param("userPhone") String userPhone);
 
     void updateUserEmail(@Param("userId")Integer userId,@Param("userEmail") String userEmail);
@@ -62,4 +64,6 @@ public interface UserMapper {
      * @param userAttc
      */
     void updateUserAttc(@Param("userId")Integer userId,@Param("userAttc")Integer userAttc);
+
+    void updateUserPassByUserPhone(@Param("userPassword") String userPassword,@Param("phoneNum")String phoneNum);
 }

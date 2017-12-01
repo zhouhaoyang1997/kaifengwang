@@ -1,5 +1,8 @@
 package com.kf.util;
 
+import com.kf.vo.MsgCode;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -53,5 +56,11 @@ public class CommonUtil {
         }
         return randomNumStr;
     }
+
+    public static boolean isLawMsgCode(MsgCode msgCode){
+        return msgCode!=null&&StringUtils.isNotBlank(msgCode.getCode())&&StringUtils.isNotBlank(msgCode.getHash())&&StringUtils.isNotBlank(msgCode.getTamp());
+    }
+
+
 }
 

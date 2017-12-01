@@ -94,6 +94,16 @@ function getMsgNum(that) {
     }
 }
 
+function regGetMsgNum() {
+    var phoneNumber = $('#phone').val();
+    var reg = /^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\d{8}$/;
+    if(reg.test(phoneNumber)){
+        $("#verifyModal").modal("show");
+    }else{
+        alert("请输入合法的手机号!");
+    }
+}
+
 function verifyNum() {
     var data={
         phoneNumber:$('#phone').val(),
@@ -116,6 +126,7 @@ function verifyNum() {
                 setButtonStatus($("#verify_refresh"));
                 messageData = result;
                 $("#verifyModal").modal("hide");
+
             }else
             if(result.code=='300'){
                 $("#verifyError").text(result.message);
@@ -145,36 +156,64 @@ function setButtonStatus(that) {
     }
 }
 /**
- * 注册按钮
+ * 确认按钮
  */
 function validateNum() {
 
     if(regPhone2()){
         var data = {
-            msgNum: $("#phoneCode").val(),
+            code: $("#phoneCode").val(),
             phoneNum:$("#phone").val(),
             tamp: messageData.tamp,
             hash: messageData.hash,
-            remember: $("#phoneRemember").val()
+            remember: $("#phoneRemember").val(),
+            path:$("#path").val()
         };
         $.ajax({
             url:  '/validateNum', // 验证接口
             type: 'POST',
-            dataType: 'json',
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            async: false, //false 同步
+            data: data,
             success: function (result) {
-                if(result.code=='200'){
-                    window.location.href="/index";
+                var res = result.split(":");
+                if(res[0]=='200'){
+                    window.location.href=res[1];
+                }else{
+                    alert(res[1]);
                 }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(XMLHttpRequest.status);
-                console.log(XMLHttpRequest.readyState);
-                console.log(textStatus);
             }
         });
     }
 
+}
+
+function verifyRegNum() {
+    var data={
+        phoneNumber:$('#phone').val(),
+        verify:$("#phoneVerifyCode").val()
+    };
+    $.ajax({
+        url:'/sendMsg',
+        type:'post',
+        dataType: 'json',
+        contentType: "application/json",
+        async: false, //false 同步
+        data: JSON.stringify(data),
+        xhrFields: {
+            withCredentials: true
+        },
+        success:function (result) {
+            if(result.code=='200'){
+                setButtonStatus($("#verify_refresh"));
+                $("#hash").val(result.hash);
+                $("#tamp").val(result.tamp);
+                $("#verifyModal").modal("hide");
+            }else
+            if(result.code=='300'){
+                $("#verifyError").text(result.message);
+            }
+            else {
+                alert("错误码:" + result.code + " 错误信息:" + result.message);
+            }
+        }
+    })
 }

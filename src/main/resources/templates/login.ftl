@@ -1,11 +1,12 @@
+<#assign base="${request.contextPath}"/>
 <!DOCTYPE HTML>
 <html>
 <head lang="zh">
     <title>登录麦芒网</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${request.contextPath}/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${request.contextPath}/css/login.css">
+    <link rel="stylesheet" href="${base}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${base}/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${base}/css/login.css">
     <style>
         a{
             color: #000;
@@ -33,13 +34,13 @@
             var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 
             if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-                window.location.href = "${request.contextPath}/m${springMacroRequestContext.getRequestUri()}<#if request.queryString??>?${request.queryString}</#if>";
+                window.location.href = "${base}/m${springMacroRequestContext.getRequestUri()}<#if request.queryString??>?${request.queryString}</#if>";
             }
         }
     </script>
 </head>
 <body class="style-3">
-<img src="${request.contextPath}/img/login_bg.jpg" alt="" width="100%" height="100%" class="bg_img">
+<img src="${base}/img/login_bg.jpg" alt="" width="100%" height="100%" class="bg_img">
 <div class="container">
 
     <div class="row" id="login">
@@ -80,7 +81,7 @@
                                             <label for="remember"><input type="checkbox" name="remember" value="true" id="remember">记住我?</label>
                                         </div>
                                         <div class="col-xs-6">
-                                            <p>没有账号? <a href="${request.contextPath}/register">注册</a> | <a href="javascript:;">忘记密码?</a></p>
+                                            <p>没有账号? <a href="${base}/register">注册</a> | <a href="${base}/verifyAccount">忘记密码?</a></p>
                                         </div>
 
                                     </div>
@@ -109,7 +110,7 @@
                                             <label for="remember"><input type="checkbox" name="remember" value="true" id="phoneRemember">记住我?</label>
                                         </div>
                                         <div class="col-xs-6">
-                                            <p>没有账号? <a href="${request.contextPath}/register">注册</a> | <a href="javascript:;">忘记密码?</a></p>
+                                            <p>没有账号? <a href="${base}/register">注册</a> | <a href="${base}/verifyAccount">忘记密码?</a></p>
                                         </div>
 
                                     </div>
