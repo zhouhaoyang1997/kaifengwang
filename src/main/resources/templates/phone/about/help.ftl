@@ -50,12 +50,12 @@
                     <h3>使用帮助</h3>
                 </div>
                 <div class="panel-body">
-                    <ul class="left_menu">
-                        <li><a href="#tab1" style="text-decoration: none" data-toggle="tab">提示信息待审核，怎么办？</a></li>
-                        <li><a href="#tab2" style="text-decoration: none" data-toggle="tab">点了发布按钮却没有反应？</a></li>
-                        <li><a href="#tab3" style="text-decoration: none" data-toggle="tab">为什么我发布的信息没有了？</a></li>
-                        <li><a href="#">提示信息待审核，怎么办？</a></li>
-                        <li><a href="#">提示信息待审核，怎么办？</a></li>
+                    <ul class=" list-group left_menu">
+                        <a href="#tab1" style="text-decoration: none" data-toggle="tab"><li class="list-group-item">提示信息待审核，怎么办？</li></a>
+                        <a href="#tab2" style="text-decoration: none" data-toggle="tab"><li class="list-group-item">点了发布按钮却没有反应？</li></a>
+                        <a href="#tab3" style="text-decoration: none" data-toggle="tab"><li class="list-group-item">为什么我发布的信息没有了？</li></a>
+                        <a href="#"><li class="list-group-item">提示信息待审核，怎么办？</li></a>
+                        <a href="#"><li class="list-group-item">提示信息待审核，怎么办？</li></a>
                     </ul>
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading red">
                             提示信息待审核，怎么办？
                         </div>
                         <div class="panel-body">
@@ -80,7 +80,7 @@
                 </div>
                 <div class="tab-pane" id="tab2">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading red">
                             发布信息时，点了“写好了，立即发布”按钮没反应？
                         </div>
                         <div class="panel-body">
@@ -98,7 +98,7 @@
                 </div>
                 <div class="tab-pane" id="tab3">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading red">
                             为什么我发布的信息没有了？
                         </div>
                         <div class="panel-body">
