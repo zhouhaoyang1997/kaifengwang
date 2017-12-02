@@ -77,7 +77,15 @@ public class MUserController {
         return "phone/alterPwd";
     }
 
+    @GetMapping("/phoneLogin")
+    public String phoneLogin(){
+        return "phone/phoneLogin";
+    }
 
+    @GetMapping("/verifyAccount")
+    public String verify(){
+        return "phone/alterPass/phone";
+    }
 
 
 }

@@ -74,6 +74,7 @@
     <meta name="description" content=${base_keywords}/>
     <title>${siteName}</title>
 <#--//遍历扩展页css-->
+    <link rel="stylesheet" href="${baseUrl}/BeAlert/BeAlert.css">
     <#list base_css as c>
         <link rel="stylesheet" href="${baseUrl}/css/phone/${c}.css">
     </#list>
@@ -112,6 +113,7 @@
     <#list base_js as j>
     <script src="${baseUrl}/js/phone/${j}.js"></script>
     </#list>
+<script type="text/javascript" src="${request.contextPath}/BeAlert/BeAlert.js"></script>
 <script type="text/javascript">
     //判断是否移动端访问
     browserRedirect();

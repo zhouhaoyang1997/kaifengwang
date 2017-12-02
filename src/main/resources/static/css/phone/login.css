@@ -366,7 +366,7 @@ ul#pptmobileregul li#mobileRegButtonLi .passport-reg-input-span {
 .login_hezuo_mian ul {
 
     border: 1px solid #c0c1c2;
-    height: 80px;
+    height: 40px;
 
     margin-bottom: 10px;
     overflow: hidden
@@ -379,7 +379,6 @@ ul#pptmobileregul li#mobileRegButtonLi .passport-reg-input-span {
     padding: 10px 0;
     margin-bottom: 5px;
     border-bottom: 1px solid #555;
-    height: 22px;
     line-height: 22px;
     text-align: center
 }

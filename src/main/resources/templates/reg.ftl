@@ -100,6 +100,9 @@
 
 <script>
     $(function() {
+        $("#phoneChangeImg").click(function () {
+            $(".verify").attr("src","${request.contextPath}/verify/code?date=" + new Date().getTime());
+        });
         jQuery.validator.addMethod("regex",
                 function(value, element, params) {
                     var exp = new RegExp(params);

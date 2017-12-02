@@ -159,7 +159,14 @@ function setButtonStatus(that) {
  * 确认按钮
  */
 function validateNum() {
-
+    if(messageData==undefined){
+        alert("请先获取手机动态码!");
+        return false;
+    }
+    if($("#phoneCode").val().length!=6){
+        alert("请输入6位动态码!");
+        return false;
+    }
     if(regPhone2()){
         var data = {
             code: $("#phoneCode").val(),

@@ -20,7 +20,7 @@
                 </h1>
                 <div class="form-box row">
                     <div class="col-sm-offset-1 col-sm-10">
-                        <h3>你的密码已经充值成功!</h3>
+                        <h3>你的密码已经重置成功!</h3>
                         <p>即将为您自动登录&nbsp; <span id="time">5</span> &nbsp;秒</p>
                     </div>
 
@@ -40,7 +40,7 @@
     $(function () {
         function updateVal() {
             if(wait==0){
-                window.location.href="${request.contextPath}/login"
+                window.location.href="${request.contextPath}/index"
             }else{
                 wait--;
                 $("#time").text(wait);

@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -259,24 +260,33 @@ public class UserController{
     }
 
     @PostMapping("/verifyAccount")
-    public String verifyAccount(String phoneNum,ModelMap modelMap){
+    public String verifyAccount(String phoneNum,ModelMap modelMap,Device device){
         if(StringUtils.isNotBlank(phoneNum)&&CommonUtil.isPhoneNum(phoneNum)){
             //确定该用户存在
             if(!userService.userPhoneIsNotExists(phoneNum)){
                 modelMap.addAttribute("phone",phoneNum);
-                return "alterPass/forget";
+                if(device.isMobile()||device.isTablet()){
+                    return "phone/alterPass/forget";
+                }else {
+                    return "alterPass/forget";
+                }
             }else{
                 modelMap.addAttribute("error","您还不是本站会员,请注册!");
             }
         }else{
             modelMap.addAttribute("error","请输入合法的手机号!");
         }
-        return "alterPass/phone";
+        if(device.isMobile()||device.isTablet()){
+            return "phone/alterPass/phone";
+        }else {
+            return "alterPass/phone";
+        }
+
     }
 
 
     @PostMapping("/resetPass")
-    public String resetPass(MsgCode msgCode,ModelMap modelMap){
+    public String resetPass(MsgCode msgCode, ModelMap modelMap, Device device){
         //考虑该用户未注册进入这里的情况...
         if(CommonUtil.isLawMsgCode(msgCode)) {
             String hash = Md5Util.MD5(KEY + "@" + msgCode.getTamp() + "@" + msgCode.getCode());
@@ -289,7 +299,11 @@ public class UserController{
                     //重新hash值,设置将次hash值中带入手机号,以免非法输入其他的手机号
                     msgCode.setHash(Md5Util.MD5(KEY+"@"+msgCode.getTamp()+"@"+msgCode.getCode()+"@"+msgCode.getPhoneNum()));
                     modelMap.addAttribute("msgCode",msgCode);
-                    return "alterPass/resetPass";
+                    if(device.isMobile()||device.isTablet()){
+                        return "phone/alterPass/resetPass";
+                    }else {
+                        return "alterPass/resetPass";
+                    }
                 }else {
                     modelMap.addAttribute("phone",msgCode.getPhoneNum());
                     modelMap.addAttribute("error","验证码输入不正确");
@@ -301,12 +315,17 @@ public class UserController{
         }else{
             modelMap.addAttribute("error","请输入合法的信息");
         }
-        return "alterPass/forget";
+        if(device.isMobile()||device.isTablet()){
+            return "phone/alterPass/forget";
+        }else {
+            return "alterPass/forget";
+        }
     }
 
     @PostMapping("/alterPassword")
-    public String resetPass(String userPassword,MsgCode msgCode,ModelMap modelMap){
-        if(StringUtils.isNotBlank(userPassword)&&userPassword.length()>6&&userPassword.length()<16){
+    public String resetPass(String userPassword,MsgCode msgCode,ModelMap modelMap,HttpSession session,Device device){
+        if(StringUtils.isNotBlank(userPassword)&&userPassword.length()>=6&&userPassword.length()<=16){
+            logger.debug("进入:"+userPassword);
             if(CommonUtil.isLawMsgCode(msgCode)) {
                 //对重新hash的数值进行比较
                 String hash = Md5Util.MD5(KEY + "@" + msgCode.getTamp() + "@" + msgCode.getCode()+"@"+msgCode.getPhoneNum());
@@ -321,25 +340,47 @@ public class UserController{
                         //对密码进行加密
                         userPassword = Md5Util.MD5("kf"+userPassword+"cg");
                         userService.updateUserPassByUserPhone(userPassword,msgCode.getPhoneNum());
-                        return "alterPass/resetPassOk";
+                        User user = userService.getUser(msgCode.getPhoneNum());
+                        session.setAttribute("user",user);
+                        if(device.isMobile()||device.isTablet()){
+                            return "phone/alterPass/resetPassOk";
+                        }else {
+                            return "alterPass/resetPassOk";
+                        }
                     }else {
                         modelMap.addAttribute("phone",msgCode.getPhoneNum());
                         modelMap.addAttribute("error","错误的请求");
-                        return "alterPass/verifyAccount";
+                        if(device.isMobile()||device.isTablet()){
+                            return "phone/alterPass/verifyAccount";
+                        }else {
+                            return "alterPass/verifyAccount";
+                        }
                     }
                 }else{
                     modelMap.addAttribute("phone",msgCode.getPhoneNum());
                     modelMap.addAttribute("error","您的请求已过期");
-                    return "alterPass/verifyAccount";
+                    if(device.isMobile()||device.isTablet()){
+                        return "phone/alterPass/verifyAccount";
+                    }else {
+                        return "alterPass/verifyAccount";
+                    }
                 }
             }else{
                 modelMap.addAttribute("error","错误的请求");
-                return "alterPass/verifyAccount";
+                if(device.isMobile()||device.isTablet()){
+                    return "phone/alterPass/verifyAccount";
+                }else {
+                    return "alterPass/verifyAccount";
+                }
             }
 
         }else{
             modelMap.addAttribute("error","对不起,您输入的密码不合法!");
-            return "alterPass/resetPass";
+            if(device.isMobile()||device.isTablet()){
+                return "phone/alterPass/resetPass";
+            }else {
+                return "alterPass/resetPass";
+            }
         }
     }
 

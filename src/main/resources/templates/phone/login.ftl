@@ -53,15 +53,13 @@
     </div>
     <div class="login_ff">
         <div class="login_ffmain">
-            <a class="login_ffleft" href="javascript:;">忘记密码?</a><a class="login_ffleft" href="${baseUrl}/m/reg">免费注册</a>
+            <a class="login_ffleft" href="${baseUrl}/m/verifyAccount">忘记密码?</a><a class="login_ffleft" href="${baseUrl}/m/reg">免费注册</a>
         </div>
         <div class="login_hezuo">
             使用其他方式登录：
             <div class="login_hezuo_mian">
                 <ul>
-                    <li class="bor" style=" margin:0 auto; float:none; border:none"><a href="http://www.5ol.com/include/qqlogin/qq_login.php?mod=m"><i class="hzico-qq"></i>使用手机号登录</a></li>
-
-                    <li class="bor" style=" margin:0 auto; float:none; border:none"><a href="http://www.5ol.com/include/qqlogin/qq_login.php?mod=m"><i class="hzico-qq"></i>使用QQ账号登录</a></li>
+                    <li class="bor" style=" margin:0 auto; float:none; border:none"><a href="${baseUrl}/m/phoneLogin"><i class="hzico-qq"></i>使用手机号登录</a></li>
                 </ul>
             </div>
         </div>

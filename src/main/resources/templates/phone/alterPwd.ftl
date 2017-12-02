@@ -30,8 +30,11 @@
             <div class="form-group">
                 <div class="col-sm-6 text-center">
                     <button type="submit" class="btn btn-primary">保存修改</button>
+
                 </div>
+
             </div>
+            <a  style="font-size: 12px" href="${base}/m/verifyAccount" >忘记密码?手机号修改</a>
         </form>
     </div>
 </div>

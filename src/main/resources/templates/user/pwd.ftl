@@ -76,9 +76,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-offset-1 col-sm-6">
+                                <div class="col-sm-offset-1 col-sm-2">
                                     <button type="submit" class="btn btn-primary">保存修改</button>
                                 </div>
+                                <div class="col-sm-4" style="height: 34px;line-height: 34px"> <a href="${base}/verifyAccount" >忘记密码?手机号修改</a></div>
                             </div>
                         </form>
                     </div>
