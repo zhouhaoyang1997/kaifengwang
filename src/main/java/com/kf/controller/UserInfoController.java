@@ -1,23 +1,12 @@
 package com.kf.controller;
 
 import com.kf.exception.UserNotLoginException;
-import com.kf.pojo.District;
-import com.kf.pojo.SecondClass;
 import com.kf.pojo.User;
-import com.kf.service.DistrictService;
-import com.kf.service.SecondClassService;
 import com.kf.service.UserService;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
-
 import com.kf.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by 18236 on 2017/10/2.
@@ -194,7 +185,7 @@ public class UserInfoController {
      * @return
      */
     @PostMapping("/user/alterHead")
-    public ModelAndView alterUserHead(HttpServletRequest request, MultipartFile file){
+    public ModelAndView alterUserHead(HttpServletRequest request, MultipartFile file,Device device){
         Integer userId=SessionUtil.getUserId(request);
         if(userId==null){
             throw new UserNotLoginException("500","对不起,您的登录已经过期!请重新登录");
@@ -203,25 +194,45 @@ public class UserInfoController {
             if(file==null||file.isEmpty()){
                 modelAndView = pic(request);
                 modelAndView.addObject("headInfo","修改头像失败，文件上传为空");
+                //判断是否移动端
+                if (device.isMobile()||device.isTablet()) {
+                    modelAndView.setViewName("phone/alterInfo");
+                }
                 return modelAndView;
             }else{
                 if(file.getSize()>1024*1024){
                     modelAndView = pic(request);
                     modelAndView.addObject("headInfo","修改头像失败,上传文件过大,请上传1M以下图片");
+                    //判断是否移动端
+                    if (device.isMobile()||device.isTablet()) {
+                        modelAndView.setViewName("phone/alterInfo");
+                    }
                     return modelAndView;
                 }
                 String filePath = FileUtil.getFilePath(file,"img/headimg/");
                 try {
+                    System.out.println(basePath.getPathValue()+filePath);
                     file.transferTo(new File(basePath.getPathValue()+filePath));
                     //将图片路径存入数据库
                     userService.updateUserImg(filePath,userId,basePath.getPathValue());
-                    modelAndView = new ModelAndView("redirect:/user/info");
+                    if (device.isMobile()||device.isTablet()) {
+                        modelAndView=new ModelAndView("redirect:/m/user/alterInfo");
+                    }else {
+                        modelAndView = new ModelAndView("redirect:/user/info");
+
+                    }
+
                 } catch (IOException e) {
                     modelAndView = pic(request);
                     modelAndView.addObject("headInfo","修改头像失败,上传图片发生异常，请稍后再试");
+                    //判断是否移动端
+                    if (device.isMobile()||device.isTablet()) {
+                        modelAndView.setViewName("phone/alterInfo");
+                    }
                     return modelAndView;
                 }
             }
+
             return modelAndView;
         }
     }
