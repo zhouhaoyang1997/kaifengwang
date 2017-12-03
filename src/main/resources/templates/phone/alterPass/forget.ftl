@@ -17,7 +17,7 @@
 <div class="fh5co-form">
     <div id="logRegTabCon">
         <div class="form-box" style="margin-top: 10px;">
-            <form id="commentForm" action="${request.contextPath}/resetPass" method="post" class="fh5co-form animate-box">
+            <form id="commentForm" class="fh5co-form animate-box">
                 <h1 style="text-align: center">
                     ②手机号认证
                 </h1>
@@ -37,7 +37,7 @@
                         <input type="hidden" name="hash" id="hash" value="${hash!""}">
 
                         <div class="form-group">
-                            <input type="submit" style="width: 100%;" value="确认" class="btn btn-primary">
+                            <input type="button" style="width: 100%;" onclick="resetPass()" value="确认" class="btn btn-primary">
                         </div>
                     </div>
 
@@ -85,9 +85,26 @@
         $("#phoneChangeImg").click(function () {
             $(".verify").attr("src","${request.contextPath}/verify/code?date=" + new Date().getTime());
         });
-        <#if error??>
-            alert("${error}");
-        </#if>
+        function verifyForm() {
+            return $("#commentForm").validate().form();
+        }
+
+        function resetPass() {
+            if(verifyForm()){
+                $.ajax({
+                    url:'${request.contextPath}/resetPass',
+                    type:'post',
+                    data:$("#commentForm").serialize(),
+                    success:function (result) {
+                        if(result.code=="ok"){
+                            window.location.href="/forgetPass?hash="+result.msgCode.hash+"&tamp="+result.msgCode.tamp+"&phoneNum="+result.msgCode.phoneNum+"&code="+result.msgCode.code
+                        }else{
+                            alert(result.msg);
+                        }
+                    }
+                })
+            }
+        }
     });
 
 </script>

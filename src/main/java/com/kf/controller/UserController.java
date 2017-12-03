@@ -9,6 +9,7 @@ import com.kf.util.CookieUtil;
 import com.kf.util.Md5Util;
 import com.kf.util.SessionUtil;
 import com.kf.vo.MsgCode;
+import com.kf.vo.StateMsg;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -286,7 +287,8 @@ public class UserController{
 
 
     @PostMapping("/resetPass")
-    public String resetPass(MsgCode msgCode, ModelMap modelMap, Device device){
+    @ResponseBody
+    public StateMsg resetPass(MsgCode msgCode){
         //考虑该用户未注册进入这里的情况...
         if(CommonUtil.isLawMsgCode(msgCode)) {
             String hash = Md5Util.MD5(KEY + "@" + msgCode.getTamp() + "@" + msgCode.getCode());
@@ -298,30 +300,37 @@ public class UserController{
                 if (hash != null && hash.equalsIgnoreCase(msgCode.getHash())) {
                     //重新hash值,设置将次hash值中带入手机号,以免非法输入其他的手机号
                     msgCode.setHash(Md5Util.MD5(KEY+"@"+msgCode.getTamp()+"@"+msgCode.getCode()+"@"+msgCode.getPhoneNum()));
-                    modelMap.addAttribute("msgCode",msgCode);
-                    if(device.isMobile()||device.isTablet()){
-                        return "phone/alterPass/resetPass";
-                    }else {
-                        return "alterPass/resetPass";
-                    }
+                    return new StateMsg(msgCode,"ok","");
                 }else {
-                    modelMap.addAttribute("tamp",msgCode.getTamp());
-                    modelMap.addAttribute("hash",msgCode.getHash());
-                    modelMap.addAttribute("phone",msgCode.getPhoneNum());
-                    modelMap.addAttribute("error","验证码输入不正确");
+                    return new StateMsg(null,"error","验证码输入不正确");
                 }
             }else{
-                modelMap.addAttribute("phone",msgCode.getPhoneNum());
-                modelMap.addAttribute("error","验证码已经过期");
+                return new StateMsg(null,"error","验证码已经过期");
             }
         }else{
-            modelMap.addAttribute("error","请输入合法的信息");
+            return new StateMsg(null,"error","请输入合法的信息");
         }
-        if(device.isMobile()||device.isTablet()){
-            return "phone/alterPass/forget";
-        }else {
-            return "alterPass/forget";
+
+    }
+    @GetMapping("/forgetPass")
+    public String forgetPass(MsgCode msgCode,ModelMap modelMap,Device device){
+        if(CommonUtil.isLawMsgCode(msgCode)&&StringUtils.isNotBlank(msgCode.getPhoneNum())){
+            modelMap.addAttribute("tamp",msgCode.getTamp());
+            modelMap.addAttribute("hash",msgCode.getHash());
+            modelMap.addAttribute("phone",msgCode.getPhoneNum());
+            if(device.isMobile()||device.isTablet()){
+                return "phone/alterPass/resetPass";
+            }else {
+                return "alterPass/resetPass";
+            }
+        }else{
+            if(device.isMobile()||device.isTablet()){
+                return "redirect:/m/verifyAccount";
+            }else {
+                return "redirect:/verifyAccount";
+            }
         }
+
     }
 
     @PostMapping("/alterPassword")

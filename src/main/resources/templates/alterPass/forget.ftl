@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-6 col-md-push-4">
 
-            <form id="commentForm" action="${request.contextPath}/resetPass" method="post" class="fh5co-form animate-box">
+            <form id="commentForm" class="fh5co-form animate-box">
 
                 <h1 style="text-align: center">
                     ②手机号认证
@@ -24,7 +24,7 @@
                     <div class="col-sm-offset-1 col-sm-10">
                         <div class="form-group input-group">
                             <label for="phone" class="sr-only">手机号</label>
-                            <input type="text" class="form-control" minlength="11" maxlength="11" name="phoneNum" value="${phone!""}" required id="phone" placeholder="手机号" >
+                            <input type="text" class="form-control" readonly minlength="11" maxlength="11" name="phoneNum" value="${phone!""}" required id="phone" placeholder="手机号" >
                             <span class="input-group-addon" style="background: none;border: none;"><input class="btn btn-success"  id="verify_refresh" type="button" onclick="regGetMsgNum()" value="免费获取验证码"></span>
                         </div>
 
@@ -32,11 +32,11 @@
                             <label for="phone" class="sr-only">动态码</label>
                             <input type="text" class="form-control" required minlength="6" maxlength="6" name="code" id="phone" placeholder="动态码" >
                         </div>
-                        <input type="hidden" name="tamp" id="tamp" value="${tamp!""}">
-                        <input type="hidden" name="hash" id="hash" value="${hash!""}">
+                        <input type="hidden" name="tamp" id="tamp">
+                        <input type="hidden" name="hash" id="hash">
 
                         <div class="form-group">
-                            <input type="submit" style="width: 100%;" value="确认" class="btn btn-primary">
+                            <input type="button" style="width: 100%;" onclick="resetPass()" value="确认" class="btn btn-primary">
                         </div>
                     </div>
 
@@ -83,10 +83,28 @@
 <script type="text/javascript" src="${request.contextPath}/js/message.js"></script>
 <script type="text/javascript" src="${request.contextPath}/BeAlert/BeAlert.js"></script>
 <script>
-    <#if error??>
-    $(function () {
-        alert("${error}");
+    $("#phoneChangeImg").click(function () {
+        $(".verify").attr("src","${request.contextPath}/verify/code?date=" + new Date().getTime());
     });
-    </#if>
+    function verifyForm() {
+        return $("#commentForm").validate().form();
+    }
+
+    function resetPass() {
+        if(verifyForm()){
+            $.ajax({
+                url:'${request.contextPath}/resetPass',
+                type:'post',
+                data:$("#commentForm").serialize(),
+                success:function (result) {
+                    if(result.code=="ok"){
+                        window.location.href="/forgetPass?hash="+result.msgCode.hash+"&tamp="+result.msgCode.tamp+"&phoneNum="+result.msgCode.phoneNum+"&code="+result.msgCode.code
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            })
+        }
+    }
 </script>
 </html>

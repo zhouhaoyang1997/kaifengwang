@@ -5,11 +5,29 @@ package com.kf.vo;
  */
 public class StateMsg {
     private String code;
+    private MsgCode msgCode;
     private String msg;
 
-    public StateMsg(String code, String msg) {
-        this.code = code;
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public StateMsg(MsgCode msgCode, String code,String msg) {
+        this.msgCode = msgCode;
+        this.code= code;
+        this.msg=msg;
+    }
+
+    public MsgCode getMsgCode() {
+        return msgCode;
+    }
+
+    public void setMsgCode(MsgCode msgCode) {
+        this.msgCode = msgCode;
     }
 
     public StateMsg() {
@@ -23,11 +41,4 @@ public class StateMsg {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 }
