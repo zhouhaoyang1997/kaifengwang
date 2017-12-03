@@ -25,7 +25,7 @@
                     <div class="col-sm-offset-1 col-sm-10">
                         <div class="form-group input-group">
                             <label for="phone" class="sr-only">手机号</label>
-                            <input type="text" class="form-control" minlength="11" maxlength="11" name="phoneNum" value="${phone!""}" required id="phone" placeholder="手机号" >
+                            <input type="text" class="form-control" minlength="11" maxlength="11" readonly name="phoneNum" value="${phone!""}" required id="phone" placeholder="手机号" >
                             <span class="input-group-addon" style="padding: 0;background: none;border: none;"><input class="btn btn-success"  id="verify_refresh" type="button" onclick="regGetMsgNum()" value="免费获取验证码"></span>
                         </div>
 
