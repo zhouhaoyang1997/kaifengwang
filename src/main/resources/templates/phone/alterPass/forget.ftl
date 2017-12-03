@@ -33,8 +33,8 @@
                             <label for="phone" class="sr-only">动态码</label>
                             <input type="text" class="form-control" required minlength="6" maxlength="6" name="code" id="phone" placeholder="动态码" >
                         </div>
-                        <input type="hidden" name="tamp" value="" id="tamp">
-                        <input type="hidden" name="hash" value="" id="hash">
+                        <input type="hidden" name="tamp" id="tamp" value="${tamp!""}">
+                        <input type="hidden" name="hash" id="hash" value="${hash!""}">
 
                         <div class="form-group">
                             <input type="submit" style="width: 100%;" value="确认" class="btn btn-primary">

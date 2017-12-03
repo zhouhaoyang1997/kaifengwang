@@ -305,6 +305,8 @@ public class UserController{
                         return "alterPass/resetPass";
                     }
                 }else {
+                    modelMap.addAttribute("tamp",msgCode.getTamp());
+                    modelMap.addAttribute("hash",msgCode.getHash());
                     modelMap.addAttribute("phone",msgCode.getPhoneNum());
                     modelMap.addAttribute("error","验证码输入不正确");
                 }

@@ -95,7 +95,7 @@
                                     <div class="form-group input-group">
                                         <label for="phone" class="sr-only">手机号</label>
                                         <input type="text" class="form-control" id="phone" maxlength="11" minlength="11" name="phone" placeholder="手机号">
-                                        <span class="input-group-addon" style="background: none;border: none;"><input class="btn btn-success"  id="verify_refresh" type="button" onclick="getMsgNum(this)" value="免费获取验证码"></span>
+                                        <span class="input-group-addon" style="background: none;border: none;"><input class="btn btn-success"  id="verify_refresh" type="button" onclick="regGetMsgNum()" value="免费获取验证码"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="phoneCode" class="sr-only">动态码</label>

@@ -44,16 +44,16 @@ public class IndexController {
     private HotSearchService hotSearchService;
 
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String lastIndex(Device device){
         if (device.isMobile()||device.isTablet()) {
             return "redirect:/m/index";
         }
-        return "redirect:/";
+        return "redirect:/index";
     }
 
 
-    @RequestMapping("/")
+    @RequestMapping("/index")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
         List<SecondClass> zhaoPin = secondClassService.getAllSecondClass(1);

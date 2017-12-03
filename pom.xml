@@ -98,6 +98,26 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>RELEASE</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>aliyun-message-sdk-core</groupId>
+			<artifactId>aliyun-message-sdk-core</artifactId>
+			<version>3.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>aliyun-message-sdk-mns</groupId>
+			<artifactId>aliyun-message-sdk-mns</artifactId>
+			<version>1.1.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>aliyun-java-sdk-dysmsapi</groupId>
+			<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

@@ -59,40 +59,7 @@ function regPhone2() {
  * 获取验证码
  * @param that
  */
-function getMsgNum(that) {
 
-    if(regPhone()){
-        $("#verifyModal").modal("show");
-        // var phoneNumber = $('#phone').val();
-        // setButtonStatus(that); // 设置按钮倒计时
-        // var obj = {
-        //     phoneNumber: phoneNumber
-        // };
-        // $.ajax({
-        //     url: '/sendMsg', // 后台短信发送接口
-        //     type: 'POST',
-        //     dataType: 'json',
-        //     contentType: "application/json",
-        //     async: false, //false 同步
-        //     data: JSON.stringify(obj),
-        //     xhrFields: {
-        //         withCredentials: true
-        //     },
-        //     success: function (result) {
-        //         if(result.code == '200') {
-        //             messageData = result;
-        //         }else {
-        //             alert("错误码:" + result.code + " 错误信息:" + result.message);
-        //         }
-        //     },
-        //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //         console.log(XMLHttpRequest.status);
-        //         console.log(XMLHttpRequest.readyState);
-        //         console.log(textStatus);
-        //     }
-        // });
-    }
-}
 
 function regGetMsgNum() {
     var phoneNumber = $('#phone').val();
